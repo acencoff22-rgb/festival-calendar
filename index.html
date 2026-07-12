@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>전국 축제 알리미</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
+/>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"></script>
+<style>
+  :root {
+    --paper: #f6f1e7;
+    --paper-deep: #ece3d0;
+    --ink: #2b2620;
+    --ink-soft: #6b6255;
+    --lantern: #c1432f;
+    --lantern-soft: #e8c9b8;
+    --indigo: #2b3a55;
+    --indigo-soft: #dde2ec;
+    --line: #d9cdb4;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    padding: 28px 20px 22px;
+    background: var(--indigo);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--lantern) 0%, transparent 70%);
+    opacity: 0.5;
+  }
+
+  header h1 {
+    margin: 0 0 4px;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  header p {
+    margin: 0;
+    font-size: 13px;
+    color: #c8cfe0;
+  }
+
+  #updatedAt {
+    font-size: 12px;
+    color: #9aa4c0;
+    margin-top: 10px;
+  }
+
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 16px 16px 60px;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 14px;
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    padding: 10px 0;
+    z-index: 5;
+  }
+
+  .controls input,
+  .controls select {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--ink);
+  }
+
+  .controls input { flex: 1 1 100%; min-width: 0; }
+  .controls select { flex: 1 1 auto; }
+
+  .view-toggle {
+    display: flex;
+    gap: 4px;
+    background: var(--paper-deep);
+    border-radius: 10px;
+    padding: 3px;
+    margin-bottom: 16px;
+  }
+
+  .view-toggle button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 8px 0;
+    border-radius: 8px;
+    color: var(--ink-soft);
+  }
+
+  .view-toggle button.active {
+    background: var(--indigo);
+    color: white;
+  }
+
+  /* ---------- 목록 보기 ---------- */
+
+  .month-group { margin-bottom: 28px; }
+
+  .month-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 10px 2px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 6px;
+  }
+
+  .card {
+    display: flex;
+    gap: 12px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+
+  .card img {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: var(--paper-deep);
+    flex-shrink: 0;
+  }
+
+  .card .no-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    background: var(--paper-deep);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .card-body { flex: 1; min-width: 0; }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-meta {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .dday {
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: var(--paper-deep);
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .dday.soon { background: var(--lantern); color: white; }
+  .dday.today { background: var(--ink); color: white; }
+
+  .empty, .loading {
+    text-align: center;
+    color: var(--ink-soft);
+    padding: 60px 20px;
+    font-size: 14px;
+  }
+
+  a.card-link { text-decoration: none; color: inherit; display: block; }
+
+  .card-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .share-btn {
+    border: 1px solid var(--line);
+    background: #fee500;
+    color: #391b1b;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 8px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  /* ---------- 달력 보기 ---------- */
+
+  .cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .cal-header button {
+    border: 1px solid var(--line);
+    background: white;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    color: var(--ink);
+  }
+
+  .cal-title {
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .cal-today-btn {
+    font-size: 12px !important;
+    font-weight: 700;
+    width: auto !important;
+    padding: 0 10px;
+    color: var(--indigo) !important;
+  }
+
+  .cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .cal-weekdays span:first-child { color: #c1432f; }
+  .cal-weekdays span:last-child { color: var(--indigo); }
+
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+  }
+
+  .cal-day {
+    min-height: 64px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+  }
+
+  .cal-day.muted { background: var(--paper); border-color: transparent; opacity: 0.45; }
+  .cal-day.today { border: 1.5px solid var(--lantern); }
+  .cal-day.has-events { cursor: pointer; }
+
+  .cal-daynum {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+
+  .cal-day.today .cal-daynum { color: var(--lantern); }
+
+  .cal-chip {
+    font-size: 9.5px;
+    line-height: 1.3;
+    padding: 1px 4px;
+    border-radius: 4px;
+    background: var(--indigo-soft);
+    color: var(--indigo);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cal-chip.festival { background: var(--lantern-soft); color: #8a2f20; }
+
+  .cal-more {
+    font-size: 9.5px;
+    color: var(--ink-soft);
+    font-weight: 700;
+  }
+
+  /* ---------- 날짜 상세 모달 ---------- */
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 16, 10, 0.45);
+    display: flex;
+    align-items: flex-end;
+    z-index: 50;
+  }
+
+  .modal-sheet {
+    background: var(--paper);
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 18px 18px 0 0;
+    padding: 16px 16px 28px;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .modal-title { font-size: 16px; font-weight: 800; }
+
+  .modal-close {
+    border: none;
+    background: var(--paper-deep);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏮 전국 축제·공연 알리미</h1>
+  <p>필요할 때 열어보는 우리 동호회 축제·공연 캘린더</p>
+  <div id="updatedAt">불러오는 중…</div>
+</header>
+
+<main>
+  <div class="controls">
+    <input id="search" type="text" placeholder="이름, 지역, 장소 검색" />
+    <select id="typeFilter">
+      <option value="">전체 유형</option>
+      <option value="festival">지역축제</option>
+      <option value="performance">공연</option>
+    </select>
+    <select id="areaFilter">
+      <option value="">전체 지역</option>
+    </select>
+  </div>
+
+  <div class="view-toggle">
+    <button id="btnCalendarView" class="active">📅 달력 보기</button>
+    <button id="btnListView">☰ 목록 보기</button>
+  </div>
+
+  <div id="calendarView"></div>
+  <div id="list" class="hidden"><div class="loading">축제 정보를 불러오는 중…</div></div>
+</main>
+
+<div id="dayModal" class="modal-backdrop hidden">
+  <div class="modal-sheet">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle"></div>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  const AREA_NAMES = {
+    "1": "서울", "2": "인천", "3": "대전", "4": "대구", "5": "광주",
+    "6": "부산", "7": "울산", "8": "세종", "31": "경기", "32": "강원",
+    "33": "충북", "34": "충남", "35": "경북", "36": "경남", "37": "전북",
+    "38": "전남", "39": "제주"
+  };
+  const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
+
+  // 카카오 디벨로퍼스에서 발급받은 JavaScript 키 (도메인 제한이 걸려있어 공개돼도 안전해요)
+  const KAKAO_JS_KEY = "bd1806c2ecb3953f8fe0b07be69f6686";
+  if (window.Kakao && !Kakao.isInitialized()) {
+    Kakao.init(KAKAO_JS_KEY);
+  }
+
+  function shareToKakao({ title, date, location, link }) {
+    if (!window.Kakao || !Kakao.isInitialized()) {
+      alert("카카오톡 공유를 불러오지 못했어요. 잠시 후 다시 시도해주세요.");
+      return;
+    }
+    Kakao.Share.sendDefault({
+      objectType: "text",
+      text: `📍 이번 주말 여기 어때요?\n\n${title}\n일정: ${date}${location ? "\n장소: " + location : ""}\n\n👉 마음에 드시면 단톡방 투표를 열어주세요!`,
+      link: { mobileWebUrl: link, webUrl: link },
+    });
+  }
+
+  document.body.addEventListener("click", (e) => {
+    const btn = e.target.closest(".share-btn");
+    if (!btn) return;
+    e.preventDefault();
+    shareToKakao({
+      title: btn.dataset.title,
+      date: btn.dataset.date,
+      location: btn.dataset.location,
+      link: btn.dataset.link,
+    });
+  });
+
+  let allFestivals = [];
+  let currentView = "calendar"; // "calendar" | "list"
+  let calYear, calMonth; // calMonth: 0-indexed
+
+  function todayIso() {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d.toISOString().slice(0, 10);
+  }
+
+  function daysUntil(dateStr) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const target = new Date(dateStr);
+    target.setHours(0, 0, 0, 0);
+    return Math.round((target - today) / 86400000);
+  }
+
+  function ddayLabel(startDate) {
+    const d = daysUntil(startDate);
+    if (d < 0) return { text: "진행 중", cls: "" };
+    if (d === 0) return { text: "오늘 시작", cls: "today" };
+    if (d <= 7) return { text: `D-${d}`, cls: "soon" };
+    return { text: `D-${d}`, cls: "" };
+  }
+
+  function monthLabel(dateStr) {
+    const d = new Date(dateStr);
+    return `${d.getFullYear()}년 ${d.getMonth() + 1}월`;
+  }
+
+  function getFiltered() {
+    const q = document.getElementById("search").value.trim().toLowerCase();
+    const area = document.getElementById("areaFilter").value;
+    const type = document.getElementById("typeFilter").value;
+
+    return allFestivals.filter((f) => {
+      const matchesQuery =
+        !q ||
+        f.title?.toLowerCase().includes(q) ||
+        f.location?.toLowerCase().includes(q);
+      const matchesArea = !area || String(f.area) === area;
+      const matchesType = !type || f.type === type;
+      return matchesQuery && matchesArea && matchesType;
+    });
+  }
+
+  function eventLink(f) {
+    return (
+      f.detailUrl ||
+      `https://search.naver.com/search.naver?query=${encodeURIComponent(f.title)}`
+    );
+  }
+
+  /* ---------- 목록 보기 ---------- */
+
+  function renderList() {
+    const filtered = getFiltered();
+    const list = document.getElementById("list");
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="empty">조건에 맞는 일정이 없어요.</div>';
+      return;
+    }
+
+    const groups = new Map();
+    const ongoing = [];
+    for (const f of filtered) {
+      if (daysUntil(f.startDate) < 0) {
+        ongoing.push(f);
+        continue;
+      }
+      const key = monthLabel(f.startDate);
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(f);
+    }
+    ongoing.sort((a, b) => (a.endDate || "").localeCompare(b.endDate || ""));
+
+    let html = "";
+    if (ongoing.length > 0) html += renderGroup("지금 진행 중", ongoing);
+    for (const [month, items] of groups) html += renderGroup(month, items);
+    list.innerHTML = html;
+  }
+
+  function renderGroup(title, items) {
+    let html = `<div class="month-group"><div class="month-title">${title}</div>`;
+    for (const f of items) html += renderCard(f);
+    html += `</div>`;
+    return html;
+  }
+
+  function escapeAttr(str) {
+    return String(str ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function renderCard(f) {
+    const dday = ddayLabel(f.startDate);
+    const icon = f.type === "performance" ? "🎤" : "🎪";
+    const img = f.thumbnail
+      ? `<img src="${f.thumbnail}" alt="" loading="lazy" />`
+      : `<div class="no-img">${icon}</div>`;
+    const genreTag = f.genre ? `<span>· ${f.genre}</span>` : "";
+    const link = eventLink(f);
+    const dateRange = `${f.startDate}${f.endDate && f.endDate !== f.startDate ? " ~ " + f.endDate : ""}`;
+    return `
+      <div class="card">
+        <a class="card-link" href="${link}" target="_blank" rel="noopener" style="display:flex;gap:12px;flex:1;min-width:0">
+          ${img}
+          <div class="card-body">
+            <p class="card-title">${f.title}</p>
+            <div class="card-meta">
+              <span>${dateRange}</span>
+              ${f.location ? `<span>· ${f.location}</span>` : ""}
+              ${genreTag}
+            </div>
+          </div>
+        </a>
+        <div class="card-side">
+          <div class="dday ${dday.cls}">${dday.text}</div>
+          <button
+            class="share-btn"
+            data-title="${escapeAttr(f.title)}"
+            data-date="${escapeAttr(dateRange)}"
+            data-location="${escapeAttr(f.location || "")}"
+            data-link="${escapeAttr(link)}"
+          >💬 제안</button>
+        </div>
+      </div>`;
+  }
+
+  /* ---------- 달력 보기 ---------- */
+
+  function renderCalendar() {
+    const filtered = getFiltered();
+    const container = document.getElementById("calendarView");
+    const today = todayIso();
+
+    const firstOfMonth = new Date(calYear, calMonth, 1);
+    const startOffset = firstOfMonth.getDay(); // 0=일요일
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
+
+    // 날짜별 이벤트 매핑 (성능을 위해 이번 화면 범위만 계산)
+    const gridStart = new Date(calYear, calMonth, 1 - startOffset);
+    const gridEnd = new Date(calYear, calMonth, totalCells - startOffset);
+    const byDate = new Map();
+
+    for (const f of filtered) {
+      if (!f.startDate) continue;
+      const start = new Date(f.startDate);
+      const end = f.endDate ? new Date(f.endDate) : start;
+      if (end < gridStart || start > gridEnd) continue;
+      const cursor = new Date(Math.max(start, gridStart));
+      const stop = new Date(Math.min(end, gridEnd));
+      while (cursor <= stop) {
+        const key = cursor.toISOString().slice(0, 10);
+        if (!byDate.has(key)) byDate.set(key, []);
+        byDate.get(key).push(f);
+        cursor.setDate(cursor.getDate() + 1);
+      }
+    }
+
+    let cellsHtml = "";
+    for (let i = 0; i < totalCells; i++) {
+      const cellDate = new Date(calYear, calMonth, 1 - startOffset + i);
+      const iso = cellDate.toISOString().slice(0, 10);
+      const inMonth = cellDate.getMonth() === calMonth;
+      const isToday = iso === today;
+      const events = (byDate.get(iso) || []).sort((a, b) =>
+        (a.title || "").localeCompare(b.title || "")
+      );
+
+      const classes = ["cal-day"];
+      if (!inMonth) classes.push("muted");
+      if (isToday) classes.push("today");
+      if (events.length > 0) classes.push("has-events");
+
+      const visibleChips = events.slice(0, 2);
+      const extra = events.length - visibleChips.length;
+
+      const chipsHtml = visibleChips
+        .map(
+          (f) =>
+            `<div class="cal-chip ${f.type === "festival" ? "festival" : ""}">${f.title}</div>`
+        )
+        .join("");
+      const moreHtml = extra > 0 ? `<div class="cal-more">+${extra}개 더</div>` : "";
+
+      cellsHtml += `
+        <div class="${classes.join(" ")}" data-date="${iso}">
+          <div class="cal-daynum">${cellDate.getDate()}</div>
+          ${chipsHtml}
+          ${moreHtml}
+        </div>`;
+    }
+
+    container.innerHTML = `
+      <div class="cal-header">
+        <button id="calPrev">‹</button>
+        <div class="cal-title">${calYear}년 ${calMonth + 1}월</div>
+        <button id="calNext">›</button>
+      </div>
+      <div style="text-align:right;margin-bottom:6px">
+        <button class="cal-today-btn" id="calToday">오늘로</button>
+      </div>
+      <div class="cal-weekdays">${WEEKDAYS.map((w) => `<span>${w}</span>`).join("")}</div>
+      <div class="cal-grid">${cellsHtml}</div>
+    `;
+
+    document.getElementById("calPrev").addEventListener("click", () => shiftMonth(-1));
+    document.getElementById("calNext").addEventListener("click", () => shiftMonth(1));
+    document.getElementById("calToday").addEventListener("click", () => {
+      const now = new Date();
+      calYear = now.getFullYear();
+      calMonth = now.getMonth();
+      renderCalendar();
+    });
+
+    container.querySelectorAll(".cal-day.has-events").forEach((el) => {
+      el.addEventListener("click", () => openDayModal(el.dataset.date, byDate.get(el.dataset.date) || []));
+    });
+  }
+
+  function shiftMonth(delta) {
+    calMonth += delta;
+    if (calMonth < 0) { calMonth = 11; calYear -= 1; }
+    if (calMonth > 11) { calMonth = 0; calYear += 1; }
+    renderCalendar();
+  }
+
+  function openDayModal(iso, events) {
+    const [y, m, d] = iso.split("-");
+    document.getElementById("modalTitle").textContent = `${y}년 ${Number(m)}월 ${Number(d)}일`;
+    document.getElementById("modalBody").innerHTML = events
+      .sort((a, b) => (a.title || "").localeCompare(b.title || ""))
+      .map((f) => renderCard(f))
+      .join("");
+    document.getElementById("dayModal").classList.remove("hidden");
+  }
+
+  document.getElementById("modalClose").addEventListener("click", () => {
+    document.getElementById("dayModal").classList.add("hidden");
+  });
+  document.getElementById("dayModal").addEventListener("click", (e) => {
+    if (e.target.id === "dayModal") e.target.classList.add("hidden");
+  });
+
+  /* ---------- 보기 전환 ---------- */
+
+  function renderCurrentView() {
+    if (currentView === "calendar") renderCalendar();
+    else renderList();
+  }
+
+  document.getElementById("btnCalendarView").addEventListener("click", () => {
+    currentView = "calendar";
+    document.getElementById("btnCalendarView").classList.add("active");
+    document.getElementById("btnListView").classList.remove("active");
+    document.getElementById("calendarView").classList.remove("hidden");
+    document.getElementById("list").classList.add("hidden");
+    renderCurrentView();
+  });
+
+  document.getElementById("btnListView").addEventListener("click", () => {
+    currentView = "list";
+    document.getElementById("btnListView").classList.add("active");
+    document.getElementById("btnCalendarView").classList.remove("active");
+    document.getElementById("list").classList.remove("hidden");
+    document.getElementById("calendarView").classList.add("hidden");
+    renderCurrentView();
+  });
+
+  /* ---------- 데이터 로드 ---------- */
+
+  async function load() {
+    try {
+      const res = await fetch("festivals.json", { cache: "no-store" });
+      const json = await res.json();
+      allFestivals = json.festivals || [];
+
+      const updated = new Date(json.updatedAt);
+      document.getElementById("updatedAt").textContent =
+        `마지막 업데이트: ${updated.toLocaleString("ko-KR")} · 총 ${json.count}건`;
+
+      const areaSelect = document.getElementById("areaFilter");
+      const usedAreas = new Set(allFestivals.map((f) => String(f.area)).filter(Boolean));
+      for (const code of Object.keys(AREA_NAMES)) {
+        if (usedAreas.has(code)) {
+          const opt = document.createElement("option");
+          opt.value = code;
+          opt.textContent = AREA_NAMES[code];
+          areaSelect.appendChild(opt);
+        }
+      }
+
+      const now = new Date();
+      calYear = now.getFullYear();
+      calMonth = now.getMonth();
+
+      renderCurrentView();
+    } catch (e) {
+      document.getElementById("calendarView").innerHTML =
+        '<div class="empty">축제 데이터를 아직 불러올 수 없어요.<br/>festivals.json이 생성됐는지 확인해주세요.</div>';
+      console.error(e);
+    }
+  }
+
+  document.getElementById("search").addEventListener("input", renderCurrentView);
+  document.getElementById("areaFilter").addEventListener("change", renderCurrentView);
+  document.getElementById("typeFilter").addEventListener("change", renderCurrentView);
+
+  load();
+</script>
+</body>
+</html>
