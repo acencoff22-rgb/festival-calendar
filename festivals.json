@@ -1,0 +1,18 @@
+{
+  "updatedAt": "2026-07-12T00:00:00.000Z",
+  "count": 1,
+  "festivals": [
+    {
+      "source": "sample",
+      "type": "festival",
+      "id": "sample-1",
+      "title": "샘플 축제 (첫 자동 갱신 후 실제 데이터로 교체됩니다)",
+      "startDate": "2026-07-20",
+      "endDate": "2026-07-22",
+      "location": "GitHub Actions 실행 후 자동으로 채워집니다",
+      "area": null,
+      "thumbnail": null,
+      "detailUrl": null
+    }
+  ]
+}
