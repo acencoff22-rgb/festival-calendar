@@ -1,163 +1,7 @@
 {
-  "updatedAt": "2026-07-12T02:13:05.417Z",
-  "count": 2721,
+  "updatedAt": "2026-07-12T08:27:14.423Z",
+  "count": 2554,
   "festivals": [
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF185428",
-      "title": "행오버",
-      "startDate": "2014-09-11",
-      "endDate": "2026-08-31",
-      "location": "정극장 (구. M시어터, 구.하모니아트홀)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF185428_250416_111227.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF185428",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF241378",
-      "title": "쉬어매드니스 [대학로]",
-      "startDate": "2016-04-05",
-      "endDate": "2026-07-31",
-      "location": "콘텐츠박스(구. 르메이에르 씨어터)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF241378_260618_130555.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF241378",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF175093",
-      "title": "뷰티풀라이프",
-      "startDate": "2016-10-02",
-      "endDate": "2026-07-31",
-      "location": "JTN 아트홀(구. 대학로예술마당)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF175093_241218_105921.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF175093",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF138268",
-      "title": "시간을 파는 상점",
-      "startDate": "2017-07-01",
-      "endDate": "2026-08-30",
-      "location": "파랑씨어터 (구. 도향아트홀, 구. 뮤디스홀)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF138268_260119_135011.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF138268",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF160272",
-      "title": "해녀의 부엌: 해녀이야기",
-      "startDate": "2018-12-31",
-      "endDate": "2026-07-31",
-      "location": "해녀의부엌",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF160272_191231_111713.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF160272",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF147207",
-      "title": "택시안에서 [부산]",
-      "startDate": "2019-03-15",
-      "endDate": "2026-07-31",
-      "location": "해바라기소극장 [부산]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF147207_190318_105324.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF147207",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF152141",
-      "title": "북극곰 예술여행",
-      "startDate": "2019-07-20",
-      "endDate": "2026-07-31",
-      "location": "북극곰소극장(구.아뮤스소극장)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF152141_190724_140737.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF152141",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF161298",
-      "title": "자취",
-      "startDate": "2020-02-28",
-      "endDate": "2026-07-31",
-      "location": "댕로홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF161298_251014_110146.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF161298",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF170941",
-      "title": "연극라면",
-      "startDate": "2021-01-14",
-      "endDate": "2026-08-31",
-      "location": "해피씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF170941_210106_102633.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF170941",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF172538",
-      "title": "한뼘사이 [라온아트홀]",
-      "startDate": "2021-03-19",
-      "endDate": "2026-08-31",
-      "location": "라온아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF172538_210318_095642.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF172538",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF235543",
-      "title": "난타 [명동]",
-      "startDate": "2021-12-02",
-      "endDate": "2026-09-30",
-      "location": "명동난타극장",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF235543_251014_140238.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF235543",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF186819",
-      "title": "늘근도둑이야기 [대학로]",
-      "startDate": "2022-03-05",
-      "endDate": "2026-07-31",
-      "location": "아트포레스트 아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF186819_260610_143419.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF186819",
-      "genre": "연극"
-    },
     {
       "source": "tourapi",
       "type": "festival",
@@ -168,839 +12,7 @@
       "location": "서울특별시 중구 정동길 3 (정동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/01/4060301_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3481597"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF203142",
-      "title": "햇님이 달님이",
-      "startDate": "2022-12-03",
-      "endDate": "2026-10-11",
-      "location": "소극장 쇠내골",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF203142_250611_160045.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF203142",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF230196",
-      "title": "여수월드, 여수서커스",
-      "startDate": "2023-03-18",
-      "endDate": "2026-08-31",
-      "location": "여수월드서커스",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF230196_241119_104852.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF230196",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF215020",
-      "title": "핫식스",
-      "startDate": "2023-04-01",
-      "endDate": "2026-08-31",
-      "location": "도토리씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF215020_230315_130848.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF215020",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF214941",
-      "title": "너의 목소리가 들려",
-      "startDate": "2023-04-02",
-      "endDate": "2026-07-31",
-      "location": "도토리씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF214941_260514_122605.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF214941",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF216355",
-      "title": "오마이갓 [전용관]",
-      "startDate": "2023-04-10",
-      "endDate": "2026-08-31",
-      "location": "오마이갓 전용관",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF216355_260122_123340.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF216355",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF216967",
-      "title": "요리하는 마술사 [부천]",
-      "startDate": "2023-04-22",
-      "endDate": "2026-07-19",
-      "location": "부천소극장",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF216967_240524_113729.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF216967",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF217274",
-      "title": "고두영의 키즈 매직쇼 [화성]",
-      "startDate": "2023-05-05",
-      "endDate": "2026-07-26",
-      "location": "더퍼포머 씨어터(라스플로레스)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF217274_230424_103946.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF217274",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF220426",
-      "title": "죽여주는 이야기",
-      "startDate": "2023-07-01",
-      "endDate": "2026-09-30",
-      "location": "지인시어터(구. 알과핵소극장)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF220426_260331_102545.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF220426",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF223694",
-      "title": "미래상상마술쇼 [대학로]",
-      "startDate": "2023-08-19",
-      "endDate": "2026-07-19",
-      "location": "파랑새극장(구. 샘터파랑새극장)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF223694_230811_150439.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF223694",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF231437",
-      "title": "어린이 마술쇼 [인천 송도]",
-      "startDate": "2023-12-09",
-      "endDate": "2026-08-30",
-      "location": "미리내 마술극단 [송도]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF231437_241120_111048.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF231437",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF229985",
-      "title": "천로역정",
-      "startDate": "2023-12-09",
-      "endDate": "2026-08-29",
-      "location": "명륜아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF229985_240819_152304.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF229985",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF234521",
-      "title": "사춘기메들리 [대학로]",
-      "startDate": "2024-02-01",
-      "endDate": "2026-07-31",
-      "location": "아라아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF234521_240126_100644.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF234521",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF234123",
-      "title": "나의PS파트너 [대학로]",
-      "startDate": "2024-02-03",
-      "endDate": "2026-07-31",
-      "location": "마루아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF234123_260626_134241.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF234123",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF235344",
-      "title": "오백에 삼십 [JTN 아트홀]",
-      "startDate": "2024-02-24",
-      "endDate": "2026-08-31",
-      "location": "JTN 아트홀(구. 대학로예술마당)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF235344_250915_085637.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF235344",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF235885",
-      "title": "사내연애 보고서",
-      "startDate": "2024-03-15",
-      "endDate": "2026-07-31",
-      "location": "제나아트홀 (구. 룸씨어터)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF235885_251126_090821.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF235885",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF236674",
-      "title": "썸데이 [대학로]",
-      "startDate": "2024-03-16",
-      "endDate": "2026-07-31",
-      "location": "대학로 무하아트센터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF236674_250602_133202.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF236674",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF238631",
-      "title": "내일은 내일에게 [대학로]",
-      "startDate": "2024-03-22",
-      "endDate": "2026-09-27",
-      "location": "초록씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF238631_250609_134228.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF238631",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF235879",
-      "title": "피노키오야 노올자~! [대학로]",
-      "startDate": "2024-03-23",
-      "endDate": "2026-08-30",
-      "location": "서연아트홀 (구. 인아소극장)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF235879_260609_134815.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF235879",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF237479",
-      "title": "페인터즈 [경향아트힐]",
-      "startDate": "2024-03-25",
-      "endDate": "2026-08-31",
-      "location": "경향아트힐",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF237479_260518_151643.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF237479",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF236460",
-      "title": "난타 [제주]",
-      "startDate": "2024-04-01",
-      "endDate": "2026-08-31",
-      "location": "제주난타극장",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF236460_260612_162011.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF236460",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF236349",
-      "title": "난타 [홍대]",
-      "startDate": "2024-04-01",
-      "endDate": "2026-09-30",
-      "location": "홍대난타극장(구. 뮤직쇼웨딩 전용관)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF236349_251016_133538.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF236349",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF239645",
-      "title": "조각: 사라진 기억",
-      "startDate": "2024-04-22",
-      "endDate": "2026-07-31",
-      "location": "댕로홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF239645_240422_124740.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF239645",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF239377",
-      "title": "비누향기",
-      "startDate": "2024-04-27",
-      "endDate": "2026-07-31",
-      "location": "서연아트홀 (구. 인아소극장)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF239377_251126_085938.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF239377",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF241439",
-      "title": "남사친 여사친",
-      "startDate": "2024-06-01",
-      "endDate": "2026-07-31",
-      "location": "세우아트센터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF241439_240531_105054.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF241439",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF242666",
-      "title": "페인터즈 [서대문전용관]",
-      "startDate": "2024-06-05",
-      "endDate": "2026-07-31",
-      "location": "NH아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF242666_240805_155829.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF242666",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF244959",
-      "title": "아기돼지삼형제: 늑대숲 또옹돼지 원정대 [대학로]",
-      "startDate": "2024-07-14",
-      "endDate": "2026-07-26",
-      "location": "라온씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF244959_260406_141210.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF244959",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF243650",
-      "title": "어린이 마술쇼 [수원 광교]",
-      "startDate": "2024-07-20",
-      "endDate": "2026-08-30",
-      "location": "매직앤조이 [광교]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF243650_240624_151725.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF243650",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF247233",
-      "title": "The entry to Jazz [서울 성수]",
-      "startDate": "2024-08-25",
-      "endDate": "2026-10-30",
-      "location": "entry55 [성수]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF247233_240819_134456.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF247233",
-      "genre": "대중음악"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF247431",
-      "title": "Special GIG [성수]",
-      "startDate": "2024-08-31",
-      "endDate": "2026-10-31",
-      "location": "entry55 [성수]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF247431_240821_143844.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF247431",
-      "genre": "대중음악"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF247938",
-      "title": "점프 JUMP",
-      "startDate": "2024-10-01",
-      "endDate": "2026-08-31",
-      "location": "명보아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF247938_240829_104022.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF247938",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF249563",
-      "title": "썸데이 [청주]",
-      "startDate": "2024-10-05",
-      "endDate": "2026-07-19",
-      "location": "소극장 쇠내골",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF249563_240923_155210.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF249563",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF249529",
-      "title": "701호 [대학로]",
-      "startDate": "2024-10-09",
-      "endDate": "2026-07-31",
-      "location": "우리소극장 [대학로]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF249529_250213_110549.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF249529",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF251017",
-      "title": "터치 파이브 (TOUCH FIVE)",
-      "startDate": "2024-11-08",
-      "endDate": "2026-07-31",
-      "location": "TOUCH FIVE 전용관",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF251017_260706_104403.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF251017",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF248820",
-      "title": "우리가 사랑한 한국 영화 OST 콘서트 [대구]",
-      "startDate": "2024-11-09",
-      "endDate": "2026-11-22",
-      "location": "스테이지엠 (STAGE M) (구.프란츠홀)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF248820_241223_114124.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF248820",
-      "genre": "서양음악(클래식)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF252877",
-      "title": "드립소년단 [대학로]",
-      "startDate": "2024-11-16",
-      "endDate": "2026-08-02",
-      "location": "스케치홀 (구.소극장 선물 1관)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF252877_260409_131846.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF252877",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF254868",
-      "title": "급식왕: 급식이 사라졌다",
-      "startDate": "2024-12-14",
-      "endDate": "2026-08-01",
-      "location": "스케치홀 (구.소극장 선물 1관)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF254868_241129_111046.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF254868",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF254737",
-      "title": "지브리와 사랑에 빠지다: 지브리 영화 음악 콘서트 [대구]",
-      "startDate": "2025-01-05",
-      "endDate": "2026-08-01",
-      "location": "스테이지엠 (STAGE M) (구.프란츠홀)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF254737_250915_150123.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF254737",
-      "genre": "서양음악(클래식)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF255313",
-      "title": "라이어 1탄 (1관)",
-      "startDate": "2025-01-10",
-      "endDate": "2026-07-31",
-      "location": "상명아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255313_241205_143818.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF255313",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF278472",
-      "title": "김슬기 공연: 카디션과 일상다반사",
-      "startDate": "2025-01-11",
-      "endDate": "2026-07-25",
-      "location": "카디션(CARDICIAN)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF278472_251107_125207.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF278472",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF257417",
-      "title": "코미디 매직쇼 [수원]",
-      "startDate": "2025-01-14",
-      "endDate": "2026-08-30",
-      "location": "매직앤조이 [광교]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF257417_250117_112415.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF257417",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF272938",
-      "title": "더 맨 얼라이브: 초이스",
-      "startDate": "2025-01-15",
-      "endDate": "2026-07-31",
-      "location": "더 서울라이티움 (갤러리아포레)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF272938_260506_110502.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF272938",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF256370",
-      "title": "스테이지 M 신년 음악회: 캔들데이 콘서트 [대구]",
-      "startDate": "2025-01-17",
-      "endDate": "2026-12-27",
-      "location": "스테이지엠 (STAGE M) (구.프란츠홀)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF256370_250108_161156.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF256370",
-      "genre": "서양음악(클래식)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF259569",
-      "title": "코미디 매직쇼 [인천 송도]",
-      "startDate": "2025-01-31",
-      "endDate": "2026-08-29",
-      "location": "미리내 마술극단 [송도]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF259569_250224_110527.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF259569",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF257643",
-      "title": "마하랑 떠나요, 수도SONG 세계여행 [고양]",
-      "startDate": "2025-02-15",
-      "endDate": "2026-08-30",
-      "location": "한국항공대학교",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF257643_260601_125537.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF257643",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF265271",
-      "title": "흉터 [서울 홍대]",
-      "startDate": "2025-03-01",
-      "endDate": "2026-07-31",
-      "location": "홍대 씨어터 윤",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF265271_250519_160940.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF265271",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF259907",
-      "title": "반짝 반짝 라푼젤 [대학로]",
-      "startDate": "2025-03-01",
-      "endDate": "2026-08-17",
-      "location": "달밤엔씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF259907_250227_110032.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF259907",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF260200",
-      "title": "알사탕",
-      "startDate": "2025-03-29",
-      "endDate": "2026-08-30",
-      "location": "더 서울라이티움 (갤러리아포레)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF260200_250304_161053.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF260200",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF276055",
-      "title": "헝키쇼 (HUNKY SHOW)",
-      "startDate": "2025-04-25",
-      "endDate": "2026-08-30",
-      "location": "스타스테이지",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF276055_251014_105639.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF276055",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF263000",
-      "title": "써니텐 [대전]",
-      "startDate": "2025-05-09",
-      "endDate": "2026-08-30",
-      "location": "런던스테이지 [대전 중구]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF263000_250811_154517.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF263000",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF265713",
-      "title": "기억의 숲 [대학로]",
-      "startDate": "2025-06-06",
-      "endDate": "2026-07-31",
-      "location": "지즐소극장",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF265713_260612_162254.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF265713",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF266985",
-      "title": "진연 [서울]",
-      "startDate": "2025-06-13",
-      "endDate": "2026-12-31",
-      "location": "지지대악",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF266985_251013_141958.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF266985",
-      "genre": "한국음악(국악)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF267104",
-      "title": "슬립노모어 서울",
-      "startDate": "2025-07-24",
-      "endDate": "2026-07-31",
-      "location": "매키탄 호텔",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF267104_260204_101123.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF267104",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF270484",
-      "title": "영시기 [서울 성수]",
-      "startDate": "2025-08-01",
-      "endDate": "2026-07-31",
-      "location": "성수 소극장(일루미 스튜디오)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF270484_251127_101354.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF270484",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF273014",
-      "title": "스폿라이트 [대학로]",
-      "startDate": "2025-08-28",
-      "endDate": "2026-07-31",
-      "location": "스폿라이트",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF273014_260702_163452.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF273014",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF274555",
-      "title": "패밀리 재즈 콘서트: 재즈로 듣는 지브리 &amp; 디즈니 OST [대구]",
-      "startDate": "2025-09-14",
-      "endDate": "2026-09-12",
-      "location": "스테이지엠 (STAGE M) (구.프란츠홀)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF274555_251223_161622.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF274555",
-      "genre": "대중음악"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF275957",
-      "title": "우야꼬: 마술 여행사, 당신의 여행지는? [부산]",
-      "startDate": "2025-09-27",
-      "endDate": "2026-07-18",
-      "location": "제페토(GEPPETTO)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF275957_251013_142552.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF275957",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF275888",
-      "title": "시그널 [대전]",
-      "startDate": "2025-10-24",
-      "endDate": "2026-08-23",
-      "location": "아신극장",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF275888_251013_120442.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF275888",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF274407",
-      "title": "아주아주 배고픈 애벌레 쇼",
-      "startDate": "2025-10-24",
-      "endDate": "2026-08-09",
-      "location": "NOL 씨어터 합정(구, 신한카드 SOL페이 스퀘어)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF274407_250918_124113.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF274407",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF280368",
-      "title": "보물찾기 [대학로]",
-      "startDate": "2025-11-07",
-      "endDate": "2026-07-31",
-      "location": "아트포레스트 아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF280368_251127_134026.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF280368",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF276681",
-      "title": "아빠와 딸 [대학로]",
-      "startDate": "2025-11-09",
-      "endDate": "2026-07-31",
-      "location": "세우아트센터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF276681_251201_134130.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF276681",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF278194",
-      "title": "남주를 부탁해",
-      "startDate": "2025-11-15",
-      "endDate": "2026-08-02",
-      "location": "스케치홀 (구.소극장 선물 1관)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF278194_251105_103707.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF278194",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF277037",
-      "title": "아주아주 배고픈 애벌레 쇼 (영어)",
-      "startDate": "2025-11-21",
-      "endDate": "2026-07-12",
-      "location": "NOL 씨어터 합정(구, 신한카드 SOL페이 스퀘어)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF277037_251022_141641.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF277037",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF280025",
-      "title": "투모로우 모닝 [대학로]",
-      "startDate": "2025-12-03",
-      "endDate": "2026-07-26",
-      "location": "큐씨어터(구. 수상한흥신소전용관)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF280025_260320_170827.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF280025",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF274143",
-      "title": "스테이지엠 크리스마스 영화 음악 &amp; 캐롤 콘서트 [대구]",
-      "startDate": "2025-12-06",
-      "endDate": "2026-12-19",
-      "location": "스테이지엠 (STAGE M) (구.프란츠홀)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF274143_251128_134208.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF274143",
-      "genre": "서양음악(클래식)"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1012,7 +24,7 @@
       "location": "부산광역시 수영구 광안해변로 219 (광안동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/12/3518612_image2_1.jpeg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2786391"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1024,7 +36,7 @@
       "location": "서울특별시 종로구 인사동5길 10 (인사동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/35/4060435_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4060434"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1036,7 +48,7 @@
       "location": "서울특별시 종로구 종로 54 (관철동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/57/4001657_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2809535"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1048,7 +60,7 @@
       "location": "서울특별시 중구 세종대로 99 (정동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/79/4039379_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=292961"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1060,7 +72,7 @@
       "location": "서울특별시 중구 세종대로 40 (남대문로4가)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/99/4001599_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3107059"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1072,20 +84,7 @@
       "location": "서울특별시 중구 을지로 281 (을지로7가)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/09/4046009_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3473295"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF281481",
-      "title": "토요명품",
-      "startDate": "2026-01-03",
-      "endDate": "2026-12-26",
-      "location": "국립국악원",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF281481_251226_165238.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF281481",
-      "genre": "한국음악(국악)"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1097,150 +96,7 @@
       "location": "인천광역시 영종구 공항로 272 (운서동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/76/4029576_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2433596"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF283834",
-      "title": "한영숙류 이철진 춤: 오직 승무",
-      "startDate": "2026-01-12",
-      "endDate": "2026-12-28",
-      "location": "성균소극장",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF283834_260126_124443.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF283834",
-      "genre": "무용(서양/한국무용)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF281900",
-      "title": "어쩌다 보니",
-      "startDate": "2026-01-13",
-      "endDate": "2026-07-31",
-      "location": "샤봉디씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF281900_251219_134945.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF281900",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF282265",
-      "title": "라움 마티네 콘서트",
-      "startDate": "2026-01-27",
-      "endDate": "2026-12-24",
-      "location": "소셜베뉴 라움",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF282265_251229_102231.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF282265",
-      "genre": "복합"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF282994",
-      "title": "한상민의 매직쇼",
-      "startDate": "2026-02-07",
-      "endDate": "2026-12-27",
-      "location": "루시드아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF282994_260112_142805.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF282994",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF284920",
-      "title": "우상임 아코디언 에세이: 붉은 풍금소리",
-      "startDate": "2026-02-12",
-      "endDate": "2026-08-13",
-      "location": "애월뮤직팩토리",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284920_260211_125924.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF284920",
-      "genre": "서양음악(클래식)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF283487",
-      "title": "키즈 마티네 콘서트 [김포]",
-      "startDate": "2026-02-21",
-      "endDate": "2026-12-19",
-      "location": "김포아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF283487_260120_100059.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF283487",
-      "genre": "복합"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF284226",
-      "title": "ACC 브런치콘서트 플러스",
-      "startDate": "2026-02-25",
-      "endDate": "2026-12-23",
-      "location": "국립아시아문화전당",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284226_260202_122150.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF284226",
-      "genre": "복합"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF283137",
-      "title": "다담",
-      "startDate": "2026-02-25",
-      "endDate": "2026-11-25",
-      "location": "국립국악원",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF283137_260202_174919.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF283137",
-      "genre": "한국음악(국악)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF282357",
-      "title": "삼청각 수요상설공연, 三淸: 삼청",
-      "startDate": "2026-02-25",
-      "endDate": "2026-12-30",
-      "location": "삼청각",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF282357_251230_102727.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF282357",
-      "genre": "한국음악(국악)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF281769",
-      "title": "오르간 오딧세이",
-      "startDate": "2026-02-25",
-      "endDate": "2026-12-16",
-      "location": "롯데콘서트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF281769_251217_135219.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF281769",
-      "genre": "서양음악(클래식)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF284880",
-      "title": "움라우트 뮤직 키즈 클래식 [창원] (13시)",
-      "startDate": "2026-02-28",
-      "endDate": "2026-12-19",
-      "location": "몰입공유연습실",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284880_260211_100356.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF284880",
-      "genre": "서양음악(클래식)"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1252,59 +108,7 @@
       "location": "전남광주통합특별시 여수시 선어시장길 6 (중앙동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/13/4067313_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4067214"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285694",
-      "title": "마피아게임 [대학로]",
-      "startDate": "2026-03-05",
-      "endDate": "2026-07-31",
-      "location": "아라아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285694_260224_131148.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285694",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF281822",
-      "title": "롯콘 마티네: 대니 구의 플레이리스트",
-      "startDate": "2026-03-05",
-      "endDate": "2026-11-05",
-      "location": "롯데콘서트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF281822_251222_110249.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF281822",
-      "genre": "서양음악(클래식)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286497",
-      "title": "김종욱 찾기 [대학로]",
-      "startDate": "2026-03-07",
-      "endDate": "2026-07-31",
-      "location": "틴틴홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286497_260306_173930.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286497",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285993",
-      "title": "부여군충남국악단의 토요상설 국악공연, 유종지미: 끝맺음의 아름다움 [부여]",
-      "startDate": "2026-03-07",
-      "endDate": "2026-10-31",
-      "location": "부여국악의전당",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285993_260227_142329.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285993",
-      "genre": "한국음악(국악)"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1316,7 +120,7 @@
       "location": "경기도 안양시 만안구 예술공원로 180 (안양동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/69/4054469_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3113265"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1328,7 +132,7 @@
       "location": "전남광주통합특별시 북구 하서로 50 (운암동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/85/4039885_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3488655"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1340,85 +144,7 @@
       "location": "경기도 파주시 탄현면 헤이리로 16",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/91/4081691_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3488421"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286003",
-      "title": "돌고돌아, 도라희",
-      "startDate": "2026-03-14",
-      "endDate": "2026-07-29",
-      "location": "성수 소극장(일루미 스튜디오)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286003_260508_125530.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286003",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF284594",
-      "title": "장수탕 선녀님 [서울 광진]",
-      "startDate": "2026-03-14",
-      "endDate": "2026-08-09",
-      "location": "서울어린이대공원",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284594_260206_110407.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF284594",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286005",
-      "title": "삐삐: 기억을 담는 작은 상자 [대학로]",
-      "startDate": "2026-03-19",
-      "endDate": "2026-07-31",
-      "location": "대학로 마로니에소극장(플레이더씨어터)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286005_260227_145520.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286005",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285984",
-      "title": "성남아트센터 마티네 콘서트: 독일, 음악의 숲",
-      "startDate": "2026-03-19",
-      "endDate": "2026-12-17",
-      "location": "성남아트센터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285984_260227_140158.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285984",
-      "genre": "서양음악(클래식)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF287509",
-      "title": "썰: 친구고추본썰",
-      "startDate": "2026-03-20",
-      "endDate": "2026-07-31",
-      "location": "레드루즈씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF287509_260629_130750.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF287509",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285015",
-      "title": "구미호 식당",
-      "startDate": "2026-03-20",
-      "endDate": "2026-08-30",
-      "location": "초록씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285015_260212_104445.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285015",
-      "genre": "연극"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1430,137 +156,7 @@
       "location": "경상북도 경주시 금성로 260-6 (노서동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/26/4062226_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4062064"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF290349",
-      "title": "모래로 그린 음악동화: 어린왕자 [오산]",
-      "startDate": "2026-03-21",
-      "endDate": "2026-11-07",
-      "location": "피아올라홀(피아올라스튜디오)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290349_260429_115045.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290349",
-      "genre": "복합"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285121",
-      "title": "슈퍼거북 슈퍼토끼",
-      "startDate": "2026-03-21",
-      "endDate": "2026-07-12",
-      "location": "더 서울라이티움 (갤러리아포레)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285121_260212_153249.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285121",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286553",
-      "title": "차와 이야기가 있는 국악콘서트: 다담 [남원]",
-      "startDate": "2026-03-25",
-      "endDate": "2026-11-25",
-      "location": "국립민속국악원",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286553_260324_140343.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286553",
-      "genre": "한국음악(국악)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286158",
-      "title": "신바람 삼대 [부산]",
-      "startDate": "2026-03-26",
-      "endDate": "2026-07-19",
-      "location": "BNK부산은행 조은극장",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286158_260303_154554.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286158",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286856",
-      "title": "마술집 [인천]",
-      "startDate": "2026-03-27",
-      "endDate": "2026-12-25",
-      "location": "카페와안",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286856_260311_141715.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286856",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286173",
-      "title": "브라보 마이 라이프 [전주]",
-      "startDate": "2026-03-27",
-      "endDate": "2026-07-12",
-      "location": "한해랑아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286173_260303_163012.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286173",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285499",
-      "title": "동대문문화재단 기획공연, 와인et멜로디",
-      "startDate": "2026-03-27",
-      "endDate": "2026-11-27",
-      "location": "선농단역사문화관",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285499_260223_105308.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285499",
-      "genre": "대중음악"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285860",
-      "title": "어서 오세요, 휴남동 서점입니다 [대학로]",
-      "startDate": "2026-03-28",
-      "endDate": "2026-08-30",
-      "location": "루미나아트홀 (구.시온아트홀)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285860_260226_114615.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285860",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285481",
-      "title": "불편한 편의점1 [부산]",
-      "startDate": "2026-03-28",
-      "endDate": "2026-08-30",
-      "location": "KNN시어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285481_260220_140447.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285481",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286469",
-      "title": "아리아라리 [정선]",
-      "startDate": "2026-03-31",
-      "endDate": "2026-11-27",
-      "location": "정선아리랑센터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286469_260306_140831.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286469",
-      "genre": "뮤지컬"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1572,72 +168,7 @@
       "location": "인천광역시 제물포구 송현동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/82/4055582_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3492276"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF287756",
-      "title": "김슬기의 타짜",
-      "startDate": "2026-04-01",
-      "endDate": "2026-07-26",
-      "location": "카디션(CARDICIAN)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF287756_260323_143059.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF287756",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285349",
-      "title": "불편한 편의점2",
-      "startDate": "2026-04-01",
-      "endDate": "2026-08-30",
-      "location": "후암씨어터(콘텐츠룸)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285349_260219_144146.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285349",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF288776",
-      "title": "할래말래 [부산]",
-      "startDate": "2026-04-02",
-      "endDate": "2026-08-09",
-      "location": "BNK부산은행 조은극장",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288776_260612_113021.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288776",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286457",
-      "title": "할래? !말래 [부산]",
-      "startDate": "2026-04-02",
-      "endDate": "2026-07-19",
-      "location": "BNK부산은행 조은극장",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286457_260408_110832.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286457",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285965",
-      "title": "리턴 [대학로]",
-      "startDate": "2026-04-02",
-      "endDate": "2026-12-31",
-      "location": "시윤아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285965_260227_131223.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285965",
-      "genre": "연극"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1649,33 +180,7 @@
       "location": "서울특별시 강남구 봉은사로 531 (삼성동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/90/4054090_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3377038"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286545",
-      "title": "오싹한 알바 [부산]",
-      "startDate": "2026-04-03",
-      "endDate": "2026-09-27",
-      "location": "초콜릿팩토리",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286545_260309_114832.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286545",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285839",
-      "title": "불편한 편의점1 [대학로]",
-      "startDate": "2026-04-03",
-      "endDate": "2026-08-30",
-      "location": "올웨이즈 씨어터(구.아티스탄홀)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285839_260611_144043.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285839",
-      "genre": "연극"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1687,7 +192,7 @@
       "location": "경기도 안성시 보개면 남사당로 198-2",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/32/4039532_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=293030"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1699,7 +204,7 @@
       "location": "전남광주통합특별시 고흥군 도양읍 봉암리",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/97/4054497_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2987489"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1711,7 +216,7 @@
       "location": "전남광주통합특별시 동구 금남로 245 (금남로1가)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/37/4040737_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3478890"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1723,124 +228,7 @@
       "location": "전남광주통합특별시 동구 충장로 94 (충장로2가)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/01/4067301_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2865136"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF287953",
-      "title": "카디션 김슬기의 다윈의 역작",
-      "startDate": "2026-04-04",
-      "endDate": "2026-07-25",
-      "location": "카디션(CARDICIAN)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF287953_260325_105456.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF287953",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF287430",
-      "title": "토요국악동화",
-      "startDate": "2026-04-04",
-      "endDate": "2026-11-28",
-      "location": "국립국악원",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF287430_260318_145539.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF287430",
-      "genre": "한국음악(국악)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286899",
-      "title": "연희판판",
-      "startDate": "2026-04-04",
-      "endDate": "2026-10-31",
-      "location": "국립국악원",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286899_260311_165032.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286899",
-      "genre": "한국음악(국악)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286543",
-      "title": "백 번째 리뷰",
-      "startDate": "2026-04-04",
-      "endDate": "2026-08-30",
-      "location": "올림픽공원",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286543_260309_114309.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286543",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF284729",
-      "title": "정선아리랑 토요상설공연: 뗏꾼",
-      "startDate": "2026-04-04",
-      "endDate": "2026-11-28",
-      "location": "정선아리랑센터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284729_260209_130555.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF284729",
-      "genre": "한국음악(국악)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF286928",
-      "title": "제1회 은곡마을 음악축제: ENCOUNTER",
-      "startDate": "2026-04-05",
-      "endDate": "2026-11-23",
-      "location": "야기스튜디오",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286928_260312_111109.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286928",
-      "genre": "복합"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285980",
-      "title": "헤르츠클란 [대학로]",
-      "startDate": "2026-04-07",
-      "endDate": "2026-07-12",
-      "location": "링크아트센터드림",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285980_260410_125923.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285980",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF287675",
-      "title": "미드나잇: 액터뮤지션 [대학로]",
-      "startDate": "2026-04-08",
-      "endDate": "2026-08-09",
-      "location": "유니플렉스",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF287675_260323_111140.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF287675",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285591",
-      "title": "저항: 찬송이 된 사람들",
-      "startDate": "2026-04-10",
-      "endDate": "2026-10-31",
-      "location": "광야아트센터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285591_260403_162724.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285591",
-      "genre": "뮤지컬"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1852,7 +240,7 @@
       "location": "서울특별시 종로구 종로1길 45 (세종로)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/13/4056513_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3497454"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1864,59 +252,7 @@
       "location": "제주특별자치도 서귀포시 이중섭로 11 (서귀동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/17/4044417_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3512205"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF284789",
-      "title": "키즈인비또 스페셜, 클래식 어드벤처: 음악 왕국으로 떠나는 대모험! [용인]",
-      "startDate": "2026-04-11",
-      "endDate": "2026-12-12",
-      "location": "용인문화예술원",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284789_260609_105906.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF284789",
-      "genre": "서양음악(클래식)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF284081",
-      "title": "빌리 엘리어트",
-      "startDate": "2026-04-12",
-      "endDate": "2026-07-26",
-      "location": "블루스퀘어",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284081_260129_115349.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF284081",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF289561",
-      "title": "경기국악원 기획공연 Ⅱ, 국악원활성화, Feel korea: Gugak experience [용인]",
-      "startDate": "2026-04-15",
-      "endDate": "2026-11-11",
-      "location": "경기아트센터 경기국악원",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289561_260605_174640.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289561",
-      "genre": "한국음악(국악)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF285983",
-      "title": "스크루테이프의 편지 [대학로]",
-      "startDate": "2026-04-17",
-      "endDate": "2026-08-29",
-      "location": "명륜아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285983_260227_135825.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285983",
-      "genre": "뮤지컬"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1928,7 +264,7 @@
       "location": "전북특별자치도 전주시 완산구 태조로 44 (풍남동3가)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/58/4067258_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2547013"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1940,46 +276,7 @@
       "location": "경기도 수원시 영통구 도청로 지하36 (이의동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/21/4058721_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4058556"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF287252",
-      "title": "제5회 전주미니재즈페스티벌",
-      "startDate": "2026-04-18",
-      "endDate": "2026-10-31",
-      "location": "로라뮤직-바인홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF287252_260316_173713.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF287252",
-      "genre": "대중음악"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF288040",
-      "title": "내가 하면 로맨스 [하마씨어터]",
-      "startDate": "2026-04-19",
-      "endDate": "2026-07-31",
-      "location": "하마씨어터(구. 가든씨어터)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288040_260708_170047.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288040",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF287889",
-      "title": "세심굿: 응공이 이야기 [대전]",
-      "startDate": "2026-04-19",
-      "endDate": "2026-12-19",
-      "location": "별별마당 우금치",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF287889_260324_112128.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF287889",
-      "genre": "한국음악(국악)"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1991,20 +288,7 @@
       "location": "서울특별시 영등포구 여의동로 330 (여의도동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/49/4058449_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3111722"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF288963",
-      "title": "나의 빈틈메이트",
-      "startDate": "2026-04-22",
-      "endDate": "2026-07-31",
-      "location": "대학로 마로니에소극장(플레이더씨어터)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288963_260416_131224.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288963",
-      "genre": "연극"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -2016,7 +300,7 @@
       "location": "강원특별자치도 원주시 지정면 소금산길 12",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/09/4059609_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2766000"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -2028,20 +312,7 @@
       "location": "제주특별자치도 서귀포시 남성중로 40 (서홍동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/22/4051822_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2434545"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF288962",
-      "title": "스카이파크 루프탑 콘서트 [성남]",
-      "startDate": "2026-04-25",
-      "endDate": "2026-08-29",
-      "location": "호텔 스카이파크 센트럴 서울 판교",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288962_260605_172629.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288962",
-      "genre": "대중음악"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -2053,7 +324,7 @@
       "location": "충청북도 괴산군 괴산읍 충민로검승1길 6",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/07/4063007_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4062805"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -2078,7 +349,7 @@
       "location": "서울특별시 영등포구 여의동로 330 (여의도동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/46/4060146_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3116066"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -2090,7 +361,7 @@
       "location": "서울특별시 종로구 세종대로 지하172 (세종로)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/74/4060474_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2720203"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -2102,20 +373,7 @@
       "location": "경기도 수원시 팔달구 정조로 825 (남창동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/63/4081263_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2657619"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF291607",
-      "title": "스위치 [대학로]",
-      "startDate": "2026-05-01",
-      "endDate": "2026-07-31",
-      "location": "아스가르드 씨어터 (구. 낙산씨어터)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291607_260518_123128.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291607",
-      "genre": "연극"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -2128,45 +386,6 @@
       "area": null,
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291121_260511_150409.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291121",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF289294",
-      "title": "마트로시카 [서울 중구]",
-      "startDate": "2026-05-01",
-      "endDate": "2027-01-03",
-      "location": "명보아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289294_260414_101835.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289294",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF288877",
-      "title": "괴담: 위험한 해시태그",
-      "startDate": "2026-05-01",
-      "endDate": "2026-08-30",
-      "location": "미래아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288877_260408_103225.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288877",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF288742",
-      "title": "사랑해 엄마 [대학로]",
-      "startDate": "2026-05-01",
-      "endDate": "2026-09-30",
-      "location": "아트하우스",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288742_260709_131427.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288742",
       "genre": "연극"
     },
     {
@@ -2231,7 +450,7 @@
       "location": "서울특별시 중구 을지로 지하12 (을지로1가)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/68/4059668_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2598331"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -2269,33 +488,7 @@
       "location": "전남광주통합특별시 목포시 평화로 82 (상동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/45/4055545_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2774275"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF287874",
-      "title": "브라더스 까라마조프 [대학로]",
-      "startDate": "2026-05-12",
-      "endDate": "2026-09-06",
-      "location": "NOL 씨어터 대학로 (구. 대학로뮤지컬센터)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF287874_260324_104435.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF287874",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF291510",
-      "title": "트랜스엠파이어 션 타이어스 내한",
-      "startDate": "2026-05-13",
-      "endDate": "2036-05-13",
-      "location": "심심(XIMXIM)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291510_260515_135202.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291510",
-      "genre": "대중음악"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -2326,45 +519,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF290945",
-      "title": "안산시립국악단 기획연주회: 목요보노음악회 [안산]",
-      "startDate": "2026-05-21",
-      "endDate": "2026-12-17",
-      "location": "보노마루",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290945_260508_132508.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290945",
-      "genre": "한국음악(국악)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF290133",
-      "title": "인사이드 더 플레이: 군체 [서울 신대방]",
-      "startDate": "2026-05-21",
-      "endDate": "2026-08-31",
-      "location": "롯데시네마 [신대방]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290133_260427_105326.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290133",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF292586",
-      "title": "경기국악원 국악소풍",
-      "startDate": "2026-05-22",
-      "endDate": "2026-11-30",
-      "location": "경기아트센터 경기국악원",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292586_260601_104054.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292586",
-      "genre": "한국음악(국악)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF291214",
       "title": "MU&amp;A 스튜디오 기획 시리즈, 귀로 읽는 밤",
       "startDate": "2026-05-22",
@@ -2391,19 +545,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF289525",
-      "title": "그때, 변홍례 [부산]",
-      "startDate": "2026-05-22",
-      "endDate": "2026-12-31",
-      "location": "어댑터씨어터 2관",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289525_260416_132441.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289525",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF293714",
       "title": "아기돼지 삼형제 [의정부]",
       "startDate": "2026-05-23",
@@ -2417,19 +558,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF291242",
-      "title": "별향단젼이라 [전주]",
-      "startDate": "2026-05-23",
-      "endDate": "2026-10-17",
-      "location": "전주한벽문화관",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291242_260513_104948.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291242",
-      "genre": "한국음악(국악)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF289063",
       "title": "연극열전10, 렁스",
       "startDate": "2026-05-23",
@@ -2439,19 +567,6 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289063_260611_112550.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289063",
       "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF292827",
-      "title": "꼬마별이 만든 보물성 [용인]",
-      "startDate": "2026-05-26",
-      "endDate": "2026-10-27",
-      "location": "경기아트센터 경기국악원",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292827_260604_103714.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292827",
-      "genre": "한국음악(국악)"
     },
     {
       "source": "kopis",
@@ -2528,7 +643,7 @@
       "location": "서울특별시 종로구 효자로13길 45 (효자동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/70/4082670_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4082595"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -2637,19 +752,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF291593",
-      "title": "속임수에 걸린 꾀보토끼 [광주]",
-      "startDate": "2026-06-06",
-      "endDate": "2026-11-07",
-      "location": "공연일번지",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291593_260518_111732.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291593",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF291364",
       "title": "섹시맨스탠딩",
       "startDate": "2026-06-06",
@@ -2741,19 +843,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF291337",
-      "title": "12시 런치 콘서트 [세종]",
-      "startDate": "2026-06-10",
-      "endDate": "2026-09-23",
-      "location": "세종예술의전당",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291337_260514_103823.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291337",
-      "genre": "복합"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF291152",
       "title": "박열 [대학로]",
       "startDate": "2026-06-10",
@@ -2801,19 +890,6 @@
       "area": null,
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291644_260529_162645.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291644",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF291533",
-      "title": "빨래: 32차 프로덕션",
-      "startDate": "2026-06-11",
-      "endDate": "2027-02-21",
-      "location": "유니플렉스",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291533_260515_150927.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291533",
       "genre": "뮤지컬"
     },
     {
@@ -2923,19 +999,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF291398",
-      "title": "제1회 전주재즈쇼케이스",
-      "startDate": "2026-06-13",
-      "endDate": "2026-12-12",
-      "location": "로라뮤직-바인홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291398_260514_133606.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291398",
-      "genre": "대중음악"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF291582",
       "title": "꽃, 별이 지나 [대학로]",
       "startDate": "2026-06-16",
@@ -2997,19 +1060,6 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293447_260611_135833.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293447",
       "genre": "서양음악(클래식)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF291382",
-      "title": "19시 야민락 콘서트 [세종]",
-      "startDate": "2026-06-17",
-      "endDate": "2026-09-16",
-      "location": "세종예술의전당",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291382_260514_125930.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291382",
-      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -3216,7 +1266,7 @@
       "location": "경기도 연천군 중면 군중로 324-1",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/93/4080593_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3495437"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -3293,7 +1343,7 @@
       "location": "경기도 양평군 양서면 양수로 93",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/76/4078876_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2550263"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -3324,19 +1374,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF293251",
-      "title": "리온의 신비한 과자상점 [부산]",
-      "startDate": "2026-06-27",
-      "endDate": "2026-12-26",
-      "location": "가온아트홀 [부산]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293251_260610_113230.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293251",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF292626",
       "title": "알라딘 [광주]",
       "startDate": "2026-06-27",
@@ -3346,19 +1383,6 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292626_260601_125028.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292626",
       "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF292279",
-      "title": "월간 하랑: 계절의 온도 [속초]",
-      "startDate": "2026-06-27",
-      "endDate": "2026-12-26",
-      "location": "소극장 초속",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292279_260527_101019.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292279",
-      "genre": "서양음악(클래식)"
     },
     {
       "source": "kopis",
@@ -3435,7 +1459,7 @@
       "location": "서울특별시 중구 세종대로21길 30 (태평로1가)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/49/4057349_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1829696"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -3461,19 +1485,6 @@
       "area": null,
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295103_260702_121218.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295103",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294961",
-      "title": "SEXY MEN STANDING 섹시 맨 스탠딩",
-      "startDate": "2026-07-01",
-      "endDate": "2026-11-29",
-      "location": "레드루즈씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294961_260630_134910.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294961",
       "genre": "뮤지컬"
     },
     {
@@ -3592,19 +1603,6 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290092_260424_140514.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290092",
       "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294122",
-      "title": "맥거핀 이야기",
-      "startDate": "2026-07-02",
-      "endDate": "2026-10-11",
-      "location": "맥거핀 서교",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294122_260619_130006.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294122",
-      "genre": "연극"
     },
     {
       "source": "kopis",
@@ -4025,19 +2023,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF295351",
-      "title": "지브리 하우스 콘서트: 그 여름날의 계곡 [대구]",
-      "startDate": "2026-07-07",
-      "endDate": "2026-10-20",
-      "location": "어연히하우스",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295351_260706_110409.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295351",
-      "genre": "서양음악(클래식)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF292689",
       "title": "다녀왔습니다 [서울]",
       "startDate": "2026-07-07",
@@ -4324,19 +2309,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF292469",
-      "title": "룰렛",
-      "startDate": "2026-07-09",
-      "endDate": "2026-10-11",
-      "location": "롯데시네마 [도곡]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292469_260528_145445.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292469",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF292347",
       "title": "제11회 늘푸른연극제, 작은할머니: 그 여자의 소설",
       "startDate": "2026-07-09",
@@ -4345,19 +2317,6 @@
       "area": null,
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292347_260527_134337.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292347",
-      "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF292342",
-      "title": "더 헬멧",
-      "startDate": "2026-07-09",
-      "endDate": "2026-10-11",
-      "location": "홍익대 대학로 아트센터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292342_260527_133223.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292342",
       "genre": "연극"
     },
     {
@@ -4383,7 +2342,7 @@
       "location": "충청남도 금산군 금산읍 인삼광장로 30",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/42/4064242_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2719507"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -4395,7 +2354,7 @@
       "location": "경상북도 구미시 산동읍 첨단기업1로 49",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/48/4065648_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3302702"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -4407,7 +2366,7 @@
       "location": "경상남도 통영시 남망공원길 29 (동호동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/82/4070082_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1824778"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -4419,7 +2378,7 @@
       "location": "부산광역시 해운대구 APEC로 55 (우동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/87/4080287_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4080156"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -4580,19 +2539,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF291461",
-      "title": "드라큘라 [서울]",
-      "startDate": "2026-07-10",
-      "endDate": "2026-10-18",
-      "location": "LG아트센터 서울",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291461_260515_111114.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291461",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF290572",
       "title": "더 스토리 오브 언더더씨",
       "startDate": "2026-07-10",
@@ -4626,7 +2572,7 @@
       "location": "서울특별시 관악구 신림로3길 35 (신림동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/42/4071342_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2826964"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -4638,7 +2584,7 @@
       "location": "경상북도 칠곡군 왜관읍 왜관리",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/06/4061206_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3487396"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -4717,19 +2663,6 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294980_260701_101824.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294980",
       "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294696",
-      "title": "동아줄",
-      "startDate": "2026-07-11",
-      "endDate": "2026-10-11",
-      "location": "디너씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294696_260626_131834.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294696",
-      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -6125,19 +4058,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF295594",
-      "title": "지브리 하우스 콘서트: 바다와 함께하는 여름 [대구]",
-      "startDate": "2026-07-14",
-      "endDate": "2026-10-27",
-      "location": "어연히하우스",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295594_260708_130516.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295594",
-      "genre": "서양음악(클래식)"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF295407",
       "title": "권그림 바이올린 독주회",
       "startDate": "2026-07-14",
@@ -7068,7 +4988,7 @@
       "location": "경기도 수원시 권선구 서둔로 166 (서둔동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/47/4076547_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1825520"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -7080,7 +5000,7 @@
       "location": "서울특별시 강남구 영동대로 513 (삼성동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/35/4080135_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2387785"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -7846,7 +5766,7 @@
       "location": "전북특별자치도 전주시 완산구 전주천동로 118 (전동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/55/4076355_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3495394"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -7858,7 +5778,7 @@
       "location": "전북특별자치도 장수군 번암면 방화동로 778",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/12/4073812_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2989580"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -7870,7 +5790,7 @@
       "location": "강원 홍천군 홍천읍 갈마곡리 501",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/51/4075351_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=140833"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -8118,19 +6038,6 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294941_260630_113140.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294941",
       "genre": "대중음악"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294866",
-      "title": "인사이드 더 플레이: 데스게임 [서울 중구]",
-      "startDate": "2026-07-17",
-      "endDate": "2026-11-01",
-      "location": "롯데시네마 에비뉴엘 [서울 중구]",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294866_260629_155229.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294866",
-      "genre": "연극"
     },
     {
       "source": "kopis",
@@ -8857,7 +6764,7 @@
       "location": "대구광역시 달성군 다사읍 강정본길 57",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/66/4079966_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4079965"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -8869,7 +6776,7 @@
       "location": "경기도 고양시 일산서구 킨텍스로 217-60 (대화동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/38/4076738_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3352452"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -11611,7 +9518,7 @@
       "location": "서울특별시 종로구 세종대로 175 (세종로)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/04/4079504_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3509884"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -11623,7 +9530,7 @@
       "location": "부산광역시 해운대구 APEC로 55 (우동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/26/4055726_image2_1.jpeg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4055637"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -12051,7 +9958,7 @@
       "location": "강원특별자치도 강릉시 경강로2021번길 9-1 (명주동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/43/4078843_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2543724"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -12414,7 +10321,7 @@
       "location": "부산광역시 해운대구 APEC로 55 (우동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/57/4077757_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4077756"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -12426,7 +10333,7 @@
       "location": "제주특별자치도 서귀포시 중문관광로 191 (중문동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/10/4066710_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3318880"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -12438,7 +10345,7 @@
       "location": "강원특별자치도 평창군 대관령면 솔봉로 325",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/08/4080008_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=590921"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -13217,7 +11124,7 @@
       "location": "제주특별자치도 서귀포시 안덕면 신화역사로304번길 98",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/60/4081660_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2728613"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -13229,7 +11136,7 @@
       "location": "충청남도 보령시 신흑동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/79/3534979_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506534"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -13241,7 +11148,7 @@
       "location": "강원특별자치도 삼척시 갈천동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/14/4081114_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2609985"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -13253,7 +11160,7 @@
       "location": "울산광역시 동구 해수욕장10길",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/50/4072450_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1049327"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -13265,7 +11172,7 @@
       "location": "부산광역시 중구 용미길9번길 6-45 (남포동1가)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/18/4080818_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2486085"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -13277,7 +11184,7 @@
       "location": "부산광역시 해운대구 APEC로 30 (우동)",
       "area": null,
       "thumbnail": null,
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2704473"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -13289,7 +11196,7 @@
       "location": "부산광역시 해운대구 APEC로 30 (우동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/66/4059066_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2523149"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -13996,19 +11903,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF291886",
-      "title": "헬스키친",
-      "startDate": "2026-07-24",
-      "endDate": "2026-11-08",
-      "location": "GS아트센터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291886_260520_152250.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291886",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF291825",
       "title": "재즈 오디세이: part 6. 파이브 브라더 [울산]",
       "startDate": "2026-07-24",
@@ -14224,7 +12118,7 @@
       "location": "경상남도 거제시 일운면 지세포해안로 15-44",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/62/4082962_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=589170"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -14236,7 +12130,7 @@
       "location": "인천 계양구 장기동 109-1",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/05/4082205_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3329992"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -14248,7 +12142,7 @@
       "location": "대구 동구 불로동 971-3",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/98/4085498_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3507102"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -14260,7 +12154,7 @@
       "location": "경상북도 안동시 강남로 246 (정하동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/94/4080294_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2993769"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -14272,7 +12166,7 @@
       "location": "전남광주통합특별시 장흥군 장흥읍 칠거리예양로 83",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/77/4071277_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=767114"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -14284,7 +12178,7 @@
       "location": "강원특별자치도 태백시 황지연못길 12 황지연못(문화관광해설사의집)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/56/4064656_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2391294"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -14296,7 +12190,7 @@
       "location": "경상남도 사천시 사천대로 35 (대방동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/78/4084478_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2372235"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -14308,7 +12202,7 @@
       "location": "강원특별자치도 홍천군 홍천읍 태학여내길 22",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/70/4081270_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4081268"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -16744,19 +14638,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF293356",
-      "title": "리온의 신비한 과자상점 [양산]",
-      "startDate": "2026-07-26",
-      "endDate": "2026-12-27",
-      "location": "아르디ys아트홀",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293356_260611_100802.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293356",
-      "genre": "서커스/마술"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF293219",
       "title": "인어공주 [평택]",
       "startDate": "2026-07-26",
@@ -17429,19 +15310,6 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293268_260610_130851.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293268",
       "genre": "연극"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF293005",
-      "title": "AI세계에서 살아남기",
-      "startDate": "2026-07-28",
-      "endDate": "2026-12-31",
-      "location": "더 서울라이티움 (갤러리아포레)",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293005_260608_111131.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293005",
-      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -18155,7 +16023,7 @@
       "location": "서울특별시 강남구 영동대로 513 (삼성동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/78/4062778_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2718984"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -18583,7 +16451,7 @@
       "location": "강원특별자치도 영월군 영월읍 하송리",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/34/4071434_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=581063"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -18595,7 +16463,7 @@
       "location": "경상북도 안동시 상아동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/44/4071944_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2661137"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -18607,7 +16475,7 @@
       "location": "경상북도 영주시 가흥로 109 (가흥동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/30/4084230_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2992167"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -18619,7 +16487,7 @@
       "location": "인천광역시 연수구 센트럴로 350",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/65/4070165_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=561027"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -19229,7 +17097,7 @@
       "location": "부산광역시 해운대구 APEC로 55 (우동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/25/4084525_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3514951"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -19241,7 +17109,7 @@
       "location": "부산광역시 수영구 광안해변로 219 (광안동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/41/4065341_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3498395"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -19253,7 +17121,7 @@
       "location": "서울특별시 영등포구 여의공원로 68 (여의도동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/63/4071363_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2497537"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -20363,19 +18231,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF292306",
-      "title": "디어 에반 핸슨 (Musical Dear Evan Hansen) [서울]",
-      "startDate": "2026-08-01",
-      "endDate": "2026-11-01",
-      "location": "충무아트센터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292306_260527_110648.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292306",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF292088",
       "title": "렛잇고3 [부산]",
       "startDate": "2026-08-01",
@@ -21345,7 +19200,7 @@
       "location": "강원특별자치도 홍천군 홍천읍 갈마곡리",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/16/4075616_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2539802"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -21617,7 +19472,7 @@
       "location": "전남광주통합특별시 여수시 박람회길 1 (덕충동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/90/4081290_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2728529"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -21629,7 +19484,7 @@
       "location": "부산광역시 해운대구 APEC로 55 (우동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/92/4077792_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2644679"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -21862,7 +19717,7 @@
       "location": "경상남도 밀양시 삼문동 1-1번지",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/67/4070867_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4070865"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -21874,7 +19729,7 @@
       "location": "부산광역시 사하구 다대동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/40/4085840_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=142080"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -24122,7 +21977,7 @@
       "location": "경상남도 통영시 통영해안로 267 (항남동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/08/4041308_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=507454"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -24452,19 +22307,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF292160",
-      "title": "겨울왕국 [서울]",
-      "startDate": "2026-08-13",
-      "endDate": "2027-03-01",
-      "location": "샤롯데씨어터",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292160_260601_111455.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292160",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF290941",
       "title": "한화생명과 함께하는 예술의전당 11시 콘서트 (8월)",
       "startDate": "2026-08-13",
@@ -24511,7 +22353,7 @@
       "location": "강원특별자치도 강릉시 임영로131번길 6",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/77/3317777_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2541883"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -24523,7 +22365,7 @@
       "location": "인천광역시 강화군 강화읍 북문길 42",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/40/4055040_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3485078"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -24535,7 +22377,7 @@
       "location": "경상북도 김천시 운동장길 1 김천종합스포츠타운",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/64/4060564_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2751126"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -25749,19 +23591,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF294946",
-      "title": "엘리자벳",
-      "startDate": "2026-08-16",
-      "endDate": "2026-11-15",
-      "location": "블루스퀘어",
-      "area": null,
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294946_260701_134627.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294946",
-      "genre": "뮤지컬"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF294921",
       "title": "럿거스 콰르텟 정기연주회",
       "startDate": "2026-08-16",
@@ -26367,7 +24196,7 @@
       "location": "서울특별시 강서구 마곡중앙로 143 (마곡동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/75/4059475_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3351451"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -26925,7 +24754,7 @@
       "location": "경상북도 문경시 문경읍 새재로 932",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/31/4078831_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1939183"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -28250,7 +26079,7 @@
       "location": "제주특별자치도 제주시 1100로 2894-78 (연동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/77/4073777_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3399432"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -28834,7 +26663,7 @@
       "location": "경기도 화성시 효행구 봉담읍 동화새터길 133",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/05/4078805_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2853756"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -28846,7 +26675,7 @@
       "location": "경상북도 안동시 풍천면 하회종가길 2-1",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/34/4055834_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2651042"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -29105,7 +26934,7 @@
       "location": "부산광역시 해운대구 수영강변대로 85 (우동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/37/4069137_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2991394"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -30352,7 +28181,7 @@
       "location": "충청남도 천안시 동남구 목천읍 독립기념관로 1",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/10/4020710_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2996478"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -30585,7 +28414,7 @@
       "location": "전북특별자치도 무주군 무주읍 한풍루로 326-17",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/69/3520569_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506523"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -30597,7 +28426,7 @@
       "location": "경상북도 칠곡군 왜관읍 관문로 61",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/50/4082750_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3486887"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -30609,7 +28438,7 @@
       "location": "충청북도 청주시 흥덕구 직지대로 713 (운천동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/80/4083180_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3305165"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -30621,7 +28450,7 @@
       "location": "강원특별자치도 평창군 봉평면 이효석길 157",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/28/3523028_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=507635"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -31465,7 +29294,7 @@
       "location": "강원특별자치도 홍천군 서면 한치골길 262",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/88/4075188_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4075091"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -31659,7 +29488,7 @@
       "location": "전북특별자치도 장수군 장수읍 한누리로 378",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/91/3519591_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=763974"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -31671,7 +29500,7 @@
       "location": "전남광주통합특별시 서구 상무누리로 30",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/46/4001646_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2614198"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -31787,7 +29616,7 @@
       "location": "서울특별시 종로구 인사동9길 26 (견지동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/69/4073769_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1018469"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -31799,7 +29628,7 @@
       "location": "전북특별자치도 전주시 완산구 전주천동로 20 (교동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/69/4060669_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1945450"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -31811,7 +29640,7 @@
       "location": "경기도 성남시 분당구 분당내곡로 121 (백현동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/36/4065636_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3499401"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -32044,7 +29873,7 @@
       "location": "대전광역시 중구 중앙로 85 (선화동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/83/4081183_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3532372"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -32706,7 +30535,7 @@
       "location": "부산광역시 동구 충장대로 206 (초량동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/79/4039679_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4033328"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -32731,7 +30560,7 @@
       "location": "서울특별시 종로구 대학로 104 (동숭동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/65/4081065_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2556687"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -32808,7 +30637,7 @@
       "location": "충청북도 음성군 금왕읍 금빛공원2길 16",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/14/4078314_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2699287"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -32924,7 +30753,7 @@
       "location": "경기도 고양시 일산동구 호수로 595 (장항동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/61/4081461_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1100492"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -32936,7 +30765,7 @@
       "location": "부산광역시 수영구 광안해변로 219 (광안동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/82/4084482_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2412052"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -32948,7 +30777,7 @@
       "location": "경기도 부천시 원미구 길주로 1 (상동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/75/3557475_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=589386"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -32960,7 +30789,7 @@
       "location": "서울특별시 중구 세종대로 110 (태평로1가)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/66/4031666_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3544886"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -32972,7 +30801,7 @@
       "location": "경기도 시흥시 동서로 287 (장곡동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/09/3528809_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=142197"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -32984,7 +30813,7 @@
       "location": "전남광주통합특별시 영광군 불갑면 불갑사로 450",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/32/4041232_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1078905"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -32996,7 +30825,7 @@
       "location": "전북특별자치도 진안군 진안읍 마이산로 160",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/02/3535902_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1718060"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -33008,7 +30837,7 @@
       "location": "경기도 이천시 경충대로2697번길 263",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/71/4065571_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1250585"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -33020,7 +30849,7 @@
       "location": "서울특별시 중구 을지로 281 (을지로7가)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/58/4078758_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3524889"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -33201,7 +31030,7 @@
       "location": "경기도 수원시 팔달구 장안동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/46/4076246_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2751090"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -33590,7 +31419,7 @@
       "location": "경상남도 고성군 당항만로 1116",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/32/4084832_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=141105"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -33654,7 +31483,7 @@
       "location": "경상북도 안동시 육사로 239 (운흥동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/06/4025906_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506670"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -33757,7 +31586,7 @@
       "location": "충청북도 청주시 흥덕구 오송읍 오송생명로 250",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/28/4080328_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4080078"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -33886,7 +31715,7 @@
       "location": "충청남도 계룡시 신도안면 정장리",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/74/3514774_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2992940"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -33898,7 +31727,7 @@
       "location": "전북특별자치도 김제시 부량면 벽골제로 442",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/44/4013544_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=574285"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -33910,7 +31739,7 @@
       "location": "강원특별자치도 정선군 정선읍 봉양리",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/03/4085103_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506895"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -33922,7 +31751,7 @@
       "location": "충청남도 천안시 서북구 번영로 208 (백석동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/35/4056635_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506935"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -33960,7 +31789,7 @@
       "location": "전북특별자치도 군산시 중앙로1가",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/48/3561448_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1846797"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -33972,7 +31801,7 @@
       "location": "충청남도 금산군 금산읍 인삼광장로 30",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/27/4069627_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506465"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -33984,7 +31813,7 @@
       "location": "부산광역시 사상구 삼락동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/06/4040606_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=140799"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -33996,7 +31825,7 @@
       "location": "인천광역시 부평구 부평대로 34-1 (부평동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/77/4067377_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1266642"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34008,7 +31837,7 @@
       "location": "경상남도 산청군 금서면 동의보감로555번길 45-6",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/88/3523088_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506600"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34020,7 +31849,7 @@
       "location": "인천광역시 남동구 장도로 86-17 (논현동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/93/4074893_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506809"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34032,7 +31861,7 @@
       "location": "경기도 안성시 보개면 남사당로 198",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/54/3540554_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506690"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34044,7 +31873,7 @@
       "location": "전북특별자치도 완주군 고산면 고산휴양림로 89",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/49/4062849_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1336591"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34056,7 +31885,7 @@
       "location": "충청북도 청주시 청원구 오창읍 미래지로 99",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/14/3549714_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=613316"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -34159,7 +31988,7 @@
       "location": "경상북도 영주시 풍기읍 성내리",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/55/3563955_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506766"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34171,7 +32000,7 @@
       "location": "경기도 화성시 장조1로 34",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/62/4054062_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1725929"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34183,7 +32012,7 @@
       "location": "경상남도 진주시 남강로 626 (본성동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/57/4082657_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506926"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -34351,7 +32180,7 @@
       "location": "경기도 수원시 팔달구 정조로 825 (남창동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/90/4060890_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=914138"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34363,7 +32192,7 @@
       "location": "서울특별시 종로구 사직로 161 (세종로)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/59/4078459_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2554814"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -34466,7 +32295,7 @@
       "location": "전남광주통합특별시 동구 금남로3가",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/71/3584471_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=692682"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34478,7 +32307,7 @@
       "location": "전남광주통합특별시 동구 금남로1가 41 금남지하상가",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/63/4076763_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2990881"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34490,7 +32319,7 @@
       "location": "경상남도 함양군 함양읍 필봉산길 49",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/67/4053967_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=563458"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34502,7 +32331,7 @@
       "location": "강원특별자치도 횡성군 횡성읍 북천리",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/42/4064642_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=232325"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -34579,7 +32408,7 @@
       "location": "전북특별자치도 임실군 성수면 도인2길 50",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/54/3377054_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2031318"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34591,7 +32420,7 @@
       "location": "전북특별자치도 정읍시 산내면 청정로 926-89",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/56/4071256_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1105347"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -34642,7 +32471,7 @@
       "location": "충청남도 서산시 해미면 남문2로 143",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/47/3550747_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=140752"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34654,7 +32483,7 @@
       "location": "세종특별자치시 다솜로 216 (세종동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/16/3553216_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1849007"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34666,7 +32495,7 @@
       "location": "경상북도 경주시 노동동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/83/4063783_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1718137"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34678,7 +32507,7 @@
       "location": "충청남도 공주시 공주대학로 92 (신관동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/03/4081503_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2877244"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34690,7 +32519,7 @@
       "location": "경상북도 예천군 호명읍 산합리 73",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/26/4059026_image2_1.jpeg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2622679"
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -34923,7 +32752,7 @@
       "location": "전북특별자치도 고창군 고창읍 모양성로 11",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/30/3519730_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=604454"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34935,7 +32764,7 @@
       "location": "전북특별자치도 순창군 순창읍 장류로 55",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/59/3535559_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=638241"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34947,7 +32776,7 @@
       "location": "충청북도 영동군 영동읍 영동힐링로 117",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/72/4058672_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=293084"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34959,7 +32788,7 @@
       "location": "경상북도 칠곡군 석적읍 중지리",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/66/4080666_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1844150"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34971,7 +32800,7 @@
       "location": "서울특별시 강동구 올림픽로 875 (암사동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/77/3541977_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1307813"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34983,7 +32812,7 @@
       "location": "서울특별시 관악구 낙성대로 77 (봉천동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/31/4073831_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2612274"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -34995,7 +32824,7 @@
       "location": "경상남도 김해시 가락로93번길 26",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/17/4073617_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2551117"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35007,7 +32836,7 @@
       "location": "부산광역시 동래구 문화로 80 (명륜동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/43/3366443_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=229048"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35019,7 +32848,7 @@
       "location": "전남광주통합특별시 목포시 삼학로92번길 6 (산정동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/90/3498990_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=574014"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35031,7 +32860,7 @@
       "location": "충청북도 청주시 청원구 내수읍 초정약수로 851",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/82/4064382_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1344850"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35043,7 +32872,7 @@
       "location": "경기도 양평군 양서면 양수로 93",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/17/4062917_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2667707"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35055,7 +32884,7 @@
       "location": "경상북도 구미시 송정동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/50/4063650_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3017799"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35067,7 +32896,7 @@
       "location": "강원특별자치도 강릉시 창해로14번길 20-1 (견소동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/24/3546224_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=825295"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35079,7 +32908,7 @@
       "location": "경상남도 사천시 사천읍 정의리",
       "area": "36",
       "thumbnail": "http://tong.visitkorea.or.kr/cms/resource/49/3566649_image2_1.png",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=234232"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35091,7 +32920,7 @@
       "location": "전남광주통합특별시 서구 내방로 111 (치평동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/32/3545732_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=604097"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35103,7 +32932,7 @@
       "location": "경상북도 김천시 대항면 황악로 1189-52",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/27/3544627_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3377995"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35115,7 +32944,7 @@
       "location": "제주특별자치도 서귀포시 서홍동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/11/4039211_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=506616"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35127,7 +32956,7 @@
       "location": "경기도 여주시 천송동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/63/3546463_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1147035"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35139,7 +32968,7 @@
       "location": "울산광역시 중구 북정동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/74/4078274_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3501104"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35151,7 +32980,7 @@
       "location": "경기도 고양시 덕양구 원당로 16 (주교동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/73/4066273_image2_1.JPG",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3383613"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35163,7 +32992,7 @@
       "location": "경상북도 청송군 청송읍 월막리",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/98/3533798_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=921212"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35175,7 +33004,7 @@
       "location": "경상북도 구미시 원평동",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/40/3497640_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3028462"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35187,7 +33016,7 @@
       "location": "경상북도 포항시 북구 해안로 48 (항구동)",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/88/3484788_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=588175"
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -35199,7 +33028,7 @@
       "location": "강원특별자치도 화천군 화천읍 산천어길 137",
       "area": null,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/46/4071246_image2_1.jpg",
-      "detailUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=507599"
+      "detailUrl": null
     }
   ]
 }
