@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-07-13T14:02:12.547Z",
-  "count": 929,
+  "updatedAt": "2026-07-13T23:39:42.909Z",
+  "count": 935,
   "sourceStatus": {
     "tourapi": true,
     "culture": true,
     "kopis": true,
-    "weather": false
+    "weather": true
   },
   "festivals": [
     {
@@ -19,12 +19,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286493_260306_165308.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286493",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -37,12 +32,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288366_260331_130055.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288366",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -68,12 +58,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288567_260403_101810.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288567",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -86,12 +71,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289630_260417_133034.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289630",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -104,12 +84,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289650_260622_160139.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289650",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -122,12 +97,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290797_260507_112714.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290797",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -140,12 +110,7 @@
       "area": "경기",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293714_260615_132716.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293714",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "☀️",
-        "label": "맑음",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -158,12 +123,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291501_260515_132648.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291501",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -176,12 +136,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292649_260601_134101.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292649",
-      "genre": "대중음악",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -194,12 +149,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290741_260507_105626.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290741",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -212,12 +162,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291364_260526_172524.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291364",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -230,12 +175,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291013_260511_104240.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291013",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -248,12 +188,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290879_260508_101558.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290879",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -266,12 +201,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290322_260429_102855.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290322",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -284,12 +214,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289313_260529_101314.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289313",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -302,12 +227,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288803_260407_104823.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288803",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -320,12 +240,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291152_260512_100644.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291152",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -338,12 +253,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290329_260429_104532.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290329",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -369,12 +279,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291272_260513_124151.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291272",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -387,12 +292,7 @@
       "area": "경기",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291251_260513_111001.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291251",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "☀️",
-        "label": "맑음",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -405,12 +305,7 @@
       "area": "경기",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288875_260428_155213.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288875",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "☀️",
-        "label": "맑음",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -423,12 +318,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290595_260504_152008.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290595",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -454,12 +344,7 @@
       "area": "경기",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292463_260528_142245.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292463",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "☀️",
-        "label": "맑음",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -472,12 +357,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290498_260504_111347.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290498",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -490,12 +370,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291233_260513_102906.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291233",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -508,12 +383,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292433_260528_132346.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292433",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "tourapi",
@@ -527,12 +397,7 @@
       "lat": 37.5408730098,
       "lon": 127.3239218611,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/76/4078876_image2_1.JPG",
-      "detailUrl": null,
-      "weather": {
-        "icon": "☀️",
-        "label": "맑음",
-        "tmp": 29
-      }
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -571,12 +436,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291333_260514_103003.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291333",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -589,12 +449,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290422_260430_104157.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290422",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "tourapi",
@@ -608,12 +463,7 @@
       "lat": 37.5678450408989,
       "lon": 126.975895739578,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/49/4057349_image2_1.jpg",
-      "detailUrl": null,
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "detailUrl": null
     },
     {
       "source": "kopis",
@@ -626,12 +476,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292137_260526_103713.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292137",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -644,12 +489,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291712_260519_103106.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291712",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -675,12 +515,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289372_260415_104821.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289372",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -693,12 +528,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294950_260630_131016.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294950",
-      "genre": "복합",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "복합"
     },
     {
       "source": "kopis",
@@ -724,12 +554,7 @@
       "area": "경기",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293978_260617_152041.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293978",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "☀️",
-        "label": "맑음",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -742,12 +567,7 @@
       "area": "경기",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293278_260610_133006.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293278",
-      "genre": "복합",
-      "weather": {
-        "icon": "☀️",
-        "label": "맑음",
-        "tmp": 29
-      }
+      "genre": "복합"
     },
     {
       "source": "kopis",
@@ -760,12 +580,7 @@
       "area": "경기",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292958_260605_104400.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292958",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "☀️",
-        "label": "맑음",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -778,12 +593,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291596_260518_112451.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291596",
-      "genre": "대중음악",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -796,12 +606,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288583_260615_133627.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288583",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -827,12 +632,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295755_260710_102010.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295755",
-      "genre": "대중음악",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "대중음악"
     },
     {
       "source": "tourapi",
@@ -859,12 +659,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294870_260629_160432.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294870",
-      "genre": "복합",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "복합"
     },
     {
       "source": "kopis",
@@ -877,12 +672,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292950_260605_103058.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292950",
-      "genre": "대중음악",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -895,12 +685,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292842_260604_113439.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292842",
-      "genre": "대중음악",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -913,12 +698,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290572_260504_142502.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290572",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -931,12 +711,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290370_260429_132746.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290370",
-      "genre": "뮤지컬",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "뮤지컬"
     },
     {
       "source": "kopis",
@@ -975,12 +750,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295229_260703_102438.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295229",
-      "genre": "대중음악",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -993,12 +763,7 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294730_260626_152625.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294730",
-      "genre": "대중음악",
-      "weather": {
-        "icon": "🌧️",
-        "label": "비",
-        "tmp": 29
-      }
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -1060,7 +825,12 @@
       "area": "서울",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295342_260706_103725.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295342",
-      "genre": "대중음악"
+      "genre": "대중음악",
+      "weather": {
+        "icon": "☁️",
+        "label": "흐림",
+        "tmp": 25
+      }
     },
     {
       "source": "kopis",
@@ -1073,7 +843,12 @@
       "area": "광주",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293905_260617_104314.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293905",
-      "genre": "뮤지컬"
+      "genre": "뮤지컬",
+      "weather": {
+        "icon": "🌧️",
+        "label": "비",
+        "tmp": 27
+      }
     },
     {
       "source": "kopis",
@@ -1086,7 +861,12 @@
       "area": "강원",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293861_260616_142041.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293861",
-      "genre": "뮤지컬"
+      "genre": "뮤지컬",
+      "weather": {
+        "icon": "🌧️",
+        "label": "비",
+        "tmp": 29
+      }
     },
     {
       "source": "kopis",
@@ -1099,7 +879,12 @@
       "area": "인천",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292783_260602_131318.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292783",
-      "genre": "대중음악"
+      "genre": "대중음악",
+      "weather": {
+        "icon": "☁️",
+        "label": "흐림",
+        "tmp": 25
+      }
     },
     {
       "source": "tourapi",
@@ -1350,6 +1135,34 @@
       "lat": 35.5896080738,
       "lon": 127.5292776915,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/12/4073812_image2_1.jpg",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-606549",
+      "title": "제24회 동강국제사진제",
+      "startDate": "2026-07-17",
+      "endDate": "2026-10-11",
+      "location": "강원특별자치도 영월군 영월읍 영월로 1909-10",
+      "area": null,
+      "lat": 37.1819133415,
+      "lon": 128.4614563757,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/56/4075256_image2_1.jpg",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-4086427",
+      "title": "춘천 썸머워터 페스티벌",
+      "startDate": "2026-07-17",
+      "endDate": "2026-08-17",
+      "location": "강원특별자치도 춘천시 삼천동 200-9",
+      "area": null,
+      "lat": 37.8724857,
+      "lon": 127.7002608,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/31/4086431_image2_1.jpg",
       "detailUrl": null
     },
     {
@@ -3210,6 +3023,20 @@
     {
       "source": "tourapi",
       "type": "festival",
+      "id": "tour-2728613",
+      "title": "귀몽 제주신화월드",
+      "startDate": "2026-07-24",
+      "endDate": "2026-08-17",
+      "location": "제주특별자치도 서귀포시 안덕면 신화역사로304번길 98",
+      "area": null,
+      "lat": 33.3049276506,
+      "lon": 126.3151497973,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/60/4081660_image2_1.png",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
       "id": "tour-506534",
       "title": "보령머드축제",
       "startDate": "2026-07-24",
@@ -3643,6 +3470,20 @@
       "lat": 35.8998279,
       "lon": 128.6288967,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/98/4085498_image2_1.jpg",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-142064",
+      "title": "봉화은어축제",
+      "startDate": "2026-07-25",
+      "endDate": "2026-08-02",
+      "location": "경상북도 봉화군 봉화읍 내성리",
+      "area": null,
+      "lat": 36.8884979597,
+      "lon": 128.7367992541,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/30/4080830_image2_1.JPG",
       "detailUrl": null
     },
     {
@@ -6336,6 +6177,20 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294485_260624_103814.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294485",
       "genre": "뮤지컬"
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-2557842",
+      "title": "전주 가맥축제",
+      "startDate": "2026-08-06",
+      "endDate": "2026-08-08",
+      "location": "전북특별자치도 전주시 덕진구 권삼득로 308 (덕진동1가)",
+      "area": null,
+      "lat": 35.8442101179,
+      "lon": 127.1292609884,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/43/4086143_image2_1.jpg",
+      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -10550,6 +10405,20 @@
     {
       "source": "tourapi",
       "type": "festival",
+      "id": "tour-2392105",
+      "title": "2026 달성 대구현대미술제  Movement: Flow-Ringer-Flux",
+      "startDate": "2026-09-11",
+      "endDate": "2026-10-11",
+      "location": "대구광역시 달성군 다사읍 강정본길 57",
+      "area": null,
+      "lat": 35.8412414475,
+      "lon": 128.4649553312,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/09/4086009_image2_1.png",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
       "id": "tour-3499401",
       "title": "GXG 2026",
       "startDate": "2026-09-11",
@@ -12019,8 +11888,8 @@
       "endDate": "2026-10-11",
       "location": "경상북도 예천군 호명읍 산합리 73",
       "area": null,
-      "lat": 36.57159867934121,
-      "lon": 128.48875137314153,
+      "lat": 36.5715986793,
+      "lon": 128.4887513731,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/26/4059026_image2_1.jpeg",
       "detailUrl": null
     },
