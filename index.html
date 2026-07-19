@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>전국 축제 알리미</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
+/>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"></script>
+<style>
+  :root {
+    --paper: #f6f1e7;
+    --paper-deep: #ece3d0;
+    --ink: #2b2620;
+    --ink-soft: #6b6255;
+    --lantern: #c1432f;
+    --lantern-soft: #e8c9b8;
+    --indigo: #2b3a55;
+    --line: #d9cdb4;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    padding: 28px 20px 22px;
+    background: var(--indigo);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--lantern) 0%, transparent 70%);
+    opacity: 0.5;
+  }
+
+  header h1 {
+    margin: 0 0 4px;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  header p {
+    margin: 0;
+    font-size: 13px;
+    color: #c8cfe0;
+  }
+
+  #updatedAt {
+    font-size: 12px;
+    color: #9aa4c0;
+    margin-top: 10px;
+  }
+
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 16px 16px 60px;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 14px;
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    padding: 10px 0;
+    z-index: 5;
+  }
+
+  .controls input,
+  .controls select {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--ink);
+  }
+
+  .controls input { flex: 1 1 100%; min-width: 0; }
+  .controls select { flex: 1 1 auto; }
+
+  .view-toggle {
+    display: flex;
+    gap: 4px;
+    background: var(--paper-deep);
+    border-radius: 10px;
+    padding: 3px;
+    margin-bottom: 16px;
+  }
+
+  .view-toggle button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 8px 0;
+    border-radius: 8px;
+    color: var(--ink-soft);
+  }
+
+  .view-toggle button.active {
+    background: var(--indigo);
+    color: white;
+  }
+
+  /* ---------- 목록 보기 ---------- */
+
+  .month-group { margin-bottom: 28px; }
+
+  .month-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 10px 2px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 6px;
+  }
+
+  .card {
+    display: flex;
+    gap: 12px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+
+  .card img {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: var(--paper-deep);
+    flex-shrink: 0;
+  }
+
+  .card .no-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    background: var(--paper-deep);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .card-body { flex: 1; min-width: 0; }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-meta {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .dday {
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: var(--paper-deep);
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .dday.soon { background: var(--lantern); color: white; }
+  .dday.today { background: var(--ink); color: white; }
+
+  .hot-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--lantern);
+    margin-right: 4px;
+  }
+
+  .weekend-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink);
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+  }
+
+  .weekend-toggle input { width: 16px; height: 16px; }
+
+  .status-banner {
+    background: #fff4e5;
+    border: 1px solid #f0c987;
+    color: #7a4a00;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin: 14px 0 0;
+  }
+
+  .empty, .loading {
+    text-align: center;
+    color: var(--ink-soft);
+    padding: 60px 20px;
+    font-size: 14px;
+  }
+
+  a.card-link { text-decoration: none; color: inherit; display: block; }
+
+  .card-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .share-btn {
+    border: 1px solid var(--line);
+    background: #fee500;
+    color: #391b1b;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 8px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  /* ---------- 날짜 상세 모달 ---------- */
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 16, 10, 0.45);
+    display: flex;
+    align-items: flex-end;
+    z-index: 50;
+  }
+
+  .modal-sheet {
+    background: var(--paper);
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 18px 18px 0 0;
+    padding: 16px 16px 28px;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .modal-title { font-size: 16px; font-weight: 800; }
+
+  .modal-close {
+    border: none;
+    background: var(--paper-deep);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  .area-filter-btn {
+    flex: 1 1 auto;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--ink);
+    text-align: left;
+  }
+
+  .area-quick-btn {
+    flex: 1;
+    border: 1px solid var(--line);
+    background: white;
+    border-radius: 8px;
+    padding: 8px 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+
+  .area-checkbox-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .area-checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    padding: 8px 6px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: white;
+  }
+
+  .area-checkbox-item input { width: 15px; height: 15px; flex-shrink: 0; }
+
+  .area-apply-btn {
+    width: 100%;
+    background: var(--indigo);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .urgent-section-title {
+    font-size: 14px;
+    font-weight: 800;
+    margin: 20px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--line);
+  }
+
+  .urgent-section-title.hot {
+    color: var(--lantern);
+    border-bottom-color: var(--lantern);
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏮 전국 축제·공연 알리미</h1>
+  <p>필요할 때 열어보는 우리 동호회 축제·공연 캘린더</p>
+  <div id="updatedAt">불러오는 중…</div>
+</header>
+
+<main>
+  <div id="statusBanner" class="status-banner hidden"></div>
+  <div class="controls">
+    <input id="search" type="text" placeholder="이름, 지역, 장소 검색" />
+    <select id="typeFilter">
+      <option value="">전체 유형</option>
+      <option value="festival">지역축제</option>
+      <option value="performance">공연</option>
+    </select>
+    <select id="monthFilter">
+      <option value="">전체 기간</option>
+    </select>
+    <button id="areaFilterBtn" class="area-filter-btn">📍 전체 지역</button>
+  </div>
+
+  <div class="view-toggle">
+    <button id="btnUrgentView" class="active">🔥 임박순</button>
+    <button id="btnListView">☰ 목록 보기</button>
+  </div>
+
+  <div id="urgentView"></div>
+
+  <div id="list" class="hidden"><div class="loading">축제 정보를 불러오는 중…</div></div>
+</main>
+
+<div id="areaModal" class="modal-backdrop hidden">
+  <div class="modal-sheet">
+    <div class="modal-header">
+      <div class="modal-title">지역 선택 (여러 개 가능)</div>
+      <button class="modal-close" id="areaModalClose">✕</button>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <button class="area-quick-btn" id="areaSelectAll">전체 선택</button>
+      <button class="area-quick-btn" id="areaSelectNone">선택 초기화</button>
+    </div>
+    <div id="areaCheckboxList" class="area-checkbox-list"></div>
+    <button class="area-apply-btn" id="areaApply">적용하기</button>
+  </div>
+</div>
+
+<script>
+  // 지역 필터 드롭다운에 보여줄 때 이 순서대로 정렬합니다 (데이터에 있는 것만 표시됨)
+  const AREA_DISPLAY_ORDER = [
+    "서울", "인천", "경기", "강원", "대전", "충남", "충북", "세종",
+    "대구", "경북", "부산", "울산", "경남", "광주", "전북", "전남", "제주",
+  ];
+  const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
+
+  // 카카오 디벨로퍼스에서 발급받은 JavaScript 키 (도메인 제한이 걸려있어 공개돼도 안전해요)
+  const KAKAO_JS_KEY = "bd1806c2ecb3953f8fe0b07be69f6686";
+  if (window.Kakao && !Kakao.isInitialized()) {
+    Kakao.init(KAKAO_JS_KEY);
+  }
+
+  function shareToKakao({ title, date, location, link, thumbnail }) {
+    if (!window.Kakao || !Kakao.isInitialized()) {
+      alert("카카오톡 공유를 불러오지 못했어요. 잠시 후 다시 시도해주세요.");
+      return;
+    }
+    if (thumbnail) {
+      Kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title,
+          description: `📅 ${date}${location ? " · " + location : ""}`,
+          imageUrl: thumbnail,
+          link: { mobileWebUrl: link, webUrl: link },
+        },
+        buttons: [{ title: "🔍 상세보기", link: { mobileWebUrl: link, webUrl: link } }],
+      });
+    } else {
+      Kakao.Share.sendDefault({
+        objectType: "text",
+        text: `📍 이번 주말 여기 어때요?\n\n${title}\n일정: ${date}${location ? "\n장소: " + location : ""}\n\n👉 마음에 드시면 단톡방 투표를 열어주세요!`,
+        link: { mobileWebUrl: link, webUrl: link },
+      });
+    }
+  }
+
+  document.body.addEventListener("click", (e) => {
+    const btn = e.target.closest(".share-btn");
+    if (!btn) return;
+    e.preventDefault();
+    shareToKakao({
+      title: btn.dataset.title,
+      date: btn.dataset.date,
+      location: btn.dataset.location,
+      link: btn.dataset.link,
+      thumbnail: btn.dataset.thumbnail,
+    });
+  });
+
+  let allFestivals = [];
+  let hotIds = new Set(); // 언급량 상위 항목의 id (🔥 인기 배지용)
+  let currentView = "urgent"; // "urgent" | "list"
+
+  // 강릉 동호회 기준으로 실제 다녀올 만한 지역을 기본값으로 미리 선택해둡니다.
+  // 이후 areaModal에서 자유롭게 바꿀 수 있어요.
+  const DEFAULT_AREAS = ["서울", "경기", "강원"];
+  let selectedAreas = new Set(DEFAULT_AREAS);
+  let selectedMonth = ""; // "" = 전체 기간, 그 외엔 "YYYY-MM"
+  let weekendOnly = false; // 임박순 보기의 "이번 주말만" 토글
+
+  function daysUntil(dateStr) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const target = new Date(dateStr);
+    target.setHours(0, 0, 0, 0);
+    return Math.round((target - today) / 86400000);
+  }
+
+  function ddayLabel(startDate) {
+    const d = daysUntil(startDate);
+    if (d < 0) return { text: "진행 중", cls: "" };
+    if (d === 0) return { text: "오늘 시작", cls: "today" };
+    if (d <= 7) return { text: `D-${d}`, cls: "soon" };
+    return { text: `D-${d}`, cls: "" };
+  }
+
+  function monthLabel(dateStr) {
+    const d = new Date(dateStr);
+    return `${d.getFullYear()}년 ${d.getMonth() + 1}월`;
+  }
+
+  function getFiltered() {
+    const q = document.getElementById("search").value.trim().toLowerCase();
+    const type = document.getElementById("typeFilter").value;
+
+    let monthStart = null, monthEnd = null;
+    if (selectedMonth) {
+      const [y, m] = selectedMonth.split("-").map(Number);
+      monthStart = new Date(y, m - 1, 1);
+      monthEnd = new Date(y, m, 0);
+    }
+
+    return allFestivals.filter((f) => {
+      const matchesQuery =
+        !q ||
+        f.title?.toLowerCase().includes(q) ||
+        f.location?.toLowerCase().includes(q);
+      const matchesArea = selectedAreas.size === 0 || (f.area && selectedAreas.has(f.area));
+      const matchesType = !type || f.type === type;
+      let matchesMonth = true;
+      if (monthStart) {
+        if (!f.startDate) matchesMonth = false;
+        else {
+          const start = new Date(f.startDate);
+          const end = f.endDate ? new Date(f.endDate) : start;
+          matchesMonth = start <= monthEnd && end >= monthStart;
+        }
+      }
+      return matchesQuery && matchesArea && matchesType && matchesMonth;
+    });
+  }
+
+  function eventLink(f) {
+    return (
+      f.detailUrl ||
+      `https://search.naver.com/search.naver?query=${encodeURIComponent(f.title)}`
+    );
+  }
+
+  /* ---------- 목록 보기 ---------- */
+
+  function renderList() {
+    const filtered = getFiltered();
+    const list = document.getElementById("list");
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="empty">조건에 맞는 일정이 없어요.</div>';
+      return;
+    }
+
+    const groups = new Map();
+    const ongoing = [];
+    for (const f of filtered) {
+      if (daysUntil(f.startDate) < 0) {
+        ongoing.push(f);
+        continue;
+      }
+      const key = monthLabel(f.startDate);
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(f);
+    }
+    ongoing.sort((a, b) => (a.endDate || "").localeCompare(b.endDate || ""));
+
+    let html = "";
+    if (ongoing.length > 0) html += renderGroup("지금 진행 중", ongoing);
+    for (const [month, items] of groups) html += renderGroup(month, items);
+    list.innerHTML = html;
+  }
+
+  function renderGroup(title, items) {
+    let html = `<div class="month-group"><div class="month-title">${title}</div>`;
+    for (const f of items) html += renderCard(f);
+    html += `</div>`;
+    return html;
+  }
+
+  /* ---------- 임박순 보기 ---------- */
+
+  function getUpcomingWeekendRange() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const day = today.getDay(); // 0=일, 6=토
+    const start = new Date(today);
+    if (day !== 6 && day !== 0) start.setDate(today.getDate() + (6 - day));
+    const end = new Date(start);
+    if (day !== 0) end.setDate(start.getDate() + 1);
+    return { start, end };
+  }
+
+  function renderUrgent() {
+    let filtered = getFiltered();
+    const container = document.getElementById("urgentView");
+
+    if (weekendOnly) {
+      const { start, end } = getUpcomingWeekendRange();
+      filtered = filtered.filter((f) => {
+        const s = new Date(f.startDate);
+        const e = f.endDate ? new Date(f.endDate) : s;
+        return s <= end && e >= start;
+      });
+    }
+
+    const toggleHtml = `
+      <label class="weekend-toggle">
+        <input type="checkbox" id="weekendOnlyToggle" ${weekendOnly ? "checked" : ""} />
+        🗓️ 이번 주말만 보기
+      </label>`;
+
+    if (filtered.length === 0) {
+      container.innerHTML = toggleHtml + '<div class="empty">조건에 맞는 일정이 없어요.</div>';
+      document.getElementById("weekendOnlyToggle").addEventListener("change", (e) => {
+        weekendOnly = e.target.checked;
+        renderUrgent();
+      });
+      return;
+    }
+
+    const urgent = [], nextWeek = [], future = [];
+    for (const f of filtered) {
+      const startD = daysUntil(f.startDate);
+      const endD = f.endDate ? daysUntil(f.endDate) : startD;
+      if (endD < 0) continue; // 이미 종료됨
+      if (startD <= 0 || startD <= 7) urgent.push(f);
+      else if (startD <= 14) nextWeek.push(f);
+      else future.push(f);
+    }
+
+    const sortKey = (f) => {
+      const startD = daysUntil(f.startDate);
+      return startD < 0 ? daysUntil(f.endDate || f.startDate) : startD;
+    };
+    urgent.sort((a, b) => sortKey(a) - sortKey(b));
+    nextWeek.sort((a, b) => sortKey(a) - sortKey(b));
+    future.sort((a, b) => sortKey(a) - sortKey(b));
+
+    let html = toggleHtml;
+    html += `<div class="urgent-section-title hot">🔥 당장 출발! (진행 중 ~ 7일 이내)</div>`;
+    html += urgent.length
+      ? urgent.map(renderCard).join("")
+      : '<div class="empty">해당하는 일정이 없어요.</div>';
+
+    html += `<div class="urgent-section-title">⏰ 다음 주 예정 (8~14일 후)</div>`;
+    html += nextWeek.length
+      ? nextWeek.map(renderCard).join("")
+      : '<div class="empty">해당하는 일정이 없어요.</div>';
+
+    html += `<div class="urgent-section-title">🗓️ 이후 일정</div>`;
+    html += future.length
+      ? future.map(renderCard).join("")
+      : '<div class="empty">해당하는 일정이 없어요.</div>';
+
+    container.innerHTML = html;
+    document.getElementById("weekendOnlyToggle").addEventListener("change", (e) => {
+      weekendOnly = e.target.checked;
+      renderUrgent();
+    });
+  }
+
+  function escapeAttr(str) {
+    return String(str ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function renderCard(f) {
+    const dday = ddayLabel(f.startDate);
+    const icon = f.type === "performance" ? "🎤" : "🎪";
+    const img = f.thumbnail
+      ? `<img src="${f.thumbnail}" alt="" loading="lazy" />`
+      : `<div class="no-img">${icon}</div>`;
+    const genreTag = f.genre ? `<span>· ${f.genre}</span>` : "";
+    const link = eventLink(f);
+    const dateRange = `${f.startDate}${f.endDate && f.endDate !== f.startDate ? " ~ " + f.endDate : ""}`;
+    const hotTag = hotIds.has(f.id) ? `<span class="hot-tag">🔥 인기</span>` : "";
+    return `
+      <div class="card">
+        <a class="card-link" href="${link}" target="_blank" rel="noopener" style="display:flex;gap:12px;flex:1;min-width:0">
+          ${img}
+          <div class="card-body">
+            <p class="card-title">${hotTag}${f.title}</p>
+            <div class="card-meta">
+              <span>${dateRange}</span>
+              ${f.location ? `<span>· ${f.location}</span>` : ""}
+              ${genreTag}
+            </div>
+          </div>
+        </a>
+        <div class="card-side">
+          <div class="dday ${dday.cls}">${dday.text}</div>
+          <button
+            class="share-btn"
+            data-title="${escapeAttr(f.title)}"
+            data-date="${escapeAttr(dateRange)}"
+            data-location="${escapeAttr(f.location || "")}"
+            data-link="${escapeAttr(link)}"
+            data-thumbnail="${escapeAttr(f.thumbnail || "")}"
+          >💬 제안</button>
+        </div>
+      </div>`;
+  }
+
+  /* ---------- 보기 전환 ---------- */
+
+  function renderCurrentView() {
+    if (currentView === "urgent") renderUrgent();
+    else renderList();
+  }
+
+  function switchView(view) {
+    currentView = view;
+    document.getElementById("btnUrgentView").classList.toggle("active", view === "urgent");
+    document.getElementById("btnListView").classList.toggle("active", view === "list");
+    document.getElementById("urgentView").classList.toggle("hidden", view !== "urgent");
+    document.getElementById("list").classList.toggle("hidden", view !== "list");
+    renderCurrentView();
+  }
+
+  document.getElementById("btnUrgentView").addEventListener("click", () => switchView("urgent"));
+  document.getElementById("btnListView").addEventListener("click", () => switchView("list"));
+
+  document.getElementById("typeFilter").addEventListener("change", () => renderCurrentView());
+  document.getElementById("monthFilter").addEventListener("change", (e) => {
+    selectedMonth = e.target.value;
+    renderCurrentView();
+  });
+
+  /* ---------- 데이터 로드 ---------- */
+
+  async function load() {
+    try {
+      const res = await fetch("festivals.json", { cache: "no-store" });
+      const json = await res.json();
+      allFestivals = json.festivals || [];
+
+      const ranked = allFestivals
+        .filter((f) => typeof f.mentions === "number")
+        .sort((a, b) => b.mentions - a.mentions)
+        .slice(0, 15);
+      hotIds = new Set(ranked.map((f) => f.id));
+
+      const updated = new Date(json.updatedAt);
+      document.getElementById("updatedAt").textContent =
+        `마지막 업데이트: ${updated.toLocaleString("ko-KR")} · 총 ${json.count}건`;
+
+      const SOURCE_LABELS = { tourapi: "지역축제(TourAPI)", culture: "문화축제 표준데이터", kopis: "공연(KOPIS)", mentions: "인기도(언급량)" };
+      const failed = Object.entries(json.sourceStatus || {})
+        .filter(([, ok]) => ok === false)
+        .map(([key]) => SOURCE_LABELS[key] || key);
+      const banner = document.getElementById("statusBanner");
+      if (failed.length > 0) {
+        banner.textContent = `⚠️ ${failed.join(", ")} 갱신에 실패해서 일부 정보가 최신이 아닐 수 있어요.`;
+        banner.classList.remove("hidden");
+      } else {
+        banner.classList.add("hidden");
+      }
+
+      const usedAreas = new Set(allFestivals.map((f) => f.area).filter(Boolean));
+      const orderedAreas = [
+        ...AREA_DISPLAY_ORDER.filter((a) => usedAreas.has(a)),
+        ...[...usedAreas].filter((a) => !AREA_DISPLAY_ORDER.includes(a)).sort(),
+      ];
+      const checkboxList = document.getElementById("areaCheckboxList");
+      checkboxList.innerHTML = orderedAreas
+        .map(
+          (area) => `
+        <label class="area-checkbox-item">
+          <input type="checkbox" value="${area}" />
+          ${area}
+        </label>`
+        )
+        .join("");
+
+      const monthKeys = new Set();
+      for (const f of allFestivals) {
+        if (!f.startDate) continue;
+        const start = new Date(f.startDate);
+        const end = f.endDate ? new Date(f.endDate) : start;
+        const cursor = new Date(start.getFullYear(), start.getMonth(), 1);
+        const endCursor = new Date(end.getFullYear(), end.getMonth(), 1);
+        while (cursor <= endCursor) {
+          monthKeys.add(`${cursor.getFullYear()}-${String(cursor.getMonth() + 1).padStart(2, "0")}`);
+          cursor.setMonth(cursor.getMonth() + 1);
+        }
+      }
+      const monthSelect = document.getElementById("monthFilter");
+      [...monthKeys]
+        .sort()
+        .forEach((key) => {
+          const [y, m] = key.split("-");
+          const opt = document.createElement("option");
+          opt.value = key;
+          opt.textContent = `${y}년 ${Number(m)}월`;
+          monthSelect.appendChild(opt);
+        });
+
+      updateAreaButtonLabel();
+      renderCurrentView();
+    } catch (e) {
+      document.getElementById("urgentView").innerHTML =
+        '<div class="empty">축제 데이터를 아직 불러올 수 없어요.<br/>festivals.json이 생성됐는지 확인해주세요.</div>';
+      console.error(e);
+    }
+  }
+
+  function updateAreaButtonLabel() {
+    const btn = document.getElementById("areaFilterBtn");
+    if (selectedAreas.size === 0) {
+      btn.textContent = "📍 전체 지역";
+    } else if (selectedAreas.size <= 3) {
+      btn.textContent = `📍 ${[...selectedAreas].join(", ")}`;
+    } else {
+      btn.textContent = `📍 ${[...selectedAreas][0]} 외 ${selectedAreas.size - 1}곳`;
+    }
+  }
+
+  document.getElementById("areaFilterBtn").addEventListener("click", () => {
+    document
+      .querySelectorAll("#areaCheckboxList input[type=checkbox]")
+      .forEach((cb) => (cb.checked = selectedAreas.has(cb.value)));
+    document.getElementById("areaModal").classList.remove("hidden");
+  });
+
+  document.getElementById("areaModalClose").addEventListener("click", () => {
+    document.getElementById("areaModal").classList.add("hidden");
+  });
+  document.getElementById("areaModal").addEventListener("click", (e) => {
+    if (e.target.id === "areaModal") e.target.classList.add("hidden");
+  });
+
+  document.getElementById("areaSelectAll").addEventListener("click", () => {
+    document.querySelectorAll("#areaCheckboxList input[type=checkbox]").forEach((cb) => (cb.checked = true));
+  });
+  document.getElementById("areaSelectNone").addEventListener("click", () => {
+    document.querySelectorAll("#areaCheckboxList input[type=checkbox]").forEach((cb) => (cb.checked = false));
+  });
+
+  document.getElementById("areaApply").addEventListener("click", () => {
+    const checked = [...document.querySelectorAll("#areaCheckboxList input[type=checkbox]:checked")].map(
+      (cb) => cb.value
+    );
+    selectedAreas = new Set(checked);
+    updateAreaButtonLabel();
+    document.getElementById("areaModal").classList.add("hidden");
+    renderCurrentView();
+  });
+
+  document.getElementById("search").addEventListener("input", renderCurrentView);
+
+  load();
+</script>
+</body>
+</html>
