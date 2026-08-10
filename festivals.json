@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-08-08T22:04:02.614Z",
-  "count": 787,
+  "updatedAt": "2026-08-10T23:11:16.398Z",
+  "count": 714,
   "sourceStatus": {
     "tourapi": true,
     "culture": true,
@@ -20,7 +20,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289313_260529_101314.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289313",
       "genre": "뮤지컬",
-      "mentions": 530440
+      "mentions": 531919
     },
     {
       "source": "kopis",
@@ -34,7 +34,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292761_260602_111221.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292761",
       "genre": "복합",
-      "mentions": 2120
+      "mentions": 2125
     },
     {
       "source": "tourapi",
@@ -49,7 +49,7 @@
       "lon": 127.3239218611,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/76/4078876_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 7592
+      "mentions": 7598
     },
     {
       "source": "kopis",
@@ -63,7 +63,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290422_260430_104157.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290422",
       "genre": "뮤지컬",
-      "mentions": 106755
+      "mentions": 106626
     },
     {
       "source": "kopis",
@@ -77,7 +77,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288583_260615_133627.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288583",
       "genre": "뮤지컬",
-      "mentions": 164
+      "mentions": 171
     },
     {
       "source": "kopis",
@@ -91,7 +91,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290370_260429_132746.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290370",
       "genre": "뮤지컬",
-      "mentions": 1763
+      "mentions": 1778
     },
     {
       "source": "tourapi",
@@ -121,7 +121,7 @@
       "lon": 127.7002608,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/31/4086431_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 923
+      "mentions": 941
     },
     {
       "source": "tourapi",
@@ -136,7 +136,7 @@
       "lon": 127.0142152392,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/83/4094783_image2_1.png",
       "detailUrl": null,
-      "mentions": 43
+      "mentions": 45
     },
     {
       "source": "tourapi",
@@ -151,7 +151,7 @@
       "lon": 128.9895710269,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/22/3493222_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 11140
+      "mentions": 11253
     },
     {
       "source": "kopis",
@@ -170,21 +170,6 @@
     {
       "source": "tourapi",
       "type": "festival",
-      "id": "tour-3509884",
-      "title": "서울썸머비치",
-      "startDate": "2026-07-20",
-      "endDate": "2026-08-09",
-      "location": "서울특별시 종로구 세종대로 175 (세종로)",
-      "area": null,
-      "lat": 37.5718478585,
-      "lon": 126.9761682759,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/04/4079504_image2_1.png",
-      "detailUrl": null,
-      "mentions": 11879
-    },
-    {
-      "source": "tourapi",
-      "type": "festival",
       "id": "tour-2728613",
       "title": "귀몽 제주신화월드",
       "startDate": "2026-07-24",
@@ -195,37 +180,7 @@
       "lon": 126.3151497973,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/60/4081660_image2_1.png",
       "detailUrl": null,
-      "mentions": 128
-    },
-    {
-      "source": "tourapi",
-      "type": "festival",
-      "id": "tour-506534",
-      "title": "보령머드축제",
-      "startDate": "2026-07-24",
-      "endDate": "2026-08-09",
-      "location": "충청남도 보령시 신흑동",
-      "area": null,
-      "lat": 36.314822,
-      "lon": 126.515029,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/79/3534979_image2_1.jpg",
-      "detailUrl": null,
-      "mentions": 61630
-    },
-    {
-      "source": "tourapi",
-      "type": "festival",
-      "id": "tour-2499947",
-      "title": "성북문화바캉스",
-      "startDate": "2026-07-25",
-      "endDate": "2026-08-09",
-      "location": "서울특별시 성북구 정릉로 279 (정릉동)",
-      "area": null,
-      "lat": 37.6038254756,
-      "lon": 127.0132924339,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/88/4087988_image2_1.JPG",
-      "detailUrl": null,
-      "mentions": 1080
+      "mentions": 144
     },
     {
       "source": "tourapi",
@@ -240,21 +195,7 @@
       "lon": 128.0507877466,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/78/4084478_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 45
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295380",
-      "title": "우금치 별별축제 [대전]",
-      "startDate": "2026-07-28",
-      "endDate": "2026-08-08",
-      "location": "별별마당 우금치",
-      "area": "대전",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295380_260706_131541.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295380",
-      "genre": "복합",
-      "mentions": 303
+      "mentions": 48
     },
     {
       "source": "tourapi",
@@ -269,7 +210,7 @@
       "lon": 129.2938457635,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/02/4090202_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 114132
+      "mentions": 114274
     },
     {
       "source": "tourapi",
@@ -284,7 +225,7 @@
       "lon": 126.8839435426,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/92/4089092_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 212
+      "mentions": 215
     },
     {
       "source": "kopis",
@@ -298,7 +239,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293635_260612_171840.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293635",
       "genre": "대중음악",
-      "mentions": 54
+      "mentions": 59
     },
     {
       "source": "tourapi",
@@ -328,22 +269,7 @@
       "lon": 129.2895153224,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/17/4090217_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 59
-    },
-    {
-      "source": "tourapi",
-      "type": "festival",
-      "id": "tour-2539802",
-      "title": "홍천강 별빛음악 맥주축제",
-      "startDate": "2026-08-05",
-      "endDate": "2026-08-09",
-      "location": "강원특별자치도 홍천군 홍천읍 갈마곡리",
-      "area": null,
-      "lat": 37.689158,
-      "lon": 127.893014,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/16/4075616_image2_1.jpg",
-      "detailUrl": null,
-      "mentions": 2285
+      "mentions": 65
     },
     {
       "source": "tourapi",
@@ -358,7 +284,7 @@
       "lon": 126.9150631652,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/22/4087022_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 648
+      "mentions": 666
     },
     {
       "source": "tourapi",
@@ -373,37 +299,21 @@
       "lon": 127.2722214092,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/25/4091125_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 48
+      "mentions": 70
     },
     {
-      "source": "tourapi",
-      "type": "festival",
-      "id": "tour-2557842",
-      "title": "전주 가맥축제",
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298124",
+      "title": "우상임의 아코디언 에세이: 세월 따라, 노래 따라",
       "startDate": "2026-08-06",
-      "endDate": "2026-08-08",
-      "location": "전북특별자치도 전주시 덕진구 권삼득로 308 (덕진동1가)",
-      "area": null,
-      "lat": 35.8442101179,
-      "lon": 127.1292609884,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/43/4086143_image2_1.jpg",
-      "detailUrl": null,
-      "mentions": 7917
-    },
-    {
-      "source": "tourapi",
-      "type": "festival",
-      "id": "tour-2644679",
-      "title": "2026 부산국제불교박람회",
-      "startDate": "2026-08-06",
-      "endDate": "2026-08-09",
-      "location": "부산광역시 해운대구 APEC로 55 (우동)",
-      "area": null,
-      "lat": 35.1687048508,
-      "lon": 129.1354937071,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/92/4077792_image2_1.jpg",
-      "detailUrl": null,
-      "mentions": 1371
+      "endDate": "2026-08-27",
+      "location": "애월뮤직팩토리",
+      "area": "제주",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298124_260810_150339.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298124",
+      "genre": "대중음악",
+      "mentions": 2
     },
     {
       "source": "kopis",
@@ -417,7 +327,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297376_260731_124609.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297376",
       "genre": "대중음악",
-      "mentions": 6
+      "mentions": 7
     },
     {
       "source": "kopis",
@@ -431,37 +341,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296474_260720_174023.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296474",
       "genre": "대중음악",
-      "mentions": 1694
-    },
-    {
-      "source": "tourapi",
-      "type": "festival",
-      "id": "tour-4070865",
-      "title": "밀양 수퍼 페스티벌",
-      "startDate": "2026-08-07",
-      "endDate": "2026-08-09",
-      "location": "경상남도 밀양시 삼문동 1-1번지",
-      "area": null,
-      "lat": 35.489859,
-      "lon": 128.757295,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/67/4070867_image2_1.JPG",
-      "detailUrl": null,
-      "mentions": 700
-    },
-    {
-      "source": "tourapi",
-      "type": "festival",
-      "id": "tour-3537267",
-      "title": "백년나이트 야시장 (메기의 귀환)",
-      "startDate": "2026-08-07",
-      "endDate": "2026-08-08",
-      "location": "서울특별시 강북구 한천로144길 16 (수유동)",
-      "area": null,
-      "lat": 37.641720888,
-      "lon": 127.0259140093,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/13/4096313_image2_1.jpg",
-      "detailUrl": null,
-      "mentions": 3073
+      "mentions": 1695
     },
     {
       "source": "tourapi",
@@ -476,21 +356,7 @@
       "lon": 128.966195,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/40/4085840_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 265231
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF297250",
-      "title": "INITIAL MUSIC presents, Yuuki Yoshiyama",
-      "startDate": "2026-08-07",
-      "endDate": "2026-08-08",
-      "location": "라이언슈퍼클럽(LION SUPER CLUB)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297250_260730_100904.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297250",
-      "genre": "대중음악",
-      "mentions": 0
+      "mentions": 265751
     },
     {
       "source": "kopis",
@@ -504,63 +370,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297046_260727_145916.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297046",
       "genre": "대중음악",
-      "mentions": 300627
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295960",
-      "title": "다린 여름 콘서트, 열대야: Windows",
-      "startDate": "2026-08-07",
-      "endDate": "2026-08-09",
-      "location": "Vel.R 벨르 (구. 벨로주 [홍대])",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295960_260713_154753.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295960",
-      "genre": "대중음악",
-      "mentions": 1
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295647",
-      "title": "김현수 x 이벼리 수채화 콘서트: 여름 스케치",
-      "startDate": "2026-08-07",
-      "endDate": "2026-08-09",
-      "location": "굿씨어터",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295647_260708_145505.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295647",
-      "genre": "대중음악",
-      "mentions": 4
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294611",
-      "title": "aespa LIVE TOUR -SYNK: COMPLaeXITY-",
-      "startDate": "2026-08-07",
-      "endDate": "2026-08-08",
-      "location": "고척스카이돔",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294611_260625_124317.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294611",
-      "genre": "대중음악",
-      "mentions": 132
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294552",
-      "title": "THE SOLUTIONS (솔루션스) 콘서트: Maximizer Ⅱ",
-      "startDate": "2026-08-07",
-      "endDate": "2026-08-09",
-      "location": "한국콘텐츠진흥원 CKL스테이지",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294552_260624_135953.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294552",
-      "genre": "대중음악",
-      "mentions": 7
+      "mentions": 300945
     },
     {
       "source": "kopis",
@@ -574,21 +384,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293119_260724_112432.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293119",
       "genre": "복합",
-      "mentions": 947
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF292906",
-      "title": "오지게 재밌는 가시나들 [안동]",
-      "startDate": "2026-08-07",
-      "endDate": "2026-08-08",
-      "location": "안동문화예술의전당",
-      "area": "경상북",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292906_260604_144421.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292906",
-      "genre": "뮤지컬",
-      "mentions": 2020
+      "mentions": 1005
     },
     {
       "source": "tourapi",
@@ -603,7 +399,7 @@
       "lon": 126.6562376599,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/70/4089470_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 15191
+      "mentions": 15310
     },
     {
       "source": "tourapi",
@@ -618,301 +414,7 @@
       "lon": 126.9335951931,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/69/4095469_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 10775
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF297776",
-      "title": "제4회 문화도시 정책페스타, 폐막식 문화도시락 [의정부]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "의정부예술의전당",
-      "area": "경기",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297776_260805_144444.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297776",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF297605",
-      "title": "LUN8 FANCON: OFF-ZONE",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "예스24 라이브홀 (구. 악스코리아)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297605_260804_110602.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297605",
-      "genre": "대중음악",
-      "mentions": 7
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF297588",
-      "title": "토요재즈살롱 LIVE IN 인천 송도, 단예 QUARTET",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "카페와안",
-      "area": "인천",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297588_260804_102832.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297588",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF297481",
-      "title": "KINETIC TEC Session 1: Hard Techno",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "라이언슈퍼클럽(LION SUPER CLUB)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297481_260803_112724.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297481",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF297310",
-      "title": "IDOL PALETTE Vol.68",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "세티 라이브홀 (SETI LIVE HALL)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297310_260730_140215.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297310",
-      "genre": "대중음악",
-      "mentions": 6
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF297129",
-      "title": "Summer Night Party",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "우무지",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297129_260728_131132.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297129",
-      "genre": "대중음악",
-      "mentions": 16335
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296843",
-      "title": "Leaveourtears EP vivid pillow 발매 기념 단독 공연",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "무대륙",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296843_260724_101510.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296843",
-      "genre": "대중음악",
-      "mentions": 1
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296842",
-      "title": "제33회 주WORK 야ROCK",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "후케즈",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296842_260724_100601.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296842",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296776",
-      "title": "제29회 서울프린지페스티벌, 송종빈 첫 독주 콘서트: The Hour Between",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "온수공간",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296776_260723_143233.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296776",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296710",
-      "title": "도란도란 이야기보따리 [순천]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "순천문화예술회관",
-      "area": "전라남",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296710_260723_110552.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296710",
-      "genre": "복합",
-      "mentions": 7753
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296699",
-      "title": "워터밤 [부산]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "롯데월드 어드벤처 [부산]",
-      "area": "부산",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296699_260723_103722.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296699",
-      "genre": "대중음악",
-      "mentions": 985471
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296498",
-      "title": "UAU FANCON: Playlist #Your Youth [서울]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "스페이스브릭 (SPACE BRICK)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296498_260721_102741.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296498",
-      "genre": "대중음악",
-      "mentions": 8
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296473",
-      "title": "한왕! 바람, 노래가 되다 [익산]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "익산예술의전당",
-      "area": "전북",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296473_260720_173308.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296473",
-      "genre": "뮤지컬",
-      "mentions": 875
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296471",
-      "title": "idntt FAN-CON TOUR: 20 in Seoul",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "연세대학교 대강당",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296471_260720_172546.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296471",
-      "genre": "대중음악",
-      "mentions": 1
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296460",
-      "title": "TONE Studio Stay-easy, 문소문",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "톤스튜디오 서울",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296460_260720_165750.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296460",
-      "genre": "대중음악",
-      "mentions": 1
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296457",
-      "title": "TONE STUDIO LIVE, 아사달",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "톤스튜디오 서울",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296457_260720_165118.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296457",
-      "genre": "대중음악",
-      "mentions": 8
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296426",
-      "title": "라틴재즈밴드 겟츠의 LATIN FIESTA [부산]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "백양문화예술회관",
-      "area": "부산",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296426_260720_154402.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296426",
-      "genre": "대중음악",
-      "mentions": 3
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296420",
-      "title": "숲세권 라이브, 쿠모 단독 공연: 쿠루쿠마",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "숲세권 라이브",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296420_260720_153357.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296420",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296410",
-      "title": "유희열 Curated 26, PEPPERTONES CLUB TOUR [서울 (앵콜) ]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "현대카드 언더스테이지",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296410_260720_151110.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296410",
-      "genre": "대중음악",
-      "mentions": 6
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296386",
-      "title": "SUMMER CLUB TOUR: POSER [대구]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "제임스레코드",
-      "area": "대구",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296386_260720_142556.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296386",
-      "genre": "대중음악",
-      "mentions": 13
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296376",
-      "title": "곁에두는음악 Series 22. 유쾌한 섬 프로젝트의 브라질로 떠나는 음악여행: Choro em Agosto (8월의 쇼루)",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "음악의집",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296376_260720_140738.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296376",
-      "genre": "대중음악",
-      "mentions": 0
+      "mentions": 10851
     },
     {
       "source": "kopis",
@@ -926,637 +428,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296312_260720_111603.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296312",
       "genre": "뮤지컬",
-      "mentions": 278
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296264",
-      "title": "쿠잉 단독 콘서트: SUMMER KISS: 4 IN 6 OUT",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "KT&amp;G 상상마당 라이브홀 [마포]",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296264_260716_135950.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296264",
-      "genre": "대중음악",
-      "mentions": 2
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296205",
-      "title": "87DAY",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "채널 1969",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296205_260716_103525.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296205",
-      "genre": "대중음악",
-      "mentions": 107299
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296187",
-      "title": "데카당 단독공연: RAGE BAITS",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "무신사 개러지 (구. 왓챠홀)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296187_260715_151257.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296187",
-      "genre": "대중음악",
-      "mentions": 2
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296099",
-      "title": "KARD WORLD TOUR: NOW HERE [서울]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "GB가빈아트홀",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296099_260715_103350.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296099",
-      "genre": "대중음악",
-      "mentions": 28
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296065",
-      "title": "불독맨션: MINTPAPER 20th SPECIAL LIVE",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "XSCALA(엑스칼라)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296065_260714_133257.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296065",
-      "genre": "대중음악",
-      "mentions": 5
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295924",
-      "title": "SSUM 타는 콘서트, 여름밤에 우린",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "반포심산아트홀",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295924_260713_143716.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295924",
-      "genre": "대중음악",
-      "mentions": 14
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295902",
-      "title": "Royal 44 1st Solo Concert: Avant-Garde",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "노들섬",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295902_260713_135513.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295902",
-      "genre": "대중음악",
-      "mentions": 4
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295865",
-      "title": "IRO (아이로) 미니 콘서트: Hi, IRO",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "살롱 문보우",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295865_260713_112347.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295865",
-      "genre": "대중음악",
-      "mentions": 7
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295837",
-      "title": "이바다 콘서트: 환상비행",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "롤링홀",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295837_260713_102822.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295837",
-      "genre": "대중음악",
-      "mentions": 9
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295800",
-      "title": "2PM Concert: THE RETURN [인천]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "인스파이어 엔터테인먼트 리조트",
-      "area": "인천",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295800_260710_134214.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295800",
-      "genre": "대중음악",
-      "mentions": 601
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295784",
-      "title": "Bender X 목캔디의 인디밴드 라이브 Present Vol.2: FESTIVAL BREAK",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "CLUB bender(클럽 벤더)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295784_260710_130509.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295784",
-      "genre": "대중음악",
-      "mentions": 2
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295768",
-      "title": "세이트 (CEIGHT) EP 발매 기념 공연: Days of Umbra: 365",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "클럽 프리버드",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295768_260710_110422.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295768",
-      "genre": "대중음악",
-      "mentions": 1
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295740",
-      "title": "음악공방 피오레움, 인플루언서 초청 연주회: PITCH EUNWOO",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "피오레아트앤엔터(피오레움)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295740_260709_134320.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295740",
-      "genre": "대중음악",
-      "mentions": 3
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295625",
-      "title": "제26회 대전국제음악제, KBS특별음악회: 해피 재즈 콘서트",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "대전예술의전당",
-      "area": "대전",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295625_260708_140034.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295625",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295345",
-      "title": "CROSS GENE FANCON: CROSS THE LINE",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "구름아래소극장",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295345_260706_104542.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295345",
-      "genre": "대중음악",
-      "mentions": 11
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295308",
-      "title": "MASAYA BIRTHDAY CONCERT [서울]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "스카이아트홀",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295308_260703_141818.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295308",
-      "genre": "대중음악",
-      "mentions": 9
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295239",
-      "title": "ENHYPEN WORLD TOUR: BLOOD SAGA [부산]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "부산사직실내체육관",
-      "area": "부산",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295239_260703_105421.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295239",
-      "genre": "대중음악",
-      "mentions": 228
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295149",
-      "title": "너드커넥션 클럽 투어: 파도의 고점 [전주]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "더뮤지션",
-      "area": "전북",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295149_260702_141145.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295149",
-      "genre": "대중음악",
-      "mentions": 28
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294883",
-      "title": "nib.archive 전국 클럽투어: idea of nib [대구] (08.08)",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "클럽헤비",
-      "area": "대구",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294883_260629_163256.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294883",
-      "genre": "대중음악",
-      "mentions": 7
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294879",
-      "title": "KIMCHIKURA Fes'26",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "경희대학교 평화의전당",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294879_260629_162240.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294879",
-      "genre": "대중음악",
-      "mentions": 28
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294856",
-      "title": "다이노: 공룡세계에서 살아남기 [안산]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "안산문화예술의전당",
-      "area": "경기",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294856_260629_153233.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294856",
-      "genre": "뮤지컬",
-      "mentions": 415
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294845",
-      "title": "제36회 유재하음악경연대회 수상자 기념공연",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "CJ아지트 광흥창",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294845_260629_150558.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294845",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294840",
-      "title": "떼창데이 Vol.2 김경호 X 포지션 콘서트 [여주]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "세종국악당",
-      "area": "경기",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294840_260629_145850.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294840",
-      "genre": "대중음악",
-      "mentions": 5
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294694",
-      "title": "N.Flying LIVE, &amp;CON5: into REM [대구]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "엑스코(exco)",
-      "area": "대구",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294694_260626_130514.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294694",
-      "genre": "대중음악",
-      "mentions": 123
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294660",
-      "title": "pidalso concert: piano and me",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "JCC 아트센터",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294660_260626_101857.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294660",
-      "genre": "대중음악",
-      "mentions": 2
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294595",
-      "title": "SUMMER FESTA with 변진섭 [인천]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "제물포구문화체육센터(구. 동구문화체육센터)",
-      "area": "인천",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294595_260625_110135.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294595",
-      "genre": "대중음악",
-      "mentions": 23
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294537",
-      "title": "아이엠케이팝 (i'MK POP) 밀레니엄 콘서트: 난.. 가끔... 눈물을 흘린다... [익산]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "원광대학교 문화체육관",
-      "area": "전북",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294537_260624_133129.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294537",
-      "genre": "대중음악",
-      "mentions": 6
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294059",
-      "title": "현역가왕3 전국투어 콘서트 [대전]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "대전컨벤션센터 (DCC)",
-      "area": "대전",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294059_260618_153513.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294059",
-      "genre": "대중음악",
-      "mentions": 3286
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294014",
-      "title": "ASH DA HERO ASIA TOUR [서울]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "웨스트브릿지 라이브홀",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294014_260618_133639.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294014",
-      "genre": "대중음악",
-      "mentions": 48
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF293593",
-      "title": "이세준 30주년 기념 공연, MY SONGS &amp; MY LIFE: 30 YEARS with Friends",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "KT&amp;G 상상마당 대치아트홀",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293593_260612_151438.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293593",
-      "genre": "대중음악",
-      "mentions": 3
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF293323",
-      "title": "CLICK-B, RE: CLICK: 한여름밤의 꿈 VOL.2",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "블루스퀘어",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293323_260610_160833.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293323",
-      "genre": "대중음악",
-      "mentions": 104
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF293245",
-      "title": "브로콜리너마저 장기 공연: 이른 열대야 [부산]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "KT&amp;G 상상마당 라이브홀 [부산]",
-      "area": "부산",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293245_260610_112038.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293245",
-      "genre": "대중음악",
-      "mentions": 177
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF293154",
-      "title": "싸이흠뻑쇼: SUMMERSWAG [광주]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "조선대학교",
-      "area": "광주",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293154_260608_164704.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293154",
-      "genre": "대중음악",
-      "mentions": 8381
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF292812",
-      "title": "사과가 쿵! [청주]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "청주아트홀 (구. 청주시민회관)",
-      "area": "충청북",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292812_260604_100157.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292812",
-      "genre": "뮤지컬",
-      "mentions": 58748
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF292044",
-      "title": "무명전설 전국투어 콘서트 [고양]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "고양아람누리",
-      "area": "경기",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292044_260522_124656.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292044",
-      "genre": "대중음악",
-      "mentions": 3335
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF291917",
-      "title": "Chilli Beans. Asia Tour [서울]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "예스24 원더로크홀",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291917_260521_103143.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291917",
-      "genre": "대중음악",
-      "mentions": 41
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF291428",
-      "title": "정글북 [광주]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "전남광주통합특별시 예술의전당 (구. 광주예술의전당)",
-      "area": "광주",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291428_260514_143555.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291428",
-      "genre": "뮤지컬",
-      "mentions": 127168
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF291390",
-      "title": "미스트롯4 전국투어 콘서트: 트롯으로 세상을 홀려라 [안산]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "안산대학교",
-      "area": "경기",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291390_260514_131527.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291390",
-      "genre": "대중음악",
-      "mentions": 166
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF291025",
-      "title": "이승철 40주년 콘서트, THE VOICE: LEE SEUNG CHUL [성남]",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "성남아트센터",
-      "area": "경기",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291025_260511_110614.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291025",
-      "genre": "대중음악",
-      "mentions": 79
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF289647",
-      "title": "오피셜히게단디즘 아시아 투어 in SEOUL",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-09",
-      "location": "올림픽공원",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289647_260417_142951.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289647",
-      "genre": "대중음악",
-      "mentions": 137
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF289230",
-      "title": "설리번 포트너 트리오 라이브 인 서울",
-      "startDate": "2026-08-08",
-      "endDate": "2026-08-08",
-      "location": "광림아트센터",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289230_260413_135650.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289230",
-      "genre": "대중음악",
-      "mentions": 4
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF297856",
-      "title": "오일내 홍대점 presents 육즙폭발 Vol.1",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "세티 라이브홀 (SETI LIVE HALL)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297856_260806_131126.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297856",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF297353",
-      "title": "MIKI HOSHII SOLO SHOWCASE: THE FUTURE SPOTLIGHT",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "GB가빈아트홀",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297353_260731_103512.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297353",
-      "genre": "대중음악",
-      "mentions": 5
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF297016",
-      "title": "MUNIV 13TH Beside Series #3, 한여름 채집회",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "우무지",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297016_260727_135639.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297016",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296950",
-      "title": "숲세권 라이브, 블루디 단독 공연: Blue Rose",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "숲세권 라이브",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296950_260727_104914.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296950",
-      "genre": "대중음악",
-      "mentions": 0
+      "mentions": 276
     },
     {
       "source": "kopis",
@@ -1575,104 +447,6 @@
     {
       "source": "kopis",
       "type": "performance",
-      "id": "kopis-PF296850",
-      "title": "팡타구뤼엘의 파티 Vol.10, 시와",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "복합문화공간에무",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296850_260724_103428.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296850",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296442",
-      "title": "TONE STUDIO LIVE, 까데호",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "톤스튜디오 서울",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296442_260720_161238.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296442",
-      "genre": "대중음악",
-      "mentions": 26
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296440",
-      "title": "POSER SUMMER CLUB TOUR: 역발산기개세 (力拔山氣蓋世) VOL.3 WATCH OUT [대전]",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "인터플레이 [대전]",
-      "area": "대전",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296440_260720_160819.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296440",
-      "genre": "대중음악",
-      "mentions": 4
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296296",
-      "title": "O.O.O단독 콘서트: 느리고, 흐린 춤 (Slow, Blurry Dance)",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "구름아래소극장",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296296_260720_103309.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296296",
-      "genre": "대중음악",
-      "mentions": 8
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296053",
-      "title": "짙은: MINTPAPER 20th SPECIAL LIVE",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "XSCALA(엑스칼라)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296053_260714_130318.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296053",
-      "genre": "대중음악",
-      "mentions": 17
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296003",
-      "title": "서지기획, 레코다메 &amp; 세희 &amp; 셀린셀리셀리느",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "스트레인지 프룻",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296003_260714_100114.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296003",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295848",
-      "title": "철조망: METAL SYNDICATE NETWORK, LaylaFest",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "딥퍼플",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295848_260713_104834.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295848",
-      "genre": "대중음악",
-      "mentions": 0
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
       "id": "kopis-PF295802",
       "title": "겨울왕국 프리뷰 [서울]",
       "startDate": "2026-08-09",
@@ -1682,105 +456,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295802_260721_140503.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295802",
       "genre": "뮤지컬",
-      "mentions": 1301
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295527",
-      "title": "김종서 전국투어 콘서트: 모두의 김종서 [인천]",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "제물포구문화체육센터(구. 동구문화체육센터)",
-      "area": "인천",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295527_260707_141247.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295527",
-      "genre": "대중음악",
-      "mentions": 264
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295507",
-      "title": "조영남 전국투어 콘서트: 조영남이 죽기 전에 하고 싶은 이야기 [인천]",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "제물포구문화체육센터(구. 동구문화체육센터)",
-      "area": "인천",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295507_260707_131605.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295507",
-      "genre": "대중음악",
-      "mentions": 119
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF295022",
-      "title": "오월오일 전국 클럽 투어: SUNBURN [부산]",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "금사락",
-      "area": "부산",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295022_260701_130550.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295022",
-      "genre": "대중음악",
-      "mentions": 30
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF294885",
-      "title": "nib.archive 전국 클럽투어: idea of nib [대구] (08.09)",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "클럽헤비",
-      "area": "대구",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294885_260629_163639.png",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294885",
-      "genre": "대중음악",
-      "mentions": 7
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF293845",
-      "title": "조항조 전국투어 콘서트: 생각 [부천]",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "부천시민회관",
-      "area": "경기",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293845_260616_134843.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293845",
-      "genre": "대중음악",
-      "mentions": 497
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF293305",
-      "title": "The 심수봉 SHOW [파주]",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "파주운정행복센터",
-      "area": "경기",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293305_260610_142749.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293305",
-      "genre": "대중음악",
-      "mentions": 466
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF289916",
-      "title": "민트페스타 vol.85",
-      "startDate": "2026-08-09",
-      "endDate": "2026-08-09",
-      "location": "KT&amp;G 상상마당 라이브홀 [마포]",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289916_260422_130149.gif",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289916",
-      "genre": "대중음악",
-      "mentions": 33
+      "mentions": 1311
     },
     {
       "source": "kopis",
@@ -1794,7 +470,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297159_260729_100932.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297159",
       "genre": "대중음악",
-      "mentions": 238
+      "mentions": 240
     },
     {
       "source": "tourapi",
@@ -1809,7 +485,7 @@
       "lon": 129.132986,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/32/4092532_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 7230
+      "mentions": 7282
     },
     {
       "source": "kopis",
@@ -1852,7 +528,7 @@
       "lon": 128.4246286625,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/08/4041308_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 11771
+      "mentions": 11919
     },
     {
       "source": "kopis",
@@ -1866,7 +542,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297909_260807_104336.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297909",
       "genre": "대중음악",
-      "mentions": 5
+      "mentions": 12
     },
     {
       "source": "kopis",
@@ -1936,7 +612,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296301_260720_104508.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296301",
       "genre": "대중음악",
-      "mentions": 141
+      "mentions": 149
     },
     {
       "source": "kopis",
@@ -1950,7 +626,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292896_260604_142522.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292896",
       "genre": "대중음악",
-      "mentions": 4172
+      "mentions": 4174
     },
     {
       "source": "kopis",
@@ -1978,7 +654,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288334_260331_102011.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288334",
       "genre": "대중음악",
-      "mentions": 25
+      "mentions": 26
     },
     {
       "source": "kopis",
@@ -2020,7 +696,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297450_260803_102944.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297450",
       "genre": "복합",
-      "mentions": 2274
+      "mentions": 2281
     },
     {
       "source": "kopis",
@@ -2076,7 +752,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295611_260708_133621.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295611",
       "genre": "뮤지컬",
-      "mentions": 2830288
+      "mentions": 2831990
     },
     {
       "source": "kopis",
@@ -2105,7 +781,7 @@
       "lon": 128.8920940489,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/77/3317777_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1420
+      "mentions": 1457
     },
     {
       "source": "tourapi",
@@ -2120,7 +796,7 @@
       "lon": 128.2138916396,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/17/4094217_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1692
+      "mentions": 1721
     },
     {
       "source": "tourapi",
@@ -2135,7 +811,7 @@
       "lon": 129.1354937071,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/55/4087155_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 786
+      "mentions": 808
     },
     {
       "source": "tourapi",
@@ -2150,7 +826,7 @@
       "lon": 127.0197179,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/14/4095814_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1657
+      "mentions": 1718
     },
     {
       "source": "tourapi",
@@ -2180,7 +856,7 @@
       "lon": 128.0858237357,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/79/4096279_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 24457
+      "mentions": 24473
     },
     {
       "source": "tourapi",
@@ -2195,7 +871,7 @@
       "lon": 126.6613891711,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/02/4093802_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 392
+      "mentions": 423
     },
     {
       "source": "tourapi",
@@ -2210,7 +886,7 @@
       "lon": 126.9761682759,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/87/4090187_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 210
+      "mentions": 211
     },
     {
       "source": "kopis",
@@ -2252,7 +928,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297080_260728_095500.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297080",
       "genre": "대중음악",
-      "mentions": 106
+      "mentions": 108
     },
     {
       "source": "kopis",
@@ -2266,7 +942,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297011_260727_133905.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297011",
       "genre": "대중음악",
-      "mentions": 1009
+      "mentions": 1017
     },
     {
       "source": "kopis",
@@ -2280,7 +956,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296955_260727_105740.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296955",
       "genre": "뮤지컬",
-      "mentions": 391721
+      "mentions": 391892
     },
     {
       "source": "kopis",
@@ -2308,7 +984,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296549_260721_140343.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296549",
       "genre": "대중음악",
-      "mentions": 1406
+      "mentions": 1409
     },
     {
       "source": "kopis",
@@ -2336,7 +1012,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296259_260716_134600.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296259",
       "genre": "대중음악",
-      "mentions": 13
+      "mentions": 14
     },
     {
       "source": "kopis",
@@ -2364,7 +1040,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295926_260713_144159.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295926",
       "genre": "복합",
-      "mentions": 2465
+      "mentions": 2472
     },
     {
       "source": "kopis",
@@ -2406,7 +1082,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293792_260616_103236.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293792",
       "genre": "대중음악",
-      "mentions": 2528
+      "mentions": 2545
     },
     {
       "source": "kopis",
@@ -2434,7 +1110,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292725_260601_163238.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292725",
       "genre": "대중음악",
-      "mentions": 7595
+      "mentions": 7609
     },
     {
       "source": "tourapi",
@@ -2449,7 +1125,7 @@
       "lon": 126.9573284067,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/12/4089612_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 5774
+      "mentions": 5859
     },
     {
       "source": "tourapi",
@@ -2464,7 +1140,21 @@
       "lon": 129.2090805222,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/91/4087291_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 524
+      "mentions": 545
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298106",
+      "title": "생일, 그리고 사랑으로 [제주]",
+      "startDate": "2026-08-15",
+      "endDate": "2026-08-15",
+      "location": "애월뮤직팩토리",
+      "area": "제주",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298106_260810_142930.png",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298106",
+      "genre": "대중음악",
+      "mentions": 2075267
     },
     {
       "source": "kopis",
@@ -2520,7 +1210,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296972_260727_113701.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296972",
       "genre": "복합",
-      "mentions": 7753
+      "mentions": 7762
     },
     {
       "source": "kopis",
@@ -2604,7 +1294,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296374_260720_140402.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296374",
       "genre": "대중음악",
-      "mentions": 18
+      "mentions": 19
     },
     {
       "source": "kopis",
@@ -2646,7 +1336,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296158_260715_135245.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296158",
       "genre": "복합",
-      "mentions": 6
+      "mentions": 9
     },
     {
       "source": "kopis",
@@ -2688,7 +1378,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295987_260713_164800.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295987",
       "genre": "대중음악",
-      "mentions": 128
+      "mentions": 129
     },
     {
       "source": "kopis",
@@ -2758,7 +1448,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295275_260703_131254.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295275",
       "genre": "대중음악",
-      "mentions": 28
+      "mentions": 30
     },
     {
       "source": "kopis",
@@ -2786,7 +1476,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295269_260703_130345.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295269",
       "genre": "뮤지컬",
-      "mentions": 39756
+      "mentions": 39786
     },
     {
       "source": "kopis",
@@ -2800,7 +1490,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295241_260703_105634.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295241",
       "genre": "대중음악",
-      "mentions": 5
+      "mentions": 6
     },
     {
       "source": "kopis",
@@ -2814,7 +1504,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295016_260701_120913.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295016",
       "genre": "대중음악",
-      "mentions": 30
+      "mentions": 33
     },
     {
       "source": "kopis",
@@ -2828,7 +1518,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294718_260626_143424.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294718",
       "genre": "대중음악",
-      "mentions": 123
+      "mentions": 135
     },
     {
       "source": "kopis",
@@ -2926,7 +1616,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293650_260615_102857.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293650",
       "genre": "대중음악",
-      "mentions": 51
+      "mentions": 54
     },
     {
       "source": "kopis",
@@ -2940,7 +1630,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293467_260611_144955.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293467",
       "genre": "대중음악",
-      "mentions": 95
+      "mentions": 98
     },
     {
       "source": "kopis",
@@ -2954,7 +1644,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293162_260608_172330.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293162",
       "genre": "대중음악",
-      "mentions": 8381
+      "mentions": 8405
     },
     {
       "source": "kopis",
@@ -2982,7 +1672,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291852_260520_134332.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291852",
       "genre": "뮤지컬",
-      "mentions": 145
+      "mentions": 143
     },
     {
       "source": "kopis",
@@ -2996,7 +1686,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291476_260515_122702.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291476",
       "genre": "대중음악",
-      "mentions": 3
+      "mentions": 4
     },
     {
       "source": "kopis",
@@ -3122,7 +1812,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295576_260708_112655.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295576",
       "genre": "대중음악",
-      "mentions": 89
+      "mentions": 96
     },
     {
       "source": "kopis",
@@ -3150,7 +1840,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295309_260703_141819.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295309",
       "genre": "대중음악",
-      "mentions": 119
+      "mentions": 120
     },
     {
       "source": "kopis",
@@ -3164,7 +1854,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295099_260702_113449.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295099",
       "genre": "대중음악",
-      "mentions": 30
+      "mentions": 33
     },
     {
       "source": "kopis",
@@ -3206,7 +1896,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293471_260611_145457.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293471",
       "genre": "대중음악",
-      "mentions": 95
+      "mentions": 98
     },
     {
       "source": "kopis",
@@ -3234,7 +1924,21 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288265_260330_133157.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288265",
       "genre": "대중음악",
-      "mentions": 166
+      "mentions": 167
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298015",
+      "title": "nib.archive 전국 클럽투어: idea of nib [서울 (앵콜) ]",
+      "startDate": "2026-08-17",
+      "endDate": "2026-08-17",
+      "location": "KT&amp;G 상상마당 라이브홀 [마포]",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298015_260810_102309.png",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298015",
+      "genre": "대중음악",
+      "mentions": 7
     },
     {
       "source": "kopis",
@@ -3332,7 +2036,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292879_260604_135112.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292879",
       "genre": "대중음악",
-      "mentions": 319
+      "mentions": 327
     },
     {
       "source": "kopis",
@@ -3346,7 +2050,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291536_260722_134217.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291536",
       "genre": "대중음악",
-      "mentions": 808
+      "mentions": 809
     },
     {
       "source": "kopis",
@@ -3402,7 +2106,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297938_260807_124338.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297938",
       "genre": "복합",
-      "mentions": 205
+      "mentions": 206
     },
     {
       "source": "kopis",
@@ -3416,7 +2120,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297888_260806_144655.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297888",
       "genre": "뮤지컬",
-      "mentions": 5397
+      "mentions": 5403
     },
     {
       "source": "kopis",
@@ -3444,7 +2148,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295857_260713_111112.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295857",
       "genre": "복합",
-      "mentions": 585
+      "mentions": 591
     },
     {
       "source": "kopis",
@@ -3472,7 +2176,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295415_260706_144440.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295415",
       "genre": "대중음악",
-      "mentions": 73
+      "mentions": 72
     },
     {
       "source": "kopis",
@@ -3500,7 +2204,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294909_260630_101734.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294909",
       "genre": "대중음악",
-      "mentions": 23
+      "mentions": 26
     },
     {
       "source": "kopis",
@@ -3514,7 +2218,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293611_260612_155933.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293611",
       "genre": "복합",
-      "mentions": 2321
+      "mentions": 2324
     },
     {
       "source": "tourapi",
@@ -3529,7 +2233,7 @@
       "lon": 128.078886292,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/28/3513728_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1197
+      "mentions": 1218
     },
     {
       "source": "tourapi",
@@ -3544,7 +2248,7 @@
       "lon": 126.82539429651213,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/75/4059475_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1606
+      "mentions": 1671
     },
     {
       "source": "kopis",
@@ -3586,7 +2290,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291332_260514_103002.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291332",
       "genre": "대중음악",
-      "mentions": 108
+      "mentions": 113
     },
     {
       "source": "tourapi",
@@ -3601,7 +2305,36 @@
       "lon": 129.1354937071,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/24/4093324_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1
+      "mentions": 2
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-4097059",
+      "title": "포항치맥페스티벌",
+      "startDate": "2026-08-21",
+      "endDate": "2026-08-22",
+      "location": "포항시 북구 두호동 1015-6번지",
+      "area": null,
+      "lat": 36.0623406,
+      "lon": 129.3820196,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/60/4097060_image2_1.png",
+      "detailUrl": null,
+      "mentions": 1804
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298017",
+      "title": "제1299회 서초금요음악회, 금요일 밤의 이중주: 리듬과 위트 사이",
+      "startDate": "2026-08-21",
+      "endDate": "2026-08-21",
+      "location": "서초문화예술회관(구. 서초구민회관)",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298017_260810_102825.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298017",
+      "genre": "복합",
+      "mentions": 0
     },
     {
       "source": "kopis",
@@ -3615,7 +2348,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297933_260807_115954.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297933",
       "genre": "대중음악",
-      "mentions": 4053
+      "mentions": 4054
     },
     {
       "source": "kopis",
@@ -3629,7 +2362,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297296_260730_132034.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297296",
       "genre": "대중음악",
-      "mentions": 27
+      "mentions": 28
     },
     {
       "source": "kopis",
@@ -3657,7 +2390,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296986_260727_124826.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296986",
       "genre": "대중음악",
-      "mentions": 81
+      "mentions": 85
     },
     {
       "source": "kopis",
@@ -3741,7 +2474,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293897_260617_102312.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293897",
       "genre": "대중음악",
-      "mentions": 4179
+      "mentions": 4242
     },
     {
       "source": "kopis",
@@ -3755,7 +2488,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292994_260608_104929.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292994",
       "genre": "대중음악",
-      "mentions": 158
+      "mentions": 167
     },
     {
       "source": "kopis",
@@ -3769,7 +2502,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292067_260522_135903.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292067",
       "genre": "뮤지컬",
-      "mentions": 5441601
+      "mentions": 5449129
     },
     {
       "source": "kopis",
@@ -3783,7 +2516,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290237_260428_094925.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290237",
       "genre": "대중음악",
-      "mentions": 176
+      "mentions": 169
     },
     {
       "source": "tourapi",
@@ -3798,7 +2531,7 @@
       "lon": 126.5012838671,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/78/2828778_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1967
+      "mentions": 1983
     },
     {
       "source": "tourapi",
@@ -3813,7 +2546,21 @@
       "lon": 128.0769891081,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/31/4078831_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 306
+      "mentions": 312
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298064",
+      "title": "TMElive International Music Awards [중국]",
+      "startDate": "2026-08-22",
+      "endDate": "2026-08-23",
+      "location": "카이탁 스타디움(Kai Tak Stadium) [중국 홍콩]",
+      "area": null,
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298064_260810_130153.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298064",
+      "genre": "대중음악",
+      "mentions": 80
     },
     {
       "source": "kopis",
@@ -3897,7 +2644,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297492_260803_125031.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297492",
       "genre": "뮤지컬",
-      "mentions": 145393
+      "mentions": 145519
     },
     {
       "source": "kopis",
@@ -3995,7 +2742,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297156_260729_100226.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297156",
       "genre": "대중음악",
-      "mentions": 47
+      "mentions": 48
     },
     {
       "source": "kopis",
@@ -4023,7 +2770,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296978_260727_120750.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296978",
       "genre": "대중음악",
-      "mentions": 140
+      "mentions": 142
     },
     {
       "source": "kopis",
@@ -4079,7 +2826,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296692_260723_101521.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296692",
       "genre": "복합",
-      "mentions": 7753
+      "mentions": 7762
     },
     {
       "source": "kopis",
@@ -4121,7 +2868,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296478_260720_175220.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296478",
       "genre": "대중음악",
-      "mentions": 14
+      "mentions": 15
     },
     {
       "source": "kopis",
@@ -4149,7 +2896,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296266_260716_140704.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296266",
       "genre": "뮤지컬",
-      "mentions": 6728
+      "mentions": 6735
     },
     {
       "source": "kopis",
@@ -4177,7 +2924,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296162_260715_135800.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296162",
       "genre": "대중음악",
-      "mentions": 221
+      "mentions": 227
     },
     {
       "source": "kopis",
@@ -4191,7 +2938,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296027_260714_105437.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296027",
       "genre": "대중음악",
-      "mentions": 23
+      "mentions": 24
     },
     {
       "source": "kopis",
@@ -4205,7 +2952,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295988_260713_165355.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295988",
       "genre": "뮤지컬",
-      "mentions": 7540
+      "mentions": 7528
     },
     {
       "source": "kopis",
@@ -4233,7 +2980,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295854_260713_110712.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295854",
       "genre": "대중음악",
-      "mentions": 550
+      "mentions": 551
     },
     {
       "source": "kopis",
@@ -4247,7 +2994,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295799_260710_134014.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295799",
       "genre": "대중음악",
-      "mentions": 19
+      "mentions": 20
     },
     {
       "source": "kopis",
@@ -4261,7 +3008,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295742_260709_135219.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295742",
       "genre": "대중음악",
-      "mentions": 128
+      "mentions": 129
     },
     {
       "source": "kopis",
@@ -4275,7 +3022,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295529_260707_141905.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295529",
       "genre": "대중음악",
-      "mentions": 413
+      "mentions": 414
     },
     {
       "source": "kopis",
@@ -4331,7 +3078,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295223_260703_101558.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295223",
       "genre": "대중음악",
-      "mentions": 2531
+      "mentions": 2556
     },
     {
       "source": "kopis",
@@ -4345,7 +3092,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295142_260702_135740.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295142",
       "genre": "대중음악",
-      "mentions": 30
+      "mentions": 33
     },
     {
       "source": "kopis",
@@ -4359,7 +3106,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295080_260702_104551.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295080",
       "genre": "뮤지컬",
-      "mentions": 9294
+      "mentions": 9299
     },
     {
       "source": "kopis",
@@ -4401,7 +3148,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294749_260629_105703.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294749",
       "genre": "대중음악",
-      "mentions": 261
+      "mentions": 262
     },
     {
       "source": "kopis",
@@ -4415,7 +3162,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294714_260626_141208.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294714",
       "genre": "대중음악",
-      "mentions": 123
+      "mentions": 135
     },
     {
       "source": "kopis",
@@ -4443,7 +3190,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294680_260626_112213.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294680",
       "genre": "뮤지컬",
-      "mentions": 71213
+      "mentions": 71289
     },
     {
       "source": "kopis",
@@ -4457,7 +3204,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294663_260626_103349.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294663",
       "genre": "대중음악",
-      "mentions": 107
+      "mentions": 105
     },
     {
       "source": "kopis",
@@ -4471,7 +3218,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294437_260623_133155.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294437",
       "genre": "대중음악",
-      "mentions": 3
+      "mentions": 4
     },
     {
       "source": "kopis",
@@ -4499,7 +3246,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293164_260608_173438.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293164",
       "genre": "대중음악",
-      "mentions": 8381
+      "mentions": 8405
     },
     {
       "source": "kopis",
@@ -4513,7 +3260,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293067_260608_133444.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293067",
       "genre": "대중음악",
-      "mentions": 92
+      "mentions": 90
     },
     {
       "source": "kopis",
@@ -4527,7 +3274,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292050_260522_130321.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292050",
       "genre": "대중음악",
-      "mentions": 3335
+      "mentions": 3363
     },
     {
       "source": "kopis",
@@ -4541,7 +3288,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291649_260518_141451.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291649",
       "genre": "대중음악",
-      "mentions": 63
+      "mentions": 64
     },
     {
       "source": "kopis",
@@ -4555,7 +3302,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290799_260507_113338.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290799",
       "genre": "뮤지컬",
-      "mentions": 100558
+      "mentions": 100584
     },
     {
       "source": "kopis",
@@ -4569,7 +3316,21 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF286683_260309_163430.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286683",
       "genre": "대중음악",
-      "mentions": 985471
+      "mentions": 988629
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298056",
+      "title": "Best Friends",
+      "startDate": "2026-08-23",
+      "endDate": "2026-08-23",
+      "location": "우무지",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298056_260810_124309.png",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298056",
+      "genre": "대중음악",
+      "mentions": 427545
     },
     {
       "source": "kopis",
@@ -4653,7 +3414,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295545_260708_101641.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295545",
       "genre": "대중음악",
-      "mentions": 550
+      "mentions": 551
     },
     {
       "source": "kopis",
@@ -4681,7 +3442,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295282_260703_132448.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295282",
       "genre": "대중음악",
-      "mentions": 28
+      "mentions": 30
     },
     {
       "source": "kopis",
@@ -4695,7 +3456,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295104_260702_122411.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295104",
       "genre": "대중음악",
-      "mentions": 9
+      "mentions": 10
     },
     {
       "source": "kopis",
@@ -4723,7 +3484,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293910_260617_110200.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293910",
       "genre": "대중음악",
-      "mentions": 99
+      "mentions": 100
     },
     {
       "source": "kopis",
@@ -4737,7 +3498,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293452_260611_141202.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293452",
       "genre": "대중음악",
-      "mentions": 7
+      "mentions": 8
     },
     {
       "source": "kopis",
@@ -4751,7 +3512,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292188_260526_131356.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292188",
       "genre": "대중음악",
-      "mentions": 4103
+      "mentions": 4127
     },
     {
       "source": "kopis",
@@ -4765,7 +3526,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292150_260526_111153.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292150",
       "genre": "대중음악",
-      "mentions": 662
+      "mentions": 670
     },
     {
       "source": "kopis",
@@ -4779,7 +3540,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290173_260427_133153.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290173",
       "genre": "대중음악",
-      "mentions": 63
+      "mentions": 64
     },
     {
       "source": "kopis",
@@ -4808,7 +3569,7 @@
       "lon": 126.489686091,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/77/4073777_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 0
+      "mentions": 1
     },
     {
       "source": "kopis",
@@ -4836,7 +3597,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297862_260806_132022.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297862",
       "genre": "대중음악",
-      "mentions": 4864
+      "mentions": 4866
     },
     {
       "source": "kopis",
@@ -4869,6 +3630,20 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF298152",
+      "title": "김천문화예술회관 재개관 기념 콘서트: 당신에게 전하는 발라드 [김천]",
+      "startDate": "2026-08-26",
+      "endDate": "2026-08-26",
+      "location": "김천시문화예술회관",
+      "area": "경상북",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298152_260810_165134.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298152",
+      "genre": "대중음악",
+      "mentions": 6
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF297208",
       "title": "썸머나이트: 지누션 &amp; 디바 [경주]",
       "startDate": "2026-08-26",
@@ -4878,7 +3653,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297208_260729_132437.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297208",
       "genre": "대중음악",
-      "mentions": 32
+      "mentions": 34
     },
     {
       "source": "kopis",
@@ -4963,7 +3738,7 @@
       "lon": 126.7810951622,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/29/4092929_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1565
+      "mentions": 1580
     },
     {
       "source": "tourapi",
@@ -4978,7 +3753,7 @@
       "lon": 127.786513691,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/99/4093999_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 13918
+      "mentions": 13958
     },
     {
       "source": "tourapi",
@@ -4993,7 +3768,7 @@
       "lon": 126.9787818353,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/15/4091815_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 919
+      "mentions": 926
     },
     {
       "source": "tourapi",
@@ -5008,7 +3783,21 @@
       "lon": 128.7012355043,
       "thumbnail": null,
       "detailUrl": null,
-      "mentions": 4198
+      "mentions": 4208
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298086",
+      "title": "월드뮤직으로 떠나는 우리 가족 행성 여행: 별빛주파수 812mhz [시흥]",
+      "startDate": "2026-08-27",
+      "endDate": "2026-08-27",
+      "location": "시흥시청 늠내홀",
+      "area": "경기",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298086_260810_134800.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298086",
+      "genre": "대중음악",
+      "mentions": 3
     },
     {
       "source": "kopis",
@@ -5079,7 +3868,7 @@
       "lon": 127.2856799,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/67/4095567_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 321
+      "mentions": 326
     },
     {
       "source": "tourapi",
@@ -5094,7 +3883,7 @@
       "lon": 127.9830546,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/54/4095354_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 584
+      "mentions": 591
     },
     {
       "source": "tourapi",
@@ -5109,7 +3898,7 @@
       "lon": 127.075333,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/21/4090921_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 3940
+      "mentions": 3960
     },
     {
       "source": "tourapi",
@@ -5124,7 +3913,7 @@
       "lon": 126.9626937088,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/05/4078805_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 5651
+      "mentions": 5657
     },
     {
       "source": "tourapi",
@@ -5139,7 +3928,7 @@
       "lon": 128.5227975834,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/34/4055834_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 18150
+      "mentions": 18160
     },
     {
       "source": "tourapi",
@@ -5154,7 +3943,7 @@
       "lon": 126.6655625042,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/31/4091431_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 3379
+      "mentions": 3423
     },
     {
       "source": "tourapi",
@@ -5184,7 +3973,21 @@
       "lon": 126.8252528805,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/95/4096095_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 5060
+      "mentions": 5067
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298153",
+      "title": "김천문화예술회관 재개관 기념 콘서트: 한여름밤의 트롯 페스타 [김천]",
+      "startDate": "2026-08-28",
+      "endDate": "2026-08-28",
+      "location": "김천시문화예술회관",
+      "area": "경상북",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298153_260810_165636.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298153",
+      "genre": "대중음악",
+      "mentions": 10
     },
     {
       "source": "kopis",
@@ -5212,7 +4015,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297991_260807_143517.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297991",
       "genre": "대중음악",
-      "mentions": 32098
+      "mentions": 32146
     },
     {
       "source": "kopis",
@@ -5282,7 +4085,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297351_260731_102851.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297351",
       "genre": "대중음악",
-      "mentions": 100
+      "mentions": 102
     },
     {
       "source": "kopis",
@@ -5352,7 +4155,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296415_260724_155030.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296415",
       "genre": "대중음악",
-      "mentions": 196
+      "mentions": 197
     },
     {
       "source": "kopis",
@@ -5395,7 +4198,7 @@
       "lon": 126.3336418836,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/62/4095062_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 3382
+      "mentions": 3395
     },
     {
       "source": "tourapi",
@@ -5410,22 +4213,7 @@
       "lon": 127.0055699583,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/29/4094029_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 981
-    },
-    {
-      "source": "tourapi",
-      "type": "festival",
-      "id": "tour-4096371",
-      "title": "트레저헌터 in 진안",
-      "startDate": "2026-08-29",
-      "endDate": "2026-09-19",
-      "location": "전북특별자치도 진안군 진안읍 외사양길 16-19",
-      "area": null,
-      "lat": 35.7769952225,
-      "lon": 127.4158812719,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/08/4096408_image2_1.jpeg",
-      "detailUrl": null,
-      "mentions": 43
+      "mentions": 985
     },
     {
       "source": "tourapi",
@@ -5440,7 +4228,7 @@
       "lon": 129.1273173184,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/37/4069137_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 88
+      "mentions": 96
     },
     {
       "source": "tourapi",
@@ -5455,7 +4243,21 @@
       "lon": 126.8685769631,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/07/4090807_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 247
+      "mentions": 258
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298030",
+      "title": "SHOWTIME: Carnival",
+      "startDate": "2026-08-29",
+      "endDate": "2026-08-29",
+      "location": "그랜드하얏트서울",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298030_260810_110221.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298030",
+      "genre": "복합",
+      "mentions": 66
     },
     {
       "source": "kopis",
@@ -5511,7 +4313,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297911_260807_104633.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297911",
       "genre": "대중음악",
-      "mentions": 106
+      "mentions": 108
     },
     {
       "source": "kopis",
@@ -5567,7 +4369,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297689_260805_101329.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297689",
       "genre": "대중음악",
-      "mentions": 929
+      "mentions": 931
     },
     {
       "source": "kopis",
@@ -5581,7 +4383,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297614_260804_112538.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297614",
       "genre": "대중음악",
-      "mentions": 5419
+      "mentions": 5437
     },
     {
       "source": "kopis",
@@ -5595,7 +4397,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297584_260804_101715.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297584",
       "genre": "대중음악",
-      "mentions": 2419362
+      "mentions": 2421267
     },
     {
       "source": "kopis",
@@ -5609,7 +4411,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297447_260803_102457.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297447",
       "genre": "복합",
-      "mentions": 23972
+      "mentions": 23989
     },
     {
       "source": "kopis",
@@ -5623,7 +4425,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297315_260730_142608.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297315",
       "genre": "대중음악",
-      "mentions": 60
+      "mentions": 63
     },
     {
       "source": "kopis",
@@ -5651,7 +4453,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297244_260730_095159.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297244",
       "genre": "복합",
-      "mentions": 7753
+      "mentions": 7762
     },
     {
       "source": "kopis",
@@ -5665,7 +4467,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297239_260729_145527.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297239",
       "genre": "대중음악",
-      "mentions": 19
+      "mentions": 20
     },
     {
       "source": "kopis",
@@ -5693,7 +4495,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296890_260724_131749.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296890",
       "genre": "대중음악",
-      "mentions": 7
+      "mentions": 8
     },
     {
       "source": "kopis",
@@ -5707,7 +4509,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296886_260724_125802.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296886",
       "genre": "대중음악",
-      "mentions": 25
+      "mentions": 28
     },
     {
       "source": "kopis",
@@ -5721,7 +4523,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296865_260724_111929.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296865",
       "genre": "뮤지컬",
-      "mentions": 79
+      "mentions": 92
     },
     {
       "source": "kopis",
@@ -5749,7 +4551,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296429_260720_154736.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296429",
       "genre": "대중음악",
-      "mentions": 218
+      "mentions": 221
     },
     {
       "source": "kopis",
@@ -5777,7 +4579,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295931_260713_145506.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295931",
       "genre": "대중음악",
-      "mentions": 128
+      "mentions": 129
     },
     {
       "source": "kopis",
@@ -5805,7 +4607,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295179_260702_151604.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295179",
       "genre": "대중음악",
-      "mentions": 30
+      "mentions": 33
     },
     {
       "source": "kopis",
@@ -5833,7 +4635,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294881_260629_162833.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294881",
       "genre": "대중음악",
-      "mentions": 40
+      "mentions": 38
     },
     {
       "source": "kopis",
@@ -5847,7 +4649,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294859_260629_153505.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294859",
       "genre": "뮤지컬",
-      "mentions": 143
+      "mentions": 146
     },
     {
       "source": "kopis",
@@ -5875,7 +4677,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294381_260623_103628.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294381",
       "genre": "뮤지컬",
-      "mentions": 75
+      "mentions": 82
     },
     {
       "source": "kopis",
@@ -5917,7 +4719,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293594_260612_152216.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293594",
       "genre": "대중음악",
-      "mentions": 159
+      "mentions": 165
     },
     {
       "source": "kopis",
@@ -5931,7 +4733,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293375_260611_104145.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293375",
       "genre": "대중음악",
-      "mentions": 264
+      "mentions": 269
     },
     {
       "source": "kopis",
@@ -5959,7 +4761,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292487_260529_103238.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292487",
       "genre": "대중음악",
-      "mentions": 381
+      "mentions": 383
     },
     {
       "source": "kopis",
@@ -5984,10 +4786,10 @@
       "endDate": "2026-08-30",
       "location": "인천문학경기장",
       "area": "인천",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292376_260528_101308.jpg",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292376_260810_104124.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292376",
       "genre": "대중음악",
-      "mentions": 594
+      "mentions": 598
     },
     {
       "source": "kopis",
@@ -6001,7 +4803,21 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292053_260522_131202.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292053",
       "genre": "대중음악",
-      "mentions": 3335
+      "mentions": 3363
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298042",
+      "title": "김승주 클럽투어: VC//VRS [대구]",
+      "startDate": "2026-08-30",
+      "endDate": "2026-08-30",
+      "location": "제임스레코드",
+      "area": "대구",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298042_260810_112350.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298042",
+      "genre": "대중음악",
+      "mentions": 2
     },
     {
       "source": "kopis",
@@ -6029,7 +4845,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297474_260803_111803.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297474",
       "genre": "대중음악",
-      "mentions": 0
+      "mentions": 1
     },
     {
       "source": "kopis",
@@ -6057,7 +4873,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297434_260731_171402.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297434",
       "genre": "대중음악",
-      "mentions": 8
+      "mentions": 9
     },
     {
       "source": "kopis",
@@ -6071,7 +4887,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296878_260724_123206.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296878",
       "genre": "대중음악",
-      "mentions": 658
+      "mentions": 662
     },
     {
       "source": "kopis",
@@ -6127,7 +4943,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293402_260611_113050.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293402",
       "genre": "대중음악",
-      "mentions": 119
+      "mentions": 120
     },
     {
       "source": "kopis",
@@ -6141,7 +4957,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292746_260602_103704.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292746",
       "genre": "대중음악",
-      "mentions": 92
+      "mentions": 90
     },
     {
       "source": "tourapi",
@@ -6156,7 +4972,7 @@
       "lon": 127.2325927550662,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/10/4020710_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 846
+      "mentions": 862
     },
     {
       "source": "kopis",
@@ -6185,7 +5001,7 @@
       "lon": 127.7862009278,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/34/4091734_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 10736
+      "mentions": 10787
     },
     {
       "source": "tourapi",
@@ -6200,7 +5016,7 @@
       "lon": 128.0847734101,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/36/4096236_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1206
+      "mentions": 1228
     },
     {
       "source": "kopis",
@@ -6257,7 +5073,7 @@
       "lon": 128.2605623,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/19/4091719_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 390
+      "mentions": 395
     },
     {
       "source": "tourapi",
@@ -6272,7 +5088,7 @@
       "lon": 127.1220001033,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/69/4091769_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1419
+      "mentions": 1435
     },
     {
       "source": "tourapi",
@@ -6287,7 +5103,7 @@
       "lon": 127.6625749245,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/66/3520566_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 17465
+      "mentions": 17502
     },
     {
       "source": "tourapi",
@@ -6302,7 +5118,7 @@
       "lon": 128.4014504193,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/90/4092590_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 217
+      "mentions": 218
     },
     {
       "source": "tourapi",
@@ -6317,7 +5133,7 @@
       "lon": 127.4722198763,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/80/4083180_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 7663
+      "mentions": 7674
     },
     {
       "source": "tourapi",
@@ -6332,7 +5148,7 @@
       "lon": 127.9358523482,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/01/4096401_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 357
+      "mentions": 360
     },
     {
       "source": "tourapi",
@@ -6347,7 +5163,7 @@
       "lon": 128.3715953535,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/28/3523028_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 12527
+      "mentions": 12542
     },
     {
       "source": "kopis",
@@ -6403,7 +5219,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297705_260805_104232.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297705",
       "genre": "대중음악",
-      "mentions": 86
+      "mentions": 88
     },
     {
       "source": "kopis",
@@ -6417,7 +5233,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297035_260727_143817.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297035",
       "genre": "대중음악",
-      "mentions": 2558
+      "mentions": 2560
     },
     {
       "source": "kopis",
@@ -6459,7 +5275,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296350_260720_131305.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296350",
       "genre": "대중음악",
-      "mentions": 6502
+      "mentions": 6599
     },
     {
       "source": "kopis",
@@ -6473,7 +5289,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295947_260713_152556.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295947",
       "genre": "복합",
-      "mentions": 4
+      "mentions": 5
     },
     {
       "source": "kopis",
@@ -6487,7 +5303,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295860_260713_111337.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295860",
       "genre": "뮤지컬",
-      "mentions": 16563022
+      "mentions": 16583909
     },
     {
       "source": "kopis",
@@ -6529,7 +5345,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290795_260507_112353.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290795",
       "genre": "뮤지컬",
-      "mentions": 129237
+      "mentions": 129289
     },
     {
       "source": "kopis",
@@ -6572,7 +5388,7 @@
       "lon": 126.7970564001,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/32/4094932_image2_1.png",
       "detailUrl": null,
-      "mentions": 2443
+      "mentions": 2446
     },
     {
       "source": "tourapi",
@@ -6587,7 +5403,7 @@
       "lon": 126.8777258264,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/72/4096372_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1463
+      "mentions": 1468
     },
     {
       "source": "tourapi",
@@ -6602,7 +5418,21 @@
       "lon": 126.9839038561,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/13/4092213_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 429
+      "mentions": 431
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298075",
+      "title": "리멤버 재즈 Vol.5: 나도윤 솔로 피아노 콘서트",
+      "startDate": "2026-09-05",
+      "endDate": "2026-09-05",
+      "location": "마이너스윙 스튜디오 (구. 글로리어겐 스튜디오)",
+      "area": "경기",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298075_260810_132311.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298075",
+      "genre": "대중음악",
+      "mentions": 5
     },
     {
       "source": "kopis",
@@ -6616,7 +5446,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297895_260807_100631.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297895",
       "genre": "대중음악",
-      "mentions": 446
+      "mentions": 448
     },
     {
       "source": "kopis",
@@ -6672,7 +5502,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297645_260804_130946.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297645",
       "genre": "대중음악",
-      "mentions": 15
+      "mentions": 16
     },
     {
       "source": "kopis",
@@ -6686,7 +5516,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297615_260804_112650.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297615",
       "genre": "대중음악",
-      "mentions": 10
+      "mentions": 11
     },
     {
       "source": "kopis",
@@ -6728,7 +5558,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297312_260730_141045.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297312",
       "genre": "복합",
-      "mentions": 7753
+      "mentions": 7762
     },
     {
       "source": "kopis",
@@ -6742,7 +5572,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297113_260728_111447.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297113",
       "genre": "대중음악",
-      "mentions": 24
+      "mentions": 25
     },
     {
       "source": "kopis",
@@ -6756,7 +5586,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297019_260727_140228.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297019",
       "genre": "대중음악",
-      "mentions": 1236
+      "mentions": 1276
     },
     {
       "source": "kopis",
@@ -6826,7 +5656,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296551_260721_141105.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296551",
       "genre": "대중음악",
-      "mentions": 550
+      "mentions": 551
     },
     {
       "source": "kopis",
@@ -6854,7 +5684,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295704_260709_111212.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295704",
       "genre": "뮤지컬",
-      "mentions": 121
+      "mentions": 123
     },
     {
       "source": "kopis",
@@ -6868,7 +5698,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295623_260708_135712.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295623",
       "genre": "대중음악",
-      "mentions": 283
+      "mentions": 284
     },
     {
       "source": "kopis",
@@ -6882,7 +5712,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295513_260707_132542.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295513",
       "genre": "뮤지컬",
-      "mentions": 7540
+      "mentions": 7528
     },
     {
       "source": "kopis",
@@ -6924,7 +5754,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294882_260629_163027.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294882",
       "genre": "대중음악",
-      "mentions": 70
+      "mentions": 71
     },
     {
       "source": "kopis",
@@ -6938,7 +5768,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294108_260619_112255.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294108",
       "genre": "대중음악",
-      "mentions": 159
+      "mentions": 165
     },
     {
       "source": "kopis",
@@ -6952,7 +5782,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292700_260601_152115.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292700",
       "genre": "대중음악",
-      "mentions": 499
+      "mentions": 503
     },
     {
       "source": "kopis",
@@ -6966,7 +5796,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292575_260529_183132.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292575",
       "genre": "대중음악",
-      "mentions": 3335
+      "mentions": 3363
     },
     {
       "source": "kopis",
@@ -6980,7 +5810,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291849_260520_133635.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291849",
       "genre": "뮤지컬",
-      "mentions": 3456
+      "mentions": 3473
     },
     {
       "source": "kopis",
@@ -6994,7 +5824,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290837_260507_140547.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290837",
       "genre": "대중음악",
-      "mentions": 8
+      "mentions": 7
     },
     {
       "source": "kopis",
@@ -7008,7 +5838,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288264_260330_133156.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288264",
       "genre": "대중음악",
-      "mentions": 166
+      "mentions": 167
     },
     {
       "source": "kopis",
@@ -7022,7 +5852,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF287381_260721_104952.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF287381",
       "genre": "대중음악",
-      "mentions": 3037
+      "mentions": 3086
     },
     {
       "source": "kopis",
@@ -7037,6 +5867,20 @@
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF286736",
       "genre": "대중음악",
       "mentions": 265
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298063",
+      "title": "Do Trio 정규 1집 발매 공연: Vessel in Motion",
+      "startDate": "2026-09-06",
+      "endDate": "2026-09-06",
+      "location": "CJ아지트 광흥창",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298063_260810_125450.png",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298063",
+      "genre": "대중음악",
+      "mentions": 1
     },
     {
       "source": "kopis",
@@ -7120,7 +5964,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296384_260720_142040.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296384",
       "genre": "대중음악",
-      "mentions": 38
+      "mentions": 36
     },
     {
       "source": "kopis",
@@ -7134,7 +5978,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295134_260702_134640.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295134",
       "genre": "대중음악",
-      "mentions": 264
+      "mentions": 269
     },
     {
       "source": "kopis",
@@ -7192,7 +6036,7 @@
       "lon": 127.68710635,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/88/4075188_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 578
+      "mentions": 591
     },
     {
       "source": "kopis",
@@ -7221,7 +6065,7 @@
       "lon": 126.9783328596,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/30/4093830_image2_1.png",
       "detailUrl": null,
-      "mentions": 178
+      "mentions": 182
     },
     {
       "source": "kopis",
@@ -7250,7 +6094,7 @@
       "lon": 127.5190644518,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/79/4095779_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 5336
+      "mentions": 5358
     },
     {
       "source": "tourapi",
@@ -7280,7 +6124,7 @@
       "lon": 126.8405217823,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/46/4001646_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 434
+      "mentions": 436
     },
     {
       "source": "kopis",
@@ -7308,7 +6152,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297233_260729_141823.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297233",
       "genre": "복합",
-      "mentions": 711
+      "mentions": 709
     },
     {
       "source": "kopis",
@@ -7337,7 +6181,7 @@
       "lon": 128.7245993248,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/38/4096738_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 8715
+      "mentions": 8731
     },
     {
       "source": "tourapi",
@@ -7352,7 +6196,7 @@
       "lon": 127.5982973737,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/28/4096528_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 193
+      "mentions": 194
     },
     {
       "source": "tourapi",
@@ -7367,7 +6211,7 @@
       "lon": 126.9836265705,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/69/4073769_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 61694
+      "mentions": 61771
     },
     {
       "source": "tourapi",
@@ -7382,7 +6226,7 @@
       "lon": 126.803726,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/40/3525340_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 563
+      "mentions": 571
     },
     {
       "source": "tourapi",
@@ -7397,7 +6241,7 @@
       "lon": 127.15958408130633,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/69/4060669_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 25957
+      "mentions": 26000
     },
     {
       "source": "tourapi",
@@ -7412,7 +6256,7 @@
       "lon": 126.7975393964,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/76/4091576_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 5511
+      "mentions": 5520
     },
     {
       "source": "tourapi",
@@ -7427,7 +6271,7 @@
       "lon": 127.7081166574,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/56/4095456_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1924
+      "mentions": 1945
     },
     {
       "source": "tourapi",
@@ -7457,7 +6301,7 @@
       "lon": 127.110963766859,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/36/4065636_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 304
+      "mentions": 313
     },
     {
       "source": "kopis",
@@ -7499,7 +6343,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297575_260803_171003.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297575",
       "genre": "대중음악",
-      "mentions": 258
+      "mentions": 261
     },
     {
       "source": "kopis",
@@ -7589,7 +6433,7 @@
       "source": "tourapi",
       "type": "festival",
       "id": "tour-3520743",
-      "title": "계촌 휴[休] 북&뮤직 페스티벌",
+      "title": "계촌 휴 페스티벌",
       "startDate": "2026-09-12",
       "endDate": "2026-09-13",
       "location": "강원특별자치도 평창군 방림면 계촌리",
@@ -7598,7 +6442,7 @@
       "lon": 128.302352,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/95/4091695_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 16
+      "mentions": 36
     },
     {
       "source": "tourapi",
@@ -7613,7 +6457,7 @@
       "lon": 129.1818960826,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/44/4093144_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1592
+      "mentions": 1597
     },
     {
       "source": "tourapi",
@@ -7628,7 +6472,21 @@
       "lon": 127.4202942759,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/83/4081183_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 2335
+      "mentions": 2337
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298058",
+      "title": "JEONG EUNJI SOLO CONCERT: SUMMER, I",
+      "startDate": "2026-09-12",
+      "endDate": "2026-09-13",
+      "location": "티켓링크 1975 씨어터(구.능동 어린이회관)",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298058_260810_124608.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298058",
+      "genre": "대중음악",
+      "mentions": 35
     },
     {
       "source": "kopis",
@@ -7642,7 +6500,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297923_260807_111906.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297923",
       "genre": "대중음악",
-      "mentions": 3780
+      "mentions": 3806
     },
     {
       "source": "kopis",
@@ -7656,7 +6514,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297716_260805_111221.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297716",
       "genre": "대중음악",
-      "mentions": 111
+      "mentions": 114
     },
     {
       "source": "kopis",
@@ -7712,7 +6570,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297201_260729_130708.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297201",
       "genre": "뮤지컬",
-      "mentions": 5154
+      "mentions": 5169
     },
     {
       "source": "kopis",
@@ -7726,7 +6584,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297014_260727_135152.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297014",
       "genre": "대중음악",
-      "mentions": 0
+      "mentions": 2
     },
     {
       "source": "kopis",
@@ -7768,7 +6626,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296678_260722_145959.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296678",
       "genre": "대중음악",
-      "mentions": 29
+      "mentions": 30
     },
     {
       "source": "kopis",
@@ -7782,7 +6640,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296501_260721_103352.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296501",
       "genre": "대중음악",
-      "mentions": 214
+      "mentions": 217
     },
     {
       "source": "kopis",
@@ -7796,7 +6654,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296441_260720_161134.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296441",
       "genre": "대중음악",
-      "mentions": 46087
+      "mentions": 46191
     },
     {
       "source": "kopis",
@@ -7824,7 +6682,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295809_260710_140025.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295809",
       "genre": "대중음악",
-      "mentions": 25
+      "mentions": 26
     },
     {
       "source": "kopis",
@@ -7838,7 +6696,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294720_260626_144208.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294720",
       "genre": "대중음악",
-      "mentions": 159
+      "mentions": 165
     },
     {
       "source": "kopis",
@@ -7866,7 +6724,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293902_260617_103518.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293902",
       "genre": "뮤지컬",
-      "mentions": 26467
+      "mentions": 26465
     },
     {
       "source": "kopis",
@@ -7908,7 +6766,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292557_260529_175206.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292557",
       "genre": "대중음악",
-      "mentions": 3335
+      "mentions": 3363
     },
     {
       "source": "kopis",
@@ -7936,7 +6794,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF289985_260423_113526.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF289985",
       "genre": "대중음악",
-      "mentions": 118
+      "mentions": 113
     },
     {
       "source": "kopis",
@@ -7964,7 +6822,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296928_260724_150128.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296928",
       "genre": "대중음악",
-      "mentions": 237
+      "mentions": 238
     },
     {
       "source": "kopis",
@@ -7978,7 +6836,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296920_260724_144151.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296920",
       "genre": "대중음악",
-      "mentions": 466
+      "mentions": 470
     },
     {
       "source": "kopis",
@@ -8006,7 +6864,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295031_260701_132105.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295031",
       "genre": "대중음악",
-      "mentions": 261
+      "mentions": 262
     },
     {
       "source": "kopis",
@@ -8020,7 +6878,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293209_260609_112907.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293209",
       "genre": "대중음악",
-      "mentions": 15
+      "mentions": 18
     },
     {
       "source": "tourapi",
@@ -8050,7 +6908,7 @@
       "lon": 127.0023742293,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/65/4081065_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 96
+      "mentions": 102
     },
     {
       "source": "tourapi",
@@ -8080,7 +6938,7 @@
       "lon": 128.725382184,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/35/4093235_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 481
+      "mentions": 483
     },
     {
       "source": "kopis",
@@ -8109,7 +6967,7 @@
       "lon": 127.9175083031,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/19/3539719_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 3568
+      "mentions": 3577
     },
     {
       "source": "tourapi",
@@ -8124,7 +6982,7 @@
       "lon": 126.7689082803,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/61/4081461_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 15367
+      "mentions": 15369
     },
     {
       "source": "tourapi",
@@ -8139,7 +6997,7 @@
       "lon": 126.989303818,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/81/4087181_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 14424
+      "mentions": 14446
     },
     {
       "source": "tourapi",
@@ -8154,7 +7012,7 @@
       "lon": 129.1185199725,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/82/4084482_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 44761
+      "mentions": 44788
     },
     {
       "source": "tourapi",
@@ -8169,7 +7027,7 @@
       "lon": 126.7421932715,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/75/3557475_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 14023
+      "mentions": 14036
     },
     {
       "source": "tourapi",
@@ -8184,7 +7042,7 @@
       "lon": 127.0696398632,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/89/4096389_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 185
+      "mentions": 192
     },
     {
       "source": "tourapi",
@@ -8199,7 +7057,7 @@
       "lon": 126.78124058551218,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/09/3528809_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 10828
+      "mentions": 10796
     },
     {
       "source": "tourapi",
@@ -8214,7 +7072,7 @@
       "lon": 126.961328128,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/88/4093188_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 7461
+      "mentions": 7463
     },
     {
       "source": "tourapi",
@@ -8229,7 +7087,7 @@
       "lon": 126.5506284863,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/32/4041232_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 7224
+      "mentions": 7230
     },
     {
       "source": "tourapi",
@@ -8259,7 +7117,7 @@
       "lon": 127.4162448689,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/75/4092075_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 5968
+      "mentions": 5969
     },
     {
       "source": "tourapi",
@@ -8274,7 +7132,7 @@
       "lon": 127.423725332612,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/71/4065571_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 503
+      "mentions": 505
     },
     {
       "source": "tourapi",
@@ -8289,7 +7147,7 @@
       "lon": 127.0095547691,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/58/4078758_image2_1.png",
       "detailUrl": null,
-      "mentions": 1005
+      "mentions": 1017
     },
     {
       "source": "kopis",
@@ -8317,7 +7175,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296563_260722_101226.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296563",
       "genre": "대중음악",
-      "mentions": 35
+      "mentions": 37
     },
     {
       "source": "kopis",
@@ -8345,7 +7203,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295753_260710_101123.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295753",
       "genre": "대중음악",
-      "mentions": 170
+      "mentions": 172
     },
     {
       "source": "kopis",
@@ -8374,7 +7232,7 @@
       "lon": 127.009673,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/46/4076246_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 20892
+      "mentions": 20925
     },
     {
       "source": "tourapi",
@@ -8404,7 +7262,7 @@
       "lon": 126.574553621,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/41/4087941_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1816
+      "mentions": 1822
     },
     {
       "source": "tourapi",
@@ -8419,7 +7277,36 @@
       "lon": 128.7573807,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/43/4091643_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 778
+      "mentions": 776
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-4096371",
+      "title": "트레저헌터 in 진안",
+      "startDate": "2026-09-19",
+      "endDate": "2026-09-19",
+      "location": "전북특별자치도 진안군 진안읍 외사양길 16-19",
+      "area": null,
+      "lat": 35.7769952225,
+      "lon": 127.4158812719,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/08/4096408_image2_1.jpeg",
+      "detailUrl": null,
+      "mentions": 45
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298059",
+      "title": "송도 트라이보울 재즈 페스티벌, 렉처 콘서트: 황덕호 &amp; 레이지 쿠마 코즈믹 코믹스 [인천]",
+      "startDate": "2026-09-19",
+      "endDate": "2026-09-19",
+      "location": "트라이보울",
+      "area": "인천",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298059_260810_124609.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298059",
+      "genre": "대중음악",
+      "mentions": 0
     },
     {
       "source": "kopis",
@@ -8447,7 +7334,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297961_260807_133548.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297961",
       "genre": "뮤지컬",
-      "mentions": 14799
+      "mentions": 14813
     },
     {
       "source": "kopis",
@@ -8461,7 +7348,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297931_260807_113401.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297931",
       "genre": "대중음악",
-      "mentions": 23701
+      "mentions": 23721
     },
     {
       "source": "kopis",
@@ -8489,7 +7376,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297819_260806_104143.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297819",
       "genre": "뮤지컬",
-      "mentions": 7540
+      "mentions": 7528
     },
     {
       "source": "kopis",
@@ -8503,7 +7390,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297756_260805_134108.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297756",
       "genre": "대중음악",
-      "mentions": 12
+      "mentions": 14
     },
     {
       "source": "kopis",
@@ -8545,7 +7432,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297276_260730_112559.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297276",
       "genre": "대중음악",
-      "mentions": 10
+      "mentions": 11
     },
     {
       "source": "kopis",
@@ -8559,7 +7446,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296736_260723_125319.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296736",
       "genre": "뮤지컬",
-      "mentions": 108878
+      "mentions": 108943
     },
     {
       "source": "kopis",
@@ -8615,7 +7502,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296499_260721_103228.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296499",
       "genre": "대중음악",
-      "mentions": 55281
+      "mentions": 55370
     },
     {
       "source": "kopis",
@@ -8657,7 +7544,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292536_260529_170932.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292536",
       "genre": "대중음악",
-      "mentions": 3335
+      "mentions": 3363
     },
     {
       "source": "kopis",
@@ -8676,6 +7563,20 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF298035",
+      "title": "송도 트라이보울 재즈 페스티벌, 김사월 밴드",
+      "startDate": "2026-09-20",
+      "endDate": "2026-09-20",
+      "location": "트라이보울",
+      "area": "인천",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298035_260810_111034.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298035",
+      "genre": "대중음악",
+      "mentions": 2
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF297950",
       "title": "송도 트라이보울 재즈 페스티벌, 라이징스타",
       "startDate": "2026-09-20",
@@ -8685,7 +7586,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297950_260807_131704.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297950",
       "genre": "대중음악",
-      "mentions": 34
+      "mentions": 35
     },
     {
       "source": "kopis",
@@ -8727,7 +7628,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294649_260625_150842.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294649",
       "genre": "대중음악",
-      "mentions": 514
+      "mentions": 513
     },
     {
       "source": "tourapi",
@@ -8742,7 +7643,7 @@
       "lon": 128.3915143393,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/32/4084832_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 10552
+      "mentions": 10550
     },
     {
       "source": "tourapi",
@@ -8757,7 +7658,7 @@
       "lon": 128.7307724581,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/06/4025906_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 14225
+      "mentions": 14240
     },
     {
       "source": "kopis",
@@ -8771,7 +7672,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295913_260713_141414.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295913",
       "genre": "뮤지컬",
-      "mentions": 16563022
+      "mentions": 16583909
     },
     {
       "source": "kopis",
@@ -8785,7 +7686,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295410_260706_143211.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295410",
       "genre": "대중음악",
-      "mentions": 21
+      "mentions": 22
     },
     {
       "source": "kopis",
@@ -8799,7 +7700,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294960_260630_134909.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294960",
       "genre": "대중음악",
-      "mentions": 49
+      "mentions": 48
     },
     {
       "source": "kopis",
@@ -8827,7 +7728,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294306_260622_140522.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294306",
       "genre": "대중음악",
-      "mentions": 381
+      "mentions": 383
     },
     {
       "source": "kopis",
@@ -8856,7 +7757,7 @@
       "lon": 127.3354600053,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/28/4080328_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 2836
+      "mentions": 2861
     },
     {
       "source": "kopis",
@@ -8927,7 +7828,7 @@
       "lon": 127.2371112,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/74/3514774_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 2871
+      "mentions": 2868
     },
     {
       "source": "tourapi",
@@ -8942,7 +7843,7 @@
       "lon": 126.8522718951,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/54/3516354_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 16881
+      "mentions": 16883
     },
     {
       "source": "tourapi",
@@ -8957,7 +7858,7 @@
       "lon": 128.6658996682,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/03/4085103_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 39713
+      "mentions": 39739
     },
     {
       "source": "tourapi",
@@ -8972,7 +7873,7 @@
       "lon": 127.235951,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/03/4091903_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 9219
+      "mentions": 9224
     },
     {
       "source": "tourapi",
@@ -8987,7 +7888,7 @@
       "lon": 127.11145203614497,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/35/4056635_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 13623
+      "mentions": 13626
     },
     {
       "source": "tourapi",
@@ -9002,7 +7903,7 @@
       "lon": 129.1276550014,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/73/4094773_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1968
+      "mentions": 1964
     },
     {
       "source": "kopis",
@@ -9016,7 +7917,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297995_260807_144442.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297995",
       "genre": "대중음악",
-      "mentions": 2539611
+      "mentions": 2541197
     },
     {
       "source": "kopis",
@@ -9030,7 +7931,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297901_260807_102525.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297901",
       "genre": "대중음악",
-      "mentions": 170
+      "mentions": 174
     },
     {
       "source": "tourapi",
@@ -9045,7 +7946,7 @@
       "lon": 126.711671,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/48/3561448_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 40762
+      "mentions": 40769
     },
     {
       "source": "tourapi",
@@ -9060,7 +7961,7 @@
       "lon": 127.5005221346,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/59/3524159_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 10080
+      "mentions": 10090
     },
     {
       "source": "tourapi",
@@ -9075,7 +7976,7 @@
       "lon": 128.9681914,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/06/4040606_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 17079
+      "mentions": 17092
     },
     {
       "source": "tourapi",
@@ -9090,7 +7991,7 @@
       "lon": 126.7229954336,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/77/4067377_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 5050
+      "mentions": 5051
     },
     {
       "source": "tourapi",
@@ -9105,7 +8006,7 @@
       "lon": 127.82935943935597,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/88/3523088_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 8973
+      "mentions": 8969
     },
     {
       "source": "tourapi",
@@ -9120,7 +8021,7 @@
       "lon": 126.7393126807,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/93/4074893_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 21717
+      "mentions": 21668
     },
     {
       "source": "tourapi",
@@ -9135,7 +8036,7 @@
       "lon": 127.3054103868,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/93/4091593_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 4236
+      "mentions": 4218
     },
     {
       "source": "tourapi",
@@ -9150,7 +8051,7 @@
       "lon": 128.504971,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/23/4092723_image2_1.png",
       "detailUrl": null,
-      "mentions": 28625
+      "mentions": 28702
     },
     {
       "source": "tourapi",
@@ -9165,7 +8066,7 @@
       "lon": 127.23120952485095,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/49/4062849_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 1955
+      "mentions": 1953
     },
     {
       "source": "tourapi",
@@ -9194,7 +8095,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF288814_260407_111321.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF288814",
       "genre": "대중음악",
-      "mentions": 2176
+      "mentions": 2174
     },
     {
       "source": "tourapi",
@@ -9224,7 +8125,7 @@
       "lon": 126.995063775,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/62/4054062_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 9666
+      "mentions": 9674
     },
     {
       "source": "tourapi",
@@ -9239,7 +8140,22 @@
       "lon": 128.0800831631,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/57/4082657_image2_1.png",
       "detailUrl": null,
-      "mentions": 48271
+      "mentions": 48283
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-293131",
+      "title": "춘천애니토이페스티벌",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-05",
+      "location": "강원특별자치도 춘천시 서면 박사로 854",
+      "area": null,
+      "lat": 37.8929758061,
+      "lon": 127.691820103,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/49/4097049_image2_1.jpg",
+      "detailUrl": null,
+      "mentions": 577
     },
     {
       "source": "kopis",
@@ -9253,7 +8169,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297672_260804_141755.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297672",
       "genre": "대중음악",
-      "mentions": 5519
+      "mentions": 5540
     },
     {
       "source": "kopis",
@@ -9295,7 +8211,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297045_260727_145817.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297045",
       "genre": "대중음악",
-      "mentions": 25
+      "mentions": 26
     },
     {
       "source": "kopis",
@@ -9309,7 +8225,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296267_260716_141450.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296267",
       "genre": "대중음악",
-      "mentions": 92
+      "mentions": 90
     },
     {
       "source": "kopis",
@@ -9323,7 +8239,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295883_260713_130506.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295883",
       "genre": "뮤지컬",
-      "mentions": 1794346
+      "mentions": 1797137
     },
     {
       "source": "kopis",
@@ -9337,7 +8253,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294142_260619_134608.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294142",
       "genre": "뮤지컬",
-      "mentions": 364
+      "mentions": 362
     },
     {
       "source": "kopis",
@@ -9351,7 +8267,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292945_260605_101827.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292945",
       "genre": "대중음악",
-      "mentions": 47
+      "mentions": 51
     },
     {
       "source": "kopis",
@@ -9380,7 +8296,7 @@
       "lon": 127.0143944638,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/90/4060890_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 159665
+      "mentions": 159721
     },
     {
       "source": "tourapi",
@@ -9395,7 +8311,7 @@
       "lon": 126.9767218661,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/59/4078459_image2_1.png",
       "detailUrl": null,
-      "mentions": 3711
+      "mentions": 3712
     },
     {
       "source": "kopis",
@@ -9423,7 +8339,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297040_260727_145107.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297040",
       "genre": "대중음악",
-      "mentions": 99
+      "mentions": 100
     },
     {
       "source": "kopis",
@@ -9437,7 +8353,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296475_260720_174200.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296475",
       "genre": "대중음악",
-      "mentions": 159
+      "mentions": 165
     },
     {
       "source": "kopis",
@@ -9451,7 +8367,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296437_260720_160514.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296437",
       "genre": "대중음악",
-      "mentions": 30
+      "mentions": 31
     },
     {
       "source": "kopis",
@@ -9479,7 +8395,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293346_260610_165851.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293346",
       "genre": "대중음악",
-      "mentions": 42
+      "mentions": 44
     },
     {
       "source": "tourapi",
@@ -9494,7 +8410,7 @@
       "lon": 126.91587,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/71/3584471_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 7104
+      "mentions": 7103
     },
     {
       "source": "tourapi",
@@ -9509,7 +8425,7 @@
       "lon": 126.9198016528,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/63/4076763_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1514
+      "mentions": 1513
     },
     {
       "source": "tourapi",
@@ -9524,7 +8440,7 @@
       "lon": 127.7218508587,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/67/4053967_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 10138
+      "mentions": 10136
     },
     {
       "source": "tourapi",
@@ -9539,7 +8455,7 @@
       "lon": 127.992519,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/42/4064642_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 18817
+      "mentions": 18825
     },
     {
       "source": "kopis",
@@ -9567,7 +8483,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291729_260519_110652.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291729",
       "genre": "대중음악",
-      "mentions": 754
+      "mentions": 758
     },
     {
       "source": "tourapi",
@@ -9582,7 +8498,7 @@
       "lon": 127.30177597177955,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/54/3377054_image2_1.png",
       "detailUrl": null,
-      "mentions": 8632
+      "mentions": 8578
     },
     {
       "source": "tourapi",
@@ -9597,7 +8513,7 @@
       "lon": 127.0193690153,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/56/4071256_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 11434
+      "mentions": 11428
     },
     {
       "source": "kopis",
@@ -9626,7 +8542,7 @@
       "lon": 126.55038368933553,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/47/3550747_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 14360
+      "mentions": 14338
     },
     {
       "source": "tourapi",
@@ -9641,7 +8557,7 @@
       "lon": 127.27018405937929,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/16/3553216_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 22239
+      "mentions": 22205
     },
     {
       "source": "tourapi",
@@ -9656,7 +8572,7 @@
       "lon": 126.7402812374,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/77/4089877_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 3151
+      "mentions": 3146
     },
     {
       "source": "tourapi",
@@ -9671,7 +8587,7 @@
       "lon": 129.210644,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/83/4063783_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 482671
+      "mentions": 483248
     },
     {
       "source": "tourapi",
@@ -9686,7 +8602,7 @@
       "lon": 127.1378517748,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/03/4081503_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 928
+      "mentions": 926
     },
     {
       "source": "tourapi",
@@ -9701,7 +8617,7 @@
       "lon": 126.6213512914,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/61/4092561_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 800
+      "mentions": 801
     },
     {
       "source": "tourapi",
@@ -9731,7 +8647,7 @@
       "lon": 126.7447928585,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/98/4087098_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 482
+      "mentions": 497
     },
     {
       "source": "kopis",
@@ -9759,7 +8675,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297875_260806_135017.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297875",
       "genre": "대중음악",
-      "mentions": 108
+      "mentions": 120
     },
     {
       "source": "kopis",
@@ -9773,7 +8689,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297726_260805_114049.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297726",
       "genre": "대중음악",
-      "mentions": 286948
+      "mentions": 287299
     },
     {
       "source": "kopis",
@@ -9801,7 +8717,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296133_260715_123433.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296133",
       "genre": "대중음악",
-      "mentions": 3695
+      "mentions": 3706
     },
     {
       "source": "kopis",
@@ -9815,7 +8731,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF292543_260529_172146.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF292543",
       "genre": "대중음악",
-      "mentions": 4018
+      "mentions": 4024
     },
     {
       "source": "kopis",
@@ -9829,7 +8745,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297742_260805_131243.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297742",
       "genre": "뮤지컬",
-      "mentions": 16563022
+      "mentions": 16583909
     },
     {
       "source": "kopis",
@@ -9871,7 +8787,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297210_260729_132622.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297210",
       "genre": "복합",
-      "mentions": 105
+      "mentions": 104
     },
     {
       "source": "kopis",
@@ -9885,7 +8801,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296930_260724_151559.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296930",
       "genre": "뮤지컬",
-      "mentions": 37
+      "mentions": 38
     },
     {
       "source": "kopis",
@@ -9899,7 +8815,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296169_260715_142357.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296169",
       "genre": "뮤지컬",
-      "mentions": 121
+      "mentions": 123
     },
     {
       "source": "kopis",
@@ -9913,7 +8829,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295803_260710_134714.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295803",
       "genre": "대중음악",
-      "mentions": 159
+      "mentions": 165
     },
     {
       "source": "kopis",
@@ -9927,7 +8843,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296688_260722_152145.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296688",
       "genre": "대중음악",
-      "mentions": 381
+      "mentions": 383
     },
     {
       "source": "kopis",
@@ -9941,7 +8857,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295821_260710_144242.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295821",
       "genre": "대중음악",
-      "mentions": 66
+      "mentions": 67
     },
     {
       "source": "kopis",
@@ -9955,7 +8871,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295812_260710_140722.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295812",
       "genre": "대중음악",
-      "mentions": 1133
+      "mentions": 1136
     },
     {
       "source": "kopis",
@@ -9969,7 +8885,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF290262_260428_110042.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF290262",
       "genre": "대중음악",
-      "mentions": 63
+      "mentions": 64
     },
     {
       "source": "tourapi",
@@ -9984,7 +8900,7 @@
       "lon": 127.7219052,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/73/4095373_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 13285
+      "mentions": 13297
     },
     {
       "source": "tourapi",
@@ -9999,7 +8915,7 @@
       "lon": 126.70350182663505,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/30/3519730_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 7417
+      "mentions": 7416
     },
     {
       "source": "tourapi",
@@ -10014,7 +8930,7 @@
       "lon": 127.11232141891857,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/59/3535559_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 7395
+      "mentions": 7386
     },
     {
       "source": "tourapi",
@@ -10029,7 +8945,7 @@
       "lon": 127.786513691,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/72/4058672_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 6876
+      "mentions": 6886
     },
     {
       "source": "tourapi",
@@ -10044,7 +8960,7 @@
       "lon": 129.3808069186,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/98/3572398_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 27627
+      "mentions": 27598
     },
     {
       "source": "tourapi",
@@ -10059,7 +8975,7 @@
       "lon": 128.401094,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/66/4080666_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 3429
+      "mentions": 3438
     },
     {
       "source": "kopis",
@@ -10088,7 +9004,7 @@
       "lon": 127.13060065465167,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/77/3541977_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 9506
+      "mentions": 9477
     },
     {
       "source": "tourapi",
@@ -10103,7 +9019,7 @@
       "lon": 126.9587204342,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/31/4073831_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 3971
+      "mentions": 3973
     },
     {
       "source": "tourapi",
@@ -10118,7 +9034,7 @@
       "lon": 129.0570297348,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/56/4090456_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 5081
+      "mentions": 5090
     },
     {
       "source": "tourapi",
@@ -10133,7 +9049,7 @@
       "lon": 128.8772389826,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/17/4073617_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1117
+      "mentions": 1122
     },
     {
       "source": "tourapi",
@@ -10148,7 +9064,7 @@
       "lon": 129.09053553882106,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/43/3366443_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 6034
+      "mentions": 6039
     },
     {
       "source": "tourapi",
@@ -10163,7 +9079,7 @@
       "lon": 126.3936724331,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/90/3498990_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 9424
+      "mentions": 9416
     },
     {
       "source": "tourapi",
@@ -10178,7 +9094,7 @@
       "lon": 127.7234716104,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/59/4096359_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 11939
+      "mentions": 11945
     },
     {
       "source": "tourapi",
@@ -10193,7 +9109,7 @@
       "lon": 127.60067592555232,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/82/4064382_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 2483
+      "mentions": 2486
     },
     {
       "source": "tourapi",
@@ -10223,7 +9139,7 @@
       "lon": 126.961489283,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/11/4096811_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 1141
+      "mentions": 1142
     },
     {
       "source": "kopis",
@@ -10237,7 +9153,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297704_260805_104230.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297704",
       "genre": "뮤지컬",
-      "mentions": 16563022
+      "mentions": 16583909
     },
     {
       "source": "kopis",
@@ -10266,7 +9182,7 @@
       "lon": 128.349461,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/50/4063650_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 5069
+      "mentions": 5087
     },
     {
       "source": "tourapi",
@@ -10281,7 +9197,7 @@
       "lon": 126.6730682816,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/27/4096227_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 469
+      "mentions": 470
     },
     {
       "source": "kopis",
@@ -10295,7 +9211,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297855_260806_130841.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297855",
       "genre": "대중음악",
-      "mentions": 283
+      "mentions": 284
     },
     {
       "source": "kopis",
@@ -10323,7 +9239,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297337_260730_153242.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297337",
       "genre": "대중음악",
-      "mentions": 5851
+      "mentions": 5848
     },
     {
       "source": "kopis",
@@ -10337,7 +9253,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296665_260722_143755.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296665",
       "genre": "대중음악",
-      "mentions": 1019
+      "mentions": 1021
     },
     {
       "source": "kopis",
@@ -10365,7 +9281,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295969_260713_160344.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295969",
       "genre": "대중음악",
-      "mentions": 159
+      "mentions": 165
     },
     {
       "source": "kopis",
@@ -10379,7 +9295,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295656_260708_151724.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295656",
       "genre": "대중음악",
-      "mentions": 15
+      "mentions": 16
     },
     {
       "source": "kopis",
@@ -10393,7 +9309,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295653_260708_151216.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295653",
       "genre": "대중음악",
-      "mentions": 21
+      "mentions": 22
     },
     {
       "source": "kopis",
@@ -10407,7 +9323,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295650_260708_150722.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295650",
       "genre": "대중음악",
-      "mentions": 15
+      "mentions": 16
     },
     {
       "source": "kopis",
@@ -10449,7 +9365,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295320_260703_144614.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295320",
       "genre": "뮤지컬",
-      "mentions": 74
+      "mentions": 70
     },
     {
       "source": "kopis",
@@ -10519,7 +9435,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295661_260708_152555.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295661",
       "genre": "대중음악",
-      "mentions": 15
+      "mentions": 16
     },
     {
       "source": "kopis",
@@ -10533,7 +9449,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295657_260708_152132.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295657",
       "genre": "대중음악",
-      "mentions": 22
+      "mentions": 23
     },
     {
       "source": "kopis",
@@ -10562,7 +9478,7 @@
       "lon": 128.9473094259,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/24/3546224_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 61490
+      "mentions": 61471
     },
     {
       "source": "kopis",
@@ -10591,7 +9507,7 @@
       "lon": 128.0699132182,
       "thumbnail": "http://tong.visitkorea.or.kr/cms/resource/49/3566649_image2_1.png",
       "detailUrl": null,
-      "mentions": 11568
+      "mentions": 11561
     },
     {
       "source": "tourapi",
@@ -10606,7 +9522,7 @@
       "lon": 126.8496518916,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/59/4095359_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 3653
+      "mentions": 3652
     },
     {
       "source": "tourapi",
@@ -10621,7 +9537,7 @@
       "lon": 127.94555,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/93/4095093_image2_1.png",
       "detailUrl": null,
-      "mentions": 1918
+      "mentions": 1913
     },
     {
       "source": "tourapi",
@@ -10636,7 +9552,7 @@
       "lon": 126.8530264839,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/32/3545732_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 37449
+      "mentions": 37489
     },
     {
       "source": "tourapi",
@@ -10651,7 +9567,7 @@
       "lon": 127.99484429506171,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/27/3544627_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 9507
+      "mentions": 9512
     },
     {
       "source": "tourapi",
@@ -10666,7 +9582,7 @@
       "lon": 126.560563,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/11/4039211_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 5404
+      "mentions": 5402
     },
     {
       "source": "tourapi",
@@ -10681,7 +9597,22 @@
       "lon": 127.655753,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/63/3546463_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 5111
+      "mentions": 5107
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-2872078",
+      "title": "인천 영화 주간 2026",
+      "startDate": "2026-10-23",
+      "endDate": "2026-10-25",
+      "location": "인천광역시 연수구 청능대로 210 (동춘동)",
+      "area": null,
+      "lat": 37.4059981779,
+      "lon": 126.6836220553,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/38/4096938_image2_1.jpg",
+      "detailUrl": null,
+      "mentions": 5134
     },
     {
       "source": "kopis",
@@ -10695,7 +9626,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297990_260807_143219.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297990",
       "genre": "대중음악",
-      "mentions": 1
+      "mentions": 2
     },
     {
       "source": "kopis",
@@ -10793,7 +9724,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF293095_260608_143024.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF293095",
       "genre": "대중음악",
-      "mentions": 71
+      "mentions": 74
     },
     {
       "source": "kopis",
@@ -10807,7 +9738,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291856_260520_134611.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291856",
       "genre": "뮤지컬",
-      "mentions": 3456
+      "mentions": 3473
     },
     {
       "source": "kopis",
@@ -10821,7 +9752,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF291041_260511_115116.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF291041",
       "genre": "대중음악",
-      "mentions": 63
+      "mentions": 64
     },
     {
       "source": "kopis",
@@ -10849,7 +9780,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296524_260721_112323.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296524",
       "genre": "대중음악",
-      "mentions": 645
+      "mentions": 647
     },
     {
       "source": "kopis",
@@ -10892,7 +9823,7 @@
       "lon": 129.321469,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/74/4078274_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 2502
+      "mentions": 2498
     },
     {
       "source": "tourapi",
@@ -10907,7 +9838,21 @@
       "lon": 126.8019627,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/09/4096209_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 19081
+      "mentions": 19108
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298096",
+      "title": "칸호 야쿠시지 첫 내한공연, 10주년 월드투어: Circle of Harmony",
+      "startDate": "2026-10-30",
+      "endDate": "2026-10-30",
+      "location": "예스24 원더로크홀",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298096_260810_141117.gif",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298096",
+      "genre": "대중음악",
+      "mentions": 0
     },
     {
       "source": "kopis",
@@ -10921,7 +9866,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297245_260730_095519.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297245",
       "genre": "대중음악",
-      "mentions": 1632
+      "mentions": 1644
     },
     {
       "source": "kopis",
@@ -10950,7 +9895,7 @@
       "lon": 126.83276387204035,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/73/4066273_image2_1.JPG",
       "detailUrl": null,
-      "mentions": 280
+      "mentions": 282
     },
     {
       "source": "kopis",
@@ -10964,7 +9909,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296774_260723_142621.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296774",
       "genre": "대중음악",
-      "mentions": 159
+      "mentions": 165
     },
     {
       "source": "kopis",
@@ -10978,7 +9923,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF294155_260619_141433.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF294155",
       "genre": "대중음악",
-      "mentions": 381
+      "mentions": 383
     },
     {
       "source": "kopis",
@@ -11007,7 +9952,7 @@
       "lon": 129.055726,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/98/3533798_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 12967
+      "mentions": 12982
     },
     {
       "source": "kopis",
@@ -11026,6 +9971,21 @@
     {
       "source": "tourapi",
       "type": "festival",
+      "id": "tour-1074568",
+      "title": "2026 제주올레걷기축제",
+      "startDate": "2026-11-05",
+      "endDate": "2026-11-07",
+      "location": "제주특별자치도 제주시 조천읍 조천리 1141",
+      "area": null,
+      "lat": 33.5405232248,
+      "lon": 126.6421943052,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/20/4096920_image2_1.jpg",
+      "detailUrl": null,
+      "mentions": 1242
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
       "id": "tour-3028462",
       "title": "구미라면 축제",
       "startDate": "2026-11-06",
@@ -11036,7 +9996,7 @@
       "lon": 128.331422,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/40/3497640_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 12487
+      "mentions": 12504
     },
     {
       "source": "tourapi",
@@ -11051,7 +10011,7 @@
       "lon": 129.1354937071,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/80/4093280_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 988
+      "mentions": 996
     },
     {
       "source": "kopis",
@@ -11065,7 +10025,7 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296280_260716_144855.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296280",
       "genre": "뮤지컬",
-      "mentions": 429802
+      "mentions": 429855
     },
     {
       "source": "kopis",
@@ -11108,7 +10068,7 @@
       "lon": 126.7921939309,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/86/4095386_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 2821
+      "mentions": 2819
     },
     {
       "source": "kopis",
@@ -11164,7 +10124,21 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF281962_251222_125508.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF281962",
       "genre": "대중음악",
-      "mentions": 473
+      "mentions": 474
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF285341",
+      "title": "렉처 콘서트 Ⅳ. 미국 음악의 탄생 [공주]",
+      "startDate": "2026-11-10",
+      "endDate": "2026-11-10",
+      "location": "공주문예회관",
+      "area": "충청남",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285341_260219_141836.gif",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF285341",
+      "genre": "대중음악",
+      "mentions": 19
     },
     {
       "source": "tourapi",
@@ -11179,7 +10153,7 @@
       "lon": 129.377594275323,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/88/3484788_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 16107
+      "mentions": 16116
     },
     {
       "source": "tourapi",
@@ -11194,7 +10168,7 @@
       "lon": 129.1360182683,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/64/4095564_image2_1.png",
       "detailUrl": null,
-      "mentions": 1669
+      "mentions": 1719
     },
     {
       "source": "tourapi",
@@ -11209,7 +10183,7 @@
       "lon": 127.7098811689,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/46/4071246_image2_1.jpg",
       "detailUrl": null,
-      "mentions": 11003
+      "mentions": 10999
     }
   ]
 }
