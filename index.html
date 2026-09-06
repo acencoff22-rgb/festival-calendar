@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>전국 축제·공연 알리미</title>
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
+/>
+
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"></script>
+
+<style>
+  :root {
+    --paper: #f6f1e7;
+    --paper-deep: #ece3d0;
+    --ink: #2b2620;
+    --ink-soft: #6b6255;
+    --lantern: #c1432f;
+    --lantern-soft: #e8c9b8;
+    --indigo: #2b3a55;
+    --line: #d9cdb4;
+  }
+
+  [data-theme="dark"] {
+    --paper: #17140f;
+    --paper-deep: #221e17;
+    --ink: #efe9dd;
+    --ink-soft: #a89e8c;
+    --lantern: #e2694f;
+    --lantern-soft: #4a2c22;
+    --indigo: #3d5175;
+    --line: #3a352b;
+  }
+
+  [data-theme="contrast"] {
+    --paper: #ffffff;
+    --paper-deep: #ffffff;
+    --ink: #000000;
+    --ink-soft: #000000;
+    --lantern: #b30000;
+    --lantern-soft: #ffe0e0;
+    --indigo: #00247d;
+    --line: #000000;
+  }
+
+  [data-theme="contrast"] body {
+    font-weight: 600;
+  }
+
+  [data-theme="contrast"] .card,
+  [data-theme="contrast"] .favorite-item,
+  [data-theme="contrast"] .modal-sheet,
+  [data-theme="contrast"] .controls input,
+  [data-theme="contrast"] .controls select,
+  [data-theme="contrast"] .area-filter-btn,
+  [data-theme="contrast"] .area-quick-btn,
+  [data-theme="contrast"] .yt-btn,
+  [data-theme="contrast"] .copy-btn,
+
+
+  [data-theme="contrast"] .share-btn {
+    color: #000000;
+    border-width: 2px;
+  }
+
+  [data-theme="contrast"] header {
+    background: #000000;
+  }
+
+  [data-theme="dark"] .card,
+  [data-theme="dark"] .favorite-item,
+  [data-theme="dark"] .modal-sheet,
+  [data-theme="dark"] .controls input,
+  [data-theme="dark"] .controls select,
+  [data-theme="dark"] .area-filter-btn,
+  [data-theme="dark"] .area-quick-btn,
+  [data-theme="dark"] .yt-btn,
+  [data-theme="dark"] .copy-btn,
+  [data-theme="dark"] .unhide-btn,
+  [data-theme="dark"] .weather-link-btn,
+  [data-theme="dark"] .weekend-chip,
+  [data-theme="dark"] .area-checkbox-item,
+  [data-theme="dark"] .no-img {
+    background: var(--paper-deep);
+  }
+
+  [data-theme="dark"] .share-btn {
+    color: #2b1a0f;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    padding: 28px 20px 22px;
+    background: var(--indigo);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      var(--lantern) 0%,
+      transparent 70%
+    );
+    opacity: 0.5;
+  }
+
+  header h1 {
+    margin: 0 0 4px;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  header p {
+    margin: 0;
+    font-size: 13px;
+    color: #c8cfe0;
+  }
+
+  .theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .contrast-toggle {
+    position: absolute;
+    top: 20px;
+    right: 64px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .contrast-toggle.active {
+    background: #ffd400;
+    border-color: #ffd400;
+  }
+
+  .favorites-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  #updatedAt {
+    font-size: 12px;
+    color: #9aa4c0;
+    margin-top: 10px;
+  }
+
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 16px 16px 60px;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 14px;
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    padding: 10px 0;
+    z-index: 5;
+  }
+
+  .controls input,
+  .controls select {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--ink);
+  }
+
+  .controls input {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .controls select {
+    flex: 1 1 auto;
+  }
+
+  .view-toggle {
+    display: flex;
+    gap: 4px;
+    background: var(--paper-deep);
+    border-radius: 10px;
+    padding: 3px;
+    margin-bottom: 16px;
+  }
+
+  .view-toggle button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 8px 0;
+    border-radius: 8px;
+    color: var(--ink-soft);
+  }
+
+  .view-toggle button.active {
+    background: var(--indigo);
+    color: white;
+  }
+
+  .compact-toggle-btn {
+    flex: 0 0 auto !important;
+    width: 38px;
+    padding: 8px 0 !important;
+  }
+
+  body.compact-view .card {
+    padding: 8px 10px;
+  }
+
+  body.compact-view .card img,
+  body.compact-view .no-img {
+    display: none;
+  }
+
+  body.compact-view .card-link {
+    align-items: center;
+  }
+
+  body.compact-view .card-body {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  body.compact-view .card-title {
+    font-size: 13px;
+    max-width: 55%;
+    flex: 0 1 auto;
+  }
+
+  body.compact-view .card-meta {
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  body.compact-view .share-btn,
+  body.compact-view .yt-btn,
+  body.compact-view .copy-btn,
+
+  body.compact-view .card-side {
+    gap: 4px;
+  }
+
+  .month-group {
+    margin-bottom: 28px;
+  }
+
+  .month-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 10px 2px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 6px;
+  }
+
+  .card {
+    display: flex;
+    gap: 12px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 10px;
+    align-items: center;
+    position: relative;
+    touch-action: pan-y;
+  }
+
+  .card.swiping {
+    transition: none;
+  }
+
+  .hide-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    font-size: 12px;
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  .copy-btn {
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--ink-soft);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 8px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  .card img {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: var(--paper-deep);
+    flex-shrink: 0;
+  }
+
+  .card .no-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    background: var(--paper-deep);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .card-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-title mark,
+  .card-meta mark {
+    background: var(--lantern-soft);
+    color: var(--lantern);
+    border-radius: 3px;
+    padding: 0 1px;
+  }
+
+  .card-meta {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .dday {
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: var(--paper-deep);
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .dday.soon {
+    background: var(--lantern);
+    color: white;
+  }
+
+  .dday.today {
+    background: var(--ink);
+    color: white;
+  }
+
+  .hot-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--lantern);
+    margin-right: 4px;
+  }
+
+  .weekend-chips {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .weekend-chip {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 14px;
+    white-space: nowrap;
+  }
+
+  .weekend-chip.active {
+    color: var(--lantern);
+    border-color: var(--lantern);
+    background: var(--lantern-soft);
+  }
+
+  .status-banner {
+    background: #fff4e5;
+    border: 1px solid #f0c987;
+    color: #7a4a00;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin: 14px 0 0;
+  }
+
+
+
+  .top-btn {
+    position: fixed;
+    right: 18px;
+    bottom: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--indigo);
+    color: white;
+    font-size: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+  }
+
+  .favorites-hint {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+    line-height: 1.5;
+  }
+
+  .favorite-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    touch-action: pan-y;
+  }
+
+  .favorite-item.dragging {
+    opacity: 0.5;
+  }
+
+  .favorite-item img,
+  .favorite-item .no-img-mini {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--paper-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .favorite-item-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .favorite-item-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .favorite-item-meta {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+  }
+
+  .favorite-item-reminder {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .favorite-reminder-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .favorite-reminder-date {
+    width: 132px;
+    min-height: 30px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 4px 6px;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 11px;
+  }
+
+  .favorite-reminder {
+    width: 100%;
+    text-align: right;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+  }
+
+  .reminder-banner {
+    margin: 10px auto;
+    max-width: 1200px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--paper-deep);
+    color: var(--ink);
+  }
+
+  .reminder-banner-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.5;
+  }
+
+  .reminder-banner-item + .reminder-banner-item {
+    margin-top: 4px;
+  }
+
+  .reminder-banner.hidden {
+    display: none;
+  }
+
+  .favorite-remove-btn {
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    font-size: 14px;
+    padding: 4px;
+  }
+
+  .favorite-drag-handle {
+    flex-shrink: 0;
+    font-size: 18px;
+    color: var(--ink-soft);
+    padding: 4px 6px;
+    cursor: grab;
+    touch-action: none;
+  }
+
+  .poster-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 8, 5, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    touch-action: none;
+    overflow: hidden;
+  }
+
+  .poster-modal img {
+    max-width: 92vw;
+    max-height: 82vh;
+    border-radius: 8px;
+    touch-action: none;
+    transform-origin: center center;
+    will-change: transform;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .poster-modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-size: 16px;
+    z-index: 61;
+  }
+
+  .poster-modal-hint {
+    position: absolute;
+    top: 22px;
+    left: 18px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .empty,
+  .loading {
+    text-align: center;
+    color: var(--ink-soft);
+    padding: 60px 20px;
+    font-size: 14px;
+  }
+
+  .load-more-sentinel {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 12px;
+    padding: 14px 0;
+  }
+
+  a.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .card-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .share-btn {
+    border: 1px solid var(--line);
+    background: #fee500;
+    color: #391b1b;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 8px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  .yt-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    background: white;
+    color: #c4302b;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 8px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 16, 10, 0.45);
+    display: flex;
+    align-items: flex-end;
+    z-index: 50;
+  }
+
+  .modal-sheet {
+    background: var(--paper);
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 18px 18px 0 0;
+    padding: 16px 16px 28px;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .modal-title {
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .modal-close {
+    border: none;
+    background: var(--paper-deep);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  .hidden-manage-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    padding: 0 2px 12px;
+  }
+
+  .hidden-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13.5px;
+  }
+
+  .unhide-btn {
+    flex-shrink: 0;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--indigo);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  .area-filter-btn {
+    flex: 1 1 100%;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 32px 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--ink);
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .area-filter-btn::after {
+    content: "▾";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-soft);
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  .weather-link-btn {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--indigo);
+    white-space: nowrap;
+  }
+
+  .area-quick-btn {
+    flex: 1;
+    border: 1px solid var(--line);
+    background: white;
+    border-radius: 8px;
+    padding: 8px 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+
+  .area-checkbox-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .area-checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    padding: 8px 6px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: white;
+  }
+
+  .area-checkbox-item input {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+
+  .area-apply-btn {
+    width: 100%;
+    background: var(--indigo);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .urgent-section-title {
+    font-size: 14px;
+    font-weight: 800;
+    margin: 20px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--line);
+  }
+
+  .urgent-section-title.hot {
+    color: var(--lantern);
+    border-bottom-color: var(--lantern);
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+
+  .filter-summary {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin:10px 0 12px;
+    padding:9px 12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper-soft);
+    color:var(--ink-soft);
+    font-size:12px;
+  }
+
+  .filter-reset-btn {
+    flex:0 0 auto;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:transparent;
+    color:var(--ink);
+    padding:6px 9px;
+    font:inherit;
+    cursor:pointer;
+  }
+
+  .filter-reset-btn.hidden {
+    display:none;
+  }
+
+  .hidden-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .unhide-all-btn {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 7px 10px;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .date-quick-wrap {
+    margin: 12px 0 14px;
+  }
+
+  .date-quick-title {
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 7px;
+  }
+
+  .date-quick-bar {
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    padding-bottom: 3px;
+    scrollbar-width: thin;
+  }
+
+  .date-quick-btn {
+    flex: 0 0 auto;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .date-quick-btn.active {
+    border-color: var(--lantern);
+    background: var(--lantern);
+    color: #fff;
+  }
+
+  .custom-date-box {
+    display: flex;
+    align-items: end;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 9px;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+
+  .custom-date-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .custom-date-field input {
+    min-height: 38px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0 8px;
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+  }
+
+  .custom-date-action {
+    min-height: 38px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0 12px;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .custom-date-action.primary {
+    border-color: var(--lantern);
+    background: var(--lantern);
+    color: #fff;
+  }
+
+  @media (max-width: 600px) {
+    .card { gap: 8px; padding: 10px; align-items: flex-start; }
+    .card img, .card .no-img { width: 52px; height: 52px; }
+    .card-side { gap: 5px; max-width: 78px; }
+    .card-side > button, .card-side > a { max-width: 78px; overflow: hidden; text-overflow: ellipsis; }
+    .favorite-btn, .share-btn, .yt-btn, .copy-btn { min-height: 34px; padding: 6px 7px; }
+    .top-btn { right: 10px; bottom: 10px; }
+
+    .custom-date-box {
+      align-items: stretch;
+    }
+
+    .custom-date-field {
+      flex: 1 1 140px;
+    }
+
+    .custom-date-action {
+      flex: 1 1 auto;
+    }
+  }
+
+/* ======================================================
+   Mobile interaction hardening
+   ====================================================== */
+@media (max-width: 768px) {
+
+  input,
+  select,
+  button {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+}
+
+
+/* Favorite visual state */
+.favorite-btn.active,
+button.favorite-btn.active,
+.favorite-btn[aria-pressed="true"] {
+  background: rgba(255, 193, 7, 0.16);
+  border-color: rgba(255, 193, 7, 0.65);
+  color: #b77900;
+  font-weight: 700;
+}
+
+.favorite-btn.active:hover,
+button.favorite-btn.active:hover {
+  background: rgba(255, 193, 7, 0.24);
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <button
+    id="contrastToggle"
+    class="contrast-toggle"
+    aria-label="야외 고대비 모드"
+  >
+    ☀️
+  </button>
+
+  <button
+    id="themeToggle"
+    class="theme-toggle"
+    aria-label="다크 모드 전환"
+  >
+    🌙
+  </button>
+
+  <button
+    id="favoritesBtn"
+    class="favorites-btn"
+    aria-label="내 찜 목록"
+  >
+    📌
+  </button>
+
+  <h1>🏮 전국 축제·공연 알리미</h1>
+
+  <p>
+    이번엔 어디 가볼까? 전국의 축제와 공연을 찾아보세요.
+  </p>
+
+  <div id="updatedAt">
+    불러오는 중…
+  </div>
+</header>
+
+<main>
+  <div
+    id="statusBanner"
+    class="status-banner hidden"
+  ></div>
+
+  
+
+  <div class="controls">
+
+    <input
+      id="search"
+      type="text"
+      placeholder="축제·공연 이름, 지역, 장소 검색"
+      aria-label="축제·공연 검색"
+    />
+
+    <select
+      id="typeFilter"
+      aria-label="행사 유형"
+    >
+      <option value="">
+        전체 유형
+      </option>
+
+      <option value="festival">
+        지역축제
+      </option>
+
+      <option value="performance">
+        공연
+      </option>
+    </select>
+
+    <select
+      id="monthFilter"
+      aria-label="행사 기간"
+    >
+      <option value="">
+        전체 기간
+      </option>
+    </select>
+
+    <button
+      id="areaFilterBtn"
+      class="area-filter-btn"
+      type="button"
+      aria-label="지역 선택"
+    >
+      📍 전국 전체 지역
+    </button>
+
+    <a
+      id="weatherLinkBtn"
+      class="weather-link-btn hidden"
+      target="_blank"
+      rel="noopener"
+    >
+      ☂️ 주말 날씨
+    </a>
+
+  </div>
+
+  <section
+    class="date-quick-wrap"
+    aria-label="날짜 빠른 선택"
+  >
+    <div class="date-quick-title">
+      날짜
+    </div>
+
+    <div
+      id="dateQuickBar"
+      class="date-quick-bar"
+    >
+      <button
+        class="date-quick-btn active"
+        type="button"
+        data-mode="all"
+        aria-pressed="true"
+      >
+        전체
+      </button>
+
+      <button
+        class="date-quick-btn"
+        type="button"
+        data-mode="today"
+        aria-pressed="false"
+      >
+        오늘
+      </button>
+
+      <button
+        class="date-quick-btn"
+        type="button"
+        data-mode="tomorrow"
+        aria-pressed="false"
+      >
+        내일
+      </button>
+
+      <button
+        class="date-quick-btn"
+        type="button"
+        data-mode="this-week"
+        aria-pressed="false"
+      >
+        이번 주
+      </button>
+
+      <button
+        class="date-quick-btn"
+        type="button"
+        data-mode="weekend"
+        aria-pressed="false"
+      >
+        이번 주말
+      </button>
+
+      <button
+        class="date-quick-btn"
+        type="button"
+        data-mode="next-week"
+        aria-pressed="false"
+      >
+        다음 주
+      </button>
+
+      <button
+        class="date-quick-btn"
+        type="button"
+        data-mode="custom"
+        aria-pressed="false"
+      >
+        직접 선택
+      </button>
+    </div>
+
+    <div
+      id="customDateBox"
+      class="custom-date-box hidden"
+    >
+      <label class="custom-date-field">
+        시작일
+        <input
+          id="customDateStart"
+          type="date"
+        />
+      </label>
+
+      <label class="custom-date-field">
+        종료일
+        <input
+          id="customDateEnd"
+          type="date"
+        />
+      </label>
+
+      <button
+        id="customDateApply"
+        class="custom-date-action primary"
+        type="button"
+      >
+        적용
+      </button>
+
+      <button
+        id="customDateReset"
+        class="custom-date-action"
+        type="button"
+      >
+        초기화
+      </button>
+    </div>
+  </section>
+
+  <div
+    id="filterSummary"
+    class="filter-summary"
+    aria-live="polite"
+  >
+    <span id="filterSummaryText">전체 행사</span>
+    <button
+      id="filterResetBtn"
+      type="button"
+      class="filter-reset-btn hidden"
+    >
+      조건 초기화
+    </button>
+  </div>
+
+  <button
+    id="hiddenManageBtn"
+    class="hidden-manage-btn hidden"
+    type="button"
+  >
+    🙈 숨긴 항목
+    <span id="hiddenCount">0</span>개 관리
+  </button>
+
+  <div class="view-toggle">
+
+    <button
+      id="btnUrgentView"
+      class="active"
+      type="button"
+    >
+      🔥 다가오는 일정
+    </button>
+
+    <button
+      id="btnListView"
+      type="button"
+    >
+      📅 월별 목록
+    </button>
+
+    <button
+      id="compactToggle"
+      class="compact-toggle-btn"
+      type="button"
+      aria-label="한 줄 보기 전환"
+    >
+      ☰
+    </button>
+
+  </div>
+
+  <div id="urgentView"></div>
+
+  <div
+    id="list"
+    class="hidden"
+  >
+    <div class="loading">
+      축제 정보를 불러오는 중…
+    </div>
+  </div>
+
+</main>
+
+
+<!-- ================================================== -->
+<!-- 지역 선택 모달 -->
+<!-- ================================================== -->
+
+<div
+  id="areaModal"
+  class="modal-backdrop hidden"
+>
+  <div class="modal-sheet">
+
+    <div class="modal-header">
+
+      <div class="modal-title">
+        지역 선택 (여러 개 가능)
+      </div>
+
+      <button
+        class="modal-close"
+        id="areaModalClose"
+        type="button"
+        aria-label="지역 선택 닫기"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <div
+      style="display:flex;gap:8px;margin-bottom:14px"
+    >
+
+      <button
+        class="area-quick-btn"
+        id="areaSelectAll"
+        type="button"
+      >
+        전국 전체 선택
+      </button>
+
+      <button
+        class="area-quick-btn"
+        id="areaSelectNone"
+        type="button"
+      >
+        선택 초기화
+      </button>
+
+    </div>
+
+    <div
+      id="areaCheckboxList"
+      class="area-checkbox-list"
+    ></div>
+
+    <button
+      class="area-apply-btn"
+      id="areaApply"
+      type="button"
+    >
+      적용하기
+    </button>
+
+  </div>
+</div>
+
+
+<!-- ================================================== -->
+<!-- 숨긴 항목 관리 모달 -->
+<!-- ================================================== -->
+
+<div
+  id="hiddenModal"
+  class="modal-backdrop hidden"
+>
+  <div class="modal-sheet">
+
+    <div class="modal-header">
+
+      <div class="modal-title">
+        숨긴 항목 관리
+      </div>
+
+      <button
+        class="modal-close"
+        id="hiddenModalClose"
+        type="button"
+        aria-label="숨긴 항목 관리 닫기"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <div id="hiddenList"></div>
+
+  </div>
+</div>
+
+
+<!-- ================================================== -->
+<!-- 상단 이동 -->
+<!-- ================================================== -->
+
+<button
+  id="topBtn"
+  class="top-btn hidden"
+  type="button"
+  aria-label="맨 위로"
+>
+  ⬆️
+</button>
+
+
+
+
+
+<div id="reminderBanner" class="reminder-banner hidden" aria-live="polite"></div>
+
+
+<!-- ================================================== -->
+<!-- 찜 목록 -->
+<!-- ================================================== -->
+
+<div
+  id="favoritesModal"
+  class="modal-backdrop hidden"
+>
+  <div class="modal-sheet">
+
+    <div class="modal-header">
+
+      <div class="modal-title">
+        📌 내 찜 목록
+      </div>
+
+      <button
+        class="modal-close"
+        id="favoritesModalClose"
+        type="button"
+        aria-label="찜 목록 닫기"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <p class="favorites-hint">
+      카드를 오른쪽으로 밀면 여기에 모여요. ⏰ 알림 날짜도 설정할 수 있어요.
+      ⠿ 손잡이를 끌면 순서를 바꿀 수 있어요.
+    </p>
+
+    <div id="favoritesList"></div>
+
+  </div>
+</div>
+
+
+<!-- ================================================== -->
+<!-- 포스터 확대 -->
+<!-- ================================================== -->
+
+<div
+  id="posterModal"
+  class="poster-modal hidden"
+>
+
+  <button
+    id="posterModalClose"
+    class="poster-modal-close"
+    type="button"
+    aria-label="닫기"
+  >
+    ✕
+  </button>
+
+  <p class="poster-modal-hint">
+    두 손가락으로 벌려서 확대해보세요
+  </p>
+
+  <img
+    id="posterModalImg"
+    src=""
+    alt="포스터 확대"
+  />
+
+</div>
+
+
+<!-- ================================================== -->
+<!-- JavaScript -->
+<!-- 실행 순서 중요 -->
+<!-- ================================================== -->
+
+<script src="js/state.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/logic.js"></script>
+<script src="js/render.js"></script>
+<script src="js/actions.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
