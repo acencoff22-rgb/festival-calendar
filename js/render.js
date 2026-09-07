@@ -21,6 +21,7 @@
 // 중요
 // - logic.js와 날짜/정렬 함수를 중복 정의하지 않는다.
 // - render.js에서 localStorage에 직접 접근하지 않는다.
+// - 인기도/mentions/hotIds 기능은 사용하지 않는다.
 // ======================================================
 
 
@@ -36,37 +37,82 @@ function renderCurrentView() {
   }
 
   updateFilterSummary();
-
 }
 
 
 function updateFilterSummary() {
-  const textEl = document.getElementById("filterSummaryText");
-  const resetBtn = document.getElementById("filterResetBtn");
+  const textEl =
+    document.getElementById(
+      "filterSummaryText"
+    );
+
+  const resetBtn =
+    document.getElementById(
+      "filterResetBtn"
+    );
 
   if (!textEl || !resetBtn) {
     return;
   }
 
-  const search = document.getElementById("search")?.value.trim() || "";
-  const type = document.getElementById("typeFilter")?.value || "";
-  const month = document.getElementById("monthFilter")?.value || "";
+  const search =
+    document
+      .getElementById("search")
+      ?.value
+      .trim() || "";
+
+  const type =
+    document
+      .getElementById("typeFilter")
+      ?.value || "";
+
+  const month =
+    document
+      .getElementById("monthFilter")
+      ?.value || "";
 
   const parts = [];
 
-  if (search) parts.push(`검색: ${search}`);
-  if (selectedAreas.size) parts.push(`지역: ${getAreaLabel().replace(/^📍\s*/, "")}`);
-  if (type === "festival") parts.push("지역축제");
-  if (type === "performance") parts.push("공연");
-  if (dateFilterMode) parts.push(`날짜: ${getDateFilterLabel()}`);
-  else if (month) parts.push(`월: ${month}`);
+  if (search) {
+    parts.push(
+      `검색: ${search}`
+    );
+  }
 
-  const count = getFiltered().length;
-  textEl.textContent = parts.length
-    ? `${parts.join(" · ")} · ${count}건`
-    : `전체 행사 · ${count}건`;
+  if (selectedAreas.size) {
+    parts.push(
+      `지역: ${getAreaLabel().replace(/^📍\s*/, "")}`
+    );
+  }
 
-  resetBtn.classList.toggle("hidden", parts.length === 0);
+  if (type === "festival") {
+    parts.push("지역축제");
+  }
+
+  if (type === "performance") {
+    parts.push("공연");
+  }
+
+  if (dateFilterMode) {
+    parts.push(
+      `날짜: ${getDateFilterLabel()}`
+    );
+  } else if (month) {
+    parts.push(`월: ${month}`);
+  }
+
+  const count =
+    getFiltered().length;
+
+  textEl.textContent =
+    parts.length
+      ? `${parts.join(" · ")} · ${count}건`
+      : `전체 행사 · ${count}건`;
+
+  resetBtn.classList.toggle(
+    "hidden",
+    parts.length === 0
+  );
 }
 
 
@@ -76,7 +122,9 @@ function updateFilterSummary() {
 
 function renderUrgentView() {
   const container =
-    document.getElementById("urgentView");
+    document.getElementById(
+      "urgentView"
+    );
 
   if (!container) {
     return;
@@ -93,7 +141,9 @@ function renderUrgentView() {
   }
 
   const today =
-    startOfDay(new Date());
+    startOfDay(
+      new Date()
+    );
 
   const soonLimit =
     new Date(today);
@@ -125,10 +175,7 @@ function renderUrgentView() {
             festival
           );
 
-        if (
-          !start ||
-          !end
-        ) {
+        if (!start || !end) {
           return false;
         }
 
@@ -236,7 +283,9 @@ function renderUrgentView() {
         ${
           weekendFiltered.length
             ? weekendFiltered
-                .map(renderFestivalCard)
+                .map(
+                  renderFestivalCard
+                )
                 .join("")
             : `
               <div
@@ -265,20 +314,6 @@ function renderUrgentView() {
       upcoming
     );
 
-  const hot =
-    upcoming.filter(
-      (festival) =>
-        hotIds &&
-        hotIds.has(String(festival.id))
-    );
-
-  const normal =
-    upcoming.filter(
-      (festival) =>
-        !hotIds ||
-        !hotIds.has(String(festival.id))
-    );
-
   // ----------------------------------------------------
   // 이번 주말 일정
   // ----------------------------------------------------
@@ -291,25 +326,9 @@ function renderUrgentView() {
         </div>
 
         ${weekend
-          .map(renderFestivalCard)
-          .join("")}
-      </section>
-    `;
-  }
-
-  // ----------------------------------------------------
-  // 인기 행사
-  // ----------------------------------------------------
-
-  if (hot.length) {
-    html += `
-      <section>
-        <div class="urgent-section-title hot">
-          🔥 인기 행사
-        </div>
-
-        ${hot
-          .map(renderFestivalCard)
+          .map(
+            renderFestivalCard
+          )
           .join("")}
       </section>
     `;
@@ -319,15 +338,17 @@ function renderUrgentView() {
   // 다가오는 일정
   // ----------------------------------------------------
 
-  if (normal.length) {
+  if (upcoming.length) {
     html += `
       <section>
         <div class="urgent-section-title">
           📅 다가오는 일정
         </div>
 
-        ${normal
-          .map(renderFestivalCard)
+        ${upcoming
+          .map(
+            renderFestivalCard
+          )
           .join("")}
       </section>
     `;
@@ -348,7 +369,9 @@ function renderUrgentView() {
 
 function renderListView() {
   const container =
-    document.getElementById("list");
+    document.getElementById(
+      "list"
+    );
 
   if (!container) {
     return;
@@ -356,7 +379,9 @@ function renderListView() {
 
   const festivals =
     getFiltered()
-      .sort(compareFestivalStart);
+      .sort(
+        compareFestivalStart
+      );
 
   if (!festivals.length) {
     container.innerHTML =
@@ -415,7 +440,9 @@ function renderListView() {
         </h2>
 
         ${items
-          .map(renderFestivalCard)
+          .map(
+            renderFestivalCard
+          )
           .join("")}
       </section>
     `;
@@ -434,27 +461,44 @@ function renderListView() {
 // YouTube 검색 링크
 // ------------------------------------------------------
 
-function normalizeImageUrl(url) {
-  const value = String(url || "").trim();
-  if (!value) return "";
-  return value.startsWith("http://")
+function normalizeImageUrl(
+  url
+) {
+  const value =
+    String(
+      url || ""
+    ).trim();
+
+  if (!value) {
+    return "";
+  }
+
+  return value.startsWith(
+    "http://"
+  )
     ? `https://${value.slice(7)}`
     : value;
 }
 
 
-function buildYoutubeSearchUrl(festival) {
-  const query = cleanTitleForSearch(
-    festival?.title ||
-      festival?.name ||
-      ""
-  );
+function buildYoutubeSearchUrl(
+  festival
+) {
+  const query =
+    cleanTitleForSearch(
+      festival?.title ||
+        festival?.name ||
+        ""
+    );
 
   if (!query) {
     return "";
   }
 
-  return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+  return (
+    "https://www.youtube.com/results?search_query=" +
+    encodeURIComponent(query)
+  );
 }
 
 
@@ -489,12 +533,6 @@ function renderFestivalCard(
       festival
     );
 
-  const hot =
-    hotIds &&
-    hotIds.has(
-      festival.id
-    );
-
   const favorite =
     isFavoriteId(id);
 
@@ -519,7 +557,9 @@ function renderFestivalCard(
   const videoUrl =
     festival?.youtube ||
     festival?.youtubeUrl ||
-    buildYoutubeSearchUrl(festival);
+    buildYoutubeSearchUrl(
+      festival
+    );
 
   return `
     <article
@@ -554,32 +594,35 @@ function renderFestivalCard(
       }
 
       <div class="card-body">
+
         <a
           class="card-link"
           href="${escapeAttr(link)}"
           target="_blank"
           rel="noopener"
         >
-          <h3 class="card-title">
-            ${
-              hot
-                ? '<span class="hot-tag">🔥 인기</span>'
-                : ""
-            }
 
-            ${highlightSearchText(title)}
+          <h3 class="card-title">
+            ${highlightSearchText(
+              title
+            )}
           </h3>
 
           <div class="card-meta">
+
             <span>
-              📅 ${highlightSearchText(dateText)}
+              📅 ${highlightSearchText(
+                dateText
+              )}
             </span>
 
             ${
               location
                 ? `
                   <span>
-                    📍 ${highlightSearchText(location)}
+                    📍 ${highlightSearchText(
+                      location
+                    )}
                   </span>
                 `
                 : ""
@@ -599,8 +642,11 @@ function renderFestivalCard(
                 `
                 : ""
             }
+
           </div>
+
         </a>
+
       </div>
 
       <div class="card-side">
@@ -778,7 +824,9 @@ function highlightSearchText(
 
   const search =
     document
-      .getElementById("search")
+      .getElementById(
+        "search"
+      )
       ?.value
       .trim();
 
@@ -913,9 +961,7 @@ function weekendModeValue(
 function formatWeekendLabel(
   weekend
 ) {
-  if (
-    !weekend?.start
-  ) {
+  if (!weekend?.start) {
     return "";
   }
 
@@ -956,10 +1002,7 @@ function festivalOverlapsRangeForRender(
       festival
     );
 
-  if (
-    !start ||
-    !end
-  ) {
+  if (!start || !end) {
     return false;
   }
 
@@ -1014,12 +1057,14 @@ function renderHiddenList() {
   container.innerHTML =
     `
       <div class="hidden-modal-actions">
+
         <button
           class="unhide-all-btn"
           type="button"
         >
           모두 다시 표시
         </button>
+
       </div>
     ` +
     items
@@ -1028,6 +1073,7 @@ function renderHiddenList() {
           <div class="hidden-item-row">
 
             <div>
+
               <strong>
                 ${escapeHtml(
                   festival.title ||
@@ -1048,6 +1094,7 @@ function renderHiddenList() {
                   )
                 )}
               </div>
+
             </div>
 
             <button
@@ -1182,24 +1229,45 @@ function renderFavoritesList() {
                   }
 
                 </div>
+
               </div>
 
               <div class="favorite-item-reminder">
-                <label class="favorite-reminder-btn" title="찜한 행사 알림 날짜 설정">
+
+                <label
+                  class="favorite-reminder-btn"
+                  title="찜한 행사 알림 날짜 설정"
+                >
                   <span>⏰</span>
+
                   <input
                     type="date"
                     class="favorite-reminder-date"
                     data-reminder-id="${escapeAttr(id)}"
-                    value="${escapeAttr(reminders?.[id] || "")}"
-                    aria-label="${escapeAttr((festival.title || "행사") + " 알림 날짜")}"
+                    value="${escapeAttr(
+                      reminders?.[id] ||
+                        ""
+                    )}"
+                    aria-label="${escapeAttr(
+                      (festival.title ||
+                        "행사") +
+                      " 알림 날짜"
+                    )}"
                   />
                 </label>
+
                 ${
                   reminders?.[id]
-                    ? `<span class="favorite-reminder">알림 ${escapeHtml(reminders[id])}</span>`
+                    ? `
+                      <span class="favorite-reminder">
+                        알림 ${escapeHtml(
+                          reminders[id]
+                        )}
+                      </span>
+                    `
                     : ""
                 }
+
               </div>
 
               <span
@@ -1256,7 +1324,6 @@ function getFavoritesOrderedIds() {
               isFavoriteId(id)
           )
       : [];
-
 
   return ordered;
 }
