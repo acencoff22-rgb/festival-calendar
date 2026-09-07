@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-07T11:09:41.042Z",
-  "count": 731,
+  "updatedAt": "2026-09-07T23:24:33.469Z",
+  "count": 739,
   "sourceStatus": {
     "tourapi": true,
     "culture": false,
@@ -307,20 +307,6 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298000_260807_150356.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298000",
       "genre": "대중음악"
-    },
-    {
-      "source": "tourapi",
-      "type": "festival",
-      "id": "tour-4099101",
-      "title": "수원남문시장 「불취무귀」 야시장",
-      "startDate": "2026-09-05",
-      "endDate": "2026-09-19",
-      "location": "경기도 수원시 팔달구 팔달문로 9 (팔달로2가)",
-      "area": null,
-      "lat": 37.277751177,
-      "lon": 127.0184725227,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/34/4099134_image2_1.png",
-      "detailUrl": null
     },
     {
       "source": "tourapi",
@@ -1374,6 +1360,20 @@
       "lat": 37.783732758,
       "lon": 126.2892126586,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/60/4103260_image2_1.jpg",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-4108250",
+      "title": "2026 원주 독서대전 〈거리에서 만난 책〉",
+      "startDate": "2026-09-12",
+      "endDate": "2026-09-13",
+      "location": "강원특별자치도 원주시 서원대로 472-12 (단구동)",
+      "area": null,
+      "lat": 37.3265152215,
+      "lon": 127.9538444488,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/53/4108253_image2_1.jpg",
       "detailUrl": null
     },
     {
@@ -2803,6 +2803,20 @@
     {
       "source": "tourapi",
       "type": "festival",
+      "id": "tour-2844254",
+      "title": "제8회 금천과학축제",
+      "startDate": "2026-09-18",
+      "endDate": "2026-09-19",
+      "location": "서울특별시 금천구 시흥대로73길 70 (시흥동)",
+      "area": null,
+      "lat": 37.4564406598,
+      "lon": 126.895507334,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/85/4108385_image2_1.png",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
       "id": "tour-1718060",
       "title": "진안홍삼축제",
       "startDate": "2026-09-18",
@@ -2817,15 +2831,15 @@
     {
       "source": "tourapi",
       "type": "festival",
-      "id": "tour-1250585",
-      "title": "2026 경기도자비엔날레",
+      "id": "tour-3530743",
+      "title": "한국유교문화축전",
       "startDate": "2026-09-18",
-      "endDate": "2026-11-01",
-      "location": "경기도 이천시 경충대로2697번길 263",
+      "endDate": "2026-09-20",
+      "location": "충청남도 논산시 노성면 종학길 10",
       "area": null,
-      "lat": 37.276920816247,
-      "lon": 127.423725332612,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/71/4065571_image2_1.jpg",
+      "lat": 36.2884517439,
+      "lon": 127.0981229437,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/12/4104812_image2_1.png",
       "detailUrl": null
     },
     {
@@ -2840,20 +2854,6 @@
       "lat": 34.8663080291,
       "lon": 128.7246407484,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/54/4107654_image2_1.jpg",
-      "detailUrl": null
-    },
-    {
-      "source": "tourapi",
-      "type": "festival",
-      "id": "tour-2999418",
-      "title": "2026 평화누리 피크닉 페스티벌",
-      "startDate": "2026-09-18",
-      "endDate": "2026-09-20",
-      "location": "경기도 파주시 문산읍 임진각로 148-40",
-      "area": null,
-      "lat": 37.8920134562,
-      "lon": 126.7447464059,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/64/4102264_image2_1.jpg",
       "detailUrl": null
     },
     {
@@ -3107,6 +3107,20 @@
     {
       "source": "tourapi",
       "type": "festival",
+      "id": "tour-140897",
+      "title": "경산 갓바위소원성취축제",
+      "startDate": "2026-09-19",
+      "endDate": "2026-09-20",
+      "location": "경상북도 경산시 남매로 100 (상방동)",
+      "area": null,
+      "lat": 35.8211171309,
+      "lon": 128.7437733447,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/14/4102114_image2_1.jpg",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
       "id": "tour-3538195",
       "title": "광명시 책축제",
       "startDate": "2026-09-19",
@@ -3158,6 +3172,20 @@
       "lat": 37.615291,
       "lon": 127.06423,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/95/4105595_image2_1.jpg",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-4099101",
+      "title": "수원남문시장 「불취무귀」 야시장",
+      "startDate": "2026-09-19",
+      "endDate": "2026-09-19",
+      "location": "경기도 수원시 팔달구 팔달문로 9 (팔달로2가)",
+      "area": null,
+      "lat": 37.277751177,
+      "lon": 127.0184725227,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/34/4099134_image2_1.png",
       "detailUrl": null
     },
     {
@@ -4484,6 +4512,20 @@
     {
       "source": "tourapi",
       "type": "festival",
+      "id": "tour-981658",
+      "title": "대전효문화뿌리축제",
+      "startDate": "2026-10-02",
+      "endDate": "2026-10-04",
+      "location": "대전광역시 중구 뿌리공원로 79 (침산동)",
+      "area": null,
+      "lat": 36.2844613405,
+      "lon": 127.3864102659,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/75/4108275_image2_1.jpg",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
       "id": "tour-140799",
       "title": "부산국제록페스티벌",
       "startDate": "2026-10-02",
@@ -5490,6 +5532,20 @@
     {
       "source": "tourapi",
       "type": "festival",
+      "id": "tour-1322668",
+      "title": "곡성심청어린이대축제",
+      "startDate": "2026-10-08",
+      "endDate": "2026-10-11",
+      "location": "전남광주통합특별시 곡성군 오곡면 기차마을로 232",
+      "area": null,
+      "lat": 35.2773776987,
+      "lon": 127.3080154885,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/68/4108468_image2_1.jpg",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
       "id": "tour-2031318",
       "title": "임실N치즈축제",
       "startDate": "2026-10-08",
@@ -5777,6 +5833,20 @@
       "lat": 37.8920434573,
       "lon": 126.7447928585,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/98/4087098_image2_1.jpg",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-4108258",
+      "title": "2026 한글문화특별기획전 〈세종과 남준〉",
+      "startDate": "2026-10-09",
+      "endDate": "2026-11-08",
+      "location": "세종특별자치시 중앙공원로 60 (세종동)",
+      "area": null,
+      "lat": 36.4917742203,
+      "lon": 127.2717369032,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/59/4108259_image2_1.jpg",
       "detailUrl": null
     },
     {
@@ -6466,9 +6536,23 @@
       "endDate": "2026-10-19",
       "location": "전북특별자치도 고창군 고창읍 모양성로 11",
       "area": null,
-      "lat": 35.43314793158578,
-      "lon": 126.70350182663505,
+      "lat": 35.4331479316,
+      "lon": 126.7035018266,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/30/3519730_image2_1.jpg",
+      "detailUrl": null
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-506544",
+      "title": "봉화송이축제",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-18",
+      "location": "경상북도 봉화군 봉화읍 내성로5길 13",
+      "area": null,
+      "lat": 36.8889046907,
+      "lon": 128.7389554817,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/57/4108357_image2_1.JPG",
       "detailUrl": null
     },
     {
@@ -6524,7 +6608,7 @@
       "area": null,
       "lat": 36.1680656613,
       "lon": 127.7856181933,
-      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/91/4104691_image2_1.jpg",
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/65/4108265_image2_1.png",
       "detailUrl": null
     },
     {
@@ -6630,10 +6714,10 @@
       "title": "김해 국가유산야행",
       "startDate": "2026-10-16",
       "endDate": "2026-10-18",
-      "location": "경상남도 김해시 가락로93번길 26",
+      "location": "경상남도 김해시 왕릉길 26 (서상동)",
       "area": null,
-      "lat": 35.2348642516,
-      "lon": 128.8772389826,
+      "lat": 35.2348804669,
+      "lon": 128.8772052224,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/17/4073617_image2_1.jpg",
       "detailUrl": null
     },
@@ -8322,6 +8406,20 @@
       "detailUrl": null
     },
     {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-1841539",
+      "title": "마토예술제",
+      "startDate": "2026-10-31",
+      "endDate": "2026-10-31",
+      "location": "경기도 평택시 팽성읍 안정쇼핑로 11",
+      "area": null,
+      "lat": 36.9596136599,
+      "lon": 127.0441409123,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/23/4108423_image2_1.png",
+      "detailUrl": null
+    },
+    {
       "source": "kopis",
       "type": "performance",
       "id": "kopis-PF300147",
@@ -8617,10 +8715,10 @@
       "title": "김해분청도자기축제",
       "startDate": "2026-11-06",
       "endDate": "2026-11-10",
-      "location": "경상남도 김해시 진례면 분청로 17",
+      "location": "경상남도 김해시 장유로 551 (신문동)",
       "area": null,
-      "lat": 35.2517277593,
-      "lon": 128.7458798521,
+      "lat": 35.183247103,
+      "lon": 128.8287850953,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/49/3546549_image2_1.jpg",
       "detailUrl": null
     },
@@ -9605,6 +9703,20 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF297746_260805_132158.jpg",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF297746",
       "genre": "대중음악"
+    },
+    {
+      "source": "tourapi",
+      "type": "festival",
+      "id": "tour-4108260",
+      "title": "2026 HUG RUN 허그런",
+      "startDate": "2026-12-05",
+      "endDate": "2026-12-05",
+      "location": "서울특별시 마포구 월드컵로 251 (성산동)",
+      "area": null,
+      "lat": 37.5659052367,
+      "lon": 126.8964648544,
+      "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/62/4108262_image2_1.jpg",
+      "detailUrl": null
     },
     {
       "source": "kopis",
