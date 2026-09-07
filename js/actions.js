@@ -13,6 +13,7 @@
 // - 찜 목록 열기 / 닫기
 // - 카드 스와이프
 // - 드래그 정렬
+// - 검색/필터 패널
 // - 테마 / 컴팩트 / TOP
 // - 카카오톡 공유
 // - 포스터 확대
@@ -28,6 +29,219 @@
 
 
 // ------------------------------------------------------
+// 필터 패널
+// ------------------------------------------------------
+
+let filterDrawerOpen =
+  false;
+
+let filterPointerState =
+  null;
+
+
+function openFilterDrawer() {
+  const drawer =
+    document.getElementById(
+      "filterDrawer"
+    );
+
+  const backdrop =
+    document.getElementById(
+      "filterBackdrop"
+    );
+
+  const handle =
+    document.getElementById(
+      "filterHandle"
+    );
+
+  if (!drawer) {
+    return;
+  }
+
+  filterDrawerOpen = true;
+
+  drawer.classList.add(
+    "open"
+  );
+
+  backdrop?.classList.add(
+    "visible"
+  );
+
+  handle?.setAttribute(
+    "aria-expanded",
+    "true"
+  );
+
+  document.body.classList.add(
+    "filter-drawer-open"
+  );
+}
+
+
+function closeFilterDrawer() {
+  const drawer =
+    document.getElementById(
+      "filterDrawer"
+    );
+
+  const backdrop =
+    document.getElementById(
+      "filterBackdrop"
+    );
+
+  const handle =
+    document.getElementById(
+      "filterHandle"
+    );
+
+  filterDrawerOpen = false;
+
+  drawer?.classList.remove(
+    "open"
+  );
+
+  backdrop?.classList.remove(
+    "visible"
+  );
+
+  handle?.setAttribute(
+    "aria-expanded",
+    "false"
+  );
+
+  document.body.classList.remove(
+    "filter-drawer-open"
+  );
+}
+
+
+function toggleFilterDrawer() {
+  if (filterDrawerOpen) {
+    closeFilterDrawer();
+  } else {
+    openFilterDrawer();
+  }
+}
+
+
+function updateFilterHandleState() {
+  const handle =
+    document.getElementById(
+      "filterHandle"
+    );
+
+  if (!handle) {
+    return;
+  }
+
+  const search =
+    document
+      .getElementById("search")
+      ?.value
+      .trim() || "";
+
+  const type =
+    document
+      .getElementById("typeFilter")
+      ?.value || "";
+
+  const month =
+    document
+      .getElementById("monthFilter")
+      ?.value || "";
+
+  const hasFilter =
+    Boolean(
+      search ||
+      type ||
+      month ||
+      selectedAreas.size ||
+      dateFilterMode
+    );
+
+  handle.classList.toggle(
+    "has-filter",
+    hasFilter
+  );
+}
+
+
+function startFilterSwipe(e) {
+  filterPointerState = {
+    startX: e.clientX,
+    startY: e.clientY,
+    pointerId: e.pointerId,
+    moved: false,
+  };
+}
+
+
+function moveFilterSwipe(e) {
+  if (
+    !filterPointerState ||
+    e.pointerId !==
+      filterPointerState.pointerId
+  ) {
+    return;
+  }
+
+  const dx =
+    e.clientX -
+    filterPointerState.startX;
+
+  const dy =
+    e.clientY -
+    filterPointerState.startY;
+
+  if (
+    Math.abs(dx) < 8 &&
+    Math.abs(dy) < 8
+  ) {
+    return;
+  }
+
+  if (
+    Math.abs(dy) >
+    Math.abs(dx)
+  ) {
+    filterPointerState = null;
+    return;
+  }
+
+  filterPointerState.moved = true;
+
+  e.preventDefault();
+
+  if (
+    !filterDrawerOpen &&
+    dx < -45
+  ) {
+    openFilterDrawer();
+
+    filterPointerState = null;
+    return;
+  }
+
+  if (
+    filterDrawerOpen &&
+    dx > 70
+  ) {
+    closeFilterDrawer();
+
+    filterPointerState = null;
+    return;
+  }
+}
+
+
+function endFilterSwipe() {
+  filterPointerState = null;
+}
+
+
+// ------------------------------------------------------
 // 보기 전환
 // ------------------------------------------------------
 
@@ -35,16 +249,24 @@ function switchView(view) {
   currentView = view;
 
   const urgentButton =
-    document.getElementById("btnUrgentView");
+    document.getElementById(
+      "btnUrgentView"
+    );
 
   const listButton =
-    document.getElementById("btnListView");
+    document.getElementById(
+      "btnListView"
+    );
 
   const urgentView =
-    document.getElementById("urgentView");
+    document.getElementById(
+      "urgentView"
+    );
 
   const listView =
-    document.getElementById("list");
+    document.getElementById(
+      "list"
+    );
 
   urgentButton?.classList.toggle(
     "active",
@@ -66,11 +288,12 @@ function switchView(view) {
     view !== "list"
   );
 
+  closeFilterDrawer();
+
   renderCurrentView();
 }
 
 
-// ------------------------------------------------------
 // ------------------------------------------------------
 // 날짜 빠른 필터
 // ------------------------------------------------------
@@ -164,6 +387,7 @@ function setDateFilter(mode) {
   saveDateFilterState();
   updateDateQuickUI();
   renderCurrentView();
+  closeFilterDrawer();
 }
 
 
@@ -182,6 +406,7 @@ function applyCustomDateFilter() {
     alert(
       "시작일과 종료일을 모두 선택해주세요."
     );
+
     return;
   }
 
@@ -189,6 +414,7 @@ function applyCustomDateFilter() {
     alert(
       "종료일은 시작일보다 빠를 수 없습니다."
     );
+
     return;
   }
 
@@ -210,9 +436,11 @@ function applyCustomDateFilter() {
   saveDateFilterState();
   updateDateQuickUI();
   renderCurrentView();
+  closeFilterDrawer();
 }
 
 
+// ------------------------------------------------------
 // 지역 필터
 // ------------------------------------------------------
 
@@ -281,6 +509,7 @@ function applyAreaFilter() {
   updateAreaButtonLabel();
 
   closeAreaModal();
+  closeFilterDrawer();
 
   renderCurrentView();
 }
@@ -307,7 +536,8 @@ function updateHiddenManageButton() {
       : 0;
 
   if (count) {
-    count.textContent = String(size);
+    count.textContent =
+      String(size);
   }
 
   button?.classList.toggle(
@@ -323,6 +553,8 @@ function openHiddenModal() {
   document
     .getElementById("hiddenModal")
     ?.classList.remove("hidden");
+
+  closeFilterDrawer();
 }
 
 
@@ -368,8 +600,13 @@ function setFavoriteReminder(id, date) {
     return;
   }
 
-  if (/^\d{4}-\d{2}-\d{2}$/.test(String(date || ""))) {
-    reminders[id] = String(date);
+  if (
+    /^\d{4}-\d{2}-\d{2}$/.test(
+      String(date || "")
+    )
+  ) {
+    reminders[id] =
+      String(date);
   } else {
     delete reminders[id];
   }
@@ -381,7 +618,10 @@ function setFavoriteReminder(id, date) {
 
 
 function clearFavoriteReminder(id) {
-  setFavoriteReminder(id, "");
+  setFavoriteReminder(
+    id,
+    ""
+  );
 }
 
 
@@ -405,6 +645,8 @@ function openFavoritesModal() {
   document
     .getElementById("favoritesModal")
     ?.classList.remove("hidden");
+
+  closeFilterDrawer();
 }
 
 
@@ -417,8 +659,11 @@ function closeFavoritesModal() {
 
 function removeFavorite(id) {
   id = String(id);
+
   removeFromFavoritesOrder(id);
+
   delete reminders[id];
+
   saveReminders();
 
   renderFavoritesList();
@@ -438,7 +683,7 @@ function isInteractiveCardElement(
   target
 ) {
   return !!target.closest(
-    "button, input, label, a, select, textarea, [contenteditable='true']"
+    "button, input, label, a, select, textarea, [contenteditable='true'], .card-menu"
   );
 }
 
@@ -470,15 +715,11 @@ function startCardSwipe(e) {
     pointerId: e.pointerId,
   };
 
-  // 해당 카드가 현재 pointer를 안정적으로 추적하도록 한다.
   try {
     card.setPointerCapture(
       e.pointerId
     );
-  } catch (_) {
-    // pointer capture를 지원하지 않는 환경에서는
-    // 기존 이벤트 흐름을 그대로 사용한다.
-  }
+  } catch (_) {}
 }
 
 
@@ -502,7 +743,6 @@ function moveCardSwipe(e) {
   swipeState.dx = dx;
   swipeState.dy = dy;
 
-  // 아직 방향이 확정되지 않은 상태
   if (!swipeState.moved) {
     const distance =
       Math.hypot(
@@ -514,7 +754,6 @@ function moveCardSwipe(e) {
       return;
     }
 
-    // 세로 이동이 더 크면 일반적인 페이지 스크롤로 처리한다.
     if (
       Math.abs(dy) >=
       Math.abs(dx)
@@ -523,8 +762,6 @@ function moveCardSwipe(e) {
       return;
     }
 
-    // 가로 이동 의도가 확인된 순간부터
-    // 브라우저 기본 동작과의 충돌을 막는다.
     swipeState.moved = true;
 
     e.preventDefault();
@@ -538,8 +775,6 @@ function moveCardSwipe(e) {
     return;
   }
 
-  // 가로 스와이프가 시작된 이후에는
-  // 페이지 스크롤이 개입하지 않도록 한다.
   e.preventDefault();
 
   swipeState.card.style.transform =
@@ -591,10 +826,7 @@ function endCardSwipe(e) {
         pointerId
       );
     }
-  } catch (_) {
-    // pointer capture 해제 실패는
-    // 스와이프 결과에 영향을 주지 않는다.
-  }
+  } catch (_) {}
 
   if (
     moved &&
@@ -663,6 +895,99 @@ function suppressSwipeClick(e) {
   e.stopPropagation();
 
   suppressNextClick = false;
+}
+
+
+// ------------------------------------------------------
+// 카드 메뉴
+// ------------------------------------------------------
+
+function closeCardMenus(
+  except = null
+) {
+  document
+    .querySelectorAll(
+      ".card-menu"
+    )
+    .forEach((menu) => {
+      if (
+        except &&
+        menu === except
+      ) {
+        return;
+      }
+
+      menu.classList.add(
+        "hidden"
+      );
+    });
+
+  document
+    .querySelectorAll(
+      ".card-menu-btn"
+    )
+    .forEach((button) => {
+      if (
+        except &&
+        button.closest(
+          ".card-menu-wrap"
+        )?.querySelector(
+          ".card-menu"
+        ) === except
+      ) {
+        return;
+      }
+
+      button.classList.remove(
+        "active"
+      );
+
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+    });
+}
+
+
+function toggleCardMenu(
+  button
+) {
+  const wrap =
+    button.closest(
+      ".card-menu-wrap"
+    );
+
+  const menu =
+    wrap?.querySelector(
+      ".card-menu"
+    );
+
+  if (!menu) {
+    return;
+  }
+
+  const shouldOpen =
+    menu.classList.contains(
+      "hidden"
+    );
+
+  closeCardMenus();
+
+  if (shouldOpen) {
+    menu.classList.remove(
+      "hidden"
+    );
+
+    button.classList.add(
+      "active"
+    );
+
+    button.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+  }
 }
 
 
@@ -820,8 +1145,6 @@ function setupFavoritesDragSort() {
 
 // ------------------------------------------------------
 // 테마
-//
-// 저장 / 불러오기는 storage.js
 // ------------------------------------------------------
 
 function applyTheme(theme) {
@@ -890,7 +1213,9 @@ function toggleContrast() {
       "data-theme"
     );
 
-  if (current === "contrast") {
+  if (
+    current === "contrast"
+  ) {
     const base =
       loadBaseTheme() ||
       "light";
@@ -934,8 +1259,8 @@ function applyCompactView(
   if (toggle) {
     toggle.textContent =
       isCompact
-        ? "🖼️"
-        : "☰";
+        ? "🖼️ 일반 보기로 전환"
+        : "☰ 한 줄 보기";
   }
 }
 
@@ -1409,6 +1734,87 @@ function setupPosterZoom() {
 // ------------------------------------------------------
 
 function handleCardClick(e) {
+
+  // 카드 메뉴 버튼
+  const menuBtn =
+    e.target.closest(
+      ".card-menu-btn"
+    );
+
+  if (menuBtn) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    toggleCardMenu(
+      menuBtn
+    );
+
+    return;
+  }
+
+
+  // 카드 메뉴 - 숨기기
+  const hideMenuBtn =
+    e.target.closest(
+      ".hide-card-action"
+    );
+
+  if (hideMenuBtn) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const card =
+      hideMenuBtn.closest(
+        ".card"
+      );
+
+    closeCardMenus();
+
+    hideItem(
+      hideMenuBtn.dataset
+        .hideId
+    );
+
+    card?.remove();
+
+    return;
+  }
+
+
+  // 카드 메뉴 - 카카오톡
+  const shareBtn =
+    e.target.closest(
+      ".share-btn"
+    );
+
+  if (shareBtn) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    shareToKakao({
+      title:
+        shareBtn.dataset.title,
+
+      date:
+        shareBtn.dataset.date,
+
+      location:
+        shareBtn.dataset.location,
+
+      link:
+        shareBtn.dataset.link,
+
+      thumbnail:
+        shareBtn.dataset.thumbnail,
+    });
+
+    closeCardMenus();
+
+    return;
+  }
+
+
+  // 관심
   const favoriteBtn =
     e.target.closest(
       ".favorite-btn"
@@ -1423,9 +1829,13 @@ function handleCardClick(e) {
         .favoriteId
     );
 
+    closeCardMenus();
+
     return;
   }
 
+
+  // 포스터
   const poster =
     e.target.closest(
       ".card img, .card .no-img"
@@ -1436,7 +1846,9 @@ function handleCardClick(e) {
     e.stopPropagation();
 
     const cardEl =
-      poster.closest(".card");
+      poster.closest(
+        ".card"
+      );
 
     const f =
       allFestivals.find(
@@ -1464,82 +1876,20 @@ function handleCardClick(e) {
     return;
   }
 
+
+  // 카드 링크
   const cardLink =
     e.target.closest(
       ".card-link"
     );
 
   if (cardLink) {
-    return;
-  }
-
-  const shareBtn =
-    e.target.closest(
-      ".share-btn"
-    );
-
-  if (shareBtn) {
-    e.preventDefault();
-
-    shareToKakao({
-      title:
-        shareBtn.dataset.title,
-
-      date:
-        shareBtn.dataset.date,
-
-      location:
-        shareBtn.dataset.location,
-
-      link:
-        shareBtn.dataset.link,
-
-      thumbnail:
-        shareBtn.dataset.thumbnail,
-    });
+    closeCardMenus();
 
     return;
   }
 
-  const copyBtn =
-    e.target.closest(
-      ".copy-btn"
-    );
-
-  if (copyBtn) {
-    e.preventDefault();
-
-    const text =
-      copyBtn.dataset.copy;
-
-    const originalText =
-      copyBtn.textContent;
-
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        copyBtn.textContent =
-          "✅ 복사됨";
-
-        setTimeout(() => {
-          if (
-            copyBtn.isConnected
-          ) {
-            copyBtn.textContent =
-              originalText;
-          }
-        }, 1500);
-      })
-      .catch(() => {
-        alert(
-          `복사에 실패했어요. 직접 복사해주세요:\n${text}`
-        );
-      });
-
-    return;
-  }
-
-
+  closeCardMenus();
 }
 
 
@@ -1548,31 +1898,77 @@ function handleCardClick(e) {
 // ------------------------------------------------------
 
 function resetAllFilters() {
-  const search = document.getElementById("search");
-  const type = document.getElementById("typeFilter");
-  const month = document.getElementById("monthFilter");
+  const search =
+    document.getElementById(
+      "search"
+    );
 
-  if (search) search.value = "";
-  if (type) type.value = "";
-  if (month) month.value = "";
+  const type =
+    document.getElementById(
+      "typeFilter"
+    );
 
-  selectedAreas = new Set();
-  selectedMonth = "";
-  dateFilterMode = "";
-  customDateStart = "";
-  customDateEnd = "";
-  weekendMode = "";
+  const month =
+    document.getElementById(
+      "monthFilter"
+    );
 
-  const start = document.getElementById("customDateStart");
-  const end = document.getElementById("customDateEnd");
-  if (start) start.value = "";
-  if (end) end.value = "";
+  if (search) {
+    search.value = "";
+  }
+
+  if (type) {
+    type.value = "";
+  }
+
+  if (month) {
+    month.value = "";
+  }
+
+  selectedAreas =
+    new Set();
+
+  selectedMonth =
+    "";
+
+  dateFilterMode =
+    "";
+
+  customDateStart =
+    "";
+
+  customDateEnd =
+    "";
+
+  weekendMode =
+    "";
+
+  const start =
+    document.getElementById(
+      "customDateStart"
+    );
+
+  const end =
+    document.getElementById(
+      "customDateEnd"
+    );
+
+  if (start) {
+    start.value = "";
+  }
+
+  if (end) {
+    end.value = "";
+  }
 
   saveSelectedAreas();
   saveDateFilterState();
+
   updateAreaButtonLabel();
   updateDateQuickUI();
   renderCurrentView();
+
+  closeFilterDrawer();
 }
 
 
@@ -1581,6 +1977,116 @@ function resetAllFilters() {
 // ------------------------------------------------------
 
 function setupActions() {
+
+  // ----------------------------------------------------
+  // 필터 패널
+  // ----------------------------------------------------
+
+  document
+    .getElementById(
+      "filterHandle"
+    )
+    ?.addEventListener(
+      "click",
+      toggleFilterDrawer
+    );
+
+  document
+    .getElementById(
+      "filterClose"
+    )
+    ?.addEventListener(
+      "click",
+      closeFilterDrawer
+    );
+
+  document
+    .getElementById(
+      "filterBackdrop"
+    )
+    ?.addEventListener(
+      "click",
+      closeFilterDrawer
+    );
+
+  const filterDrawer =
+    document.getElementById(
+      "filterDrawer"
+    );
+
+  const filterHandle =
+    document.getElementById(
+      "filterHandle"
+    );
+
+  filterHandle?.addEventListener(
+    "pointerdown",
+    startFilterSwipe
+  );
+
+  filterHandle?.addEventListener(
+    "pointermove",
+    moveFilterSwipe,
+    {
+      passive: false,
+    }
+  );
+
+  filterHandle?.addEventListener(
+    "pointerup",
+    endFilterSwipe
+  );
+
+  filterHandle?.addEventListener(
+    "pointercancel",
+    endFilterSwipe
+  );
+
+  filterDrawer?.addEventListener(
+    "pointerdown",
+    (e) => {
+      if (
+        e.target.closest(
+          "input, select, button, a, label"
+        )
+      ) {
+        return;
+      }
+
+      startFilterSwipe(e);
+    }
+  );
+
+  filterDrawer?.addEventListener(
+    "pointermove",
+    moveFilterSwipe,
+    {
+      passive: false,
+    }
+  );
+
+  filterDrawer?.addEventListener(
+    "pointerup",
+    endFilterSwipe
+  );
+
+  filterDrawer?.addEventListener(
+    "pointercancel",
+    endFilterSwipe
+  );
+
+  document.addEventListener(
+    "keydown",
+    (e) => {
+      if (
+        e.key === "Escape" &&
+        filterDrawerOpen
+      ) {
+        closeFilterDrawer();
+      }
+    }
+  );
+
 
   // ----------------------------------------------------
   // 보기 전환
@@ -1621,9 +2127,12 @@ function setupActions() {
     )
     ?.addEventListener(
       "change",
-      () =>
-        renderCurrentView()
+      () => {
+        renderCurrentView();
+        closeFilterDrawer();
+      }
     );
+
 
   document
     .querySelectorAll(
@@ -1640,6 +2149,7 @@ function setupActions() {
       );
     });
 
+
   document
     .getElementById(
       "customDateApply"
@@ -1649,18 +2159,28 @@ function setupActions() {
       applyCustomDateFilter
     );
 
+
   document
     .getElementById(
       "customDateReset"
     )
     ?.addEventListener(
       "click",
-      () => setDateFilter("all")
+      () =>
+        setDateFilter(
+          "all"
+        )
     );
 
+
   document
-    .getElementById("filterResetBtn")
-    ?.addEventListener("click", resetAllFilters);
+    .getElementById(
+      "filterResetBtn"
+    )
+    ?.addEventListener(
+      "click",
+      resetAllFilters
+    );
 
 
   document
@@ -1678,11 +2198,13 @@ function setupActions() {
           customDateStart = "";
           customDateEnd = "";
           weekendMode = "";
+
           saveDateFilterState();
           updateDateQuickUI();
         }
 
         renderCurrentView();
+        closeFilterDrawer();
       }
     );
 
@@ -1697,8 +2219,9 @@ function setupActions() {
     )
     ?.addEventListener(
       "input",
-      () =>
-        renderCurrentView()
+      () => {
+        renderCurrentView();
+      }
     );
 
 
@@ -1715,6 +2238,7 @@ function setupActions() {
       openAreaModal
     );
 
+
   document
     .getElementById(
       "areaModalClose"
@@ -1723,6 +2247,7 @@ function setupActions() {
       "click",
       closeAreaModal
     );
+
 
   document
     .getElementById(
@@ -1740,6 +2265,7 @@ function setupActions() {
       }
     );
 
+
   document
     .getElementById(
       "areaSelectAll"
@@ -1749,6 +2275,7 @@ function setupActions() {
       selectAllAreas
     );
 
+
   document
     .getElementById(
       "areaSelectNone"
@@ -1757,6 +2284,7 @@ function setupActions() {
       "click",
       selectNoAreas
     );
+
 
   document
     .getElementById(
@@ -1781,6 +2309,7 @@ function setupActions() {
       openHiddenModal
     );
 
+
   document
     .getElementById(
       "hiddenModalClose"
@@ -1790,6 +2319,7 @@ function setupActions() {
       closeHiddenModal
     );
 
+
   document
     .getElementById(
       "hiddenModal"
@@ -1797,6 +2327,7 @@ function setupActions() {
     ?.addEventListener(
       "click",
       (e) => {
+
         if (
           e.target.id ===
           "hiddenModal"
@@ -1813,10 +2344,15 @@ function setupActions() {
 
         if (restoreAllBtn) {
           hiddenIds.clear();
+
           saveHiddenIds();
+
           updateHiddenManageButton();
+
           closeHiddenModal();
+
           renderCurrentView();
+
           return;
         }
 
@@ -1848,6 +2384,7 @@ function setupActions() {
       openFavoritesModal
     );
 
+
   document
     .getElementById(
       "favoritesModalClose"
@@ -1857,6 +2394,7 @@ function setupActions() {
       closeFavoritesModal
     );
 
+
   document
     .getElementById(
       "favoritesModal"
@@ -1864,16 +2402,18 @@ function setupActions() {
     ?.addEventListener(
       "change",
       (e) => {
-        const input = e.target.closest(
-          ".favorite-reminder-date"
-        );
+        const input =
+          e.target.closest(
+            ".favorite-reminder-date"
+          );
 
         if (!input) {
           return;
         }
 
         setFavoriteReminder(
-          input.dataset.reminderId,
+          input.dataset
+            .reminderId,
           input.value
         );
       }
@@ -1887,6 +2427,7 @@ function setupActions() {
     ?.addEventListener(
       "click",
       (e) => {
+
         if (
           e.target.id ===
           "favoritesModal"
@@ -1911,30 +2452,13 @@ function setupActions() {
     );
 
 
-
   // ----------------------------------------------------
-  // 카드 영역
+  // 카드 / 주말 / 메뉴
   // ----------------------------------------------------
 
   document.body.addEventListener(
     "click",
     (e) => {
-
-      const hideBtn =
-        e.target.closest(
-          ".hide-btn"
-        );
-
-      if (hideBtn) {
-        e.preventDefault();
-
-        hideItem(
-          hideBtn.dataset
-            .hideId
-        );
-
-        return;
-      }
 
       const weekendChip =
         e.target.closest(
@@ -1946,19 +2470,35 @@ function setupActions() {
           weekendChip.dataset
             .mode;
 
-        dateFilterMode =
-          weekendMode === "this"
-            ? "weekend"
-            : "";
+        if (
+          weekendMode ===
+          "all"
+        ) {
+          dateFilterMode = "";
+        } else {
+          dateFilterMode =
+            "weekend";
+        }
 
         customDateStart = "";
         customDateEnd = "";
+
         saveDateFilterState();
         updateDateQuickUI();
 
         renderCurrentView();
 
+        closeFilterDrawer();
+
         return;
+      }
+
+      if (
+        !e.target.closest(
+          ".card-menu-wrap"
+        )
+      ) {
+        closeCardMenus();
       }
     }
   );
@@ -1973,6 +2513,7 @@ function setupActions() {
     startCardSwipe
   );
 
+
   document.body.addEventListener(
     "pointermove",
     moveCardSwipe,
@@ -1981,15 +2522,18 @@ function setupActions() {
     }
   );
 
+
   document.body.addEventListener(
     "pointerup",
     endCardSwipe
   );
 
+
   document.body.addEventListener(
     "pointercancel",
     endCardSwipe
   );
+
 
   document.body.addEventListener(
     "click",
@@ -2005,14 +2549,36 @@ function setupActions() {
   document.body.addEventListener(
     "error",
     (e) => {
-      const img = e.target.closest?.(".card img");
-      if (!img || img.dataset.fallbackApplied === "true") return;
+      const img =
+        e.target.closest?.(
+          ".card img"
+        );
 
-      img.dataset.fallbackApplied = "true";
-      const fallback = document.createElement("div");
-      fallback.className = "no-img";
-      fallback.textContent = "🏮";
-      img.replaceWith(fallback);
+      if (
+        !img ||
+        img.dataset.fallbackApplied ===
+          "true"
+      ) {
+        return;
+      }
+
+      img.dataset.fallbackApplied =
+        "true";
+
+      const fallback =
+        document.createElement(
+          "div"
+        );
+
+      fallback.className =
+        "no-img";
+
+      fallback.textContent =
+        "🏮";
+
+      img.replaceWith(
+        fallback
+      );
     },
     true
   );
@@ -2030,6 +2596,7 @@ function setupActions() {
       "click",
       toggleTheme
     );
+
 
   document
     .getElementById(
@@ -2070,7 +2637,7 @@ function setupActions() {
 
 
   // ----------------------------------------------------
-  // 카드 / 공유 / 복사
+  // 카드 / 공유 / 메뉴
   // ----------------------------------------------------
 
   document.body.addEventListener(
