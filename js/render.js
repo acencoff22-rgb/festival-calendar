@@ -22,6 +22,7 @@
 // - logic.js와 날짜/정렬 함수를 중복 정의하지 않는다.
 // - render.js에서 localStorage에 직접 접근하지 않는다.
 // - 인기도/mentions/hotIds 기능은 사용하지 않는다.
+// - 복사 기능은 사용하지 않는다.
 // ======================================================
 
 
@@ -36,6 +37,7 @@ function renderCurrentView() {
     renderListView();
   }
 
+  renderWeekendFilterChips();
   updateFilterSummary();
 }
 
@@ -98,7 +100,9 @@ function updateFilterSummary() {
       `날짜: ${getDateFilterLabel()}`
     );
   } else if (month) {
-    parts.push(`월: ${month}`);
+    parts.push(
+      `월: ${month}`
+    );
   }
 
   const count =
@@ -113,6 +117,13 @@ function updateFilterSummary() {
     "hidden",
     parts.length === 0
   );
+
+  if (
+    typeof updateFilterHandleState ===
+    "function"
+  ) {
+    updateFilterHandleState();
+  }
 }
 
 
@@ -152,16 +163,6 @@ function renderUrgentView() {
     soonLimit.getDate() + 30
   );
 
-  // ----------------------------------------------------
-  // 긴급 일정
-  //
-  // 포함
-  // 1. 현재 진행 중인 행사
-  // 2. 오늘부터 30일 이내에 시작하는 행사
-  //
-  // 이미 종료된 행사는 제외한다.
-  // ----------------------------------------------------
-
   const upcoming =
     festivals
       .filter((festival) => {
@@ -179,7 +180,6 @@ function renderUrgentView() {
           return false;
         }
 
-        // 현재 진행 중인 행사
         if (
           start <= today &&
           today <= end
@@ -187,7 +187,6 @@ function renderUrgentView() {
           return true;
         }
 
-        // 앞으로 30일 이내 시작하는 행사
         return (
           start >= today &&
           start <= soonLimit
@@ -218,7 +217,6 @@ function renderUrgentView() {
           bStart <= today &&
           today <= bEnd;
 
-        // 진행 중인 행사를 먼저
         if (
           aOngoing &&
           !bOngoing
@@ -248,8 +246,6 @@ function renderUrgentView() {
 
   let html = "";
 
-  html += renderWeekendChips();
-
   // ----------------------------------------------------
   // 특정 주말 선택
   // ----------------------------------------------------
@@ -276,7 +272,7 @@ function renderUrgentView() {
 
     html += `
       <section>
-        <div class="urgent-section-title hot">
+        <div class="urgent-section-title selected">
           이번 주말 일정
         </div>
 
@@ -302,21 +298,21 @@ function renderUrgentView() {
     container.innerHTML =
       html;
 
+    renderLoadMoreSentinel(
+      container
+    );
+
     return;
   }
 
   // ----------------------------------------------------
-  // 전체 보기
+  // 이번 주말 일정
   // ----------------------------------------------------
 
   const weekend =
     getWeekendFestivals(
       upcoming
     );
-
-  // ----------------------------------------------------
-  // 이번 주말 일정
-  // ----------------------------------------------------
 
   if (weekend.length) {
     html += `
@@ -429,7 +425,8 @@ function renderListView() {
     const [
       year,
       month,
-    ] = monthKey.split("-");
+    ] =
+      monthKey.split("-");
 
     html += `
       <section class="month-group">
@@ -549,11 +546,6 @@ function renderFestivalCard(
     festival?.detailUrl ||
     eventLink(festival);
 
-  const copyText =
-    buildCopyText(
-      festival
-    );
-
   const videoUrl =
     festival?.youtube ||
     festival?.youtubeUrl ||
@@ -566,16 +558,6 @@ function renderFestivalCard(
       class="card"
       data-id="${escapeAttr(id)}"
     >
-
-      <button
-        class="hide-btn"
-        type="button"
-        data-hide-id="${escapeAttr(id)}"
-        aria-label="숨기기"
-        title="숨기기"
-      >
-        ✕
-      </button>
 
       ${
         thumbnail
@@ -628,10 +610,14 @@ function renderFestivalCard(
                 : ""
             }
 
+          </div>
+
+          <div class="card-bottom">
+
             ${
               festival?.type
                 ? `
-                  <span>
+                  <span class="card-type">
                     ${
                       festival.type ===
                       "performance"
@@ -666,7 +652,6 @@ function renderFestivalCard(
           )}
         </div>
 
-        <!-- 관심 행사 -->
         <button
           class="
             favorite-btn
@@ -701,42 +686,59 @@ function renderFestivalCard(
           }
         </button>
 
-        <!-- 카카오톡 공유 -->
-        <button
-          class="share-btn"
-          type="button"
-          data-title="${escapeAttr(title)}"
-          data-date="${escapeAttr(dateText)}"
-          data-location="${escapeAttr(location)}"
-          data-link="${escapeAttr(link)}"
-          data-thumbnail="${escapeAttr(thumbnail)}"
-        >
-          카톡
-        </button>
+        <div class="card-menu-wrap">
 
-        ${
-          videoUrl
-            ? `
-              <a
-                class="yt-btn"
-                href="${escapeAttr(videoUrl)}"
-                target="_blank"
-                rel="noopener"
-              >
-                ▶ 영상
-              </a>
-            `
-            : ""
-        }
+          <button
+            class="card-menu-btn"
+            type="button"
+            aria-label="행사 메뉴"
+            aria-expanded="false"
+          >
+            ⋯
+          </button>
 
-        <!-- 복사 -->
-        <button
-          class="copy-btn"
-          type="button"
-          data-copy="${escapeAttr(copyText)}"
-        >
-          복사
-        </button>
+          <div
+            class="filter-menu card-menu hidden"
+          >
+
+            <button
+              class="card-menu-action share-btn"
+              type="button"
+              data-title="${escapeAttr(title)}"
+              data-date="${escapeAttr(dateText)}"
+              data-location="${escapeAttr(location)}"
+              data-link="${escapeAttr(link)}"
+              data-thumbnail="${escapeAttr(thumbnail)}"
+            >
+              카톡 공유
+            </button>
+
+            ${
+              videoUrl
+                ? `
+                  <a
+                    class="card-menu-action yt-btn"
+                    href="${escapeAttr(videoUrl)}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    ▶ YouTube
+                  </a>
+                `
+                : ""
+            }
+
+            <button
+              class="card-menu-action hide-card-action"
+              type="button"
+              data-hide-id="${escapeAttr(id)}"
+            >
+              🙈 이 행사 숨기기
+            </button>
+
+          </div>
+
+        </div>
 
       </div>
 
@@ -765,48 +767,6 @@ function getFestivalLocation(
         index
     )
     .join(" · ");
-}
-
-
-// ------------------------------------------------------
-// 복사 문구
-// ------------------------------------------------------
-
-function buildCopyText(
-  festival
-) {
-  const title =
-    festival?.title ||
-    "";
-
-  const date =
-    formatFestivalDate(
-      festival
-    );
-
-  const location =
-    getFestivalLocation(
-      festival
-    );
-
-  const link =
-    festival?.link ||
-    festival?.url ||
-    festival?.detailUrl ||
-    eventLink(festival);
-
-  return [
-    `🏮 ${title}`,
-    `📅 ${date}`,
-    location
-      ? `📍 ${location}`
-      : "",
-    link
-      ? `🔗 ${link}`
-      : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
 }
 
 
@@ -867,7 +827,25 @@ function escapeRegExp(
 
 // ------------------------------------------------------
 // 주말 칩
+//
+// 메인 행사 영역이 아니라
+// 필터 패널 내부에 표시한다.
 // ------------------------------------------------------
+
+function renderWeekendFilterChips() {
+  const container =
+    document.getElementById(
+      "filterWeekendChips"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML =
+    renderWeekendChips();
+}
+
 
 function renderWeekendChips() {
   const weekends =
@@ -976,9 +954,6 @@ function formatWeekendLabel(
 
 // ------------------------------------------------------
 // 범위 겹침
-//
-// logic.js의 festivalOverlapsRange()
-// 현재 구조는 { start, end } 객체를 받는다.
 // ------------------------------------------------------
 
 function festivalOverlapsRangeForRender(
@@ -1368,8 +1343,6 @@ function renderLoadMoreSentinel(
 
 // ------------------------------------------------------
 // HTML escape
-//
-// 렌더링 전용 안전 처리
 // ------------------------------------------------------
 
 function escapeHtml(
