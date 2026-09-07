@@ -60,8 +60,6 @@
   [data-theme="contrast"] .area-quick-btn,
   [data-theme="contrast"] .yt-btn,
   [data-theme="contrast"] .copy-btn,
-
-
   [data-theme="contrast"] .share-btn {
     color: #000000;
     border-width: 2px;
@@ -300,7 +298,9 @@
 
   body.compact-view .share-btn,
   body.compact-view .yt-btn,
-  body.compact-view .copy-btn,
+  body.compact-view .copy-btn {
+    display: none;
+  }
 
   body.compact-view .card-side {
     gap: 4px;
@@ -437,14 +437,6 @@
     color: white;
   }
 
-  .hot-tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--lantern);
-    margin-right: 4px;
-  }
-
   .weekend-chips {
     display: flex;
     gap: 6px;
@@ -479,8 +471,6 @@
     border-radius: 10px;
     margin: 14px 0 0;
   }
-
-
 
   .top-btn {
     position: fixed;
@@ -913,34 +903,33 @@
     display: none !important;
   }
 
-
   .filter-summary {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin:10px 0 12px;
-    padding:9px 12px;
-    border:1px solid var(--line);
-    border-radius:10px;
-    background:var(--paper-soft);
-    color:var(--ink-soft);
-    font-size:12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 10px 0 12px;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--paper-soft);
+    color: var(--ink-soft);
+    font-size: 12px;
   }
 
   .filter-reset-btn {
-    flex:0 0 auto;
-    border:1px solid var(--line);
-    border-radius:8px;
-    background:transparent;
-    color:var(--ink);
-    padding:6px 9px;
-    font:inherit;
-    cursor:pointer;
+    flex: 0 0 auto;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink);
+    padding: 6px 9px;
+    font: inherit;
+    cursor: pointer;
   }
 
   .filter-reset-btn.hidden {
-    display:none;
+    display: none;
   }
 
   .hidden-modal-actions {
@@ -1047,12 +1036,42 @@
   }
 
   @media (max-width: 600px) {
-    .card { gap: 8px; padding: 10px; align-items: flex-start; }
-    .card img, .card .no-img { width: 52px; height: 52px; }
-    .card-side { gap: 5px; max-width: 78px; }
-    .card-side > button, .card-side > a { max-width: 78px; overflow: hidden; text-overflow: ellipsis; }
-    .favorite-btn, .share-btn, .yt-btn, .copy-btn { min-height: 34px; padding: 6px 7px; }
-    .top-btn { right: 10px; bottom: 10px; }
+    .card {
+      gap: 8px;
+      padding: 10px;
+      align-items: flex-start;
+    }
+
+    .card img,
+    .card .no-img {
+      width: 52px;
+      height: 52px;
+    }
+
+    .card-side {
+      gap: 5px;
+      max-width: 78px;
+    }
+
+    .card-side > button,
+    .card-side > a {
+      max-width: 78px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .favorite-btn,
+    .share-btn,
+    .yt-btn,
+    .copy-btn {
+      min-height: 34px;
+      padding: 6px 7px;
+    }
+
+    .top-btn {
+      right: 10px;
+      bottom: 10px;
+    }
 
     .custom-date-box {
       align-items: stretch;
@@ -1067,37 +1086,27 @@
     }
   }
 
-/* ======================================================
-   Mobile interaction hardening
-   ====================================================== */
-@media (max-width: 768px) {
-
-  input,
-  select,
-  button {
-    font-size: 16px;
+  @media (max-width: 768px) {
+    input,
+    select,
+    button {
+      font-size: 16px;
+    }
   }
-}
 
-@media (max-width: 480px) {
-}
+  .favorite-btn.active,
+  button.favorite-btn.active,
+  .favorite-btn[aria-pressed="true"] {
+    background: rgba(255, 193, 7, 0.16);
+    border-color: rgba(255, 193, 7, 0.65);
+    color: #b77900;
+    font-weight: 700;
+  }
 
-
-/* Favorite visual state */
-.favorite-btn.active,
-button.favorite-btn.active,
-.favorite-btn[aria-pressed="true"] {
-  background: rgba(255, 193, 7, 0.16);
-  border-color: rgba(255, 193, 7, 0.65);
-  color: #b77900;
-  font-weight: 700;
-}
-
-.favorite-btn.active:hover,
-button.favorite-btn.active:hover {
-  background: rgba(255, 193, 7, 0.24);
-}
-
+  .favorite-btn.active:hover,
+  button.favorite-btn.active:hover {
+    background: rgba(255, 193, 7, 0.24);
+  }
 </style>
 </head>
 
@@ -1140,12 +1149,11 @@ button.favorite-btn.active:hover {
 </header>
 
 <main>
+
   <div
     id="statusBanner"
     class="status-banner hidden"
   ></div>
-
-  
 
   <div class="controls">
 
@@ -1206,6 +1214,7 @@ button.favorite-btn.active:hover {
     class="date-quick-wrap"
     aria-label="날짜 빠른 선택"
   >
+
     <div class="date-quick-title">
       날짜
     </div>
@@ -1214,6 +1223,7 @@ button.favorite-btn.active:hover {
       id="dateQuickBar"
       class="date-quick-bar"
     >
+
       <button
         class="date-quick-btn active"
         type="button"
@@ -1276,12 +1286,14 @@ button.favorite-btn.active:hover {
       >
         직접 선택
       </button>
+
     </div>
 
     <div
       id="customDateBox"
       class="custom-date-box hidden"
     >
+
       <label class="custom-date-field">
         시작일
         <input
@@ -1313,7 +1325,9 @@ button.favorite-btn.active:hover {
       >
         초기화
       </button>
+
     </div>
+
   </section>
 
   <div
@@ -1321,7 +1335,11 @@ button.favorite-btn.active:hover {
     class="filter-summary"
     aria-live="polite"
   >
-    <span id="filterSummaryText">전체 행사</span>
+
+    <span id="filterSummaryText">
+      전체 행사
+    </span>
+
     <button
       id="filterResetBtn"
       type="button"
@@ -1329,6 +1347,7 @@ button.favorite-btn.active:hover {
     >
       조건 초기화
     </button>
+
   </div>
 
   <button
@@ -1495,10 +1514,11 @@ button.favorite-btn.active:hover {
 </button>
 
 
-
-
-
-<div id="reminderBanner" class="reminder-banner hidden" aria-live="polite"></div>
+<div
+  id="reminderBanner"
+  class="reminder-banner hidden"
+  aria-live="polite"
+></div>
 
 
 <!-- ================================================== -->
