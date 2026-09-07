@@ -15,7 +15,7 @@
 
 <style>
   /* ==================================================
-     1. Theme
+     Theme
      ================================================== */
 
   :root {
@@ -44,7 +44,6 @@
     --success: #397a5c;
     --warning: #9a6412;
 
-    /* 기존 코드 호환용 */
     --bg: var(--paper);
     --text: var(--ink);
   }
@@ -121,12 +120,13 @@
   [data-theme="contrast"] .area-filter-btn,
   [data-theme="contrast"] .area-quick-btn,
   [data-theme="contrast"] .yt-btn,
-  [data-theme="contrast"] .copy-btn,
   [data-theme="contrast"] .share-btn,
   [data-theme="contrast"] .weekend-chip,
   [data-theme="contrast"] .date-quick-btn,
   [data-theme="contrast"] .custom-date-box,
-  [data-theme="contrast"] .custom-date-action {
+  [data-theme="contrast"] .custom-date-action,
+  [data-theme="contrast"] .filter-menu,
+  [data-theme="contrast"] .card-menu-action {
     color: #000000;
     border-width: 2px;
   }
@@ -143,23 +143,19 @@
   [data-theme="dark"] .area-filter-btn,
   [data-theme="dark"] .area-quick-btn,
   [data-theme="dark"] .yt-btn,
-  [data-theme="dark"] .copy-btn,
-  [data-theme="dark"] .unhide-btn,
-  [data-theme="dark"] .weather-link-btn,
+  [data-theme="dark"] .share-btn,
   [data-theme="dark"] .weekend-chip,
   [data-theme="dark"] .area-checkbox-item,
   [data-theme="dark"] .no-img,
   [data-theme="dark"] .custom-date-box,
-  [data-theme="dark"] .date-quick-btn {
+  [data-theme="dark"] .date-quick-btn,
+  [data-theme="dark"] .filter-menu,
+  [data-theme="dark"] .card-menu-action {
     background: var(--surface);
   }
 
-  [data-theme="dark"] .share-btn {
-    color: #2b1a0f;
-  }
-
   /* ==================================================
-     2. Base
+     Base
      ================================================== */
 
   * {
@@ -174,7 +170,11 @@
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:
+      "Pretendard",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
   }
@@ -190,7 +190,7 @@
   }
 
   /* ==================================================
-     3. Header
+     Header
      ================================================== */
 
   header {
@@ -204,14 +204,14 @@
         #49638e 100%
       );
     color: white;
-    padding: 22px 24px 20px;
+    padding: 20px 20px 18px;
   }
 
   header::before {
     content: "";
     position: absolute;
-    left: -90px;
-    bottom: -100px;
+    left: -100px;
+    bottom: -110px;
     width: 260px;
     height: 260px;
     border-radius: 50%;
@@ -249,8 +249,8 @@
   }
 
   header h1 {
-    margin: 0 0 4px;
-    font-size: clamp(21px, 2.3vw, 27px);
+    margin: 0 0 3px;
+    font-size: clamp(20px, 2.3vw, 27px);
     font-weight: 800;
     letter-spacing: -0.035em;
   }
@@ -262,34 +262,32 @@
   }
 
   #updatedAt {
-    margin-top: 8px;
+    margin-top: 7px;
     font-size: 11.5px;
-    color: rgba(255,255,255,0.58);
+    color: rgba(255,255,255,0.55);
   }
 
   .header-actions {
     position: absolute;
     top: 50%;
-    right: 24px;
+    right: 0;
     transform: translateY(-50%);
-    z-index: 3;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
   }
 
   .theme-toggle,
   .contrast-toggle,
   .favorites-btn {
-    position: static;
-    width: 40px;
-    height: 40px;
-    flex: 0 0 40px;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
     border-radius: 50%;
     border: 1px solid rgba(255,255,255,0.22);
     background: rgba(255,255,255,0.09);
     color: white;
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -314,31 +312,27 @@
   }
 
   /* ==================================================
-     4. Main Layout
+     Main
      ================================================== */
 
   main {
-    width: min(1100px, calc(100% - 32px));
+    width: min(1100px, calc(100% - 24px));
     margin: 0 auto;
-    padding: 26px 0 72px;
+    padding: 20px 0 72px;
   }
-
-  /* ==================================================
-     5. Status
-     ================================================== */
 
   .status-banner {
     display: flex;
     align-items: center;
     min-height: 44px;
-    background: #fff7e9;
+    margin: 0 0 16px;
+    padding: 10px 14px;
     border: 1px solid #e7c98f;
+    border-radius: 12px;
+    background: #fff7e9;
     color: #7b4b03;
     font-size: 12.5px;
     font-weight: 600;
-    padding: 10px 14px;
-    border-radius: 12px;
-    margin: 0 0 18px;
   }
 
   [data-theme="dark"] .status-banner {
@@ -354,291 +348,55 @@
   }
 
   /* ==================================================
-     6. Search / Filters
-     ================================================== */
-
-  .controls {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 180px 180px;
-    gap: 10px;
-    margin: 0 0 12px;
-    position: sticky;
-    top: 0;
-    padding: 10px 0;
-    background: color-mix(in srgb, var(--paper) 94%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    z-index: 5;
-  }
-
-  .controls input,
-  .controls select,
-  .area-filter-btn,
-  .weather-link-btn {
-    min-height: 46px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--ink);
-    transition:
-      border-color 0.15s ease,
-      box-shadow 0.15s ease,
-      background 0.15s ease;
-  }
-
-  .controls input,
-  .controls select {
-    width: 100%;
-    padding: 0 14px;
-    font-size: 14px;
-    outline: none;
-  }
-
-  .controls input::placeholder {
-    color: var(--ink-muted);
-  }
-
-  .controls input:focus,
-  .controls select:focus,
-  .area-filter-btn:focus {
-    border-color: var(--indigo);
-    box-shadow: 0 0 0 3px var(--indigo-soft);
-  }
-
-  .controls input {
-    grid-column: 1 / -1;
-    height: 52px;
-    font-size: 15px;
-    padding-left: 16px;
-  }
-
-  .controls select {
-    min-width: 0;
-  }
-
-  .area-filter-btn {
-    width: 100%;
-    padding: 0 42px 0 14px;
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    position: relative;
-    appearance: none;
-    -webkit-appearance: none;
-    font-size: 14px;
-  }
-
-  .area-filter-btn::after {
-    content: "▾";
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--ink-muted);
-    font-size: 12px;
-    pointer-events: none;
-  }
-
-  .weather-link-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 700;
-    padding: 0 14px;
-    white-space: nowrap;
-  }
-
-  .weather-link-btn:hover {
-    border-color: var(--indigo);
-    background: var(--indigo-soft);
-  }
-
-  /* Area button / weather sit below filters when present */
-  #areaFilterBtn {
-    grid-column: 1 / 3;
-  }
-
-  #weatherLinkBtn {
-    grid-column: 3;
-  }
-
-  /* ==================================================
-     7. Date Quick Filter
-     ================================================== */
-
-  .date-quick-wrap {
-    padding: 4px 0 8px;
-    margin: 4px 0 8px;
-  }
-
-  .date-quick-title {
-    margin: 0 0 8px;
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--ink-soft);
-    letter-spacing: -0.01em;
-  }
-
-  .date-quick-bar {
-    display: flex;
-    gap: 7px;
-    overflow-x: auto;
-    padding: 1px 0 5px;
-    scrollbar-width: thin;
-  }
-
-  .date-quick-btn {
-    flex: 0 0 auto;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--ink-soft);
-    border-radius: 999px;
-    min-height: 38px;
-    padding: 0 15px;
-    font-size: 13px;
-    font-weight: 700;
-    transition:
-      background 0.15s ease,
-      color 0.15s ease,
-      border-color 0.15s ease;
-  }
-
-  .date-quick-btn:hover {
-    border-color: var(--line-strong);
-    background: var(--surface-hover);
-    color: var(--ink);
-  }
-
-  .date-quick-btn.active {
-    border-color: var(--lantern);
-    background: var(--lantern);
-    color: #fff;
-  }
-
-  .custom-date-box {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    padding: 14px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: var(--surface);
-  }
-
-  .custom-date-field {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    min-width: 150px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--ink-soft);
-  }
-
-  .custom-date-field input {
-    min-height: 40px;
-    border: 1px solid var(--line);
-    border-radius: 9px;
-    padding: 0 9px;
-    background: var(--paper);
-    color: var(--ink);
-    font: inherit;
-  }
-
-  .custom-date-action {
-    min-height: 40px;
-    border: 1px solid var(--line);
-    border-radius: 9px;
-    padding: 0 14px;
-    background: var(--surface);
-    color: var(--ink);
-    font: inherit;
-    font-size: 13px;
-    font-weight: 700;
-  }
-
-  .custom-date-action.primary {
-    border-color: var(--lantern);
-    background: var(--lantern);
-    color: #fff;
-  }
-
-  /* ==================================================
-     8. Filter Summary
+     Filter Summary
      ================================================== */
 
   .filter-summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    min-height: 46px;
-    margin: 8px 0 12px;
-    padding: 0 13px;
-    border: 1px solid var(--line);
-    border-radius: 11px;
-    background: var(--paper-soft);
+    gap: 10px;
+    min-height: 42px;
+    margin: 0 0 10px;
+    padding: 0 11px;
     color: var(--ink-soft);
-    font-size: 12.5px;
+    font-size: 11.5px;
   }
 
   #filterSummaryText {
-    font-weight: 700;
-    color: var(--ink);
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .filter-reset-btn {
     flex: 0 0 auto;
-    border: 1px solid var(--line);
-    border-radius: 8px;
+    border: none;
     background: transparent;
     color: var(--ink-soft);
-    padding: 6px 9px;
+    padding: 5px 0;
     font: inherit;
     font-size: 11.5px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   .filter-reset-btn:hover {
     color: var(--ink);
-    background: var(--surface);
   }
 
   /* ==================================================
-     9. Hidden Management
-     ================================================== */
-
-  .hidden-manage-btn {
-    display: block;
-    width: fit-content;
-    margin: 0 0 12px;
-    text-align: left;
-    background: transparent;
-    border: none;
-    color: var(--ink-soft);
-    font-size: 12px;
-    padding: 0;
-  }
-
-  .hidden-manage-btn:hover {
-    color: var(--ink);
-  }
-
-  /* ==================================================
-     10. View Toggle
+     View Toggle
      ================================================== */
 
   .view-toggle {
     display: flex;
     gap: 4px;
     background: var(--paper-deep);
-    border-radius: 13px;
+    border-radius: 12px;
     padding: 4px;
-    margin: 12px 0 16px;
+    margin: 0 0 18px;
   }
 
   .view-toggle button {
@@ -646,10 +404,10 @@
     min-height: 42px;
     border: none;
     background: transparent;
+    color: var(--ink-soft);
+    border-radius: 9px;
     font-size: 13px;
     font-weight: 800;
-    border-radius: 10px;
-    color: var(--ink-soft);
     transition:
       background 0.15s ease,
       color 0.15s ease;
@@ -665,14 +423,8 @@
     box-shadow: 0 1px 4px rgba(0,0,0,0.07);
   }
 
-  .compact-toggle-btn {
-    flex: 0 0 44px !important;
-    width: 44px;
-    padding: 0 !important;
-  }
-
   /* ==================================================
-     11. Compact View
+     Compact View
      ================================================== */
 
   body.compact-view .card {
@@ -682,10 +434,6 @@
   body.compact-view .card img,
   body.compact-view .no-img {
     display: none;
-  }
-
-  body.compact-view .card-link {
-    align-items: center;
   }
 
   body.compact-view .card-body {
@@ -709,67 +457,56 @@
     text-overflow: ellipsis;
   }
 
-  body.compact-view .share-btn,
-  body.compact-view .yt-btn,
-  body.compact-view .copy-btn {
-    display: none;
-  }
-
-  body.compact-view .card-side {
-    gap: 4px;
-  }
-
   /* ==================================================
-     12. Section Titles
+     Section Titles
      ================================================== */
 
   .urgent-section-title {
-    font-size: 15px;
-    font-weight: 800;
-    margin: 24px 0 10px;
-    padding: 0 0 9px;
+    margin: 22px 0 10px;
+    padding: 0 2px 8px;
     border-bottom: 2px solid var(--line);
     color: var(--ink);
+    font-size: 15px;
+    font-weight: 800;
     letter-spacing: -0.02em;
   }
 
-  .urgent-section-title.hot {
+  .urgent-section-title.selected {
     color: var(--lantern);
     border-bottom-color: var(--lantern);
   }
 
   .month-group {
-    margin-bottom: 30px;
+    margin-bottom: 28px;
   }
 
   .month-title {
+    margin: 0 0 10px 2px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
     font-size: 13px;
     font-weight: 800;
-    color: var(--ink-soft);
     letter-spacing: 0.02em;
-    margin: 0 0 10px;
-    padding: 0 0 7px 2px;
-    border-bottom: 1px solid var(--line);
   }
 
   /* ==================================================
-     13. Cards
+     Card
      ================================================== */
 
   .card {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 15px;
     position: relative;
 
-    background: var(--surface);
+    min-height: 106px;
+    margin-bottom: 10px;
+    padding: 13px 14px;
+
     border: 1px solid var(--line);
     border-radius: 15px;
-
-    padding: 14px 15px;
-    margin-bottom: 10px;
-
-    min-height: 108px;
+    background: var(--surface);
 
     touch-action: pan-y;
 
@@ -795,29 +532,29 @@
   }
 
   a.card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
     flex: 1;
     min-width: 0;
+    display: block;
+    color: inherit;
+    text-decoration: none;
   }
 
   .card img,
   .card .no-img {
     width: 82px;
     height: 82px;
+    flex-shrink: 0;
     border-radius: 12px;
     object-fit: cover;
     background: var(--paper-deep);
-    flex-shrink: 0;
   }
 
   .card .no-img {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
     color: var(--ink-muted);
+    font-size: 24px;
   }
 
   .card-body {
@@ -826,15 +563,15 @@
   }
 
   .card-title {
+    margin: 0 0 7px;
+    color: var(--ink);
     font-size: 16px;
     font-weight: 800;
     line-height: 1.35;
-    margin: 0 0 7px;
-    color: var(--ink);
+    letter-spacing: -0.025em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    letter-spacing: -0.025em;
   }
 
   .card-title mark,
@@ -846,128 +583,37 @@
   }
 
   .card-meta {
-    font-size: 12.5px;
-    color: var(--ink-soft);
     display: flex;
-    gap: 5px 7px;
     align-items: center;
     flex-wrap: wrap;
+    gap: 4px 7px;
+    color: var(--ink-soft);
+    font-size: 12.5px;
     line-height: 1.5;
   }
 
-  .card-side {
+  .card-bottom {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    gap: 5px;
-    flex: 0 0 auto;
-    min-width: 70px;
-  }
-
-  .card-side button,
-  .card-side a {
-    min-width: 70px;
-    min-height: 32px;
-    border-radius: 8px;
-    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 7px;
+    margin-top: 9px;
   }
 
-  .copy-btn,
-  .yt-btn,
-  .share-btn,
-  .favorite-btn {
-    font-size: 11.5px;
-    font-weight: 800;
-    white-space: nowrap;
-  }
-
-  .copy-btn {
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--ink-soft);
-    padding: 5px 8px;
-  }
-
-  .copy-btn:hover {
-    color: var(--ink);
-    background: var(--paper-soft);
-  }
-
-  .share-btn {
-    border: 1px solid #d6c100;
-    background: #fee500;
-    color: #3b2b00;
-    padding: 5px 8px;
-  }
-
-  .yt-btn {
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: #c4302b;
-    padding: 5px 8px;
-  }
-
-  .yt-btn:hover {
-    background: var(--paper-soft);
-  }
-
-  .favorite-btn {
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--ink-soft);
-    padding: 5px 8px;
-  }
-
-  .favorite-btn:hover {
-    color: var(--ink);
-    background: var(--paper-soft);
-  }
-
-  .favorite-btn.active,
-  button.favorite-btn.active,
-  .favorite-btn[aria-pressed="true"] {
-    background: rgba(255,193,7,0.14);
-    border-color: rgba(255,193,7,0.65);
-    color: #b77900;
-    font-weight: 800;
-  }
-
-  .favorite-btn.active:hover,
-  button.favorite-btn.active:hover {
-    background: rgba(255,193,7,0.22);
-  }
-
-  .hide-btn {
-    position: absolute;
-    top: 7px;
-    right: 7px;
-    width: 22px;
-    height: 22px;
-    border: none;
-    background: transparent;
+  .card-type {
     color: var(--ink-muted);
-    font-size: 12px;
-    opacity: 0.45;
-    z-index: 1;
-  }
-
-  .hide-btn:hover {
-    opacity: 1;
-    color: var(--ink);
+    font-size: 11px;
+    font-weight: 700;
   }
 
   .dday {
-    flex-shrink: 0;
+    flex: 0 0 auto;
     align-self: flex-start;
-    font-size: 11px;
-    font-weight: 800;
     padding: 5px 9px;
     border-radius: 999px;
     background: var(--paper-deep);
     color: var(--ink-soft);
+    font-size: 11px;
+    font-weight: 800;
     white-space: nowrap;
   }
 
@@ -982,24 +628,136 @@
   }
 
   /* ==================================================
-     14. Weekend
+     Favorite
+     ================================================== */
+
+  .favorite-btn {
+    flex: 0 0 auto;
+    min-width: 62px;
+    min-height: 32px;
+    padding: 5px 8px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 11.5px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .favorite-btn:hover {
+    color: var(--ink);
+    background: var(--paper-soft);
+  }
+
+  .favorite-btn.active,
+  .favorite-btn[aria-pressed="true"] {
+    background: rgba(255,193,7,0.14);
+    border-color: rgba(255,193,7,0.65);
+    color: #b77900;
+  }
+
+  /* ==================================================
+     Card Menu
+     ================================================== */
+
+  .card-side {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+
+  .card-menu-wrap {
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .card-menu-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+
+  .card-menu-btn:hover,
+  .card-menu-btn.active {
+    background: var(--paper-deep);
+    color: var(--ink);
+  }
+
+  .filter-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 7px);
+    z-index: 15;
+    width: 150px;
+    padding: 5px;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    background: var(--surface);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+  }
+
+  .card-menu-action {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 38px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+    text-decoration: none;
+  }
+
+  .card-menu-action:hover {
+    background: var(--paper-deep);
+  }
+
+  .card-menu-action.share-btn {
+    color: #5b4b00;
+  }
+
+  .card-menu-action.yt-btn {
+    color: #c4302b;
+  }
+
+  .card-menu-action.hide-card-action {
+    color: var(--ink-soft);
+  }
+
+  /* ==================================================
+     Weekend chips
      ================================================== */
 
   .weekend-chips {
     display: flex;
+    flex-wrap: nowrap;
     gap: 7px;
-    margin: 12px 0 12px;
-    flex-wrap: wrap;
+    overflow-x: auto;
+    padding: 2px 0 4px;
   }
 
   .weekend-chip {
-    font-size: 12.5px;
-    font-weight: 800;
-    color: var(--ink-soft);
-    background: var(--surface);
+    flex: 0 0 auto;
+    padding: 8px 13px;
     border: 1px solid var(--line);
     border-radius: 999px;
-    padding: 8px 14px;
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 12px;
+    font-weight: 800;
     white-space: nowrap;
   }
 
@@ -1008,19 +766,346 @@
   }
 
   .weekend-chip.active {
-    color: var(--lantern);
     border-color: var(--lantern);
     background: var(--lantern-soft);
+    color: var(--lantern);
   }
 
   /* ==================================================
-     15. Favorites
+     Empty / Loading
+     ================================================== */
+
+  .empty,
+  .loading {
+    padding: 64px 20px;
+    color: var(--ink-soft);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .load-more-sentinel {
+    padding: 14px 0;
+    color: var(--ink-soft);
+    font-size: 12px;
+    text-align: center;
+  }
+
+  /* ==================================================
+     Filter Drawer
+     ================================================== */
+
+  .filter-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: rgba(20,16,10,0.48);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease;
+  }
+
+  .filter-backdrop.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .filter-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+
+    width: min(360px, 88vw);
+    padding: 18px 18px 28px;
+
+    background: var(--paper);
+    border-left: 1px solid var(--line);
+    box-shadow: -12px 0 35px rgba(0,0,0,0.12);
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+
+    transform: translateX(100%);
+    transition: transform 0.24s ease;
+  }
+
+  .filter-drawer.open {
+    transform: translateX(0);
+  }
+
+  .filter-handle {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 89;
+
+    width: 32px;
+    height: 74px;
+
+    border: 1px solid var(--line);
+    border-right: none;
+    border-radius: 14px 0 0 14px;
+    background: var(--surface);
+    color: var(--ink-soft);
+
+    font-size: 18px;
+    font-weight: 800;
+
+    box-shadow: -3px 3px 14px rgba(0,0,0,0.08);
+
+    transition:
+      right 0.24s ease,
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .filter-handle:hover {
+    background: var(--paper-deep);
+    color: var(--ink);
+  }
+
+  .filter-handle.has-filter {
+    color: var(--lantern);
+  }
+
+  body.filter-drawer-open .filter-handle {
+    right: min(360px, 88vw);
+    border-right: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    border-radius: 9px 0 0 9px;
+  }
+
+  .filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .filter-title {
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  .filter-close {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background: var(--paper-deep);
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  .filter-section {
+    margin-top: 20px;
+  }
+
+  .filter-section-title {
+    margin-bottom: 8px;
+    color: var(--ink-soft);
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .controls input,
+  .controls select,
+  .area-filter-btn,
+  .weather-link-btn {
+    width: 100%;
+    min-height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 14px;
+  }
+
+  .controls input {
+    padding: 0 13px;
+    outline: none;
+  }
+
+  .controls input::placeholder {
+    color: var(--ink-muted);
+  }
+
+  .controls input:focus,
+  .controls select:focus,
+  .area-filter-btn:focus {
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 3px var(--indigo-soft);
+  }
+
+  .controls select {
+    padding: 0 12px;
+    outline: none;
+  }
+
+  .area-filter-btn {
+    position: relative;
+    padding: 0 38px 0 13px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .area-filter-btn::after {
+    content: "▾";
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-muted);
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  .weather-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 13px;
+    color: var(--indigo);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .date-quick-title {
+    margin-bottom: 8px;
+    color: var(--ink-soft);
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .date-quick-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .date-quick-btn {
+    min-height: 37px;
+    padding: 0 13px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    font-weight: 800;
+  }
+
+  .date-quick-btn.active {
+    border-color: var(--lantern);
+    background: var(--lantern);
+    color: white;
+  }
+
+  .custom-date-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    background: var(--surface);
+  }
+
+  .custom-date-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+    color: var(--ink-soft);
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .custom-date-field input {
+    min-height: 38px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0 8px;
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+  }
+
+  .custom-date-action {
+    min-height: 39px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 12.5px;
+    font-weight: 800;
+  }
+
+  .custom-date-action.primary {
+    border-color: var(--lantern);
+    background: var(--lantern);
+    color: white;
+  }
+
+  .filter-weekend-box {
+    padding-top: 2px;
+  }
+
+  .filter-management {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .hidden-manage-btn {
+    width: 100%;
+    min-height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    text-align: left;
+  }
+
+  .compact-toggle-btn {
+    width: 100%;
+    min-height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    font-weight: 800;
+  }
+
+  /* ==================================================
+     Favorites
      ================================================== */
 
   .favorites-hint {
-    font-size: 12px;
-    color: var(--ink-soft);
     margin: 0 0 14px;
+    color: var(--ink-soft);
+    font-size: 12px;
     line-height: 1.6;
   }
 
@@ -1028,11 +1113,11 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: var(--surface);
+    margin-bottom: 8px;
+    padding: 9px 10px;
     border: 1px solid var(--line);
     border-radius: 12px;
-    padding: 9px 10px;
-    margin-bottom: 8px;
+    background: var(--surface);
     touch-action: pan-y;
   }
 
@@ -1044,9 +1129,9 @@
   .favorite-item .no-img-mini {
     width: 44px;
     height: 44px;
+    flex-shrink: 0;
     border-radius: 9px;
     object-fit: cover;
-    flex-shrink: 0;
     background: var(--paper-deep);
     display: flex;
     align-items: center;
@@ -1060,26 +1145,26 @@
   }
 
   .favorite-item-title {
+    color: var(--ink);
     font-size: 13.5px;
     font-weight: 800;
-    color: var(--ink);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .favorite-item-meta {
-    font-size: 11.5px;
     color: var(--ink-soft);
+    font-size: 11.5px;
   }
 
   .favorite-item-reminder {
-    flex-shrink: 0;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
     gap: 5px;
     flex-wrap: wrap;
-    justify-content: flex-end;
   }
 
   .favorite-reminder-btn {
@@ -1103,9 +1188,9 @@
 
   .favorite-reminder {
     width: 100%;
-    text-align: right;
-    font-size: 10.5px;
     color: var(--ink-soft);
+    font-size: 10.5px;
+    text-align: right;
   }
 
   .favorite-remove-btn {
@@ -1119,19 +1204,19 @@
 
   .favorite-drag-handle {
     flex-shrink: 0;
-    font-size: 18px;
-    color: var(--ink-soft);
     padding: 4px 6px;
+    color: var(--ink-soft);
+    font-size: 18px;
     cursor: grab;
     touch-action: none;
   }
 
   /* ==================================================
-     16. Reminder
+     Reminder
      ================================================== */
 
   .reminder-banner {
-    width: min(1100px, calc(100% - 32px));
+    width: min(1100px, calc(100% - 24px));
     margin: 0 auto 18px;
     padding: 11px 14px;
     border: 1px solid var(--line);
@@ -1156,16 +1241,16 @@
   }
 
   /* ==================================================
-     17. Modal
+     Modal
      ================================================== */
 
   .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(15, 12, 8, 0.58);
+    z-index: 100;
     display: flex;
     align-items: flex-end;
-    z-index: 50;
+    background: rgba(15,12,8,0.58);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
   }
@@ -1173,35 +1258,35 @@
   .modal-sheet {
     width: 100%;
     max-height: 82vh;
-    overflow-y: auto;
-    background: var(--paper);
-    border-radius: 20px 20px 0 0;
     padding: 18px 20px 30px;
+    overflow-y: auto;
+    border-radius: 20px 20px 0 0;
+    background: var(--paper);
     box-shadow: 0 -8px 35px rgba(0,0,0,0.15);
   }
 
   .modal-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: 12px;
     margin-bottom: 14px;
   }
 
   .modal-title {
+    color: var(--ink);
     font-size: 17px;
     font-weight: 800;
-    color: var(--ink);
   }
 
   .modal-close {
-    border: none;
-    background: var(--paper-deep);
     width: 32px;
     height: 32px;
+    border: none;
     border-radius: 50%;
-    font-size: 14px;
+    background: var(--paper-deep);
     color: var(--ink-soft);
+    font-size: 14px;
   }
 
   .modal-close:hover {
@@ -1211,8 +1296,8 @@
 
   .hidden-item-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
     padding: 11px 0;
     border-bottom: 1px solid var(--line);
@@ -1228,11 +1313,10 @@
 
   .unhide-all-btn {
     border: 1px solid var(--line);
+    border-radius: 8px;
     background: var(--surface);
     color: var(--ink);
-    border-radius: 8px;
     padding: 7px 10px;
-    font: inherit;
     font-size: 12px;
     font-weight: 700;
   }
@@ -1240,33 +1324,28 @@
   .unhide-btn {
     flex-shrink: 0;
     border: 1px solid var(--line);
+    border-radius: 8px;
     background: var(--surface);
     color: var(--indigo);
+    padding: 5px 10px;
     font-size: 12px;
     font-weight: 700;
-    padding: 5px 10px;
-    border-radius: 8px;
     white-space: nowrap;
   }
 
   /* ==================================================
-     18. Area Modal
+     Area
      ================================================== */
 
   .area-quick-btn {
     flex: 1;
     border: 1px solid var(--line);
-    background: var(--surface);
     border-radius: 9px;
+    background: var(--surface);
+    color: var(--ink-soft);
     padding: 9px 0;
     font-size: 13px;
     font-weight: 700;
-    color: var(--ink-soft);
-  }
-
-  .area-quick-btn:hover {
-    background: var(--surface-hover);
-    color: var(--ink);
   }
 
   .area-checkbox-list {
@@ -1280,11 +1359,11 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
     padding: 9px 7px;
     border: 1px solid var(--line);
     border-radius: 9px;
     background: var(--surface);
+    font-size: 13px;
   }
 
   .area-checkbox-item input {
@@ -1296,46 +1375,42 @@
   .area-apply-btn {
     width: 100%;
     min-height: 44px;
-    background: var(--indigo);
-    color: white;
     border: none;
     border-radius: 10px;
+    background: var(--indigo);
+    color: white;
     padding: 11px 0;
     font-size: 14px;
     font-weight: 800;
   }
 
-  .area-apply-btn:hover {
-    background: var(--indigo-dark);
-  }
-
   /* ==================================================
-     19. Poster Modal
+     Poster
      ================================================== */
 
   .poster-modal {
     position: fixed;
     inset: 0;
-    z-index: 60;
+    z-index: 120;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(10, 8, 5, 0.82);
+    overflow: hidden;
+    background: rgba(10,8,5,0.82);
     backdrop-filter: blur(9px);
     -webkit-backdrop-filter: blur(9px);
     touch-action: none;
-    overflow: hidden;
   }
 
   .poster-modal img {
     max-width: 92vw;
     max-height: 82vh;
     border-radius: 10px;
-    touch-action: none;
     transform-origin: center center;
     will-change: transform;
     user-select: none;
     -webkit-user-select: none;
+    touch-action: none;
     box-shadow: 0 10px 40px rgba(0,0,0,0.35);
   }
 
@@ -1343,43 +1418,28 @@
     position: absolute;
     top: 18px;
     right: 18px;
+    z-index: 121;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
     border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
     background: rgba(255,255,255,0.12);
     color: white;
     font-size: 16px;
-    z-index: 61;
   }
 
   .poster-modal-hint {
     position: absolute;
     top: 22px;
     left: 18px;
+    margin: 0;
     color: rgba(255,255,255,0.75);
     font-size: 12px;
-    margin: 0;
   }
 
   /* ==================================================
-     20. Utility
+     Utility
      ================================================== */
-
-  .empty,
-  .loading {
-    text-align: center;
-    color: var(--ink-soft);
-    padding: 64px 20px;
-    font-size: 14px;
-  }
-
-  .load-more-sentinel {
-    text-align: center;
-    color: var(--ink-soft);
-    font-size: 12px;
-    padding: 15px 0;
-  }
 
   .hidden {
     display: none !important;
@@ -1387,113 +1447,67 @@
 
   .top-btn {
     position: fixed;
-    right: 24px;
-    bottom: 24px;
+    right: 16px;
+    bottom: 18px;
+    z-index: 30;
     width: 44px;
     height: 44px;
-    border-radius: 50%;
     border: 1px solid var(--line);
+    border-radius: 50%;
     background: var(--indigo);
     color: white;
     font-size: 17px;
     box-shadow: 0 5px 18px rgba(0,0,0,0.2);
-    z-index: 20;
-  }
-
-  .top-btn:hover {
-    background: var(--indigo-dark);
   }
 
   /* ==================================================
-     21. Responsive
+     Responsive
      ================================================== */
-
-  @media (max-width: 900px) {
-    .controls {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    #areaFilterBtn,
-    #weatherLinkBtn {
-      grid-column: auto;
-    }
-
-    #areaFilterBtn {
-      grid-column: 1 / -1;
-    }
-
-    #weatherLinkBtn {
-      grid-column: 1 / -1;
-      justify-content: flex-start;
-    }
-
-    .card {
-      gap: 13px;
-    }
-  }
 
   @media (max-width: 700px) {
     header {
-      padding: 18px 16px 17px;
+      padding: 16px 16px 15px;
     }
 
     .header-inner {
       padding-right: 0;
-      padding-top: 48px;
+      padding-top: 45px;
     }
 
     .header-actions {
-      top: 14px;
-      right: 16px;
+      top: 4px;
+      right: 0;
       transform: none;
     }
 
     .theme-toggle,
     .contrast-toggle,
     .favorites-btn {
-      width: 36px;
-      height: 36px;
-      flex-basis: 36px;
-      font-size: 15px;
-    }
-
-    main {
-      width: min(100% - 24px, 1100px);
-      padding-top: 16px;
-    }
-
-    .controls {
-      grid-template-columns: 1fr;
-      gap: 8px;
-      padding-top: 7px;
-    }
-
-    .controls input,
-    .controls select,
-    .area-filter-btn,
-    .weather-link-btn {
-      min-height: 44px;
-    }
-
-    .controls input {
-      height: 48px;
+      width: 35px;
+      height: 35px;
+      flex-basis: 35px;
       font-size: 14px;
     }
 
-    #areaFilterBtn,
-    #weatherLinkBtn {
-      grid-column: auto;
+    main {
+      width: calc(100% - 20px);
+      padding-top: 14px;
     }
 
-    .view-toggle {
-      margin-top: 10px;
+    .filter-summary {
+      padding: 0 7px;
+    }
+
+    .view-toggle button {
+      min-height: 40px;
+      font-size: 12px;
     }
 
     .card {
       align-items: flex-start;
       gap: 11px;
-      padding: 12px;
       min-height: 0;
+      padding: 11px;
     }
 
     .card img,
@@ -1504,30 +1518,47 @@
     }
 
     .card-title {
-      font-size: 14px;
       margin-bottom: 5px;
+      font-size: 14px;
     }
 
     .card-meta {
       font-size: 11.5px;
-      gap: 4px 6px;
+    }
+
+    .card-bottom {
+      margin-top: 6px;
     }
 
     .card-side {
-      min-width: 58px;
-      gap: 4px;
+      align-self: flex-start;
+      gap: 5px;
     }
 
-    .card-side button,
-    .card-side a {
-      min-width: 58px;
+    .favorite-btn {
+      min-width: 56px;
       min-height: 30px;
+      padding: 5px 6px;
       font-size: 10.5px;
     }
 
-    .dday {
-      font-size: 10px;
-      padding: 4px 7px;
+    .card-menu-btn {
+      width: 32px;
+      height: 32px;
+      font-size: 17px;
+    }
+
+    .filter-handle {
+      width: 30px;
+      height: 68px;
+    }
+
+    body.filter-drawer-open .filter-handle {
+      right: min(88vw, 360px);
+    }
+
+    .filter-drawer {
+      width: min(360px, 88vw);
     }
 
     .area-checkbox-list {
@@ -1539,118 +1570,81 @@
       padding-right: 16px;
     }
 
-    .top-btn {
-      right: 12px;
-      bottom: 12px;
-    }
-
     .reminder-banner {
-      width: calc(100% - 24px);
+      width: calc(100% - 20px);
     }
   }
 
-  @media (max-width: 520px) {
+  @media (max-width: 480px) {
     input,
     select,
     button {
       font-size: 16px;
     }
 
-    .header-actions {
-      gap: 5px;
-    }
-
     header h1 {
-      font-size: 20px;
+      font-size: 19px;
     }
 
     header p {
-      font-size: 12px;
+      font-size: 11.5px;
     }
 
     #updatedAt {
-      font-size: 10.5px;
-    }
-
-    .date-quick-bar {
-      margin-right: -2px;
-    }
-
-    .date-quick-btn {
-      min-height: 36px;
-      padding: 0 13px;
-      font-size: 12px;
-    }
-
-    .filter-summary {
-      min-height: 42px;
-      font-size: 11.5px;
+      font-size: 10px;
     }
 
     .card {
       display: grid;
-      grid-template-columns: 64px minmax(0, 1fr);
+      grid-template-columns: 60px minmax(0, 1fr);
       gap: 10px;
     }
 
     .card img,
     .card .no-img {
-      width: 64px;
-      height: 64px;
+      width: 60px;
+      height: 60px;
     }
 
-    .card-body {
+    .card-link {
       min-width: 0;
     }
 
     .card-side {
       grid-column: 2;
-      flex-direction: row;
-      align-items: center;
-      flex-wrap: wrap;
-      min-width: 0;
       width: 100%;
+      justify-content: flex-end;
       margin-top: -2px;
     }
 
-    .card-side button,
-    .card-side a {
-      min-width: 0;
-      flex: 0 0 auto;
-      padding: 5px 8px;
+    .dday {
+      position: absolute;
+      left: 72px;
+      top: 10px;
     }
 
-    .month-title {
-      margin-bottom: 8px;
-    }
-
-    .weekend-chips {
-      overflow-x: auto;
-      flex-wrap: nowrap;
-      padding-bottom: 3px;
-    }
-
-    .area-checkbox-list {
-      grid-template-columns: 1fr 1fr;
+    .card-title {
+      padding-right: 48px;
     }
 
     .custom-date-box {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
     }
 
-    .custom-date-field {
-      min-width: 0;
+    .date-quick-bar {
+      flex-wrap: nowrap;
+      overflow-x: auto;
     }
 
-    .custom-date-action {
-      width: 100%;
+    .date-quick-btn {
+      flex: 0 0 auto;
+    }
+
+    .top-btn {
+      right: 10px;
+      bottom: 10px;
     }
   }
-
-  /* ==================================================
-     22. Reduced motion
-     ================================================== */
 
   @media (prefers-reduced-motion: reduce) {
     *,
@@ -1673,8 +1667,8 @@
       <button
         id="favoritesBtn"
         class="favorites-btn"
-        aria-label="내 찜 목록"
         type="button"
+        aria-label="내 찜 목록"
       >
         📌
       </button>
@@ -1682,8 +1676,8 @@
       <button
         id="contrastToggle"
         class="contrast-toggle"
-        aria-label="야외 고대비 모드"
         type="button"
+        aria-label="야외 고대비 모드"
       >
         ☀️
       </button>
@@ -1691,8 +1685,8 @@
       <button
         id="themeToggle"
         class="theme-toggle"
-        aria-label="다크 모드 전환"
         type="button"
+        aria-label="다크 모드 전환"
       >
         🌙
       </button>
@@ -1721,74 +1715,178 @@
   ></div>
 
 
-  <!-- ==================================================
-       검색 / 기본 필터
-       ================================================== -->
-
-  <div class="controls">
-
-    <input
-      id="search"
-      type="text"
-      placeholder="축제·공연 이름, 지역, 장소 검색"
-      aria-label="축제·공연 검색"
-    />
-
-    <select
-      id="typeFilter"
-      aria-label="행사 유형"
-    >
-      <option value="">
-        전체 유형
-      </option>
-
-      <option value="festival">
-        지역축제
-      </option>
-
-      <option value="performance">
-        공연
-      </option>
-    </select>
-
-    <select
-      id="monthFilter"
-      aria-label="행사 기간"
-    >
-      <option value="">
-        전체 기간
-      </option>
-    </select>
+  <div
+    id="filterSummary"
+    class="filter-summary"
+    aria-live="polite"
+  >
+    <span id="filterSummaryText">
+      전체 행사
+    </span>
 
     <button
-      id="areaFilterBtn"
-      class="area-filter-btn"
+      id="filterResetBtn"
       type="button"
-      aria-label="지역 선택"
+      class="filter-reset-btn hidden"
     >
-      📍 전국 전체 지역
+      조건 초기화
+    </button>
+  </div>
+
+
+  <div class="view-toggle">
+
+    <button
+      id="btnUrgentView"
+      class="active"
+      type="button"
+    >
+      🔥 다가오는 일정
     </button>
 
-    <a
-      id="weatherLinkBtn"
-      class="weather-link-btn hidden"
-      target="_blank"
-      rel="noopener"
+    <button
+      id="btnListView"
+      type="button"
     >
-      ☂️ 주말 날씨
-    </a>
+      📅 월별 목록
+    </button>
 
   </div>
 
 
-  <!-- ==================================================
-       날짜 빠른 선택
-       ================================================== -->
+  <div id="urgentView"></div>
 
-  <section
-    class="date-quick-wrap"
-    aria-label="날짜 빠른 선택"
+
+  <div
+    id="list"
+    class="hidden"
   >
+    <div class="loading">
+      축제 정보를 불러오는 중…
+    </div>
+  </div>
+
+</main>
+
+
+<!-- ==================================================
+     필터 핸들
+     ================================================== -->
+
+<button
+  id="filterHandle"
+  class="filter-handle"
+  type="button"
+  aria-label="검색 및 필터 열기"
+  aria-expanded="false"
+>
+  ‹
+</button>
+
+
+<div
+  id="filterBackdrop"
+  class="filter-backdrop"
+></div>
+
+
+<!-- ==================================================
+     오른쪽 필터 패널
+     ================================================== -->
+
+<aside
+  id="filterDrawer"
+  class="filter-drawer"
+  aria-label="검색 및 필터"
+>
+
+  <div class="filter-header">
+
+    <div class="filter-title">
+      검색 · 필터
+    </div>
+
+    <button
+      id="filterClose"
+      class="filter-close"
+      type="button"
+      aria-label="검색 및 필터 닫기"
+    >
+      ✕
+    </button>
+
+  </div>
+
+
+  <!-- 검색 / 기본 필터 -->
+
+  <section class="filter-section">
+
+    <div class="filter-section-title">
+      행사 찾기
+    </div>
+
+    <div class="controls">
+
+      <input
+        id="search"
+        type="text"
+        placeholder="축제·공연 이름, 지역, 장소 검색"
+        aria-label="축제·공연 검색"
+      />
+
+      <select
+        id="typeFilter"
+        aria-label="행사 유형"
+      >
+        <option value="">
+          전체 유형
+        </option>
+
+        <option value="festival">
+          지역축제
+        </option>
+
+        <option value="performance">
+          공연
+        </option>
+      </select>
+
+      <select
+        id="monthFilter"
+        aria-label="행사 기간"
+      >
+        <option value="">
+          전체 기간
+        </option>
+      </select>
+
+      <button
+        id="areaFilterBtn"
+        class="area-filter-btn"
+        type="button"
+        aria-label="지역 선택"
+      >
+        📍 전국 전체 지역
+      </button>
+
+      <a
+        id="weatherLinkBtn"
+        class="weather-link-btn hidden"
+        target="_blank"
+        rel="noopener"
+      >
+        ☂️ 주말 날씨
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- 날짜 -->
+
+  <section class="filter-section">
 
     <div class="date-quick-title">
       날짜
@@ -1909,100 +2007,57 @@
   </section>
 
 
-  <!-- ==================================================
-       필터 결과
-       ================================================== -->
+  <!-- 주말 -->
 
-  <div
-    id="filterSummary"
-    class="filter-summary"
-    aria-live="polite"
-  >
+  <section class="filter-section filter-weekend-box">
 
-    <span id="filterSummaryText">
-      전체 행사
-    </span>
-
-    <button
-      id="filterResetBtn"
-      type="button"
-      class="filter-reset-btn hidden"
-    >
-      조건 초기화
-    </button>
-
-  </div>
-
-
-  <button
-    id="hiddenManageBtn"
-    class="hidden-manage-btn hidden"
-    type="button"
-  >
-    🙈 숨긴 항목
-    <span id="hiddenCount">0</span>개 관리
-  </button>
-
-
-  <!-- ==================================================
-       보기 전환
-       ================================================== -->
-
-  <div class="view-toggle">
-
-    <button
-      id="btnUrgentView"
-      class="active"
-      type="button"
-    >
-      🔥 다가오는 일정
-    </button>
-
-    <button
-      id="btnListView"
-      type="button"
-    >
-      📅 월별 목록
-    </button>
-
-    <button
-      id="compactToggle"
-      class="compact-toggle-btn"
-      type="button"
-      aria-label="한 줄 보기 전환"
-    >
-      ☰
-    </button>
-
-  </div>
-
-
-  <!-- ==================================================
-       다가오는 일정
-       ================================================== -->
-
-  <div id="urgentView"></div>
-
-
-  <!-- ==================================================
-       월별 목록
-       ================================================== -->
-
-  <div
-    id="list"
-    class="hidden"
-  >
-    <div class="loading">
-      축제 정보를 불러오는 중…
+    <div class="filter-section-title">
+      주말 선택
     </div>
-  </div>
 
-</main>
+    <div id="filterWeekendChips"></div>
+
+  </section>
 
 
-<!-- ================================================== -->
-<!-- 지역 선택 모달 -->
-<!-- ================================================== -->
+  <!-- 기타 -->
+
+  <section class="filter-section">
+
+    <div class="filter-section-title">
+      기타
+    </div>
+
+    <div class="filter-management">
+
+      <button
+        id="compactToggle"
+        class="compact-toggle-btn"
+        type="button"
+        aria-label="한 줄 보기 전환"
+      >
+        ☰ 한 줄 보기
+      </button>
+
+      <button
+        id="hiddenManageBtn"
+        class="hidden-manage-btn hidden"
+        type="button"
+      >
+        🙈 숨긴 항목
+        <span id="hiddenCount">0</span>개 관리
+      </button>
+
+    </div>
+
+  </section>
+
+</aside>
+
+
+<!-- ==================================================
+     지역 선택 모달
+     ================================================== -->
 
 <div
   id="areaModal"
@@ -2070,9 +2125,9 @@
 </div>
 
 
-<!-- ================================================== -->
-<!-- 숨긴 항목 관리 모달 -->
-<!-- ================================================== -->
+<!-- ==================================================
+     숨긴 항목 관리 모달
+     ================================================== -->
 
 <div
   id="hiddenModal"
@@ -2103,9 +2158,9 @@
 </div>
 
 
-<!-- ================================================== -->
-<!-- 상단 이동 -->
-<!-- ================================================== -->
+<!-- ==================================================
+     상단 이동
+     ================================================== -->
 
 <button
   id="topBtn"
@@ -2117,9 +2172,9 @@
 </button>
 
 
-<!-- ================================================== -->
-<!-- 알림 -->
-<!-- ================================================== -->
+<!-- ==================================================
+     알림
+     ================================================== -->
 
 <div
   id="reminderBanner"
@@ -2128,9 +2183,9 @@
 ></div>
 
 
-<!-- ================================================== -->
-<!-- 찜 목록 -->
-<!-- ================================================== -->
+<!-- ==================================================
+     찜 목록
+     ================================================== -->
 
 <div
   id="favoritesModal"
@@ -2167,9 +2222,9 @@
 </div>
 
 
-<!-- ================================================== -->
-<!-- 포스터 확대 -->
-<!-- ================================================== -->
+<!-- ==================================================
+     포스터 확대
+     ================================================== -->
 
 <div
   id="posterModal"
@@ -2198,10 +2253,9 @@
 </div>
 
 
-<!-- ================================================== -->
-<!-- JavaScript -->
-<!-- 실행 순서 중요 -->
-<!-- ================================================== -->
+<!-- ==================================================
+     JavaScript
+     ================================================== -->
 
 <script src="js/state.js"></script>
 <script src="js/storage.js"></script>
