@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-07T23:24:33.469Z",
-  "count": 739,
+  "updatedAt": "2026-09-08T10:58:05.603Z",
+  "count": 757,
   "sourceStatus": {
     "tourapi": true,
     "culture": false,
@@ -378,45 +378,6 @@
       "detailUrl": null
     },
     {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF298972",
-      "title": "세번째 그린절 [서울]",
-      "startDate": "2026-09-07",
-      "endDate": "2026-09-07",
-      "location": "언플러그드 서교",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298972_260820_140534.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298972",
-      "genre": "대중음악"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF298902",
-      "title": "먼데이 프로젝트 IN 라이브 클럽, bendersea 단독 콘서트",
-      "startDate": "2026-09-07",
-      "endDate": "2026-09-07",
-      "location": "공상온도",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298902_260820_103019.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298902",
-      "genre": "대중음악"
-    },
-    {
-      "source": "kopis",
-      "type": "performance",
-      "id": "kopis-PF296362",
-      "title": "사상에 빠진 밤 (思想に溺れた夜) 원맨 라이브: BAND ADDICT TOUR [서울]",
-      "startDate": "2026-09-07",
-      "endDate": "2026-09-07",
-      "location": "얼라이브홀(구. 크랙홀)",
-      "area": "서울",
-      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF296362_260720_133808.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF296362",
-      "genre": "대중음악"
-    },
-    {
       "source": "tourapi",
       "type": "festival",
       "id": "tour-4095402",
@@ -443,6 +404,19 @@
       "lon": 127.68710635,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/88/4075188_image2_1.jpg",
       "detailUrl": null
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF300216",
+      "title": "LIVE in SETi vol.93",
+      "startDate": "2026-09-08",
+      "endDate": "2026-09-08",
+      "location": "세티 라이브홀 (SETI LIVE HALL)",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300216_260907_105455.png",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300216",
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -1419,6 +1393,19 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF299671",
+      "title": "해파 단독공연 [공주]",
+      "startDate": "2026-09-12",
+      "endDate": "2026-09-12",
+      "location": "문웨이브",
+      "area": "충청남",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF299671_260831_104639.png",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF299671",
+      "genre": "대중음악"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF299452",
       "title": "클래스메이트 시즌2: 5th 세션",
       "startDate": "2026-09-12",
@@ -2056,6 +2043,19 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF300351",
+      "title": "10CM with SPECIAL GUESTS, 올해도 글렀추",
+      "startDate": "2026-09-13",
+      "endDate": "2026-09-13",
+      "location": "서울어린이대공원",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300351_260908_100811.png",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300351",
+      "genre": "대중음악"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF300343",
       "title": "제31회 서곶문화예술제, 소리와 춤이 있는 그곳! 서해구 [인천]",
       "startDate": "2026-09-13",
@@ -2572,6 +2572,19 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF300360",
+      "title": "안녕! 여름, 안녕? 가을 Rock Festa [계룡]",
+      "startDate": "2026-09-17",
+      "endDate": "2026-09-17",
+      "location": "계룡시민체육관",
+      "area": "충청남",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300360_260908_103829.gif",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300360",
+      "genre": "대중음악"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF300064",
       "title": "idol wave vol.28",
       "startDate": "2026-09-17",
@@ -2869,6 +2882,19 @@
       "lon": 127.0095547691,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/58/4078758_image2_1.png",
       "detailUrl": null
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF300415",
+      "title": "서울국제컴퓨터음악제 SICMF",
+      "startDate": "2026-09-18",
+      "endDate": "2026-09-20",
+      "location": "연세대학교 음악대학 체임버홀",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300415_260908_141749.gif",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300415",
+      "genre": "복합"
     },
     {
       "source": "kopis",
@@ -3299,6 +3325,19 @@
       "lon": 128.9666251049,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/07/4106907_image2_1.jpg",
       "detailUrl": null
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF300392",
+      "title": "THE SET with WAX",
+      "startDate": "2026-09-19",
+      "endDate": "2026-09-19",
+      "location": "그랜드하얏트서울",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300392_260908_131103.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300392",
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -4029,6 +4068,19 @@
       "genre": "대중음악"
     },
     {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF300397",
+      "title": "라라라온 [롤링홀]",
+      "startDate": "2026-09-21",
+      "endDate": "2026-09-21",
+      "location": "롤링홀",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300397_260908_132044.png",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300397",
+      "genre": "대중음악"
+    },
+    {
       "source": "tourapi",
       "type": "festival",
       "id": "tour-141105",
@@ -4041,6 +4093,19 @@
       "lon": 128.3915143393,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/32/4084832_image2_1.jpg",
       "detailUrl": null
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF300394",
+      "title": "라라라온 [고라니특공대]",
+      "startDate": "2026-09-22",
+      "endDate": "2026-09-22",
+      "location": "고라니 특공대",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300394_260908_131419.png",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300394",
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -4308,6 +4373,19 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF300365",
+      "title": "곁에두는음악 Series 27. 루닐스라운지: DUOLOGUE",
+      "startDate": "2026-09-30",
+      "endDate": "2026-09-30",
+      "location": "음악의집",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300365_260908_105100.png",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300365",
+      "genre": "대중음악"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF299561",
       "title": "마티네콘서트 마실, 인생예찬",
       "startDate": "2026-09-30",
@@ -4440,6 +4518,19 @@
       "lon": 129.1276550014,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/73/4094773_image2_1.jpg",
       "detailUrl": null
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF300390",
+      "title": "소담예감, 마리아킴 Jazz in the Garden [거제]",
+      "startDate": "2026-10-01",
+      "endDate": "2026-10-01",
+      "location": "거제문화예술회관",
+      "area": "경상남",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300390_260908_125922.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300390",
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -4947,6 +5038,19 @@
       "lon": 127.691820103,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/49/4097049_image2_1.jpg",
       "detailUrl": null
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF300422",
+      "title": "홍경민 매달리스트 콘서트 SEASON3 (10월)",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-03",
+      "location": "구름아래소극장",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300422_260908_144020.gif",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300422",
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -5852,6 +5956,19 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF300393",
+      "title": "DEAD ROCK WORKING FEST. (데드락워킹페스트)",
+      "startDate": "2026-10-09",
+      "endDate": "2026-10-09",
+      "location": "아스트라홀",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300393_260908_131255.gif",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300393",
+      "genre": "대중음악"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF300140",
       "title": "POW CONCERT: COLOR ON [서울]",
       "startDate": "2026-10-09",
@@ -6642,6 +6759,19 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF300395",
+      "title": "제62회 인천 시민의 날 & IFEZ 개청 23주년 기념 음악회",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-15",
+      "location": "아트센터 인천",
+      "area": "인천",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300395_260908_131834.gif",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300395",
+      "genre": "복합"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF300259",
       "title": "두시 음악 살롱, The Crane 시네마 뮤직 파티 (10월)",
       "startDate": "2026-10-15",
@@ -6846,6 +6976,19 @@
       "lon": 126.961489283,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/11/4096811_image2_1.jpg",
       "detailUrl": null
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF300389",
+      "title": "HIGHLIGHT FAN CON: 18년차 아이돌인 내가 이세계에선 데뷔조 연습생?! [서울]",
+      "startDate": "2026-10-16",
+      "endDate": "2026-10-18",
+      "location": "장충체육관",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300389_260908_125817.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300389",
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -8169,6 +8312,19 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF300399",
+      "title": "곁에 머무는 음악 [대구]",
+      "startDate": "2026-10-27",
+      "endDate": "2026-10-27",
+      "location": "비원뮤직홀",
+      "area": "대구",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300399_260908_132639.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300399",
+      "genre": "복합"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF299287",
       "title": "드라큘라 [대구]",
       "startDate": "2026-10-27",
@@ -9055,6 +9211,19 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF300372",
+      "title": "사의 찬미 [춘천]",
+      "startDate": "2026-11-13",
+      "endDate": "2026-11-14",
+      "location": "춘천문화예술회관",
+      "area": "강원",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300372_260908_111220.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300372",
+      "genre": "뮤지컬"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF300254",
       "title": "더바인홀 특별 기획 콘서트: 케이티 조지 & 마리아 킴 [전주]",
       "startDate": "2026-11-13",
@@ -9655,6 +9824,19 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF300398",
+      "title": "이은미 콘서트 with 오케스트라: 추억이 핀다 [의정부]",
+      "startDate": "2026-11-29",
+      "endDate": "2026-11-29",
+      "location": "의정부예술의전당",
+      "area": "경기",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300398_260908_132335.gif",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300398",
+      "genre": "대중음악"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF282162",
       "title": "서울시뮤지컬단, 크리스마스 캐럴",
       "startDate": "2026-12-02",
@@ -9694,6 +9876,19 @@
     {
       "source": "kopis",
       "type": "performance",
+      "id": "kopis-PF300356",
+      "title": "스모킹 건 김목경 & 블루스 밴드 콘서트",
+      "startDate": "2026-12-04",
+      "endDate": "2026-12-04",
+      "location": "구름아래소극장",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300356_260908_102334.png",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300356",
+      "genre": "대중음악"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
       "id": "kopis-PF297746",
       "title": "이승철 40주년 콘서트, THE VOICE: LEE SEUNG CHU [서울]",
       "startDate": "2026-12-04",
@@ -9717,6 +9912,19 @@
       "lon": 126.8964648544,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/62/4108262_image2_1.jpg",
       "detailUrl": null
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF300401",
+      "title": "무명전설 전국투어 콘서트 [인천]",
+      "startDate": "2026-12-05",
+      "endDate": "2026-12-05",
+      "location": "인천남동체육관",
+      "area": "인천",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF300401_260908_132947.gif",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF300401",
+      "genre": "대중음악"
     },
     {
       "source": "kopis",
@@ -9808,6 +10016,32 @@
       "area": "경기",
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295528_260707_141435.gif",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295528",
+      "genre": "대중음악"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF299778",
+      "title": "슬로우다이브 내한 공연",
+      "startDate": "2026-12-08",
+      "endDate": "2026-12-08",
+      "location": "KBS스포츠월드(아레나)",
+      "area": "서울",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF299778_260831_160438.gif",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF299778",
+      "genre": "대중음악"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF295827",
+      "title": "모닝콘서트, 홍대광의 하얀 겨울콘서트: 잘됐으면 좋겠다 [창원] (12월)",
+      "startDate": "2026-12-08",
+      "endDate": "2026-12-08",
+      "location": "성산아트홀",
+      "area": "경상남",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF295827_260710_150415.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF295827",
       "genre": "대중음악"
     },
     {
