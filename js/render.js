@@ -129,6 +129,16 @@ function updateFilterSummary() {
 
 // ------------------------------------------------------
 // 긴급 일정 화면
+//
+// 기준
+// - 이미 종료된 행사는 제외
+// - 오늘부터 30일 이내에 시작하는 행사 포함
+// - 현재 진행 중인 행사도 포함
+// - 정렬은 "오늘 기준 실제로 가까운 일정" 순
+//
+// 예:
+// 7월 시작 ~ 10월 종료 → 현재 진행 중이면 오늘 위치
+// 9월 10일 시작 → 9월 10일 위치
 // ------------------------------------------------------
 
 function renderUrgentView() {
@@ -163,6 +173,17 @@ function renderUrgentView() {
     soonLimit.getDate() + 30
   );
 
+  // ----------------------------------------------------
+  // 다가오는 일정 후보
+  //
+  // 포함:
+  // 1. 현재 진행 중인 행사
+  // 2. 앞으로 30일 이내 시작하는 행사
+  //
+  // 제외:
+  // - 이미 종료된 행사
+  // ----------------------------------------------------
+
   const upcoming =
     festivals
       .filter((festival) => {
@@ -180,6 +201,12 @@ function renderUrgentView() {
           return false;
         }
 
+        // 이미 종료된 행사 제외
+        if (end < today) {
+          return false;
+        }
+
+        // 현재 진행 중인 행사
         if (
           start <= today &&
           today <= end
@@ -187,53 +214,52 @@ function renderUrgentView() {
           return true;
         }
 
+        // 앞으로 30일 이내 시작하는 행사
         return (
-          start >= today &&
+          start > today &&
           start <= soonLimit
         );
       })
       .sort((a, b) => {
         const aStart =
-          getFestivalStartDate(a);
+          getFestivalStartDate(
+            a
+          );
 
         const bStart =
-          getFestivalStartDate(b);
+          getFestivalStartDate(
+            b
+          );
 
-        const aEnd =
-          getFestivalEndDate(a);
-
-        const bEnd =
-          getFestivalEndDate(b);
-
-        const aOngoing =
-          aStart &&
-          aEnd &&
-          aStart <= today &&
-          today <= aEnd;
-
-        const bOngoing =
-          bStart &&
-          bEnd &&
-          bStart <= today &&
-          today <= bEnd;
-
-        if (
-          aOngoing &&
-          !bOngoing
-        ) {
-          return -1;
+        if (!aStart || !bStart) {
+          return 0;
         }
 
-        if (
-          !aOngoing &&
-          bOngoing
-        ) {
-          return 1;
+        // 이미 시작된 행사는
+        // 오늘을 실질적인 시작 기준으로 사용한다.
+        const aEffectiveDate =
+          aStart < today
+            ? today
+            : aStart;
+
+        const bEffectiveDate =
+          bStart < today
+            ? today
+            : bStart;
+
+        const diff =
+          aEffectiveDate -
+          bEffectiveDate;
+
+        if (diff !== 0) {
+          return diff;
         }
 
-        return compareFestivalStart(
-          a,
-          b
+        // 동일한 실질 날짜라면
+        // 실제 시작일이 빠른 행사 우선
+        return (
+          aStart -
+          bStart
         );
       });
 
@@ -263,7 +289,7 @@ function renderUrgentView() {
       weekend
         ? upcoming.filter(
             (festival) =>
-              festivalOverlapsRange(
+              festivalOverlapsRangeForRender(
                 festival,
                 weekend
               )
@@ -954,6 +980,9 @@ function formatWeekendLabel(
 
 // ------------------------------------------------------
 // 범위 겹침
+//
+// logic.js의 festivalOverlapsRange()와
+// 이름 충돌을 피하기 위해 render 전용 함수 사용
 // ------------------------------------------------------
 
 function festivalOverlapsRangeForRender(
