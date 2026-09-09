@@ -1,17 +1,12 @@
 /**
- * 전국 축제 + 공연 정보를 네 곳에서 가져와 하나의 JSON으로 합칩니다.
+ * 전국 축제 + 공연 정보를 여러 공공 데이터 API에서 가져와
+ * 하나의 festivals.json으로 합칩니다.
  *
+ * 데이터 출처
  * 1) 한국관광공사 TourAPI
- *    → 지역축제
- *
  * 2) 전국문화축제 표준데이터
- *    → 지자체 지역축제 보완
- *
  * 3) 한국문화정보원 한눈에보는문화정보조회서비스
- *    → 공연/전시/문화행사 보완
- *
  * 4) KOPIS 공연예술통합전산망
- *    → 공연/뮤지컬/대중음악/공연형 축제
  *
  * 실행:
  *   node fetch-festivals.mjs
@@ -22,8 +17,9 @@
  *   CULTURE_PORTAL_API_KEY
  *   KOPIS_API_KEY
  *
- * 키가 없는 소스는 건너뜁니다.
+ * API 키가 없는 소스는 건너뜁니다.
  */
+
 
 import { writeFile } from "fs/promises";
 
@@ -61,21 +57,23 @@ const sourceStatus = {
 // API 기본 URL
 // ======================================================
 
+// 한국관광공사 TourAPI
 const TOUR_BASE =
   "https://apis.data.go.kr/B551011/KorService2";
 
 
 // 전국문화축제 표준데이터
-// 공공데이터포털 표준데이터 공식 OpenAPI
 const CULTURE_BASE =
   "https://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api";
 
 
-// 문화포털 공식 가이드에 현재 기재된 endpoint
+// 한국문화정보원
+// 한눈에보는문화정보조회서비스
 const CULTURE_PORTAL_BASE =
-  "https://apis.data.go.kr/B553457/nopenapi/rest/publicperformancedisplays/period";
+  "https://apis.data.go.kr/B553457/cultureinfo";
 
 
+// KOPIS
 const KOPIS_BASE =
   "https://www.kopis.or.kr/openApi/restful/pblprfr";
 
@@ -141,6 +139,9 @@ function normalizeAreaName(raw) {
     return null;
   }
 
+  let name =
+    String(raw).trim();
+
   const suffixes = [
     "특별자치시",
     "특별자치도",
@@ -149,9 +150,6 @@ function normalizeAreaName(raw) {
     "자치도",
     "도",
   ];
-
-  let name =
-    String(raw).trim();
 
   for (const suffix of suffixes) {
     if (name.endsWith(suffix)) {
@@ -165,7 +163,10 @@ function normalizeAreaName(raw) {
     }
   }
 
-  return name || String(raw);
+  return (
+    name ||
+    String(raw).trim()
+  );
 }
 
 
@@ -214,58 +215,6 @@ function dateToYYYYMMDD(
 }
 
 
-function ymdToIso(
-  ymd
-) {
-  if (!ymd) {
-    return null;
-  }
-
-  const value =
-    String(ymd)
-      .replace(/[^\d]/g, "");
-
-  if (
-    value.length !== 8
-  ) {
-    return null;
-  }
-
-  return (
-    `${value.slice(0, 4)}-` +
-    `${value.slice(4, 6)}-` +
-    `${value.slice(6, 8)}`
-  );
-}
-
-
-function kopisDateToIso(
-  ymd
-) {
-  if (!ymd) {
-    return null;
-  }
-
-  const text =
-    String(ymd).trim();
-
-  const match =
-    text.match(
-      /(\d{4})\.(\d{2})\.(\d{2})/
-    );
-
-  if (!match) {
-    return null;
-  }
-
-  return (
-    `${match[1]}-` +
-    `${match[2]}-` +
-    `${match[3]}`
-  );
-}
-
-
 function addMonths(
   date,
   months
@@ -281,8 +230,60 @@ function addMonths(
 }
 
 
+function ymdToIso(
+  value
+) {
+  if (!value) {
+    return null;
+  }
+
+  const text =
+    String(value)
+      .trim()
+      .replace(/[^\d]/g, "");
+
+  if (
+    text.length !== 8
+  ) {
+    return null;
+  }
+
+  return (
+    `${text.slice(0, 4)}-` +
+    `${text.slice(4, 6)}-` +
+    `${text.slice(6, 8)}`
+  );
+}
+
+
+function kopisDateToIso(
+  value
+) {
+  if (!value) {
+    return null;
+  }
+
+  const match =
+    String(value)
+      .trim()
+      .match(
+        /(\d{4})\.(\d{2})\.(\d{2})/
+      );
+
+  if (!match) {
+    return null;
+  }
+
+  return (
+    `${match[1]}-` +
+    `${match[2]}-` +
+    `${match[3]}`
+  );
+}
+
+
 // ======================================================
-// 기간 계산
+// 기간
 // ======================================================
 
 function daysBetween(
@@ -344,7 +345,9 @@ function isOver90Days(
 function decodeXml(
   text
 ) {
-  return String(text || "")
+  return String(
+    text || ""
+  )
     .replace(
       /<!\[CDATA\[([\s\S]*?)\]\]>/g,
       "$1"
@@ -377,7 +380,9 @@ function xmlField(
   block,
   tags
 ) {
-  for (const tag of tags) {
+  for (
+    const tag of tags
+  ) {
     const escapedTag =
       tag.replace(
         /[.*+?^${}()|[\]\\]/g,
@@ -409,15 +414,14 @@ function xmlField(
 function extractXmlBlocks(
   xml
 ) {
-  const blockPatterns = [
+  const patterns = [
     /<item\b[^>]*>[\s\S]*?<\/item>/gi,
     /<db\b[^>]*>[\s\S]*?<\/db>/gi,
-    /<list\b[^>]*>[\s\S]*?<\/list>/gi,
     /<perfor\b[^>]*>[\s\S]*?<\/perfor>/gi,
   ];
 
   for (
-    const pattern of blockPatterns
+    const pattern of patterns
   ) {
     const blocks =
       xml.match(pattern);
@@ -431,6 +435,44 @@ function extractXmlBlocks(
   }
 
   return [];
+}
+
+
+function xmlResultCode(
+  xml
+) {
+  const code =
+    xmlField(
+      xml,
+      [
+        "resultCode",
+      ]
+    );
+
+  return (
+    String(code || "")
+      .trim()
+  );
+}
+
+
+function xmlTotalCount(
+  xml
+) {
+  const value =
+    xmlField(
+      xml,
+      [
+        "totalCount",
+      ]
+    );
+
+  const count =
+    Number(value);
+
+  return Number.isFinite(count)
+    ? count
+    : 0;
 }
 
 
@@ -505,7 +547,9 @@ async function fetchTourApiFestivals() {
 
     try {
       res =
-        await fetch(url);
+        await fetch(
+          url
+        );
     } catch (error) {
       console.error(
         "TourAPI 요청 예외:",
@@ -523,7 +567,12 @@ async function fetchTourApiFestivals() {
       console.error(
         "TourAPI 요청 실패:",
         res.status,
-        await res.text()
+        (
+          await res.text()
+        ).slice(
+          0,
+          1000
+        )
       );
 
       sourceStatus.tourapi =
@@ -561,7 +610,7 @@ async function fetchTourApiFestivals() {
           json
         ).slice(
           0,
-          1000
+          1500
         )
       );
 
@@ -572,14 +621,16 @@ async function fetchTourApiFestivals() {
     }
 
 
-    const items =
-      body.items?.item;
+    const rawItems =
+      body?.items?.item;
 
     const list =
-      Array.isArray(items)
-        ? items
-        : items
-          ? [items]
+      Array.isArray(
+        rawItems
+      )
+        ? rawItems
+        : rawItems
+          ? [rawItems]
           : [];
 
 
@@ -598,16 +649,19 @@ async function fetchTourApiFestivals() {
 
 
       if (
-        isOver90Days(
-          start,
-          end
-        )
+        !item.title ||
+        !start
       ) {
         continue;
       }
 
 
-      if (!item.title) {
+      if (
+        isOver90Days(
+          start,
+          end
+        )
+      ) {
         continue;
       }
 
@@ -642,14 +696,24 @@ async function fetchTourApiFestivals() {
           ] || null,
 
         lat:
-          item.mapy
+          item.mapy &&
+          !Number.isNaN(
+            Number(
+              item.mapy
+            )
+          )
             ? Number(
                 item.mapy
               )
             : null,
 
         lon:
-          item.mapx
+          item.mapx &&
+          !Number.isNaN(
+            Number(
+              item.mapx
+            )
+          )
             ? Number(
                 item.mapx
               )
@@ -667,15 +731,16 @@ async function fetchTourApiFestivals() {
 
     const totalCount =
       Number(
-        body.totalCount || 0
+        body.totalCount ||
+        0
       );
 
 
     if (
+      list.length === 0 ||
       pageNo *
         numOfRows >=
-        totalCount ||
-      list.length === 0
+        totalCount
     ) {
       break;
     }
@@ -695,16 +760,6 @@ async function fetchTourApiFestivals() {
 
 // ======================================================
 // 2. 전국문화축제 표준데이터
-//
-// 공식:
-// https://api.data.go.kr/openapi/
-// tn_pubr_public_cltur_fstvl_api
-//
-// 파라미터:
-// serviceKey
-// type=json
-// pageNo
-// numOfRows
 // ======================================================
 
 async function fetchCultureStandardFestivals() {
@@ -755,7 +810,9 @@ async function fetchCultureStandardFestivals() {
 
     try {
       res =
-        await fetch(url);
+        await fetch(
+          url
+        );
     } catch (error) {
       console.error(
         "문화축제 표준데이터 요청 예외:",
@@ -778,7 +835,7 @@ async function fetchCultureStandardFestivals() {
         res.status,
         text.slice(
           0,
-          1000
+          1500
         )
       );
 
@@ -808,10 +865,14 @@ async function fetchCultureStandardFestivals() {
 
 
     const response =
-      json?.response || json;
+      json?.response ||
+      json;
+
 
     const header =
-      response?.header || {};
+      response?.header ||
+      {};
+
 
     const resultCode =
       String(
@@ -842,7 +903,8 @@ async function fetchCultureStandardFestivals() {
 
 
     const body =
-      response?.body || {};
+      response?.body ||
+      {};
 
 
     const rawItems =
@@ -850,7 +912,9 @@ async function fetchCultureStandardFestivals() {
 
 
     const rows =
-      Array.isArray(rawItems)
+      Array.isArray(
+        rawItems
+      )
         ? rawItems
         : Array.isArray(
             rawItems?.item
@@ -948,17 +1012,11 @@ async function fetchCultureStandardFestivals() {
         ).trim();
 
 
-      const finalLocation =
-        location ||
-        address ||
-        jibunAddress ||
-        "";
-
-
       const latRaw =
         row?.latitude ??
         row?.["위도"] ??
         "";
+
 
       const lonRaw =
         row?.longitude ??
@@ -969,7 +1027,9 @@ async function fetchCultureStandardFestivals() {
       const lat =
         latRaw !== "" &&
         !Number.isNaN(
-          Number(latRaw)
+          Number(
+            latRaw
+          )
         )
           ? Number(
               latRaw
@@ -980,7 +1040,9 @@ async function fetchCultureStandardFestivals() {
       const lon =
         lonRaw !== "" &&
         !Number.isNaN(
-          Number(lonRaw)
+          Number(
+            lonRaw
+          )
         )
           ? Number(
               lonRaw
@@ -1015,7 +1077,10 @@ async function fetchCultureStandardFestivals() {
           end,
 
         location:
-          finalLocation,
+          location ||
+          address ||
+          jibunAddress ||
+          "",
 
         area:
           normalizeAreaName(
@@ -1040,7 +1105,8 @@ async function fetchCultureStandardFestivals() {
 
     const totalCount =
       Number(
-        body?.totalCount || 0
+        body?.totalCount ||
+        0
       );
 
 
@@ -1073,44 +1139,29 @@ async function fetchCultureStandardFestivals() {
 // ======================================================
 // 3. 문화포털
 //
-// 공식 문화포털 안내:
-// https://apis.data.go.kr/B553457/
-// nopenapi/rest/publicperformancedisplays/period
+// End Point:
+//   https://apis.data.go.kr/B553457/cultureinfo
 //
-// 공식 파라미터:
-// from
-// to
-// cPage
-// rows
-// place
-// gpsxfrom
-// gpsyfrom
-// gpsxto
-// gpsyto
-// keyword
-// sortStdr
-// serviceKey
+// 기간별 문화정보목록조회:
+//   GET /period2
 //
-// 주의:
-// 현재 공식 문서에는 이 endpoint가 존재하지만,
-// 실제 실행 환경에서는 NO_OPENAPI_SERVICE_ERROR(12)가
-// 반환될 수 있습니다.
+// serviceTp:
+//   A = 공연/전시
+//   B = 행사/축제
+//   C = 교육/체험
+//
+// 현재 앱에서는 A/B만 수집
 // ======================================================
 
-async function fetchCulturePortalPerformances() {
-  if (!CULTURE_PORTAL_API_KEY) {
-    console.log(
-      "CULTURE_PORTAL_API_KEY 없음 → 문화포털 건너뜀"
-    );
-
-    return [];
-  }
-
+async function fetchCulturePortalByServiceType(
+  serviceTp
+) {
   const results = [];
 
-  let cPage = 1;
+  let pageNo = 1;
 
-  const rows = 100;
+  const numOfRows =
+    100;
 
 
   const fromDate =
@@ -1131,32 +1182,28 @@ async function fetchCulturePortalPerformances() {
   while (true) {
     const url =
       new URL(
-        CULTURE_PORTAL_BASE
+        `${CULTURE_PORTAL_BASE}/period2`
       );
 
 
+    // 공식 파라미터
     url.searchParams.set(
-      "from",
-      fromDate
+      "serviceKey",
+      CULTURE_PORTAL_API_KEY
     );
 
     url.searchParams.set(
-      "to",
-      toDate
+      "PageNo",
+      String(pageNo)
     );
 
     url.searchParams.set(
-      "cPage",
-      String(cPage)
+      "numOfrows",
+      String(numOfRows)
     );
 
     url.searchParams.set(
-      "rows",
-      String(rows)
-    );
-
-    url.searchParams.set(
-      "place",
+      "keyword",
       ""
     );
 
@@ -1181,18 +1228,18 @@ async function fetchCulturePortalPerformances() {
     );
 
     url.searchParams.set(
-      "keyword",
-      ""
+      "serviceTp",
+      serviceTp
     );
 
     url.searchParams.set(
-      "sortStdr",
-      "1"
+      "from",
+      fromDate
     );
 
     url.searchParams.set(
-      "serviceKey",
-      CULTURE_PORTAL_API_KEY
+      "to",
+      toDate
     );
 
 
@@ -1200,10 +1247,12 @@ async function fetchCulturePortalPerformances() {
 
     try {
       res =
-        await fetch(url);
+        await fetch(
+          url
+        );
     } catch (error) {
       console.error(
-        "문화포털 API 요청 예외:",
+        `문화포털 ${serviceTp} 요청 예외:`,
         error
       );
 
@@ -1218,15 +1267,13 @@ async function fetchCulturePortalPerformances() {
       await res.text();
 
 
-    if (
-      !res.ok
-    ) {
+    if (!res.ok) {
       console.error(
-        "문화포털 API 요청 실패:",
+        `문화포털 ${serviceTp} API 요청 실패:`,
         res.status,
         xml.slice(
           0,
-          1500
+          2000
         )
       );
 
@@ -1237,23 +1284,51 @@ async function fetchCulturePortalPerformances() {
     }
 
 
-    // 공식 문화포털 에러 코드
+    // API 자체 오류 응답 처리
+    const resultCode =
+      xmlResultCode(
+        xml
+      );
+
+
+    if (
+      resultCode &&
+      resultCode !== "00" &&
+      resultCode !== "0" &&
+      resultCode !== "200"
+    ) {
+      console.error(
+        `문화포털 ${serviceTp} 응답 오류:`,
+        resultCode,
+        xml.slice(
+          0,
+          2000
+        )
+      );
+
+      sourceStatus.culturePortal =
+        false;
+
+      break;
+    }
+
+
     if (
       xml.includes(
         "NO_OPENAPI_SERVICE_ERROR"
       ) ||
       xml.includes(
-        "<returnReasonCode>12</returnReasonCode>"
+        "해당 오픈API 서비스가 없거나 폐기됨"
       )
     ) {
       console.error(
-        "문화포털 API 서비스가 존재하지 않거나 폐기된 상태입니다."
+        `문화포털 ${serviceTp}: 서비스 없음/폐기`
       );
 
       console.error(
         xml.slice(
           0,
-          1500
+          2000
         )
       );
 
@@ -1272,20 +1347,20 @@ async function fetchCulturePortalPerformances() {
         "SERVICE_ACCESS_DENIED_ERROR"
       ) ||
       xml.includes(
-        "LIMITED_NUMBER_OF_SERVICE_REQUESTS_EXCEEDS_ERROR"
+        "DEADLINE_HAS_EXPIRED_ERROR"
       ) ||
       xml.includes(
-        "DEADLINE_HAS_EXPIRED_ERROR"
+        "LIMITED_NUMBER_OF_SERVICE_REQUESTS_EXCEEDS_ERROR"
       )
     ) {
       console.error(
-        "문화포털 API 인증/호출 오류:"
+        `문화포털 ${serviceTp}: 인증/호출 오류`
       );
 
       console.error(
         xml.slice(
           0,
-          1500
+          2000
         )
       );
 
@@ -1305,15 +1380,29 @@ async function fetchCulturePortalPerformances() {
     if (
       blocks.length === 0
     ) {
+      // 정상적인 0건 응답일 가능성이 있으므로
+      // resultCode가 정상이라면 해당 서비스만 종료
+      const totalCount =
+        xmlTotalCount(
+          xml
+        );
+
+
+      if (
+        totalCount === 0
+      ) {
+        break;
+      }
+
+
       console.error(
-        "문화포털 API에서 반복 데이터 블록을 찾지 못했습니다."
+        `문화포털 ${serviceTp}: XML 반복 데이터 블록을 찾지 못했습니다.`
       );
 
       console.error(
-        "응답 앞부분:",
         xml.slice(
           0,
-          1500
+          2500
         )
       );
 
@@ -1336,8 +1425,6 @@ async function fetchCulturePortalPerformances() {
           [
             "seq",
             "SEQ",
-            "contentid",
-            "contentId",
           ]
         );
 
@@ -1348,9 +1435,6 @@ async function fetchCulturePortalPerformances() {
           [
             "title",
             "TITLE",
-            "prfnm",
-            "subject",
-            "name",
           ]
         );
 
@@ -1360,10 +1444,6 @@ async function fetchCulturePortalPerformances() {
           block,
           [
             "startDate",
-            "startdate",
-            "STARTDATE",
-            "prfpdfrom",
-            "from",
           ]
         );
 
@@ -1373,10 +1453,6 @@ async function fetchCulturePortalPerformances() {
           block,
           [
             "endDate",
-            "enddate",
-            "ENDDATE",
-            "prfpdto",
-            "to",
           ]
         );
 
@@ -1386,10 +1462,15 @@ async function fetchCulturePortalPerformances() {
           block,
           [
             "place",
-            "PLACE",
-            "fcltynm",
-            "facility",
-            "facilityName",
+          ]
+        );
+
+
+      const realmName =
+        xmlField(
+          block,
+          [
+            "realmName",
           ]
         );
 
@@ -1399,24 +1480,24 @@ async function fetchCulturePortalPerformances() {
           block,
           [
             "area",
-            "AREA",
-            "sido",
-            "sidoNm",
-            "region",
-            "regionName",
           ]
         );
 
 
-      const realm =
+      const sigungu =
         xmlField(
           block,
           [
-            "realmName",
-            "realm",
-            "REALMNAME",
-            "genrenm",
-            "category",
+            "sigungu",
+          ]
+        );
+
+
+      const thumbnail =
+        xmlField(
+          block,
+          [
+            "thumbnail",
           ]
         );
 
@@ -1426,10 +1507,6 @@ async function fetchCulturePortalPerformances() {
           block,
           [
             "gpsY",
-            "gpsy",
-            "GPSY",
-            "latitude",
-            "lat",
           ]
         );
 
@@ -1439,37 +1516,6 @@ async function fetchCulturePortalPerformances() {
           block,
           [
             "gpsX",
-            "gpsx",
-            "GPSX",
-            "longitude",
-            "lon",
-          ]
-        );
-
-
-      const thumbnail =
-        xmlField(
-          block,
-          [
-            "imgUrl",
-            "imageUrl",
-            "thumbnail",
-            "poster",
-            "firstimage",
-            "image",
-          ]
-        );
-
-
-      const detailUrl =
-        xmlField(
-          block,
-          [
-            "url",
-            "URL",
-            "detailUrl",
-            "link",
-            "homePage",
           ]
         );
 
@@ -1479,18 +1525,17 @@ async function fetchCulturePortalPerformances() {
           startRaw
         );
 
+
       const end =
         ymdToIso(
           endRaw
         );
 
 
-      if (!title) {
-        continue;
-      }
-
-
-      if (!start) {
+      if (
+        !title ||
+        !start
+      ) {
         continue;
       }
 
@@ -1505,25 +1550,12 @@ async function fetchCulturePortalPerformances() {
       }
 
 
-      const normalizedRealm =
-        String(
-          realm || ""
-        ).trim();
-
-
-      const isFestival =
-        normalizedRealm.includes(
-          "축제"
-        ) ||
-        normalizedRealm.includes(
-          "행사"
-        );
-
-
       const lat =
-        latRaw &&
+        latRaw !== "" &&
         !Number.isNaN(
-          Number(latRaw)
+          Number(
+            latRaw
+          )
         )
           ? Number(
               latRaw
@@ -1532,9 +1564,11 @@ async function fetchCulturePortalPerformances() {
 
 
       const lon =
-        lonRaw &&
+        lonRaw !== "" &&
         !Number.isNaN(
-          Number(lonRaw)
+          Number(
+            lonRaw
+          )
         )
           ? Number(
               lonRaw
@@ -1542,20 +1576,32 @@ async function fetchCulturePortalPerformances() {
           : null;
 
 
+      // A = 공연/전시
+      // B = 행사/축제
+      const type =
+        serviceTp === "B"
+          ? "festival"
+          : "performance";
+
+
+      const finalArea =
+        areaRaw ||
+        sigungu ||
+        "";
+
+
       results.push({
         source:
           "culturePortal",
 
-        type:
-          isFestival
-            ? "festival"
-            : "performance",
+        type,
 
         id:
           seq
             ? `culture-portal-${seq}`
             : (
                 `culture-portal-` +
+                `${serviceTp}-` +
                 `${normalizeTitle(title)}-` +
                 `${start}`
               ),
@@ -1568,11 +1614,13 @@ async function fetchCulturePortalPerformances() {
         endDate:
           end,
 
-        location,
+        location:
+          location ||
+          "",
 
         area:
           normalizeAreaName(
-            areaRaw
+            finalArea
           ),
 
         lat,
@@ -1584,11 +1632,10 @@ async function fetchCulturePortalPerformances() {
           null,
 
         detailUrl:
-          detailUrl ||
           null,
 
         genre:
-          normalizedRealm ||
+          realmName ||
           null,
       });
 
@@ -1598,31 +1645,87 @@ async function fetchCulturePortalPerformances() {
 
 
     console.log(
-      `문화포털 ${cPage}페이지 처리: ${pageItemCount}건`
+      `문화포털 ${serviceTp} ${pageNo}페이지 처리: ${pageItemCount}건`
     );
 
 
+    const totalCount =
+      xmlTotalCount(
+        xml
+      );
+
+
     if (
-      blocks.length < rows
+      blocks.length === 0 ||
+      blocks.length < numOfRows ||
+      (
+        totalCount > 0 &&
+        pageNo *
+          numOfRows >=
+          totalCount
+      )
     ) {
       break;
     }
 
 
-    cPage += 1;
+    pageNo += 1;
   }
+
+
+  return results;
+}
+
+
+async function fetchCulturePortalPerformances() {
+  if (!CULTURE_PORTAL_API_KEY) {
+    console.log(
+      "CULTURE_PORTAL_API_KEY 없음 → 문화포털 건너뜀"
+    );
+
+    return [];
+  }
+
+
+  const results = [];
+
+
+  // A = 공연/전시
+  const performances =
+    await fetchCulturePortalByServiceType(
+      "A"
+    );
+
+
+  // B = 행사/축제
+  const festivals =
+    sourceStatus.culturePortal
+      ? await fetchCulturePortalByServiceType(
+          "B"
+        )
+      : [];
+
+
+  results.push(
+    ...performances
+  );
+
+  results.push(
+    ...festivals
+  );
 
 
   console.log(
     `문화포털에서 ${results.length}건 수집`
   );
 
+
   return results;
 }
 
 
 // ======================================================
-// KOPIS XML 파싱
+// 4. KOPIS XML 파싱
 // ======================================================
 
 function parseKopisXml(
@@ -1630,62 +1733,78 @@ function parseKopisXml(
 ) {
   const items = [];
 
-  const dbBlocks =
+  const blocks =
     xml.match(
       /<db>[\s\S]*?<\/db>/g
     ) || [];
 
 
   for (
-    const block of dbBlocks
+    const block of blocks
   ) {
     items.push({
       mt20id:
         xmlField(
           block,
-          ["mt20id"]
+          [
+            "mt20id",
+          ]
         ),
 
       prfnm:
         xmlField(
           block,
-          ["prfnm"]
+          [
+            "prfnm",
+          ]
         ),
 
       prfpdfrom:
         xmlField(
           block,
-          ["prfpdfrom"]
+          [
+            "prfpdfrom",
+          ]
         ),
 
       prfpdto:
         xmlField(
           block,
-          ["prfpdto"]
+          [
+            "prfpdto",
+          ]
         ),
 
       fcltynm:
         xmlField(
           block,
-          ["fcltynm"]
+          [
+            "fcltynm",
+          ]
         ),
 
       poster:
         xmlField(
           block,
-          ["poster"]
+          [
+            "poster",
+          ]
         ),
 
       genrenm:
         xmlField(
           block,
-          ["genrenm"]
+          [
+            "genrenm",
+          ]
         ),
 
       area:
         xmlField(
           block,
-          ["area"]
+          [
+            "area",
+          ]
         ),
     });
   }
@@ -1862,7 +1981,7 @@ function isVenueWhitelisted(
 
 
 // ======================================================
-// 4. KOPIS
+// KOPIS
 // ======================================================
 
 async function fetchKopisPerformances() {
@@ -1933,7 +2052,9 @@ async function fetchKopisPerformances() {
 
     try {
       res =
-        await fetch(url);
+        await fetch(
+          url
+        );
     } catch (error) {
       console.error(
         "KOPIS 요청 예외:",
@@ -1951,7 +2072,12 @@ async function fetchKopisPerformances() {
       console.error(
         "KOPIS 요청 실패:",
         res.status,
-        await res.text()
+        (
+          await res.text()
+        ).slice(
+          0,
+          1000
+        )
       );
 
       sourceStatus.kopis =
@@ -1968,17 +2094,10 @@ async function fetchKopisPerformances() {
     if (
       xml.includes(
         "SERVICE KEY IS NOT REGISTERED"
-      ) ||
-      xml.includes(
-        "<error>"
       )
     ) {
       console.error(
-        "KOPIS 응답 오류:",
-        xml.slice(
-          0,
-          1000
-        )
+        "KOPIS 인증키가 등록되지 않았습니다."
       );
 
       sourceStatus.kopis =
@@ -1997,6 +2116,13 @@ async function fetchKopisPerformances() {
     for (
       const item of list
     ) {
+      if (
+        !item.prfnm
+      ) {
+        continue;
+      }
+
+
       if (
         EXCLUDED_KOPIS_GENRES.some(
           (genre) =>
@@ -2037,6 +2163,7 @@ async function fetchKopisPerformances() {
           item.prfpdfrom
         );
 
+
       const end =
         kopisDateToIso(
           item.prfpdto
@@ -2044,18 +2171,17 @@ async function fetchKopisPerformances() {
 
 
       if (
-        isOver90Days(
-          start,
-          end
-        )
+        !start
       ) {
         continue;
       }
 
 
       if (
-        !item.prfnm ||
-        !start
+        isOver90Days(
+          start,
+          end
+        )
       ) {
         continue;
       }
@@ -2104,10 +2230,12 @@ async function fetchKopisPerformances() {
           null,
 
         detailUrl:
-          (
-            "https://www.kopis.or.kr/por/db/pblprfr/" +
-            `pblprfrView.do?mt20Id=${item.mt20id}`
-          ),
+          item.mt20id
+            ? (
+                "https://www.kopis.or.kr/por/db/pblprfr/" +
+                `pblprfrView.do?mt20Id=${item.mt20id}`
+              )
+            : null,
 
         genre:
           item.genrenm ||
@@ -2148,6 +2276,7 @@ function locationsClearlyDifferent(
       a.location || ""
     ).trim();
 
+
   const locationB =
     String(
       b.location || ""
@@ -2174,6 +2303,7 @@ function locationsClearlyDifferent(
     normalizeAreaName(
       a.area
     );
+
 
   const areaB =
     normalizeAreaName(
@@ -2231,11 +2361,13 @@ function dataRichness(
 ) {
   let score = 0;
 
+
   if (
     item.location
   ) {
     score += 2;
   }
+
 
   if (
     item.area
@@ -2243,11 +2375,13 @@ function dataRichness(
     score += 1;
   }
 
+
   if (
     item.endDate
   ) {
     score += 1;
   }
+
 
   if (
     item.thumbnail
@@ -2255,17 +2389,20 @@ function dataRichness(
     score += 2;
   }
 
+
   if (
     item.detailUrl
   ) {
     score += 1;
   }
 
+
   if (
     item.genre
   ) {
     score += 1;
   }
+
 
   if (
     item.lat !== null &&
@@ -2274,6 +2411,7 @@ function dataRichness(
     score += 1;
   }
 
+
   if (
     item.lon !== null &&
     item.lon !== undefined
@@ -2281,18 +2419,13 @@ function dataRichness(
     score += 1;
   }
 
+
   return score;
 }
 
 
 // ======================================================
 // 중복 제거
-//
-// 기본:
-//   제목 정규화 + 시작일
-//
-// 단,
-// 지역이 명백하게 다르면 별도 행사로 유지
 // ======================================================
 
 function dedupe(
@@ -2335,7 +2468,9 @@ function dedupe(
 
     groups
       .get(key)
-      .push(item);
+      .push(
+        item
+      );
   }
 
 
@@ -2383,6 +2518,7 @@ function dedupe(
             existing
           );
 
+
         const itemPriority =
           sourcePriority(
             item
@@ -2393,6 +2529,7 @@ function dedupe(
           dataRichness(
             existing
           );
+
 
         const itemRichness =
           dataRichness(
@@ -2418,8 +2555,10 @@ function dedupe(
         duplicateRemoved +=
           1;
 
+
         merged =
           true;
+
 
         break;
       }
@@ -2583,9 +2722,9 @@ async function main() {
 // ======================================================
 
 main().catch(
-  (err) => {
+  (error) => {
     console.error(
-      err
+      error
     );
 
     process.exit(
