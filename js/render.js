@@ -139,6 +139,10 @@ function updateFilterSummary() {
 // 예:
 // 7월 시작 ~ 10월 종료 → 현재 진행 중이면 오늘 위치
 // 9월 10일 시작 → 9월 10일 위치
+//
+// 주의
+// - "이번 주말 일정"에 표시된 행사는
+//   아래 "다가오는 일정"에서 다시 표시하지 않는다.
 // ------------------------------------------------------
 
 function renderUrgentView() {
@@ -156,7 +160,7 @@ function renderUrgentView() {
 
   if (!festivals.length) {
     container.innerHTML =
-      '<div class="empty">조건에 맞는 축제·공연이 없어요.</div>';
+      `<div class="empty">조건에 맞는 축제·공연이 없어요.</div>`;
 
     return;
   }
@@ -265,7 +269,7 @@ function renderUrgentView() {
 
   if (!upcoming.length) {
     container.innerHTML =
-      '<div class="empty">다가오는 일정이 없어요.<br>월별 목록에서 전체 일정을 확인해보세요.</div>';
+      `<div class="empty">다가오는 일정이 없어요.<br>월별 목록에서 전체 일정을 확인해보세요.</div>`;
 
     return;
   }
@@ -357,17 +361,49 @@ function renderUrgentView() {
   }
 
   // ----------------------------------------------------
+  // 중요:
+  //
+  // 이번 주말에 이미 표시된 행사 ID를 기록하고
+  // "다가오는 일정"에서는 제외합니다.
+  //
+  // 기존 코드에서는 upcoming 전체를 다시 출력해서
+  // 같은 카드가 두 섹션에 중복 표시되었습니다.
+  // ----------------------------------------------------
+
+  const weekendIds =
+    new Set(
+      weekend.map(
+        (festival) =>
+          String(
+            festival.id
+          )
+      )
+    );
+
+  const remainingUpcoming =
+    upcoming.filter(
+      (festival) =>
+        !weekendIds.has(
+          String(
+            festival.id
+          )
+        )
+    );
+
+  // ----------------------------------------------------
   // 다가오는 일정
   // ----------------------------------------------------
 
-  if (upcoming.length) {
+  if (
+    remainingUpcoming.length
+  ) {
     html += `
       <section>
         <div class="urgent-section-title">
           📅 다가오는 일정
         </div>
 
-        ${upcoming
+        ${remainingUpcoming
           .map(
             renderFestivalCard
           )
@@ -407,7 +443,7 @@ function renderListView() {
 
   if (!festivals.length) {
     container.innerHTML =
-      '<div class="empty">조건에 맞는 축제·공연이 없어요.</div>';
+      `<div class="empty">조건에 맞는 축제·공연이 없어요.</div>`;
 
     return;
   }
