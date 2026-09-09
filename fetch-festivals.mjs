@@ -123,6 +123,8 @@ function normalizeTitle(title) {
     .replace(/\[[^\]]*\]/g, "")
     .replace(/\([^)]*\)/g, "")
     .replace(/[［］【】]/g, "")
+    // "제24회", "제 6 회" 등 회차 표기 제거 (문두/문중 모두)
+    .replace(/제\s*\d+\s*회\s*/g, "")
     .replace(/\s+/g, "")
     .replace(/[^\p{L}\p{N}]/gu, "")
     .trim()
@@ -1166,12 +1168,14 @@ async function fetchCultureStandardFestivals() {
 //   - 단, 뮤지컬은 대공연장 중심으로 제한
 //   - 연극 제외
 //   - 전시/기획전/특별전/상설전 제외
-//   - 미술관/박물관 중심 전시 제외
+//   - 명확한 전시성 항목만 제외
 //
 // B = 행사/축제
 //   - 축제/지역행사/계절행사/페스티벌 유지
 //   - 불꽃놀이/하나비 등 유지
 //   - 교육/체험/강좌/강연/세미나/워크숍 제외
+//   - 전시 제외
+//   - 연극/연극제 제외
 //   - 단순 상설 프로그램 제외
 //
 // C = 사용하지 않음
@@ -1182,12 +1186,12 @@ async function fetchCultureStandardFestivals() {
 // 문화포털 전시 제외 키워드
 // ======================================================
 //
-// A에는 공연과 전시가 섞여 있으므로
-// A 자체를 버리지 않고 명확한 전시성 항목만 제거합니다.
+// A와 B에는 다양한 문화행사가 섞일 수 있으므로
+// 명확한 전시성 항목만 제거합니다.
 //
-// 장소명만으로 무조건 제외하지 않습니다.
-// 공연장이 박물관/미술관 내부에 있는 경우까지
-// 잘못 제거하지 않기 위한 처리입니다.
+// "사진", "미술"처럼 단독으로 넓게 쓰이는 단어를
+// realmName만 보고 전시로 판정하지 않습니다.
+// 대신 제목의 명확한 전시 표현은 계속 제외합니다.
 // ======================================================
 
 const EXCLUDED_CULTURE_PORTAL_EXHIBITION_KEYWORDS = [
@@ -1199,7 +1203,10 @@ const EXCLUDED_CULTURE_PORTAL_EXHIBITION_KEYWORDS = [
   "미디어전",
   "展",
   "미술전",
+  "미술전시",
+  "미술전람회",
   "사진전",
+  "사진전시",
   "회화전",
   "조각전",
   "작품전",
@@ -1379,6 +1386,15 @@ function isVenueWhitelisted(
 // ======================================================
 // 문화포털 전시 여부
 // ======================================================
+//
+// 중요한 수정:
+// realmName에 단순히 "사진"이나 "미술"이 포함된다고
+// 전시로 보지 않습니다.
+//
+// 대신:
+// 1) realmName에 명확하게 "전시"가 포함되거나
+// 2) 제목에 명확한 전시 키워드가 있을 때만 제외합니다.
+// ======================================================
 
 function isCulturePortalExhibition(
   title,
@@ -1397,9 +1413,7 @@ function isCulturePortalExhibition(
 
   // 분야명이 명확하게 전시인 경우
   if (
-    realmText.includes("전시") ||
-    realmText.includes("미술") ||
-    realmText.includes("사진")
+    realmText.includes("전시")
   ) {
     return true;
   }
@@ -1649,12 +1663,20 @@ function shouldKeepCulturePortalA(
 //
 // 관광성이 낮은 교육/체험/강좌/강연/전시 등을
 // 제거하고 일반적인 행사/축제는 유지합니다.
+//
+// 연극은 프로젝트 정책상 제외하므로
+// "연극/연극제"도 제거합니다.
+//
+// 반대로 불꽃놀이/하나비/지역축제/계절행사 등은
+// 별도의 positive 키워드가 없어도 B의 행사 영역이라는
+// 전제하에 보수적으로 유지합니다.
 // ======================================================
 
 function shouldKeepCulturePortalB(
   title,
   realmName
 ) {
+  // 1. 명확한 전시는 제외
   if (
     isCulturePortalExhibition(
       title,
@@ -1665,6 +1687,7 @@ function shouldKeepCulturePortalB(
   }
 
 
+  // 2. 교육/체험/강좌/강연/세미나 등 제외
   if (
     isCulturePortalProgramExcluded(
       title,
@@ -1675,6 +1698,18 @@ function shouldKeepCulturePortalB(
   }
 
 
+  // 3. 연극/연극제 제외
+  if (
+    isCulturePortalTheater(
+      title,
+      realmName
+    )
+  ) {
+    return false;
+  }
+
+
+  // 4. 나머지 B 항목은 행사/축제 영역으로 보고 유지
   return true;
 }
 
@@ -2294,7 +2329,7 @@ async function fetchCulturePortalPerformances() {
   // B = 행사/축제
   //
   // 축제/지역행사 등을 유지하고
-  // 교육/체험/강좌/강연 등은 제거합니다.
+  // 교육/체험/강좌/강연/연극 등은 제거합니다.
   // ----------------------------------------------------
 
   const festivals =
@@ -3020,6 +3055,319 @@ function dataRichness(
 
 
 // ======================================================
+// 필드 단위 병합
+// ======================================================
+//
+// base: 대표로 남길 레코드
+// other: base에 없는 필드만 보충해줄 레코드
+//
+// 정체성 필드:
+// id / title / startDate
+// → base 것을 유지
+//
+// 보완 가능 필드:
+// location / area / lat / lon / thumbnail / detailUrl
+// genre / endDate
+// ======================================================
+
+function mergeRecords(
+  base,
+  other
+) {
+  const merged = {
+    ...base,
+  };
+
+  const fillableFields = [
+    "location",
+    "area",
+    "lat",
+    "lon",
+    "thumbnail",
+    "detailUrl",
+    "genre",
+    "endDate",
+  ];
+
+  for (
+    const field of fillableFields
+  ) {
+    const baseEmpty =
+      merged[field] === null ||
+      merged[field] === undefined ||
+      merged[field] === "";
+
+    if (
+      baseEmpty &&
+      other[field]
+    ) {
+      merged[field] =
+        other[field];
+    }
+  }
+
+  return merged;
+}
+
+
+// ======================================================
+// 좌표 간 거리 (m)
+// ======================================================
+
+function distanceMeters(
+  lat1,
+  lon1,
+  lat2,
+  lon2
+) {
+  if (
+    lat1 === null || lat1 === undefined ||
+    lon1 === null || lon1 === undefined ||
+    lat2 === null || lat2 === undefined ||
+    lon2 === null || lon2 === undefined
+  ) {
+    return null;
+  }
+
+  const R = 6371000;
+
+  const toRad =
+    (d) =>
+      (d * Math.PI) / 180;
+
+  const dLat =
+    toRad(
+      lat2 - lat1
+    );
+
+  const dLon =
+    toRad(
+      lon2 - lon1
+    );
+
+  const a =
+    Math.sin(
+      dLat / 2
+    ) ** 2 +
+    Math.cos(
+      toRad(lat1)
+    ) *
+      Math.cos(
+        toRad(lat2)
+      ) *
+      Math.sin(
+        dLon / 2
+      ) ** 2;
+
+  const c =
+    2 *
+    Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(1 - a)
+    );
+
+  return R * c;
+}
+
+
+// ======================================================
+// 날짜 겹침 판별
+// ======================================================
+
+function datesOverlap(
+  aStart,
+  aEnd,
+  bStart,
+  bEnd
+) {
+  if (!aStart || !bStart) {
+    return false;
+  }
+
+  const aEndResolved =
+    aEnd || aStart;
+
+  const bEndResolved =
+    bEnd || bStart;
+
+  return (
+    aStart <= bEndResolved &&
+    bStart <= aEndResolved
+  );
+}
+
+
+// ======================================================
+// 2차 중복 후보 탐지
+// ======================================================
+//
+// 자동 병합하지 않고 로그만 남김
+//
+// 기준:
+//   제목 정규화 동일
+//   +
+//   날짜 겹침
+//   +
+//   좌표 500m 이내
+//
+// 1차(제목+시작일+종료일 완전 일치)에서
+// 걸러지지 않은 것들만 대상.
+//
+// 서로 다른 행사(예: 본행사 vs 전야제/부속행사)를
+// 잘못 합치는 것을 막기 위해 여기서는
+// 삭제/병합하지 않고 확인용으로만 출력합니다.
+// ======================================================
+
+function logDuplicateCandidates(
+  list
+) {
+  const byTitle =
+    new Map();
+
+
+  for (
+    const item of list
+  ) {
+    const titleKey =
+      normalizeTitle(
+        item.title
+      );
+
+    if (!titleKey) {
+      continue;
+    }
+
+    if (
+      !byTitle.has(
+        titleKey
+      )
+    ) {
+      byTitle.set(
+        titleKey,
+        []
+      );
+    }
+
+    byTitle
+      .get(
+        titleKey
+      )
+      .push(
+        item
+      );
+  }
+
+
+  const candidates = [];
+
+
+  for (
+    const items of
+      byTitle.values()
+  ) {
+    if (
+      items.length < 2
+    ) {
+      continue;
+    }
+
+
+    for (
+      let i = 0;
+      i < items.length;
+      i += 1
+    ) {
+      for (
+        let j = i + 1;
+        j < items.length;
+        j += 1
+      ) {
+        const a =
+          items[i];
+
+        const b =
+          items[j];
+
+
+        // 이미 1차에서 병합된
+        // 완전 일치 쌍은 제외
+        if (
+          a.startDate ===
+            b.startDate &&
+          a.endDate ===
+            b.endDate
+        ) {
+          continue;
+        }
+
+
+        if (
+          !datesOverlap(
+            a.startDate,
+            a.endDate,
+            b.startDate,
+            b.endDate
+          )
+        ) {
+          continue;
+        }
+
+
+        const dist =
+          distanceMeters(
+            a.lat,
+            a.lon,
+            b.lat,
+            b.lon
+          );
+
+
+        if (
+          dist !== null &&
+          dist <= 500
+        ) {
+          candidates.push({
+            a,
+            b,
+            dist,
+          });
+        }
+      }
+    }
+  }
+
+
+  if (
+    candidates.length > 0
+  ) {
+    console.log(
+      `중복 후보(수동 확인 필요) ${candidates.length}건:`
+    );
+
+
+    for (
+      const {
+        a,
+        b,
+        dist,
+      } of candidates
+    ) {
+      console.log(
+        `  - "${a.title}" ` +
+        `(${a.source}, ${a.startDate}~${a.endDate}) ` +
+        `↔ "${b.title}" ` +
+        `(${b.source}, ${b.startDate}~${b.endDate}) ` +
+        `[${Math.round(dist)}m]`
+      );
+    }
+  }
+
+
+  return candidates;
+}
+
+
+// ======================================================
 // 중복 제거
 // ======================================================
 
@@ -3048,11 +3396,13 @@ function dedupe(
 
 
     const key =
-      `${titleKey}__${item.startDate}`;
+      `${titleKey}__${item.startDate}__${item.endDate || ""}`;
 
 
     if (
-      !groups.has(key)
+      !groups.has(
+        key
+      )
     ) {
       groups.set(
         key,
@@ -3132,7 +3482,7 @@ function dedupe(
           );
 
 
-        if (
+        const itemWins =
           itemPriority >
             existingPriority ||
           (
@@ -3140,11 +3490,19 @@ function dedupe(
               existingPriority &&
             itemRichness >
               existingRichness
-          )
-        ) {
-          kept[i] =
-            item;
-        }
+          );
+
+
+        // 통째 교체 대신 필드 단위 병합
+        kept[i] =
+          mergeRecords(
+            itemWins
+              ? item
+              : existing,
+            itemWins
+              ? existing
+              : item
+          );
 
 
         duplicateRemoved +=
@@ -3176,6 +3534,14 @@ function dedupe(
   console.log(
     `중복 제거: ${list.length}건 → ${result.length}건 ` +
     `(중복 ${duplicateRemoved}건 제거)`
+  );
+
+
+  // 확정 병합 후 남은 데이터에서
+  // "제목 같고 날짜 겹치고 좌표 근접"인 후보를
+  // 찾아 로그로만 남긴다.
+  logDuplicateCandidates(
+    result
   );
 
 
