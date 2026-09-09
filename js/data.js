@@ -1,150 +1,386 @@
 // ======================================================
 // js/data.js
-// festivals.json 로딩 및 데이터 초기화
+// festivals.json 로드 및 데이터 정규화
 // ======================================================
 
+const SOURCE_LABELS = {
+  tourapi: "지역축제(TourAPI)",
+  culture: "문화축제 표준데이터",
+  culturePortal: "문화포털",
+  kopis: "공연(KOPIS)",
+  mentions: "인기도(언급량)",
+};
+
+let festivalData = [];
+let dataLoaded = false;
+let dataLoadError = false;
+let dataSourceStatus = null;
+
+// ------------------------------------------------------
+// 문자열 보조
+// ------------------------------------------------------
+
+function normalizeText(value) {
+  if (value === null || value === undefined) {
+    return "";
+  }
+
+  return String(value).trim();
+}
+
+function normalizeDate(value) {
+  const text = normalizeText(value);
+
+  if (!text) {
+    return "";
+  }
+
+  const match = text.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
+
+  if (match) {
+    const year = match[1];
+    const month = match[2].padStart(2, "0");
+    const day = match[3].padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+
+  return text;
+}
+
+function normalizeNumber(value) {
+  if (value === null || value === undefined || value === "") {
+    return null;
+  }
+
+  const number = Number(value);
+
+  return Number.isFinite(number) ? number : null;
+}
 
 // ------------------------------------------------------
 // 지역 정규화
 // ------------------------------------------------------
 
-function normalizeFestivalArea(festival) {
-  if (!festival) return "";
+function normalizeArea(value) {
+  const text = normalizeText(value);
 
-  const raw = String(festival.area || "").trim();
-  const locationText = `${festival.location || ""} ${festival.address || ""}`;
-  const titleText = String(festival.title || "");
-  const source = `${raw} ${locationText}`;
+  if (!text) {
+    return "";
+  }
 
-  const rules = [
-    ["서울", /서울(?:특별시)?/],
-    ["부산", /부산(?:광역시)?/],
-    ["대구", /대구(?:광역시)?/],
-    ["인천", /인천(?:광역시)?/],
-    ["광주", /광주(?:광역시|특별시)?/],
-    ["대전", /대전(?:광역시)?/],
-    ["울산", /울산(?:광역시)?/],
-    ["세종", /세종(?:특별자치시)?/],
-    ["경기", /경기(?:도)?/],
-    ["강원", /강원(?:특별자치도|도)?/],
-    ["충북", /충청북|충북/],
-    ["충남", /충청남|충남/],
-    ["전북", /전라북|전북/],
-    ["전남", /전라남|전남/],
-    ["경북", /경상북|경북/],
-    ["경남", /경상남|경남/],
-    ["제주", /제주(?:특별자치도|도)?/],
+  const areaMap = [
+    ["서울특별시", "서울"],
+    ["부산광역시", "부산"],
+    ["대구광역시", "대구"],
+    ["인천광역시", "인천"],
+    ["광주광역시", "광주"],
+    ["대전광역시", "대전"],
+    ["울산광역시", "울산"],
+    ["세종특별자치시", "세종"],
+    ["경기도", "경기"],
+    ["강원특별자치도", "강원"],
+    ["강원도", "강원"],
+    ["충청북도", "충북"],
+    ["충청남도", "충남"],
+    ["전라북도", "전북"],
+    ["전북특별자치도", "전북"],
+    ["전라남도", "전남"],
+    ["경상북도", "경북"],
+    ["경상남도", "경남"],
+    ["제주특별자치도", "제주"],
   ];
 
-  if (/\[(?:중국|일본|베트남|홍콩|대만|미국|싱가포르|태국|해외)|(?:\[일본|\[중국)/.test(`${locationText} ${titleText}`)) {
-    return "기타";
+  for (const [from, to] of areaMap) {
+    if (text.startsWith(from)) {
+      return to;
+    }
   }
 
-  if (/포항|경주|안동|구미|김천|영주|영천|상주|문경|경산|칠곡|의성|울진|영덕|청도|성주|고령|봉화|예천|청송/.test(locationText)) {
-    return "경북";
-  }
-
-  for (const [area, pattern] of rules) {
-    if (pattern.test(source)) return area;
-  }
-
-  for (const [area, pattern] of rules) {
-    if (pattern.test(titleText)) return area;
-  }
-
-  if (raw === "해외") return "기타";
-  return raw;
+  return text;
 }
 
-function normalizeFestivalRecord(festival) {
-  return {
-    ...festival,
-    area: normalizeFestivalArea(festival),
+// ------------------------------------------------------
+// 카테고리 정규화
+// ------------------------------------------------------
+
+function normalizeCategory(record) {
+  const genre = normalizeText(record.genre);
+  const category = normalizeText(record.category);
+  const type = normalizeText(record.type);
+
+  const combined = `${genre} ${category} ${type}`.toLowerCase();
+
+  if (
+    combined.includes("뮤지컬") ||
+    combined.includes("콘서트") ||
+    combined.includes("공연") ||
+    combined.includes("오페라") ||
+    combined.includes("클래식") ||
+    combined.includes("페스티벌")
+  ) {
+    return "공연";
+  }
+
+  if (
+    combined.includes("축제") ||
+    combined.includes("지역행사") ||
+    combined.includes("계절행사") ||
+    combined.includes("불꽃") ||
+    combined.includes("하나비")
+  ) {
+    return "지역축제";
+  }
+
+  return category || genre || type || "기타";
+}
+
+// ------------------------------------------------------
+// 장소 정규화
+// ------------------------------------------------------
+
+function normalizeLocation(record) {
+  const location =
+    normalizeText(record.location) ||
+    normalizeText(record.addr1) ||
+    normalizeText(record.address);
+
+  return location;
+}
+
+// ------------------------------------------------------
+// 제목 정규화
+// ------------------------------------------------------
+
+function normalizeTitle(record) {
+  return (
+    normalizeText(record.title) ||
+    normalizeText(record.eventNm) ||
+    normalizeText(record.eventName) ||
+    normalizeText(record.name) ||
+    "제목 없음"
+  );
+}
+
+// ------------------------------------------------------
+// 날짜 정규화
+// ------------------------------------------------------
+
+function normalizeStartDate(record) {
+  return normalizeDate(
+    record.startDate ??
+      record.start_date ??
+      record.eventStartDate ??
+      record.eventStart
+  );
+}
+
+function normalizeEndDate(record) {
+  return normalizeDate(
+    record.endDate ??
+      record.end_date ??
+      record.eventEndDate ??
+      record.eventEnd
+  );
+}
+
+// ------------------------------------------------------
+// URL 정규화
+// ------------------------------------------------------
+
+function normalizeDetailUrl(record) {
+  return (
+    normalizeText(record.detailUrl) ||
+    normalizeText(record.detail_url) ||
+    normalizeText(record.homepage) ||
+    normalizeText(record.url) ||
+    ""
+  );
+}
+
+function normalizeThumbnail(record) {
+  return (
+    normalizeText(record.thumbnail) ||
+    normalizeText(record.imageUrl) ||
+    normalizeText(record.image) ||
+    normalizeText(record.imgUrl) ||
+    ""
+  );
+}
+
+// ------------------------------------------------------
+// 하나의 행사 레코드 정규화
+// ------------------------------------------------------
+
+function normalizeFestivalRecord(record, index) {
+  if (!record || typeof record !== "object") {
+    return null;
+  }
+
+  const title = normalizeTitle(record);
+  const startDate = normalizeStartDate(record);
+  const endDate = normalizeEndDate(record);
+
+  const source = normalizeText(record.source);
+
+  const latitude = normalizeNumber(
+    record.lat ??
+      record.latitude ??
+      record.mapy
+  );
+
+  const longitude = normalizeNumber(
+    record.lon ??
+      record.lng ??
+      record.longitude ??
+      record.mapx
+  );
+
+  const item = {
+    ...record,
+
+    id:
+      normalizeText(record.id) ||
+      `${source || "event"}-${index}-${startDate}-${title}`,
+
+    title,
+
+    startDate,
+
+    endDate: endDate || startDate,
+
+    location: normalizeLocation(record),
+
+    area:
+      normalizeArea(record.area) ||
+      normalizeArea(record.location) ||
+      normalizeArea(record.addr1) ||
+      "",
+
+    genre: normalizeText(record.genre),
+
+    category: normalizeCategory(record),
+
+    detailUrl: normalizeDetailUrl(record),
+
+    thumbnail: normalizeThumbnail(record),
+
+    lat: latitude,
+
+    lon: longitude,
+
+    source: source || "unknown",
+
+    sourceLabel:
+      SOURCE_LABELS[source] ||
+      normalizeText(record.sourceLabel) ||
+      source ||
+      "기타",
+
+    isFavorite: false,
+
+    isReminder: false,
+
+    hidden: false,
   };
+
+  return item;
 }
 
-
 // ------------------------------------------------------
-// 데이터 로딩
-// ------------------------------------------------------
-
-
-
-// ------------------------------------------------------
-// 찜 목록 알림 배너
+// JSON 데이터 정규화
 // ------------------------------------------------------
 
-function renderReminderBanner() {
-  const banner = document.getElementById("reminderBanner");
-
-  if (!banner) {
-    return;
+function normalizeFestivalData(json) {
+  if (!json) {
+    return [];
   }
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  let rawItems = [];
 
-  const remindersForDisplay = Object.entries(reminders || {})
-    .map(([id, date]) => ({
-      id: String(id),
-      date: String(date),
-      time: new Date(`${date}T00:00:00`).getTime(),
-    }))
-    .filter((item) =>
-      /^\d{4}-\d{2}-\d{2}$/.test(item.date) &&
-      Number.isFinite(item.time) &&
-      item.time >= today.getTime()
+  if (Array.isArray(json)) {
+    rawItems = json;
+  } else if (Array.isArray(json.items)) {
+    rawItems = json.items;
+  } else if (Array.isArray(json.data)) {
+    rawItems = json.data;
+  } else if (Array.isArray(json.festivals)) {
+    rawItems = json.festivals;
+  }
+
+  return rawItems
+    .map((record, index) =>
+      normalizeFestivalRecord(record, index)
     )
-    .sort((a, b) => a.time - b.time);
-
-  if (!remindersForDisplay.length) {
-    banner.classList.add("hidden");
-    banner.innerHTML = "";
-    return;
-  }
-
-  const lines = remindersForDisplay
-    .map((item) => {
-      const festival = allFestivals.find(
-        (f) => String(f.id) === item.id
-      );
-
-      if (!festival) {
-        return "";
-      }
-
-      const diff = Math.round(
-        (item.time - today.getTime()) / 86400000
-      );
-      const when =
-        diff === 0
-          ? "오늘"
-          : diff === 1
-            ? "내일"
-            : item.date;
-
-      return `<div class="reminder-banner-item">
-        <span>⏰</span>
-        <strong>${escapeHtml(festival.title || "행사")}</strong>
-        <span>— ${escapeHtml(when)}</span>
-      </div>`;
-    })
     .filter(Boolean);
-
-  if (!lines.length) {
-    banner.classList.add("hidden");
-    banner.innerHTML = "";
-    return;
-  }
-
-  banner.innerHTML = lines.join("");
-  banner.classList.remove("hidden");
 }
 
+// ------------------------------------------------------
+// 소스 상태
+// ------------------------------------------------------
 
-async function load() {
+function hasSourceFailure(sourceStatus) {
+  if (!sourceStatus || typeof sourceStatus !== "object") {
+    return false;
+  }
+
+  return Object.values(sourceStatus).some(
+    (value) => value === false
+  );
+}
+
+function getFailedSourceLabels(sourceStatus) {
+  if (!sourceStatus || typeof sourceStatus !== "object") {
+    return [];
+  }
+
+  return Object.entries(sourceStatus)
+    .filter(([, ok]) => ok === false)
+    .map(([source]) => SOURCE_LABELS[source] || source);
+}
+
+// ------------------------------------------------------
+// 데이터 경고 표시
+// ------------------------------------------------------
+
+function showDataWarning(message) {
+  const existing =
+    document.querySelector(
+      "#dataSourceWarning"
+    );
+
+  if (existing) {
+    existing.remove();
+  }
+
+  const warning =
+    document.createElement("div");
+
+  warning.id = "dataSourceWarning";
+
+  warning.className =
+    "data-source-warning";
+
+  warning.textContent = message;
+
+  const main =
+    document.querySelector("main") ||
+    document.body;
+
+  main.prepend(warning);
+}
+
+// ------------------------------------------------------
+// 데이터 로드
+// ------------------------------------------------------
+
+async function loadFestivalData() {
+  dataLoaded = false;
+  dataLoadError = false;
+  dataSourceStatus = null;
+
   try {
-    const res =
+    const response =
       await fetch(
         "festivals.json",
         {
@@ -152,384 +388,176 @@ async function load() {
         }
       );
 
-    if (!res.ok) {
-      throw new Error(`축제 데이터 로딩 실패 (${res.status})`);
+    if (!response.ok) {
+      throw new Error(
+        `HTTP ${response.status}`
+      );
     }
 
     const json =
-      await res.json();
+      await response.json();
 
-    if (!json || !Array.isArray(json.festivals)) {
-      throw new Error("축제 데이터 형식이 올바르지 않습니다.");
-    }
+    dataSourceStatus =
+      json.sourceStatus ||
+      null;
 
-    allFestivals =
-      (json.festivals || []).map(
-        normalizeFestivalRecord
+    const sourceFailed =
+      hasSourceFailure(
+        dataSourceStatus
       );
 
-    reconcileReminders(
-      allFestivals.map((f) => String(f.id))
-    );
+    const items =
+      normalizeFestivalData(json);
 
-    // 모든 데이터 소스가 정상 갱신된 경우에만
-    // 저장된 관심/숨김 목록의 고아 ID를 정리한다.
-    // 일부 소스가 실패한 상태에서는 기존 저장 상태를 보존한다.
-    const hasSourceFailure =
-      Object.values(
-        json.sourceStatus || {}
-      ).some((ok) => ok === false);
+    if (sourceFailed) {
+      dataLoadError = true;
 
-    if (!hasSourceFailure) {
-      reconcileStoredState(
-        new Set(
-          allFestivals.map((f) => String(f.id))
-        )
-      );
-    }
-
-
-    // --------------------------------------------------
-    // 인기 행사
-    //
-    // mentions가 있는 행사 중
-    // 상위 15개를 인기 행사로 지정한다.
-    // --------------------------------------------------
-
-    const ranked =
-      allFestivals
-        .filter(
-          (f) =>
-            typeof f.mentions ===
-            "number"
-        )
-        .sort(
-          (a, b) =>
-            b.mentions -
-            a.mentions
-        )
-        .slice(0, 15);
-
-    hotIds =
-      new Set(
-        ranked.map(
-          (f) => String(f.id)
-        )
-      );
-
-
-    // --------------------------------------------------
-    // 마지막 업데이트 표시
-    // --------------------------------------------------
-
-    const updated =
-      new Date(
-        json.updatedAt
-      );
-
-    const updatedValid = !Number.isNaN(updated.getTime());
-    const staleHours = updatedValid
-      ? (Date.now() - updated.getTime()) / 3600000
-      : Infinity;
-
-    document.getElementById(
-      "updatedAt"
-    ).textContent =
-      `${updatedValid
-        ? `마지막 업데이트: ${updated.toLocaleString("ko-KR")}`
-        : "업데이트 시각 확인 필요"} · 총 ${allFestivals.length}건`;
-
-
-    // --------------------------------------------------
-    // 데이터 소스 상태
-    // --------------------------------------------------
-
-    const SOURCE_LABELS = {
-      tourapi:
-        "지역축제(TourAPI)",
-
-      culture:
-        "문화축제 표준데이터",
-
-      kopis:
-        "공연(KOPIS)",
-
-      mentions:
-        "인기도(언급량)",
-    };
-
-    const failed =
-      Object.entries(
-        json.sourceStatus ||
-          {}
-      )
-        .filter(
-          ([, ok]) =>
-            ok === false
-        )
-        .map(
-          ([key]) =>
-            SOURCE_LABELS[key] ||
-            key
+      const failedLabels =
+        getFailedSourceLabels(
+          dataSourceStatus
         );
 
-    const banner =
-      document.getElementById(
-        "statusBanner"
+      const failedText =
+        failedLabels.length > 0
+          ? failedLabels.join(", ")
+          : "일부 데이터 소스";
+
+      showDataWarning(
+        `⚠️ ${failedText} 갱신에 실패해서 일부 정보가 최신이 아닐 수 있어요.`
       );
-
-    if (failed.length > 0) {
-      banner.textContent =
-        `⚠️ ${failed.join(", ")} 갱신에 실패해서 일부 정보가 최신이 아닐 수 있어요.`;
-      banner.classList.remove("hidden");
-    } else if (staleHours > 36) {
-      banner.textContent =
-        `⚠️ 행사 데이터가 ${Math.floor(staleHours)}시간 이상 갱신되지 않았습니다.`;
-      banner.classList.remove("hidden");
-    } else {
-      banner.classList.add("hidden");
     }
 
+    festivalData = items;
 
-
-    // --------------------------------------------------
-    // 지역 필터 생성
-    // --------------------------------------------------
-
-    buildAreaFilter();
-
+    dataLoaded = true;
 
     // --------------------------------------------------
-    // 월 필터 생성
+    // 서버 데이터가 정상적으로 완성된 경우에만
+    // 로컬 상태를 데이터와 맞춘다.
     // --------------------------------------------------
-
-    buildMonthFilter();
-
-
-    // --------------------------------------------------
-    // 지역 버튼 및 날씨 링크
-    // --------------------------------------------------
-
-    updateAreaButtonLabel();
-
-
-    // --------------------------------------------------
-    // 현재 화면 렌더링
-    // --------------------------------------------------
-
-    renderCurrentView();
-    renderReminderBanner();
-
-  } catch (e) {
-    const urgentView =
-      document.getElementById("urgentView");
-
-    if (urgentView) {
-      urgentView.innerHTML = `
-        <div class="empty">
-          <strong>행사 데이터를 불러오지 못했습니다.</strong><br>
-          네트워크 상태를 확인한 뒤 다시 시도해주세요.<br>
-          <button type="button" class="btn" onclick="retryLoadData()">다시 불러오기</button>
-        </div>`;
+    if (!sourceFailed) {
+      reconcileStoredState();
     }
 
-    const banner =
-      document.getElementById("statusBanner");
+    return festivalData;
+  } catch (error) {
+    console.error(
+      "festivals.json 로드 실패:",
+      error
+    );
 
-    if (banner) {
-      banner.textContent =
-        "⚠️ 행사 데이터를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.";
-      banner.classList.remove("hidden");
-    }
+    dataLoadError = true;
 
-    console.error(e);
+    festivalData = [];
+
+    showDataWarning(
+      "⚠️ 행사 데이터를 불러오지 못했습니다."
+    );
+
+    return festivalData;
   }
 }
 
-
 // ------------------------------------------------------
-// 데이터 재시도
+// 로컬 저장 상태와 데이터 연결
 // ------------------------------------------------------
 
-async function retryLoadData() {
-  const urgentView =
-    document.getElementById("urgentView");
-
-  if (urgentView) {
-    urgentView.innerHTML =
-      '<div class="empty">행사 데이터를 다시 불러오는 중입니다...</div>';
+function reconcileStoredState() {
+  if (!Array.isArray(festivalData)) {
+    return;
   }
 
-  await load();
-}
+  const favorites =
+    typeof loadFavorites === "function"
+      ? loadFavorites()
+      : [];
 
+  const reminders =
+    typeof loadReminders === "function"
+      ? loadReminders()
+      : [];
 
-// ------------------------------------------------------
-// 오늘 알림 배너
-// ------------------------------------------------------
+  const hidden =
+    typeof loadHiddenItems === "function"
+      ? loadHiddenItems()
+      : [];
 
-
-
-
-// ------------------------------------------------------
-// 지역 필터 생성
-// ------------------------------------------------------
-
-function buildAreaFilter() {
-  const usedAreas =
+  const favoriteSet =
     new Set(
-      allFestivals
-        .map(
-          (f) => f.area
-        )
-        .filter(Boolean)
+      Array.isArray(favorites)
+        ? favorites
+        : []
     );
 
-  const orderedAreas = [
-    ...AREA_DISPLAY_ORDER.filter(
-      (a) =>
-        usedAreas.has(a)
-    ),
-
-    ...[
-      ...usedAreas,
-    ]
-      .filter(
-        (a) =>
-          !AREA_DISPLAY_ORDER.includes(
-            a
-          )
-      )
-      .sort(),
-  ];
-
-  const checkboxList =
-    document.getElementById(
-      "areaCheckboxList"
+  const reminderSet =
+    new Set(
+      Array.isArray(reminders)
+        ? reminders
+        : []
     );
 
-  checkboxList.innerHTML =
-    orderedAreas
-      .map(
-        (area) => `
-        <label class="area-checkbox-item">
-          <input
-            type="checkbox"
-            value="${escapeAttr(area)}"
-          />
-          ${escapeAttr(area)}
-        </label>`
-      )
-      .join("");
+  const hiddenSet =
+    new Set(
+      Array.isArray(hidden)
+        ? hidden
+        : []
+    );
+
+  festivalData =
+    festivalData.map((item) => ({
+      ...item,
+
+      isFavorite:
+        favoriteSet.has(item.id),
+
+      isReminder:
+        reminderSet.has(item.id),
+
+      hidden:
+        hiddenSet.has(item.id),
+    }));
 }
 
+// ------------------------------------------------------
+// 데이터 접근
+// ------------------------------------------------------
+
+function getFestivalData() {
+  return festivalData;
+}
+
+function isDataLoaded() {
+  return dataLoaded;
+}
+
+function hasDataLoadError() {
+  return dataLoadError;
+}
+
+function getDataSourceStatus() {
+  return dataSourceStatus;
+}
 
 // ------------------------------------------------------
-// 월 필터 생성
+// ID로 데이터 검색
 // ------------------------------------------------------
 
-function buildMonthFilter() {
-  const monthKeys =
-    new Set();
-
-  for (const f of allFestivals) {
-    if (!f.startDate) {
-      continue;
-    }
-
-    const start =
-      new Date(
-        f.startDate
-      );
-
-    const end =
-      f.endDate
-        ? new Date(
-            f.endDate
-          )
-        : start;
-
-    const cursor =
-      new Date(
-        start.getFullYear(),
-        start.getMonth(),
-        1
-      );
-
-    const endCursor =
-      new Date(
-        end.getFullYear(),
-        end.getMonth(),
-        1
-      );
-
-    while (
-      cursor <=
-      endCursor
-    ) {
-      monthKeys.add(
-        `${cursor.getFullYear()}-${String(
-          cursor.getMonth() + 1
-        ).padStart(
-          2,
-          "0"
-        )}`
-      );
-
-      cursor.setMonth(
-        cursor.getMonth() + 1
-      );
-    }
+function findFestivalById(id) {
+  if (!id) {
+    return null;
   }
 
-  const monthSelect =
-    document.getElementById(
-      "monthFilter"
-    );
+  return (
+    festivalData.find(
+      (item) => item.id === id
+    ) || null
+  );
+}
 
-  monthSelect
-    .querySelectorAll(
-      "option:not(:first-child)"
-    )
-    .forEach(
-      (option) =>
-        option.remove()
-    );
+// ------------------------------------------------------
+// 전체 데이터 갱신
+// ------------------------------------------------------
 
-  [
-    ...monthKeys,
-  ]
-    .sort()
-    .forEach(
-      (key) => {
-        const [y, m] =
-          key.split("-");
-
-        const opt =
-          document.createElement(
-            "option"
-          );
-
-        opt.value =
-          key;
-
-        opt.textContent =
-          `${y}년 ${Number(
-            m
-          )}월`;
-
-        monthSelect.appendChild(
-          opt
-        );
-      }
-    );
-
-  // 저장된 월 필터를 옵션 생성 후 복원한다.
-  if (selectedMonth && monthKeys.has(selectedMonth)) {
-    monthSelect.value = selectedMonth;
-  } else if (selectedMonth) {
-    selectedMonth = "";
-    saveDateFilterState();
-    monthSelect.value = "";
-  }
+async function reloadFestivalData() {
+  return await loadFestivalData();
 }
