@@ -3646,6 +3646,21 @@ async function main() {
     ]);
 
 
+    // 하나 이상의 핵심 데이터 소스가 실패한 경우
+  // 빈 결과로 기존 festivals.json을 덮어쓰지 않습니다.
+  // 일시적인 API timeout으로 기존 정상 데이터가 사라지는 것을 방지합니다.
+  const failedSources = Object.entries(sourceStatus)
+    .filter(([, ok]) => ok === false)
+    .map(([source]) => source);
+
+  if (failedSources.length > 0) {
+    console.error(
+      `데이터 소스 ${failedSources.join(', ')} 실패 → 기존 festivals.json을 유지합니다.`
+    );
+    process.exitCode = 1;
+    return;
+  }
+
   const allItems = [
     ...tourItems,
     ...cultureItems,
