@@ -1,4 +1,3 @@
-```javascript
 /**
  * 전국 축제 + 공연 정보를 여러 공공 데이터 API에서 가져와
  * 하나의 festivals.json으로 합칩니다.
@@ -126,6 +125,19 @@ function normalizeTitle(title) {
     .replace(/[［］【】]/g, "")
     .replace(/\s+/g, "")
     .replace(/[^\p{L}\p{N}]/gu, "")
+    .trim()
+    .toLowerCase();
+}
+
+
+// ======================================================
+// 일반 텍스트 정규화
+// ======================================================
+
+function normalizeText(value) {
+  return String(value || "")
+    .normalize("NFKC")
+    .replace(/\s+/g, "")
     .trim()
     .toLowerCase();
 }
@@ -1140,55 +1152,69 @@ async function fetchCultureStandardFestivals() {
 // ======================================================
 // 3. 문화포털
 //
-// End Point:
-//   https://apis.data.go.kr/B553457/cultureinfo
-//
-// 기간별 문화정보목록조회:
-//   GET /period2
-//
 // serviceTp:
 //   A = 공연/전시
 //   B = 행사/축제
 //   C = 교육/체험
 //
-// 현재 앱에서는 B만 사용합니다.
-//
 // 정책:
-//   - B(행사/축제)는 수집
-//   - 전시/미술관/교육/체험/강좌/강연/세미나 등은
-//     2차 필터링으로 제거
-//   - 공연성 행사, 축제, 페스티벌, 지역행사,
-//     계절행사, 불꽃놀이 등은 유지
+//
+// A = 공연/전시
+//   - 공연 유지
+//   - 콘서트 유지
+//   - 뮤지컬 유지
+//   - 단, 뮤지컬은 대공연장 중심으로 제한
+//   - 연극 제외
+//   - 전시/기획전/특별전/상설전 제외
+//   - 미술관/박물관 중심 전시 제외
+//
+// B = 행사/축제
+//   - 축제/지역행사/계절행사/페스티벌 유지
+//   - 불꽃놀이/하나비 등 유지
+//   - 교육/체험/강좌/강연/세미나/워크숍 제외
+//   - 단순 상설 프로그램 제외
+//
+// C = 사용하지 않음
 // ======================================================
 
 
 // ======================================================
-// 문화포털 관광성 낮은 항목 제외 키워드
+// 문화포털 전시 제외 키워드
 // ======================================================
 //
-// serviceTp=B라고 해서 모든 항목이 관광 이벤트인 것은
-// 아니므로 제목/분야를 기준으로 2차 필터링합니다.
+// A에는 공연과 전시가 섞여 있으므로
+// A 자체를 버리지 않고 명확한 전시성 항목만 제거합니다.
 //
-// 너무 광범위한 단어는 사용하지 않습니다.
-// 예:
-//   "문화", "예술", "프로그램", "공연" 등은 제외하지 않음.
+// 장소명만으로 무조건 제외하지 않습니다.
+// 공연장이 박물관/미술관 내부에 있는 경우까지
+// 잘못 제거하지 않기 위한 처리입니다.
 // ======================================================
 
-const EXCLUDED_CULTURE_PORTAL_KEYWORDS = [
-  // 전시
+const EXCLUDED_CULTURE_PORTAL_EXHIBITION_KEYWORDS = [
   "전시회",
   "전시",
   "기획전",
   "특별전",
   "상설전",
+  "미디어전",
   "展",
+  "미술전",
+  "사진전",
+  "회화전",
+  "조각전",
+  "작품전",
+  "개인전",
+  "초대전",
+  "기념전",
+  "아트페어",
+];
 
-  // 미술관/박물관 중심 프로그램
-  "미술관교육",
-  "박물관교육",
-  "미술관프로그램",
-  "박물관프로그램",
 
+// ======================================================
+// 문화포털 교육/체험 등 제외 키워드
+// ======================================================
+
+const EXCLUDED_CULTURE_PORTAL_PROGRAM_KEYWORDS = [
   // 교육
   "교육",
   "교육프로그램",
@@ -1205,7 +1231,7 @@ const EXCLUDED_CULTURE_PORTAL_KEYWORDS = [
   "문화강좌",
   "예술강좌",
 
-  // 강연/세미나
+  // 강연 / 세미나
   "강연",
   "강연회",
   "세미나",
@@ -1223,39 +1249,474 @@ const EXCLUDED_CULTURE_PORTAL_KEYWORDS = [
 
 
 // ======================================================
-// 문화포털 관광 이벤트 판별
+// 문화포털 연극 제외 키워드
 // ======================================================
 
-function isCulturePortalTourismEvent(
-  title,
-  realmName
+const EXCLUDED_CULTURE_PORTAL_THEATER_KEYWORDS = [
+  "연극",
+  "연극공연",
+  "연극제",
+];
+
+
+// ======================================================
+// 문화포털 뮤지컬 판별 키워드
+// ======================================================
+
+const MUSICAL_KEYWORDS = [
+  "뮤지컬",
+  "musical",
+];
+
+
+// ======================================================
+// 문화포털 공연 판별 키워드
+// ======================================================
+//
+// 공연이라는 단어가 없는 공연도 존재할 수 있으므로
+// 이 목록은 "공연 여부"를 강제하는 용도가 아니라
+// 장르 판별 보조용으로만 사용합니다.
+// ======================================================
+
+const PERFORMANCE_KEYWORDS = [
+  "공연",
+  "콘서트",
+  "음악회",
+  "페스티벌",
+  "페스티발",
+  "라이브",
+  "뮤지컬",
+  "musical",
+];
+
+
+// ======================================================
+// 문화포털 뮤지컬 공연장 화이트리스트
+// ======================================================
+//
+// KOPIS에서 사용하던 기준을 동일하게 적용합니다.
+// ======================================================
+
+const CULTURE_PORTAL_MUSICAL_VENUE_WHITELIST = [
+  "정동극장",
+  "디큐브아트센터",
+  "두산연강홀",
+  "충무아트센터",
+  "상상마당",
+  "우란문화재단",
+  "우란2경",
+  "LG아트센터",
+  "명동예술극장",
+  "신도림",
+  "을지로입구",
+  "샤롯데씨어터",
+  "신한카드FAN스퀘어홀",
+  "신한카드 FAN스퀘어홀",
+  "예술의전당",
+  "이해랑예술극장",
+  "광림아트센터",
+  "국립중앙박물관 극장 용",
+  "세종문화회관",
+  "유니버설아트센터",
+  "블루스퀘어",
+  "성남아트센터",
+
+  "GS아트센터",
+  "코엑스",
+  "신한카드 아티움",
+  "한전아트센터",
+  "홍대대학로아트센터",
+  "홍익대 대학로아트센터",
+  "홍익대학교 대학로아트센터",
+  "대학로아트센터",
+  "NOL씨어터",
+
+  "LG아트센터 서울",
+
+  "충무아트센터 대극장",
+  "국립극장",
+  "예스24라이브홀",
+  "예스24 라이브홀",
+  "고양아람누리",
+  "경기아트센터",
+  "수원SK아트리움",
+  "부천아트센터",
+  "강릉아트센터",
+  "춘천문화예술회관",
+  "원주치악예술관",
+  "부산문화회관",
+  "소향씨어터",
+  "드림씨어터",
+  "경남문화예술회관",
+  "성산아트홀",
+  "대구콘서트하우스",
+  "대구오페라하우스",
+  "계명아트센터",
+  "광주문화예술회관",
+  "김대중컨벤션센터",
+  "대전예술의전당",
+  "청주아트홀",
+  "제주아트센터",
+];
+
+
+function isVenueWhitelisted(
+  location
 ) {
-  const normalizedText =
-    `${title || ""} ${realmName || ""}`
-      .normalize("NFKC")
-      .replace(/\s+/g, "")
-      .toLowerCase();
-
-
-  if (!normalizedText) {
+  if (!location) {
     return false;
   }
 
-
-  return !EXCLUDED_CULTURE_PORTAL_KEYWORDS.some(
-    (keyword) =>
-      normalizedText.includes(
-        keyword
-          .normalize("NFKC")
-          .replace(/\s+/g, "")
-          .toLowerCase()
+  return CULTURE_PORTAL_MUSICAL_VENUE_WHITELIST.some(
+    (name) =>
+      location.includes(
+        name
       )
   );
 }
 
 
 // ======================================================
-// 문화포털 B 수집
+// 문화포털 전시 여부
+// ======================================================
+
+function isCulturePortalExhibition(
+  title,
+  realmName
+) {
+  const titleText =
+    normalizeText(
+      title
+    );
+
+  const realmText =
+    normalizeText(
+      realmName
+    );
+
+
+  // 분야명이 명확하게 전시인 경우
+  if (
+    realmText.includes("전시") ||
+    realmText.includes("미술") ||
+    realmText.includes("사진")
+  ) {
+    return true;
+  }
+
+
+  // 제목에 명확한 전시 키워드가 있는 경우
+  return EXCLUDED_CULTURE_PORTAL_EXHIBITION_KEYWORDS.some(
+    (keyword) =>
+      titleText.includes(
+        normalizeText(
+          keyword
+        )
+      )
+  );
+}
+
+
+// ======================================================
+// 문화포털 연극 여부
+// ======================================================
+
+function isCulturePortalTheater(
+  title,
+  realmName
+) {
+  const titleText =
+    normalizeText(
+      title
+    );
+
+  const realmText =
+    normalizeText(
+      realmName
+    );
+
+
+  return EXCLUDED_CULTURE_PORTAL_THEATER_KEYWORDS.some(
+    (keyword) =>
+      titleText.includes(
+        normalizeText(
+          keyword
+        )
+      ) ||
+      realmText.includes(
+        normalizeText(
+          keyword
+        )
+      )
+  );
+}
+
+
+// ======================================================
+// 문화포털 뮤지컬 여부
+// ======================================================
+
+function isCulturePortalMusical(
+  title,
+  realmName
+) {
+  const titleText =
+    normalizeText(
+      title
+    );
+
+  const realmText =
+    normalizeText(
+      realmName
+    );
+
+
+  return MUSICAL_KEYWORDS.some(
+    (keyword) =>
+      titleText.includes(
+        normalizeText(
+          keyword
+        )
+      ) ||
+      realmText.includes(
+        normalizeText(
+          keyword
+        )
+      )
+  );
+}
+
+
+// ======================================================
+// 문화포털 프로그램 제외 여부
+// ======================================================
+
+function isCulturePortalProgramExcluded(
+  title,
+  realmName
+) {
+  const text =
+    normalizeText(
+      `${title || ""} ${realmName || ""}`
+    );
+
+
+  if (!text) {
+    return false;
+  }
+
+
+  return EXCLUDED_CULTURE_PORTAL_PROGRAM_KEYWORDS.some(
+    (keyword) =>
+      text.includes(
+        normalizeText(
+          keyword
+        )
+      )
+  );
+}
+
+
+// ======================================================
+// 문화포털 공연 여부
+// ======================================================
+
+function isCulturePortalPerformance(
+  title,
+  realmName
+) {
+  const titleText =
+    normalizeText(
+      title
+    );
+
+  const realmText =
+    normalizeText(
+      realmName
+    );
+
+
+  return PERFORMANCE_KEYWORDS.some(
+    (keyword) =>
+      titleText.includes(
+        normalizeText(
+          keyword
+        )
+      ) ||
+      realmText.includes(
+        normalizeText(
+          keyword
+        )
+      )
+  );
+}
+
+
+// ======================================================
+// 문화포털 A 필터
+// ======================================================
+//
+// A = 공연/전시
+//
+// 전시를 제거하고 공연을 유지합니다.
+//
+// 중요한 점:
+// "공연"이라는 단어가 제목에 반드시 들어가야 하는
+// 것은 아닙니다.
+//
+// 따라서 명확한 제외 대상만 제거하고,
+// 나머지는 보수적으로 유지합니다.
+// 단, 뮤지컬은 별도의 공연장 필터를 적용합니다.
+// ======================================================
+
+function shouldKeepCulturePortalA(
+  title,
+  realmName,
+  location
+) {
+  // 1. 명확한 전시는 제외
+  if (
+    isCulturePortalExhibition(
+      title,
+      realmName
+    )
+  ) {
+    return false;
+  }
+
+
+  // 2. 연극은 기존 정책대로 제외
+  if (
+    isCulturePortalTheater(
+      title,
+      realmName
+    )
+  ) {
+    return false;
+  }
+
+
+  // 3. 교육/체험/강좌 등은 제외
+  if (
+    isCulturePortalProgramExcluded(
+      title,
+      realmName
+    )
+  ) {
+    return false;
+  }
+
+
+  // 4. 뮤지컬은 대공연장 중심으로 제한
+  if (
+    isCulturePortalMusical(
+      title,
+      realmName
+    )
+  ) {
+    return isVenueWhitelisted(
+      location
+    );
+  }
+
+
+  // 5. 명확한 공연/콘서트 등은 유지
+  if (
+    isCulturePortalPerformance(
+      title,
+      realmName
+    )
+  ) {
+    return true;
+  }
+
+
+  // 6. A 안에서 위 조건에 해당하지 않는 항목은
+  // 전시로 명확히 판정되지 않았다면 유지합니다.
+  //
+  // A의 데이터 자체가 "공연/전시"로 제한되어 있으므로
+  // 여기서 지나치게 엄격한 positive 필터를 걸면
+  // 정상적인 공연까지 사라질 수 있습니다.
+  return true;
+}
+
+
+// ======================================================
+// 문화포털 B 필터
+// ======================================================
+//
+// B = 행사/축제
+//
+// 관광성이 낮은 교육/체험/강좌/강연/전시 등을
+// 제거하고 일반적인 행사/축제는 유지합니다.
+// ======================================================
+
+function shouldKeepCulturePortalB(
+  title,
+  realmName
+) {
+  if (
+    isCulturePortalExhibition(
+      title,
+      realmName
+    )
+  ) {
+    return false;
+  }
+
+
+  if (
+    isCulturePortalProgramExcluded(
+      title,
+      realmName
+    )
+  ) {
+    return false;
+  }
+
+
+  return true;
+}
+
+
+// ======================================================
+// 문화포털 serviceTp별 필터
+// ======================================================
+
+function shouldKeepCulturePortalItem(
+  serviceTp,
+  title,
+  realmName,
+  location
+) {
+  if (
+    serviceTp === "A"
+  ) {
+    return shouldKeepCulturePortalA(
+      title,
+      realmName,
+      location
+    );
+  }
+
+
+  if (
+    serviceTp === "B"
+  ) {
+    return shouldKeepCulturePortalB(
+      title,
+      realmName
+    );
+  }
+
+
+  // C는 호출하지 않지만 안전상 제외
+  return false;
+}
+
+
+// ======================================================
+// 문화포털 수집
 // ======================================================
 
 async function fetchCulturePortalByServiceType(
@@ -1485,8 +1946,6 @@ async function fetchCulturePortalByServiceType(
     if (
       blocks.length === 0
     ) {
-      // 정상적인 0건 응답일 가능성이 있으므로
-      // resultCode가 정상이라면 해당 서비스만 종료
       const totalCount =
         xmlTotalCount(
           xml
@@ -1658,17 +2117,15 @@ async function fetchCulturePortalByServiceType(
 
 
       // --------------------------------------------------
-      // 2차 관광성 필터
-      //
-      // B = 행사/축제이므로 기본적으로 수집하되
-      // 전시/교육/체험/강좌/강연/세미나 등의
-      // 관광성이 낮은 항목은 제거합니다.
+      // serviceTp별 관광성 필터
       // --------------------------------------------------
 
       if (
-        !isCulturePortalTourismEvent(
+        !shouldKeepCulturePortalItem(
+          serviceTp,
           title,
-          realmName
+          realmName,
+          location
         )
       ) {
         filteredCount += 1;
@@ -1703,9 +2160,12 @@ async function fetchCulturePortalByServiceType(
           : null;
 
 
-      // B = 행사/축제
+      // A = 공연/전시 → 공연만 유지
+      // B = 행사/축제 → 축제로 저장
       const type =
-        "festival";
+        serviceTp === "A"
+          ? "performance"
+          : "festival";
 
 
       const finalArea =
@@ -1722,7 +2182,7 @@ async function fetchCulturePortalByServiceType(
 
         id:
           seq
-            ? `culture-portal-${seq}`
+            ? `culture-portal-${serviceTp}-${seq}`
             : (
                 `culture-portal-` +
                 `${serviceTp}-` +
@@ -1804,7 +2264,7 @@ async function fetchCulturePortalByServiceType(
 
 
 // ======================================================
-// 문화포털 행사/축제 수집
+// 문화포털 공연 + 행사/축제 수집
 // ======================================================
 
 async function fetchCulturePortalPerformances() {
@@ -1818,13 +2278,23 @@ async function fetchCulturePortalPerformances() {
 
 
   // ----------------------------------------------------
-  // 중요:
-  // serviceTp=A는 사용하지 않습니다.
+  // A = 공연/전시
   //
-  // A = 공연/전시 중 전시까지 섞여 들어오므로
-  // 현재 앱의 데이터 정책과 맞지 않습니다.
+  // 전시를 제거하고 공연을 유지합니다.
+  // 뮤지컬은 대공연장 화이트리스트 적용.
+  // ----------------------------------------------------
+
+  const performances =
+    await fetchCulturePortalByServiceType(
+      "A"
+    );
+
+
+  // ----------------------------------------------------
+  // B = 행사/축제
   //
-  // B = 행사/축제만 수집합니다.
+  // 축제/지역행사 등을 유지하고
+  // 교육/체험/강좌/강연 등은 제거합니다.
   // ----------------------------------------------------
 
   const festivals =
@@ -1833,12 +2303,19 @@ async function fetchCulturePortalPerformances() {
     );
 
 
+  const results = [
+    ...performances,
+    ...festivals,
+  ];
+
+
   console.log(
-    `문화포털에서 ${festivals.length}건 수집`
+    `문화포털에서 공연 ${performances.length}건, ` +
+    `행사/축제 ${festivals.length}건 수집`
   );
 
 
-  return festivals;
+  return results;
 }
 
 
@@ -2082,7 +2559,7 @@ const VENUE_WHITELIST = [
 ];
 
 
-function isVenueWhitelisted(
+function isKopisVenueWhitelisted(
   location
 ) {
   if (!location) {
@@ -2268,7 +2745,7 @@ async function fetchKopisPerformances() {
       if (
         item.genrenm ===
           "뮤지컬" &&
-        !isVenueWhitelisted(
+        !isKopisVenueWhitelisted(
           item.fcltynm
         )
       ) {
@@ -2746,6 +3223,45 @@ function printSourceStats(
 
 
 // ======================================================
+// 타입별 통계
+// ======================================================
+
+function printTypeStats(
+  label,
+  list
+) {
+  let festivals = 0;
+  let performances = 0;
+
+
+  for (
+    const item of list
+  ) {
+    if (
+      item.type ===
+      "festival"
+    ) {
+      festivals += 1;
+    }
+
+    if (
+      item.type ===
+      "performance"
+    ) {
+      performances += 1;
+    }
+  }
+
+
+  console.log(
+    `${label} 유형별:` +
+    ` 축제/행사=${festivals},` +
+    ` 공연=${performances}`
+  );
+}
+
+
+// ======================================================
 // 메인
 // ======================================================
 
@@ -2778,6 +3294,12 @@ async function main() {
   );
 
 
+  printTypeStats(
+    "수집 완료",
+    allItems
+  );
+
+
   let merged =
     dedupe(
       allItems
@@ -2799,6 +3321,12 @@ async function main() {
 
 
   printSourceStats(
+    "최종 데이터",
+    merged
+  );
+
+
+  printTypeStats(
     "최종 데이터",
     merged
   );
@@ -2850,4 +3378,3 @@ main().catch(
     );
   }
 );
-```
