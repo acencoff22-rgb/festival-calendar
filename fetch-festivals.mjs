@@ -1,3 +1,4 @@
+```javascript
 /**
  * 전국 축제 + 공연 정보를 여러 공공 데이터 API에서 가져와
  * 하나의 festivals.json으로 합칩니다.
@@ -1150,7 +1151,111 @@ async function fetchCultureStandardFestivals() {
 //   B = 행사/축제
 //   C = 교육/체험
 //
-// 현재 앱에서는 A/B만 수집
+// 현재 앱에서는 B만 사용합니다.
+//
+// 정책:
+//   - B(행사/축제)는 수집
+//   - 전시/미술관/교육/체험/강좌/강연/세미나 등은
+//     2차 필터링으로 제거
+//   - 공연성 행사, 축제, 페스티벌, 지역행사,
+//     계절행사, 불꽃놀이 등은 유지
+// ======================================================
+
+
+// ======================================================
+// 문화포털 관광성 낮은 항목 제외 키워드
+// ======================================================
+//
+// serviceTp=B라고 해서 모든 항목이 관광 이벤트인 것은
+// 아니므로 제목/분야를 기준으로 2차 필터링합니다.
+//
+// 너무 광범위한 단어는 사용하지 않습니다.
+// 예:
+//   "문화", "예술", "프로그램", "공연" 등은 제외하지 않음.
+// ======================================================
+
+const EXCLUDED_CULTURE_PORTAL_KEYWORDS = [
+  // 전시
+  "전시회",
+  "전시",
+  "기획전",
+  "특별전",
+  "상설전",
+  "展",
+
+  // 미술관/박물관 중심 프로그램
+  "미술관교육",
+  "박물관교육",
+  "미술관프로그램",
+  "박물관프로그램",
+
+  // 교육
+  "교육",
+  "교육프로그램",
+  "문화교육",
+  "문화예술교육",
+
+  // 체험
+  "체험",
+  "체험프로그램",
+  "체험행사",
+
+  // 강좌
+  "강좌",
+  "문화강좌",
+  "예술강좌",
+
+  // 강연/세미나
+  "강연",
+  "강연회",
+  "세미나",
+  "포럼",
+  "심포지엄",
+
+  // 워크숍
+  "워크숍",
+  "워크샵",
+
+  // 단순 시설 프로그램
+  "상설프로그램",
+  "상설문화",
+];
+
+
+// ======================================================
+// 문화포털 관광 이벤트 판별
+// ======================================================
+
+function isCulturePortalTourismEvent(
+  title,
+  realmName
+) {
+  const normalizedText =
+    `${title || ""} ${realmName || ""}`
+      .normalize("NFKC")
+      .replace(/\s+/g, "")
+      .toLowerCase();
+
+
+  if (!normalizedText) {
+    return false;
+  }
+
+
+  return !EXCLUDED_CULTURE_PORTAL_KEYWORDS.some(
+    (keyword) =>
+      normalizedText.includes(
+        keyword
+          .normalize("NFKC")
+          .replace(/\s+/g, "")
+          .toLowerCase()
+      )
+  );
+}
+
+
+// ======================================================
+// 문화포털 B 수집
 // ======================================================
 
 async function fetchCulturePortalByServiceType(
@@ -1415,6 +1520,8 @@ async function fetchCulturePortalByServiceType(
 
     let pageItemCount = 0;
 
+    let filteredCount = 0;
+
 
     for (
       const block of blocks
@@ -1550,6 +1657,26 @@ async function fetchCulturePortalByServiceType(
       }
 
 
+      // --------------------------------------------------
+      // 2차 관광성 필터
+      //
+      // B = 행사/축제이므로 기본적으로 수집하되
+      // 전시/교육/체험/강좌/강연/세미나 등의
+      // 관광성이 낮은 항목은 제거합니다.
+      // --------------------------------------------------
+
+      if (
+        !isCulturePortalTourismEvent(
+          title,
+          realmName
+        )
+      ) {
+        filteredCount += 1;
+
+        continue;
+      }
+
+
       const lat =
         latRaw !== "" &&
         !Number.isNaN(
@@ -1576,12 +1703,9 @@ async function fetchCulturePortalByServiceType(
           : null;
 
 
-      // A = 공연/전시
       // B = 행사/축제
       const type =
-        serviceTp === "B"
-          ? "festival"
-          : "performance";
+        "festival";
 
 
       const finalArea =
@@ -1645,7 +1769,9 @@ async function fetchCulturePortalByServiceType(
 
 
     console.log(
-      `문화포털 ${serviceTp} ${pageNo}페이지 처리: ${pageItemCount}건`
+      `문화포털 ${serviceTp} ${pageNo}페이지 처리: ` +
+      `${pageItemCount}건 유지, ` +
+      `${filteredCount}건 제외`
     );
 
 
@@ -1677,6 +1803,10 @@ async function fetchCulturePortalByServiceType(
 }
 
 
+// ======================================================
+// 문화포털 행사/축제 수집
+// ======================================================
+
 async function fetchCulturePortalPerformances() {
   if (!CULTURE_PORTAL_API_KEY) {
     console.log(
@@ -1687,40 +1817,28 @@ async function fetchCulturePortalPerformances() {
   }
 
 
-  const results = [];
+  // ----------------------------------------------------
+  // 중요:
+  // serviceTp=A는 사용하지 않습니다.
+  //
+  // A = 공연/전시 중 전시까지 섞여 들어오므로
+  // 현재 앱의 데이터 정책과 맞지 않습니다.
+  //
+  // B = 행사/축제만 수집합니다.
+  // ----------------------------------------------------
 
-
-  // A = 공연/전시
-  const performances =
+  const festivals =
     await fetchCulturePortalByServiceType(
-      "A"
+      "B"
     );
 
 
-  // B = 행사/축제
-  const festivals =
-    sourceStatus.culturePortal
-      ? await fetchCulturePortalByServiceType(
-          "B"
-        )
-      : [];
-
-
-  results.push(
-    ...performances
-  );
-
-  results.push(
-    ...festivals
-  );
-
-
   console.log(
-    `문화포털에서 ${results.length}건 수집`
+    `문화포털에서 ${festivals.length}건 수집`
   );
 
 
-  return results;
+  return festivals;
 }
 
 
@@ -2732,3 +2850,4 @@ main().catch(
     );
   }
 );
+```
