@@ -1148,9 +1148,14 @@ function setupFavoritesDragSort() {
 // ------------------------------------------------------
 
 function applyTheme(theme) {
+  const normalizedTheme =
+    theme === "dark"
+      ? "dark"
+      : "light";
+
   document.documentElement.setAttribute(
     "data-theme",
-    theme
+    normalizedTheme
   );
 
   const themeToggle =
@@ -1158,84 +1163,31 @@ function applyTheme(theme) {
       "themeToggle"
     );
 
-  const contrastToggle =
-    document.getElementById(
-      "contrastToggle"
-    );
-
   if (themeToggle) {
     themeToggle.textContent =
-      theme === "dark"
+      normalizedTheme === "dark"
         ? "☀️"
         : "🌙";
   }
-
-  contrastToggle?.classList.toggle(
-    "active",
-    theme === "contrast"
-  );
 }
 
 
 function toggleTheme() {
-  const prefersDark =
-    window.matchMedia &&
-    window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-
-  const savedBaseTheme =
-    loadBaseTheme();
-
-  const base =
-    savedBaseTheme ||
-    (
-      prefersDark
-        ? "dark"
-        : "light"
-    );
+  const current =
+    document.documentElement.getAttribute(
+      "data-theme"
+    ) === "dark"
+      ? "dark"
+      : "light";
 
   const next =
-    base === "dark"
+    current === "dark"
       ? "light"
       : "dark";
 
   applyTheme(next);
 
   saveTheme(next);
-  saveBaseTheme(next);
-}
-
-
-function toggleContrast() {
-  const current =
-    document.documentElement.getAttribute(
-      "data-theme"
-    );
-
-  if (
-    current === "contrast"
-  ) {
-    const base =
-      loadBaseTheme() ||
-      "light";
-
-    applyTheme(base);
-
-    saveTheme(base);
-
-    return;
-  }
-
-  saveBaseTheme(
-    current === "dark"
-      ? "dark"
-      : "light"
-  );
-
-  applyTheme("contrast");
-
-  saveTheme("contrast");
 }
 
 
@@ -2595,16 +2547,6 @@ function setupActions() {
     ?.addEventListener(
       "click",
       toggleTheme
-    );
-
-
-  document
-    .getElementById(
-      "contrastToggle"
-    )
-    ?.addEventListener(
-      "click",
-      toggleContrast
     );
 
 
