@@ -57,7 +57,22 @@ function initializeTheme() {
     baseTheme;
 
 
-  applyTheme(theme);
+  /*
+   * 기존에 contrast가 저장되어 있을 가능성에 대비한다.
+   *
+   * contrast 테마는 더 이상 사용하지 않는다.
+   * 과거 저장값이 남아 있어도 dark로 정규화한다.
+   */
+
+  const normalizedTheme =
+    theme === "contrast"
+      ? "dark"
+      : theme;
+
+
+  applyTheme(
+    normalizedTheme
+  );
 
 
   /*
@@ -67,19 +82,23 @@ function initializeTheme() {
 
   if (!savedBaseTheme) {
     saveBaseTheme(
-      baseTheme
+      normalizedTheme
     );
   }
 
 
   /*
-   * 현재 테마가 아직 저장되어 있지 않다면
-   * 현재 결정된 테마를 저장한다.
+   * 현재 테마가 아직 저장되어 있지 않거나
+   * 과거 contrast 값이었다면
+   * 정규화된 테마를 저장한다.
    */
 
-  if (!savedTheme) {
+  if (
+    !savedTheme ||
+    savedTheme === "contrast"
+  ) {
     saveTheme(
-      theme
+      normalizedTheme
     );
   }
 }
