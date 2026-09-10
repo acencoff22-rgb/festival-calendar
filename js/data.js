@@ -397,6 +397,23 @@ async function loadFestivalData() {
     const json =
       await response.json();
 
+    const updatedAtEl =
+      document.getElementById(
+        "updatedAt"
+      );
+
+    if (updatedAtEl) {
+      const formatted =
+        formatIsoDate(
+          json.updatedAt
+        );
+
+      updatedAtEl.textContent =
+        formatted
+          ? `${formatted} 기준`
+          : "";
+    }
+
     dataSourceStatus =
       json.sourceStatus ||
       null;
@@ -428,6 +445,7 @@ async function loadFestivalData() {
     }
 
     festivalData = items;
+    allFestivals = festivalData;
 
     dataLoaded = true;
 
@@ -449,6 +467,7 @@ async function loadFestivalData() {
     dataLoadError = true;
 
     festivalData = [];
+    allFestivals = festivalData;
 
     showDataWarning(
       "⚠️ 행사 데이터를 불러오지 못했습니다."
