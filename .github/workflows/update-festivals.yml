@@ -6,6 +6,10 @@ on:
     - cron: "0 21 * * *"
   workflow_dispatch: {} # 수동 실행 버튼도 사용 가능
 
+concurrency:
+  group: update-festivals
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -36,5 +40,11 @@ jobs:
           git add festivals.json
           git diff --staged --quiet && exit 0
           git commit -m "chore: 축제 데이터 자동 갱신 $(date +'%Y-%m-%d')"
-          git pull --rebase origin main
+
+          # festivals.json은 매번 API에서 통째로 재생성되는 파일이라
+          # rebase(줄 단위 재적용)는 충돌에 취약하다.
+          # merge + "-X ours"로, 혹시 그 사이 원격에 같은 파일이
+          # 먼저 갱신돼 있어도 이번에 새로 받아온 데이터를 그대로 채택한다.
+          git fetch origin main
+          git merge -X ours --no-edit origin/main
           git push
