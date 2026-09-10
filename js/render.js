@@ -239,31 +239,61 @@ function renderUrgentView() {
           return 0;
         }
 
-        // 이미 시작된 행사는
-        // 오늘을 실질적인 시작 기준으로 사용한다.
-        const aEffectiveDate =
-          aStart < today
-            ? today
+        const aEnd =
+          getFestivalEndDate(
+            a
+          );
+
+        const bEnd =
+          getFestivalEndDate(
+            b
+          );
+
+        // "다음 마감까지 며칠 남았는가"로 통일해서 비교한다.
+        // - 아직 시작 전인 행사: 시작일까지 남은 일수
+        //   (며칠 있어야 볼 수 있는지)
+        // - 이미 진행 중인 행사: 종료일까지 남은 일수
+        //   (며칠 안에 놓치는지)
+        //
+        // 이렇게 하나의 기준으로 합치면, 동강국제사진제처럼
+        // 몇 달째 열려있는 상시 행사는 종료가 한참 남아있어서
+        // 자연히 뒤로 밀리고, 반대로 '내일 끝나는' 진행 중 행사는
+        // 몇 주 뒤에 시작하는 신규 행사보다 먼저 노출된다.
+        const aOngoing =
+          aStart <= today;
+
+        const bOngoing =
+          bStart <= today;
+
+        const aDeadline =
+          aOngoing
+            ? aEnd || aStart
             : aStart;
 
-        const bEffectiveDate =
-          bStart < today
-            ? today
+        const bDeadline =
+          bOngoing
+            ? bEnd || bStart
             : bStart;
 
         const diff =
-          aEffectiveDate -
-          bEffectiveDate;
+          aDeadline - bDeadline;
 
         if (diff !== 0) {
           return diff;
         }
 
-        // 동일한 실질 날짜라면
-        // 실제 시작일이 빠른 행사 우선
+        // 마감까지 남은 일수가 같다면
+        // 이미 진행 중인 쪽을 먼저 보여준다
+        // (신규는 아직 기다려야 하지만 진행 중인 건 바로 갈 수 있으므로).
+        if (aOngoing !== bOngoing) {
+          return aOngoing
+            ? -1
+            : 1;
+        }
+
+        // 그래도 같다면 실제 시작일이 빠른 쪽이 먼저.
         return (
-          aStart -
-          bStart
+          aStart - bStart
         );
       });
 
