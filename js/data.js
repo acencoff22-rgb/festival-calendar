@@ -561,3 +561,13 @@ function findFestivalById(id) {
 async function reloadFestivalData() {
   return await loadFestivalData();
 }
+
+// ------------------------------------------------------
+// 최초 진입점 (initializeApp 5단계에서 호출)
+// festivals.json 로드가 끝난 뒤 화면을 렌더링한다.
+// ------------------------------------------------------
+
+async function load() {
+  await loadFestivalData();
+  renderCurrentView();
+}
