@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10T03:26:07.467Z",
+  "updatedAt": "2026-09-10T03:38:58.050Z",
   "count": 2448,
   "sourceStatus": {
     "tourapi": true,
@@ -12710,21 +12710,6 @@
     {
       "source": "culturePortal",
       "type": "performance",
-      "id": "culture-portal-A-392619",
-      "title": "더퍼포머 모래놀이터",
-      "startDate": "2026-07-31",
-      "endDate": "2026-09-20",
-      "location": "더퍼포머 마술극장",
-      "area": "충북",
-      "lat": 36.6373135,
-      "lon": 127.4894553,
-      "thumbnail": "http://www.culture.go.kr/upload/rdf/26/08/rdf_2026081021172137694.png",
-      "detailUrl": null,
-      "genre": "기타"
-    },
-    {
-      "source": "culturePortal",
-      "type": "performance",
       "id": "culture-portal-A-389728",
       "title": "[남원] 아버지의 해방일지",
       "startDate": "2026-07-31",
@@ -12736,6 +12721,21 @@
       "thumbnail": "http://www.culture.go.kr/upload/rdf/26/07/rdf_202607222117903945.gif",
       "detailUrl": null,
       "genre": "음악/콘서트"
+    },
+    {
+      "source": "culturePortal",
+      "type": "performance",
+      "id": "culture-portal-A-392619",
+      "title": "더퍼포머 모래놀이터",
+      "startDate": "2026-07-31",
+      "endDate": "2026-09-20",
+      "location": "더퍼포머 마술극장",
+      "area": "충북",
+      "lat": 36.6373135,
+      "lon": 127.4894553,
+      "thumbnail": "http://www.culture.go.kr/upload/rdf/26/08/rdf_2026081021172137694.png",
+      "detailUrl": null,
+      "genre": "기타"
     },
     {
       "source": "culture",
