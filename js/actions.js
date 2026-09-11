@@ -613,7 +613,12 @@ function setFavoriteReminder(id, date) {
 
   saveReminders();
   renderFavoritesList();
-  renderReminderBanner();
+
+  if (
+    typeof renderReminderBanner === "function"
+  ) {
+    renderReminderBanner();
+  }
 }
 
 
