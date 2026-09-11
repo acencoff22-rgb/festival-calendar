@@ -353,6 +353,25 @@ function isOver90Days(
 }
 
 
+// 원본 데이터 자체에 종료일이 시작일보다 빠르게 들어오는 경우
+// (예: 연도 오타 등) 종료일을 시작일과 같은 값으로 보정한다.
+// 행사를 통째로 버리지 않고, 최소한 시작일 기준으로는 정상 표시되게 한다.
+function fixReversedDateRange(
+  start,
+  end
+) {
+  if (
+    start &&
+    end &&
+    end < start
+  ) {
+    return start;
+  }
+
+  return end;
+}
+
+
 // ======================================================
 // XML 처리
 // ======================================================
@@ -965,10 +984,13 @@ async function fetchCultureStandardFestivals() {
 
 
       const end =
-        ymdToIso(
-          row?.fstvlEndDate ??
-          row?.["축제종료일자"] ??
-          ""
+        fixReversedDateRange(
+          start,
+          ymdToIso(
+            row?.fstvlEndDate ??
+            row?.["축제종료일자"] ??
+            ""
+          )
         );
 
 
@@ -1081,7 +1103,7 @@ async function fetchCultureStandardFestivals() {
           "festival",
 
         id:
-          `culture-${normalizeTitle(title)}-${start}`,
+          `culture-${normalizeTitle(title)}-${start}-${end || "x"}`,
 
         title,
 
