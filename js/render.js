@@ -145,6 +145,210 @@ function updateFilterSummary() {
 //   아래 "다가오는 일정"에서 다시 표시하지 않는다.
 // ------------------------------------------------------
 
+// ------------------------------------------------------
+// 카드 목록 점진적 렌더링 (무한 스크롤)
+// ------------------------------------------------------
+//
+// festivals.json이 수천 건이라 필터링 결과가 클 때 한 번에
+// 전부 DOM에 그리면 저사양 모바일에서 버벅일 수 있다.
+// 그룹(주말/다가오는 일정, 또는 월별) 구조는 유지한 채
+// 카드 단위로 나눠서, 스크롤로 하단 sentinel이 보일 때마다
+// 다음 묶음을 이어서 그린다.
+
+const CARDS_PER_PAGE = 60;
+
+// 같은 컨테이너를 다시 그릴 때 이전 옵저버가 계속 남아있으면
+// 중복으로 더 불러오는 문제가 생기므로, 컨테이너별로 추적해서 끊는다.
+const activeLoadMoreObservers =
+  new WeakMap();
+
+function renderGroupedCardsIncrementally(
+  container,
+  groups
+  // groups: [{ key, headerHtml, items: [festival, ...], sectionClassName? }]
+) {
+  const previousObserver =
+    activeLoadMoreObservers.get(
+      container
+    );
+
+  if (previousObserver) {
+    previousObserver.disconnect();
+    activeLoadMoreObservers.delete(
+      container
+    );
+  }
+
+  container.innerHTML = "";
+
+  let groupIndex = 0;
+  let itemIndex = 0;
+
+  function renderNextPage() {
+    let renderedThisPage = 0;
+
+    while (
+      renderedThisPage <
+        CARDS_PER_PAGE &&
+      groupIndex < groups.length
+    ) {
+      const group =
+        groups[groupIndex];
+
+      if (
+        itemIndex >=
+        group.items.length
+      ) {
+        groupIndex += 1;
+        itemIndex = 0;
+        continue;
+      }
+
+      let section =
+        container.querySelector(
+          `section[data-group="${group.key}"]`
+        );
+
+      if (!section) {
+        section =
+          document.createElement(
+            "section"
+          );
+
+        section.dataset.group =
+          group.key;
+
+        if (
+          group.sectionClassName
+        ) {
+          section.className =
+            group.sectionClassName;
+        }
+
+        section.innerHTML =
+          group.headerHtml ||
+          "";
+
+        container.appendChild(
+          section
+        );
+      }
+
+      const take =
+        Math.min(
+          CARDS_PER_PAGE -
+            renderedThisPage,
+          group.items.length -
+            itemIndex
+        );
+
+      const sliceEnd =
+        itemIndex + take;
+
+      let cardsHtml = "";
+
+      for (
+        ;
+        itemIndex < sliceEnd;
+        itemIndex += 1
+      ) {
+        cardsHtml +=
+          renderFestivalCard(
+            group.items[
+              itemIndex
+            ]
+          );
+      }
+
+      section.insertAdjacentHTML(
+        "beforeend",
+        cardsHtml
+      );
+
+      renderedThisPage +=
+        take;
+    }
+
+    return (
+      groupIndex < groups.length
+    );
+  }
+
+  const hasMore =
+    renderNextPage();
+
+  if (!hasMore) {
+    return;
+  }
+
+  if (
+    typeof IntersectionObserver !==
+    "function"
+  ) {
+    // 옵저버 미지원 환경 대비 폴백: 나머지를 한 번에 그린다.
+    while (renderNextPage()) {
+      // 계속 그린다
+    }
+
+    return;
+  }
+
+  const sentinel =
+    document.createElement(
+      "div"
+    );
+
+  sentinel.className =
+    "load-more-sentinel";
+
+  sentinel.textContent =
+    "더 불러오는 중…";
+
+  container.appendChild(
+    sentinel
+  );
+
+  const observer =
+    new IntersectionObserver(
+      (entries) => {
+        if (
+          !entries[0]
+            .isIntersecting
+        ) {
+          return;
+        }
+
+        const more =
+          renderNextPage();
+
+        // sentinel을 다시 맨 아래로 옮긴다.
+        container.appendChild(
+          sentinel
+        );
+
+        if (!more) {
+          observer.disconnect();
+
+          activeLoadMoreObservers.delete(
+            container
+          );
+
+          sentinel.remove();
+        }
+      }
+    );
+
+  observer.observe(
+    sentinel
+  );
+
+  activeLoadMoreObservers.set(
+    container,
+    observer
+  );
+}
+
+
 function renderUrgentView() {
   const container =
     document.getElementById(
@@ -304,8 +508,6 @@ function renderUrgentView() {
     return;
   }
 
-  let html = "";
-
   // ----------------------------------------------------
   // 특정 주말 선택
   // ----------------------------------------------------
@@ -330,36 +532,39 @@ function renderUrgentView() {
           )
         : [];
 
-    html += `
-      <section>
-        <div class="urgent-section-title selected">
-          이번 주말 일정
-        </div>
+    if (!weekendFiltered.length) {
+      container.innerHTML = `
+        <section>
+          <div class="urgent-section-title selected">
+            이번 주말 일정
+          </div>
 
-        ${
-          weekendFiltered.length
-            ? weekendFiltered
-                .map(
-                  renderFestivalCard
-                )
-                .join("")
-            : `
-              <div
-                class="empty"
-                style="padding:30px 10px"
-              >
-                선택한 주말에 일정이 없어요.
-              </div>
-            `
-        }
-      </section>
-    `;
+          <div
+            class="empty"
+            style="padding:30px 10px"
+          >
+            선택한 주말에 일정이 없어요.
+          </div>
+        </section>
+      `;
 
-    container.innerHTML =
-      html;
+      return;
+    }
 
-    renderLoadMoreSentinel(
-      container
+    renderGroupedCardsIncrementally(
+      container,
+      [
+        {
+          key: "weekend-selected",
+          headerHtml: `
+            <div class="urgent-section-title selected">
+              이번 주말 일정
+            </div>
+          `,
+          items:
+            weekendFiltered,
+        },
+      ]
     );
 
     return;
@@ -373,22 +578,6 @@ function renderUrgentView() {
     getWeekendFestivals(
       upcoming
     );
-
-  if (weekend.length) {
-    html += `
-      <section>
-        <div class="urgent-section-title">
-          이번 주말 일정
-        </div>
-
-        ${weekend
-          .map(
-            renderFestivalCard
-          )
-          .join("")}
-      </section>
-    `;
-  }
 
   // ----------------------------------------------------
   // 중요:
@@ -424,29 +613,38 @@ function renderUrgentView() {
   // 다가오는 일정
   // ----------------------------------------------------
 
+  const urgentGroups = [];
+
+  if (weekend.length) {
+    urgentGroups.push({
+      key: "weekend",
+      headerHtml: `
+        <div class="urgent-section-title">
+          이번 주말 일정
+        </div>
+      `,
+      items: weekend,
+    });
+  }
+
   if (
     remainingUpcoming.length
   ) {
-    html += `
-      <section>
+    urgentGroups.push({
+      key: "upcoming",
+      headerHtml: `
         <div class="urgent-section-title">
           📅 다가오는 일정
         </div>
-
-        ${remainingUpcoming
-          .map(
-            renderFestivalCard
-          )
-          .join("")}
-      </section>
-    `;
+      `,
+      items:
+        remainingUpcoming,
+    });
   }
 
-  container.innerHTML =
-    html;
-
-  renderLoadMoreSentinel(
-    container
+  renderGroupedCardsIncrementally(
+    container,
+    urgentGroups
   );
 }
 
@@ -478,7 +676,7 @@ function renderListView() {
     return;
   }
 
-  const groups =
+  const monthGroups =
     new Map();
 
   for (const festival of festivals) {
@@ -496,52 +694,48 @@ function renderListView() {
         start.getMonth() + 1
       ).padStart(2, "0")}`;
 
-    if (!groups.has(key)) {
-      groups.set(
+    if (!monthGroups.has(key)) {
+      monthGroups.set(
         key,
         []
       );
     }
 
-    groups
+    monthGroups
       .get(key)
       .push(festival);
   }
 
-  let html = "";
+  const listGroups = [];
 
   for (const [
     monthKey,
     items,
-  ] of groups) {
+  ] of monthGroups) {
     const [
       year,
       month,
     ] =
       monthKey.split("-");
 
-    html += `
-      <section class="month-group">
+    listGroups.push({
+      key: `month-${monthKey}`,
+      sectionClassName:
+        "month-group",
+      headerHtml: `
         <h2 class="month-title">
           ${escapeHtml(
             `${year}년 ${Number(month)}월`
           )}
         </h2>
-
-        ${items
-          .map(
-            renderFestivalCard
-          )
-          .join("")}
-      </section>
-    `;
+      `,
+      items,
+    });
   }
 
-  container.innerHTML =
-    html;
-
-  renderLoadMoreSentinel(
-    container
+  renderGroupedCardsIncrementally(
+    container,
+    listGroups
   );
 }
 
@@ -1396,43 +1590,6 @@ function getFavoritesOrderedIds() {
       : [];
 
   return ordered;
-}
-
-
-// ------------------------------------------------------
-// 무한 스크롤 표시
-// ------------------------------------------------------
-
-function renderLoadMoreSentinel(
-  container
-) {
-  if (!container) {
-    return;
-  }
-
-  const old =
-    container.querySelector(
-      ".load-more-sentinel"
-    );
-
-  if (old) {
-    old.remove();
-  }
-
-  const sentinel =
-    document.createElement(
-      "div"
-    );
-
-  sentinel.className =
-    "load-more-sentinel";
-
-  sentinel.textContent =
-    "전체 일정은 위에서 확인할 수 있어요.";
-
-  container.appendChild(
-    sentinel
-  );
 }
 
 
