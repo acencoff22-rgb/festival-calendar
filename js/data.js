@@ -454,7 +454,11 @@ async function loadFestivalData() {
     // 로컬 상태를 데이터와 맞춘다.
     // --------------------------------------------------
     if (!sourceFailed) {
-      reconcileStoredState();
+      reconcileStoredState(
+        festivalData.map(
+          (item) => item.id
+        )
+      );
     }
 
     return festivalData;
@@ -475,66 +479,6 @@ async function loadFestivalData() {
 
     return festivalData;
   }
-}
-
-// ------------------------------------------------------
-// 로컬 저장 상태와 데이터 연결
-// ------------------------------------------------------
-
-function reconcileStoredState() {
-  if (!Array.isArray(festivalData)) {
-    return;
-  }
-
-  const favorites =
-    typeof loadFavorites === "function"
-      ? loadFavorites()
-      : [];
-
-  const reminders =
-    typeof loadReminders === "function"
-      ? loadReminders()
-      : [];
-
-  const hidden =
-    typeof loadHiddenItems === "function"
-      ? loadHiddenItems()
-      : [];
-
-  const favoriteSet =
-    new Set(
-      Array.isArray(favorites)
-        ? favorites
-        : []
-    );
-
-  const reminderSet =
-    new Set(
-      Array.isArray(reminders)
-        ? reminders
-        : []
-    );
-
-  const hiddenSet =
-    new Set(
-      Array.isArray(hidden)
-        ? hidden
-        : []
-    );
-
-  festivalData =
-    festivalData.map((item) => ({
-      ...item,
-
-      isFavorite:
-        favoriteSet.has(item.id),
-
-      isReminder:
-        reminderSet.has(item.id),
-
-      hidden:
-        hiddenSet.has(item.id),
-    }));
 }
 
 // ------------------------------------------------------
