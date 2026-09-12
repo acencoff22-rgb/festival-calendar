@@ -960,6 +960,24 @@ function overlapsRange(
 // 전체 필터
 // ------------------------------------------------------
 
+function isExcludedByKeyword(
+  festival
+) {
+  const title =
+    String(
+      festival?.title || ""
+    );
+
+  return excludeKeywords.some(
+    (entry) =>
+      entry.enabled &&
+      title.includes(
+        entry.word
+      )
+  );
+}
+
+
 function getFiltered() {
   const searchInput =
     document.getElementById(
@@ -994,6 +1012,14 @@ function getFiltered() {
       if (
         hiddenIds.has(
           String(festival.id)
+        )
+      ) {
+        return false;
+      }
+
+      if (
+        isExcludedByKeyword(
+          festival
         )
       ) {
         return false;
