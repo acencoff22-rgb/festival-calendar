@@ -1379,6 +1379,113 @@ function renderHiddenList() {
 
 
 // ------------------------------------------------------
+// 제외 키워드 관리
+// ------------------------------------------------------
+
+function renderExcludeKeywordList() {
+  const container =
+    document.getElementById(
+      "excludeKeywordList"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  const addRowHtml = `
+    <div class="exclude-keyword-add-row">
+      <input
+        type="text"
+        id="excludeKeywordInput"
+        class="exclude-keyword-input"
+        placeholder="제외할 단어 추가"
+        maxlength="30"
+      />
+
+      <button
+        id="excludeKeywordAddBtn"
+        class="exclude-keyword-add-btn"
+        type="button"
+      >
+        추가
+      </button>
+    </div>
+
+    <div class="exclude-keyword-hint">
+      체크된 단어가 제목에 포함된 행사·공연은 목록에서 제외돼요.
+    </div>
+  `;
+
+  if (!excludeKeywords.length) {
+    container.innerHTML =
+      addRowHtml +
+      `
+        <div
+          class="empty"
+          style="padding:30px 10px"
+        >
+          등록된 제외 키워드가 없어요.
+        </div>
+      `;
+
+    return;
+  }
+
+  container.innerHTML =
+    addRowHtml +
+    excludeKeywords
+      .map(
+        (entry) => `
+          <div class="hidden-item-row exclude-keyword-row">
+
+            <label class="exclude-keyword-label">
+              <input
+                type="checkbox"
+                class="exclude-keyword-checkbox"
+                data-exclude-word="${escapeAttr(
+                  entry.word
+                )}"
+                ${
+                  entry.enabled
+                    ? "checked"
+                    : ""
+                }
+              />
+
+              <span
+                class="${
+                  entry.enabled
+                    ? ""
+                    : "exclude-keyword-disabled"
+                }"
+              >
+                ${escapeHtml(
+                  entry.word
+                )}
+              </span>
+            </label>
+
+            <button
+              class="unhide-btn"
+              type="button"
+              data-exclude-remove="${escapeAttr(
+                entry.word
+              )}"
+              aria-label="${escapeAttr(
+                entry.word
+              )} 삭제"
+            >
+              삭제
+            </button>
+
+          </div>
+        `
+      )
+      .join("");
+}
+
+
+// ------------------------------------------------------
 // 찜 목록
 // ------------------------------------------------------
 
