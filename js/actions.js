@@ -565,6 +565,99 @@ function closeHiddenModal() {
 }
 
 
+function openExcludeKeywordModal() {
+  renderExcludeKeywordList();
+
+  document
+    .getElementById(
+      "excludeKeywordModal"
+    )
+    ?.classList.remove(
+      "hidden"
+    );
+
+  closeFilterDrawer();
+}
+
+
+function closeExcludeKeywordModal() {
+  document
+    .getElementById(
+      "excludeKeywordModal"
+    )
+    ?.classList.add("hidden");
+}
+
+
+function toggleExcludeKeyword(
+  word
+) {
+  const entry =
+    excludeKeywords.find(
+      (item) =>
+        item.word === word
+    );
+
+  if (!entry) {
+    return;
+  }
+
+  entry.enabled =
+    !entry.enabled;
+
+  saveExcludeKeywords();
+  renderExcludeKeywordList();
+  renderCurrentView();
+}
+
+
+function addExcludeKeyword(
+  rawWord
+) {
+  const word =
+    String(
+      rawWord || ""
+    ).trim();
+
+  if (!word) {
+    return;
+  }
+
+  if (
+    excludeKeywords.some(
+      (item) =>
+        item.word === word
+    )
+  ) {
+    return;
+  }
+
+  excludeKeywords.push({
+    word,
+    enabled: true,
+  });
+
+  saveExcludeKeywords();
+  renderExcludeKeywordList();
+  renderCurrentView();
+}
+
+
+function removeExcludeKeyword(
+  word
+) {
+  excludeKeywords =
+    excludeKeywords.filter(
+      (item) =>
+        item.word !== word
+    );
+
+  saveExcludeKeywords();
+  renderExcludeKeywordList();
+  renderCurrentView();
+}
+
+
 function unhideItem(id) {
   hiddenIds.delete(id);
 
@@ -2323,6 +2416,131 @@ function setupActions() {
             unhideBtn.dataset
               .unhideId
           );
+        }
+      }
+    );
+
+
+  // ----------------------------------------------------
+  // 제외 키워드
+  // ----------------------------------------------------
+
+  document
+    .getElementById(
+      "excludeKeywordManageBtn"
+    )
+    ?.addEventListener(
+      "click",
+      openExcludeKeywordModal
+    );
+
+
+  document
+    .getElementById(
+      "excludeKeywordModalClose"
+    )
+    ?.addEventListener(
+      "click",
+      closeExcludeKeywordModal
+    );
+
+
+  document
+    .getElementById(
+      "excludeKeywordModal"
+    )
+    ?.addEventListener(
+      "click",
+      (e) => {
+
+        if (
+          e.target.id ===
+          "excludeKeywordModal"
+        ) {
+          closeExcludeKeywordModal();
+
+          return;
+        }
+
+        const addBtn =
+          e.target.closest(
+            "#excludeKeywordAddBtn"
+          );
+
+        if (addBtn) {
+          const input =
+            document.getElementById(
+              "excludeKeywordInput"
+            );
+
+          if (input) {
+            addExcludeKeyword(
+              input.value
+            );
+
+            input.value = "";
+            input.focus();
+          }
+
+          return;
+        }
+
+        const removeBtn =
+          e.target.closest(
+            "[data-exclude-remove]"
+          );
+
+        if (removeBtn) {
+          removeExcludeKeyword(
+            removeBtn.dataset
+              .excludeRemove
+          );
+        }
+      }
+    );
+
+
+  document
+    .getElementById(
+      "excludeKeywordModal"
+    )
+    ?.addEventListener(
+      "change",
+      (e) => {
+        const checkbox =
+          e.target.closest(
+            ".exclude-keyword-checkbox"
+          );
+
+        if (checkbox) {
+          toggleExcludeKeyword(
+            checkbox.dataset
+              .excludeWord
+          );
+        }
+      }
+    );
+
+
+  document
+    .getElementById(
+      "excludeKeywordModal"
+    )
+    ?.addEventListener(
+      "keydown",
+      (e) => {
+        if (
+          e.key === "Enter" &&
+          e.target.id ===
+            "excludeKeywordInput"
+        ) {
+          e.preventDefault();
+
+          document
+            .getElementById(
+              "excludeKeywordAddBtn"
+            )
+            ?.click();
         }
       }
     );
