@@ -77,6 +77,15 @@ let favoritesOrder = [];
 let reminders = {};
 
 /*
+ * 제외 키워드
+ *
+ * [{ word: "리사이틀", enabled: true }, ...]
+ * enabled=false인 항목은 목록에 남아있지만 필터링에는 쓰이지 않는다
+ * (다시 켤 수 있도록).
+ */
+let excludeKeywords = [];
+
+/*
  * 찜 여부
  *
  * 찜 상태의 단일 기준은 favoritesOrder이다.
