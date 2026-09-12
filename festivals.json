@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-12T22:55:59.023Z",
+  "updatedAt": "2026-09-12T23:36:13.923Z",
   "count": 3365,
   "sourceStatus": {
     "tourapi": true,
@@ -13537,7 +13537,8 @@
       "lat": 36.002341825,
       "lon": 127.6625749245,
       "thumbnail": "https://tong.visitkorea.or.kr/cms/resource/66/3520566_image2_1.JPG",
-      "detailUrl": "https://www.firefly.or.kr/"
+      "detailUrl": "https://www.firefly.or.kr/",
+      "genre": "행사/축제"
     },
     {
       "source": "tourapi",
@@ -13678,21 +13679,6 @@
       "lon": 126.525567,
       "thumbnail": null,
       "detailUrl": null
-    },
-    {
-      "source": "culturePortal",
-      "type": "festival",
-      "id": "culture-portal-B-397094",
-      "title": "제30회 무주반딧불축제 - 반디의 빛, 세계를 만나다",
-      "startDate": "2026-09-04",
-      "endDate": "2026-09-12",
-      "location": "무주군 일원(등나무 운동장, 지남공원, 남대천 등)",
-      "area": "전북",
-      "lat": null,
-      "lon": null,
-      "thumbnail": "http://www.culture.go.kr/upload/ucms/oneCltInfo/2026/202609/8fce10cc85e142e1a7558e8a278a213b.jpg",
-      "detailUrl": null,
-      "genre": "행사/축제"
     },
     {
       "source": "culturePortal",
@@ -17504,7 +17490,7 @@
       "lat": 37.47792836940147,
       "lon": 127.00885231238765,
       "thumbnail": "http://www.culture.go.kr/upload/rdf/26/08/rdf_2026082021171834264.jpg",
-      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298900",
+      "detailUrl": null,
       "genre": "음악/콘서트"
     },
     {
@@ -18241,6 +18227,21 @@
       "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298922_260820_111835.png",
       "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298922",
       "genre": "대중음악"
+    },
+    {
+      "source": "kopis",
+      "type": "performance",
+      "id": "kopis-PF298900",
+      "title": "춘호 이종길 정년 음악회, 춘호가야금앙상블: 正音",
+      "startDate": "2026-09-13",
+      "endDate": "2026-09-13",
+      "location": "국립국악원",
+      "area": "서울",
+      "lat": null,
+      "lon": null,
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF298900_260820_102559.jpg",
+      "detailUrl": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20Id=PF298900",
+      "genre": "한국음악(국악)"
     },
     {
       "source": "kopis",
