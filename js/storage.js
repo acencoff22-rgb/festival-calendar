@@ -9,6 +9,156 @@
 
 
 // ------------------------------------------------------
+// 제외 키워드 기본값
+// ------------------------------------------------------
+//
+// 제목에 이 단어가 포함된 행사·공연은 기본적으로 목록에서
+// 제외된다. 예전에는 이 중 상당수를 서버(fetch-festivals.mjs)
+// 에서 아예 걸러냈지만, 사용자가 앱에서 직접 켜고 끄거나
+// 새로 추가할 수 있도록 클라이언트로 옮겼다.
+
+const DEFAULT_EXCLUDE_KEYWORDS = [
+  // 클래식/국악 (2026-09 추가)
+  "연주회",
+  "판소리",
+  "합창",
+  "독주회",
+  "피아노",
+  "피아니스트",
+  "오케스트라",
+  "클래식",
+  "국악",
+  "리사이틀",
+  "앙상블",
+  "바이올린",
+  "동화",
+  "창극",
+  "첼로",
+
+  // 연주/공연 형식
+  "정기연주회",
+  "발표회",
+  "합창제",
+  "콩쿠르",
+  "콩쿨",
+  "워크숍",
+  "졸업연주",
+
+  // 어린이 대상
+  "어린이",
+  "아동",
+  "유아",
+  "키즈",
+  "가족뮤지컬",
+  "인형극",
+
+  // 캐릭터
+  "뽀로로",
+  "핑크퐁",
+  "타요",
+  "코코몽",
+  "베이비샤크",
+  "캐치! 티니핑",
+  "브레드이발소",
+  "슈퍼윙스",
+
+  // 동화 원작
+  "신데렐라",
+  "백설공주",
+  "인어공주",
+  "라푼젤",
+  "헨젤과그레텔",
+  "헨젤과 그레텔",
+  "콩쥐팥쥐",
+  "흥부와놀부",
+  "흥부와 놀부",
+  "심청전",
+  "피노키오",
+  "미녀와야수",
+  "미녀와 야수",
+  "피터팬",
+  "이상한나라의앨리스",
+  "이상한 나라의 앨리스",
+  "오즈의마법사",
+  "오즈의 마법사",
+  "빨간모자",
+  "아기돼지삼형제",
+  "아기 돼지 삼형제",
+  "브레멘음악대",
+  "브레멘 음악대",
+  "성냥팔이소녀",
+  "성냥팔이 소녀",
+  "개미와베짱이",
+  "개미와 베짱이",
+  "토끼와거북이",
+  "토끼와 거북이",
+  "여우와두루미",
+  "나무꾼과선녀",
+  "황금거위",
+  "아기양",
+  "잠자는숲속의공주",
+  "잠자는 숲속의 공주",
+];
+
+
+function loadExcludeKeywords() {
+  const fallback = () =>
+    DEFAULT_EXCLUDE_KEYWORDS.map(
+      (word) => ({
+        word,
+        enabled: true,
+      })
+    );
+
+  try {
+    const raw =
+      localStorage.getItem(
+        "excludeKeywords"
+      );
+
+    if (!raw) {
+      return fallback();
+    }
+
+    const parsed =
+      JSON.parse(raw);
+
+    if (
+      !Array.isArray(parsed)
+    ) {
+      return fallback();
+    }
+
+    return parsed
+      .filter(
+        (entry) =>
+          entry &&
+          typeof entry.word ===
+            "string"
+      )
+      .map((entry) => ({
+        word: entry.word,
+        enabled:
+          entry.enabled !==
+          false,
+      }));
+  } catch {
+    return fallback();
+  }
+}
+
+
+function saveExcludeKeywords() {
+  safeStorageSet(
+    "excludeKeywords",
+    JSON.stringify(
+      excludeKeywords
+    )
+  );
+}
+
+
+// ------------------------------------------------------
 // 안전한 localStorage 저장
 // ------------------------------------------------------
 // 브라우저의 저장 공간 부족, 사생활 보호 모드,
@@ -380,6 +530,8 @@ function loadStoredState() {
     loadFavoritesOrder();
   selectedAreas =
     loadSelectedAreas();
+  excludeKeywords =
+    loadExcludeKeywords();
 
   try {
     dateFilterMode =
