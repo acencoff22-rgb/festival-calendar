@@ -2919,257 +2919,305 @@ async function fetchKopisPerformances() {
   }
 
   const results = [];
-
-  let cpage = 1;
-
   const rows = 100;
 
+  const overallStart =
+    new Date();
 
-  const stdate =
-    dateToYYYYMMDD(
-      new Date()
+  overallStart.setHours(
+    0,
+    0,
+    0,
+    0
+  );
+
+  const overallEnd =
+    addMonths(
+      overallStart,
+      KOPIS_MONTHS_AHEAD
     );
 
+  overallEnd.setHours(
+    0,
+    0,
+    0,
+    0
+  );
 
-  const eddate =
-    dateToYYYYMMDD(
-      addMonths(
-        new Date(),
-        KOPIS_MONTHS_AHEAD
-      )
+  // KOPIS 목록 API의 조회 기간 제한은 최대 31일이다.
+  // 시작일과 종료일을 모두 포함해 한 번에 최대 31일씩 나눈다.
+  let windowStart =
+    new Date(overallStart);
+
+  let hasRequestFailure = false;
+
+  while (
+    windowStart <= overallEnd &&
+    !hasRequestFailure
+  ) {
+    const windowEnd =
+      new Date(windowStart);
+
+    windowEnd.setDate(
+      windowEnd.getDate() + 30
     );
-
-
-  while (true) {
-    const url =
-      new URL(
-        KOPIS_BASE
-      );
-
-
-    url.searchParams.set(
-      "service",
-      KOPIS_API_KEY
-    );
-
-    url.searchParams.set(
-      "stdate",
-      stdate
-    );
-
-    url.searchParams.set(
-      "eddate",
-      eddate
-    );
-
-    url.searchParams.set(
-      "cpage",
-      String(cpage)
-    );
-
-    url.searchParams.set(
-      "rows",
-      String(rows)
-    );
-
-
-    let res;
-
-    try {
-      res =
-        await fetchWithRetry(
-          url
-        );
-    } catch (error) {
-      logSanitizedError(
-        "KOPIS 요청 예외:",
-        error
-      );
-
-      sourceStatus.kopis =
-        false;
-
-      break;
-    }
-
-
-    if (!res.ok) {
-      logSanitizedError(
-        "KOPIS 요청 실패:",
-        res.status,
-        (
-          await res.text()
-        ).slice(
-          0,
-          1000
-        )
-      );
-
-      sourceStatus.kopis =
-        false;
-
-      break;
-    }
-
-
-    const xml =
-      await res.text();
-
 
     if (
-      xml.includes(
-        "SERVICE KEY IS NOT REGISTERED"
-      )
+      windowEnd > overallEnd
     ) {
-      logSanitizedError(
-        "KOPIS 인증키가 등록되지 않았습니다."
+      windowEnd.setTime(
+        overallEnd.getTime()
       );
-
-      sourceStatus.kopis =
-        false;
-
-      break;
     }
 
-
-    const list =
-      parseKopisXml(
-        xml
+    const stdate =
+      dateToYYYYMMDD(
+        windowStart
       );
 
+    const eddate =
+      dateToYYYYMMDD(
+        windowEnd
+      );
 
-    for (
-      const item of list
-    ) {
-      if (
-        !item.prfnm
-      ) {
-        continue;
-      }
+    console.log(
+      `KOPIS 조회 구간: ${stdate} ~ ${eddate}`
+    );
 
+    let cpage = 1;
 
-      if (
-        EXCLUDED_KOPIS_GENRES.some(
-          (genre) =>
-            item.genrenm?.includes(
-              genre
-            )
-        )
-      ) {
-        continue;
-      }
-
-
-      if (
-        item.genrenm ===
-          "뮤지컬" &&
-        !isKopisVenueWhitelisted(
-          item.fcltynm
-        )
-      ) {
-        continue;
-      }
-
-
-      const start =
-        kopisDateToIso(
-          item.prfpdfrom
+    while (true) {
+      const url =
+        new URL(
+          KOPIS_BASE
         );
 
+      url.searchParams.set(
+        "service",
+        KOPIS_API_KEY
+      );
 
-      const end =
-        fixReversedDateRange(
-          start,
-          kopisDateToIso(
-            item.prfpdto
+      url.searchParams.set(
+        "stdate",
+        stdate
+      );
+
+      url.searchParams.set(
+        "eddate",
+        eddate
+      );
+
+      url.searchParams.set(
+        "cpage",
+        String(cpage)
+      );
+
+      url.searchParams.set(
+        "rows",
+        String(rows)
+      );
+
+      let res;
+
+      try {
+        res =
+          await fetchWithRetry(
+            url
+          );
+      } catch (error) {
+        logSanitizedError(
+          "KOPIS 요청 예외:",
+          error
+        );
+
+        sourceStatus.kopis =
+          false;
+
+        hasRequestFailure = true;
+
+        break;
+      }
+
+      if (!res.ok) {
+        logSanitizedError(
+          "KOPIS 요청 실패:",
+          res.status,
+          (
+            await res.text()
+          ).slice(
+            0,
+            1000
           )
         );
 
+        sourceStatus.kopis =
+          false;
 
-      if (
-        !start
-      ) {
-        continue;
+        hasRequestFailure = true;
+
+        break;
       }
 
+      const xml =
+        await res.text();
 
       if (
-        isOver90Days(
-          start,
-          end
+        xml.includes(
+          "SERVICE KEY IS NOT REGISTERED"
         )
       ) {
-        continue;
+        logSanitizedError(
+          "KOPIS 인증키가 등록되지 않았습니다."
+        );
+
+        sourceStatus.kopis =
+          false;
+
+        hasRequestFailure = true;
+
+        break;
       }
 
+      const list =
+        parseKopisXml(
+          xml
+        );
 
-      results.push({
-        source:
-          "kopis",
+      for (
+        const item of list
+      ) {
+        if (
+          !item.prfnm
+        ) {
+          continue;
+        }
 
-        type:
-          item.genrenm?.includes(
-            "축제"
-          )
-            ? "festival"
-            : "performance",
-
-        id:
-          `kopis-${item.mt20id}`,
-
-        title:
-          item.prfnm,
-
-        startDate:
-          start,
-
-        endDate:
-          end,
-
-        location:
-          item.fcltynm ||
-          "",
-
-        area:
-          normalizeAreaName(
-            item.area
-          ),
-
-        lat:
-          null,
-
-        lon:
-          null,
-
-        thumbnail:
-          item.poster ||
-          null,
-
-        detailUrl:
-          item.mt20id
-            ? (
-                "https://www.kopis.or.kr/por/db/pblprfr/" +
-                `pblprfrView.do?mt20Id=${item.mt20id}`
+        if (
+          EXCLUDED_KOPIS_GENRES.some(
+            (genre) =>
+              item.genrenm?.includes(
+                genre
               )
-            : null,
+          )
+        ) {
+          continue;
+        }
 
-        genre:
-          item.genrenm ||
-          null,
-      });
+        if (
+          item.genrenm ===
+            "뮤지컬" &&
+          !isKopisVenueWhitelisted(
+            item.fcltynm
+          )
+        ) {
+          continue;
+        }
+
+        const start =
+          kopisDateToIso(
+            item.prfpdfrom
+          );
+
+        const end =
+          fixReversedDateRange(
+            start,
+            kopisDateToIso(
+              item.prfpdto
+            )
+          );
+
+        if (
+          !start
+        ) {
+          continue;
+        }
+
+        if (
+          isOver90Days(
+            start,
+            end
+          )
+        ) {
+          continue;
+        }
+
+        results.push({
+          source:
+            "kopis",
+
+          type:
+            item.genrenm?.includes(
+              "축제"
+            )
+              ? "festival"
+              : "performance",
+
+          id:
+            `kopis-${item.mt20id}`,
+
+          title:
+            item.prfnm,
+
+          startDate:
+            start,
+
+          endDate:
+            end,
+
+          location:
+            item.fcltynm ||
+            "",
+
+          area:
+            normalizeAreaName(
+              item.area
+            ),
+
+          lat:
+            null,
+
+          lon:
+            null,
+
+          thumbnail:
+            item.poster ||
+            null,
+
+          detailUrl:
+            item.mt20id
+              ? (
+                  "https://www.kopis.or.kr/por/db/pblprfr/" +
+                  `pblprfrView.do?mt20Id=${item.mt20id}`
+                )
+              : null,
+
+          genre:
+            item.genrenm ||
+            null,
+        });
+      }
+
+      if (
+        list.length < rows
+      ) {
+        break;
+      }
+
+      cpage += 1;
     }
 
-
-    if (
-      list.length < rows
-    ) {
+    if (hasRequestFailure) {
       break;
     }
 
+    // 다음 조회 구간은 직전 종료일의 다음 날부터 시작한다.
+    windowStart =
+      new Date(windowEnd);
 
-    cpage += 1;
+    windowStart.setDate(
+      windowStart.getDate() + 1
+    );
   }
-
 
   console.log(
     `KOPIS에서 ${results.length}건 수집`
