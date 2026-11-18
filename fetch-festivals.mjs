@@ -1528,9 +1528,9 @@ async function fetchKopisPerformances() {
       }
 
       const xml = await res.text();
-      if (!xml.trim() || /<err(?:or)?\\b/i.test(xml) ||
+      if (!xml.trim() || /<err(?:or)?\b/i.test(xml) ||
           /service key is not registered|service access denied|request limit/i.test(xml) ||
-          !/<dbs?\\b/i.test(xml)) {
+          !/<dbs?\b/i.test(xml)) {
         console.error("KOPIS 응답 형식 또는 인증 오류:", xml.slice(0, 1500));
         sourceStatus.kopis = false;
         return [];
@@ -2332,6 +2332,13 @@ function runSelfTests() {
     throw new Error("KOPIS XML 파싱 실패");
   }
   if (parseKopisXml("<dbs></dbs>").length !== 0) throw new Error("KOPIS 빈 XML 처리 실패");
+  if (!/<dbs?\b/i.test("<dbs></dbs>")) {
+    throw new Error("KOPIS 응답 루트 태그 검사 실패");
+  }
+  if (!/<err(?:or)?\b/i.test("<error>invalid</error>")) {
+    throw new Error("KOPIS 오류 응답 태그 검사 실패");
+  }
+
   console.log("수집기 자체 테스트 통과");
 }
 
