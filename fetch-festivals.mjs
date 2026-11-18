@@ -3783,9 +3783,12 @@ async function main() {
     )
     .map(([name]) => name);
 
-  if (missingApiKeys.length > 0) {
+  if (
+    process.env.GITHUB_ACTIONS === "true" &&
+    missingApiKeys.length > 0
+  ) {
     console.error(
-      `필수 API 키 누락: ${missingApiKeys.join(", ")} → 기존 festivals.json을 유지합니다.`
+      `GitHub Actions 필수 API 키 누락: ${missingApiKeys.join(", ")} → 기존 festivals.json을 유지합니다.`
     );
     process.exitCode = 1;
     return;
