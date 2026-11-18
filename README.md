@@ -31,6 +31,10 @@ festival-calendar/
 
 GitHub Actions의 `Update Festival Data` 워크플로가 매일 한국시간 오전 6시에 실행됩니다. 수동 실행도 지원하며, 수집 서버의 시간대도 `Asia/Seoul`로 고정해 날짜 기준 API 요청이 한국 날짜를 따르도록 합니다.
 
+Pull Request가 `main`을 대상으로 열리거나 갱신되면 데이터 수집 없이 JavaScript 구문 검사만 실행합니다. 실제 데이터 갱신은 예약 실행 또는 수동 실행에서만 수행합니다.
+
+KOPIS 공연 목록 API는 조회 기간 최대 31일 제한에 맞춰 전체 수집 범위를 여러 구간으로 나눕니다. 각 구간은 하루도 빠지거나 겹치지 않도록 연결하고, 구간마다 페이지 번호를 처음부터 시작합니다.
+
 GitHub Actions에서 자동 갱신하려면 다음 네 가지 저장소 Secret을 모두 설정해야 합니다.
 
 - `TOUR_API_KEY`
