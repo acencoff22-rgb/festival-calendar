@@ -423,6 +423,14 @@ function kopisDateToIso(
 }
 
 
+function isEventExpired(startDate, endDate, todayIso) {
+  if (!startDate) return true;
+  const today = todayIso || ymdToIso(todayYYYYMMDD());
+  const effectiveEnd = endDate || startDate;
+  return effectiveEnd < today;
+}
+
+
 function assertPageCompleteness(items, totalCountValue, pageNo, pageSize, sourceName) {
   const totalCount = Number(totalCountValue);
 
@@ -811,7 +819,7 @@ async function fetchTourApiFestivals() {
         continue;
       }
 
-      if ((end && end < todayIso) || (!end && start < todayIso)) {
+      if (isEventExpired(start, end, todayIso)) {
         continue;
       }
 
@@ -928,6 +936,7 @@ async function fetchCultureStandardFestivals() {
   let pageNo = 1;
 
   const numOfRows = 1000;
+  const todayIso = ymdToIso(todayYYYYMMDD());
 
 
   while (true) {
@@ -1117,10 +1126,8 @@ async function fetchCultureStandardFestivals() {
 
 
       if (
-        isOver90Days(
-          start,
-          end
-        )
+        isOver90Days(start, end) ||
+        isEventExpired(start, end, todayIso)
       ) {
         continue;
       }
@@ -1527,6 +1534,7 @@ async function fetchKopisPerformances() {
 
   const results = [];
   const rows = 100;
+  const todayIso = ymdToIso(todayYYYYMMDD());
   const dateWindows = buildDateWindows(new Date(), addMonths(new Date(), KOPIS_MONTHS_AHEAD), 30);
 
   for (const window of dateWindows) {
@@ -1571,7 +1579,11 @@ async function fetchKopisPerformances() {
 
         const startDate = kopisDateToIso(item.prfpdfrom);
         const endDate = kopisDateToIso(item.prfpdto);
-        if (!startDate || isOver90Days(startDate, endDate)) continue;
+        if (
+          !startDate ||
+          isOver90Days(startDate, endDate) ||
+          isEventExpired(startDate, endDate, todayIso)
+        ) continue;
 
         results.push({
           source: "kopis",
@@ -2334,6 +2346,19 @@ function printTypeStats(
 
 
 function runSelfTests() {
+  if (isEventExpired("2026-06-01", "2026-06-20", "2026-11-18") !== true) {
+    throw new Error("종료된 행사 필터 테스트 실패");
+  }
+  if (isEventExpired("2026-11-01", "2026-11-20", "2026-11-18") !== false) {
+    throw new Error("진행 중 행사 유지 테스트 실패");
+  }
+  if (isEventExpired("2026-11-19", "2026-11-21", "2026-11-18") !== false) {
+    throw new Error("예정 행사 유지 테스트 실패");
+  }
+  if (isEventExpired("2026-11-17", "", "2026-11-18") !== true) {
+    throw new Error("종료일 없는 과거 행사 필터 테스트 실패");
+  }
+
   if (normalizeApiKey("abc%2Bdef%3D") !== "abc+def=") throw new Error("API 키 디코딩 실패");
   if (normalizeApiKey("plain+key") !== "plain+key") throw new Error("평문 API 키 처리 실패");
 
@@ -2404,6 +2429,8 @@ async function main() {
   const missing = required.filter(([, value]) => !value).map(([name]) => name);
   if (missing.length) throw new Error(`필수 API 키 누락: ${missing.join(", ")}. 기존 festivals.json 유지`);
 
+  const todayIso = ymdToIso(todayYYYYMMDD());
+
   const [tourItems, cultureItems, kopisItems] = await Promise.all([
     fetchTourApiFestivals(),
     fetchCultureStandardFestivals(),
@@ -2440,20 +2467,27 @@ async function main() {
     return;
   }
 
-  let previousCount = null;
+  let previousActiveCount = null;
   try {
     const previous = JSON.parse(await readFile("festivals.json", "utf8"));
     const previousRows = Array.isArray(previous) ? previous : previous?.festivals;
     if (!Array.isArray(previousRows) || previousRows.length === 0) {
       throw new Error("기존 festivals.json 데이터 구조 오류. 덮어쓰지 않습니다.");
     }
-    previousCount = previousRows.length;
+    previousActiveCount = previousRows.filter(
+      (item) => !isEventExpired(item?.startDate, item?.endDate, todayIso)
+    ).length;
   } catch (error) {
     if (error?.code !== "ENOENT") throw error;
   }
 
-  if (previousCount !== null && merged.length < previousCount * 0.7) {
-    console.error(`기존 ${previousCount}건 대비 신규 ${merged.length}건(70% 미만) → 기존 파일 유지`);
+  if (
+    previousActiveCount > 0 &&
+    merged.length < previousActiveCount * 0.7
+  ) {
+    console.error(
+      `기존 진행/예정 ${previousActiveCount}건 대비 신규 ${merged.length}건(70% 미만) → 기존 파일 유지`
+    );
     process.exitCode = 1;
     return;
   }

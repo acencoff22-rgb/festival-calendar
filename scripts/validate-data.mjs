@@ -13,6 +13,16 @@ if (!Array.isArray(payload) && Number(payload.count) !== records.length) {
 }
 
 const allowed = new Set(["tourapi", "culture", "kopis", "culturePortal"]);
+const activeOnly = process.argv.includes("--active-only");
+const todayParts = Object.fromEntries(
+  new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date()).map(({ type, value }) => [type, value])
+);
+const today = todayParts.year + "-" + todayParts.month + "-" + todayParts.day;
 const ids = new Set();
 const counts = {};
 
@@ -29,10 +39,16 @@ for (const [index, item] of records.entries()) {
     throw new Error(`${row}번째 종료일 형식 오류: ${item.endDate}`);
   }
   if (!allowed.has(item.source)) throw new Error(`${row}번째 출처 오류: ${item.source}`);
+  if (activeOnly && String(item.endDate || item.startDate) < today) {
+    throw new Error(`${row}번째 종료된 행사 포함: ${item.title} (${item.endDate || item.startDate})`);
+  }
   counts[item.source] = (counts[item.source] || 0) + 1;
 }
 
-console.log(`데이터 검증 통과: ${records.length}건 / ${JSON.stringify(counts)}`);
+console.log(
+  `데이터 검증 통과: ${records.length}건 / ${JSON.stringify(counts)}` +
+  (activeOnly ? ` / 기준일 ${today} 이후 종료` : "")
+);
 if (counts.culturePortal) {
   console.warn(`구버전 문화포털 데이터 ${counts.culturePortal}건은 다음 정상 수집 후 제외됩니다.`);
 }

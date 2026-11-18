@@ -39,8 +39,8 @@ jobs:
           TZ: Asia/Seoul
         run: node fetch-festivals.mjs
 
-      - name: 신규 수집 결과 데이터 구조 검증
-        run: node scripts/validate-data.mjs
+      - name: 신규 수집 결과 데이터 구조 및 일정 검증
+        run: node scripts/validate-data.mjs --active-only
 
       - name: 검증된 프로젝트 ZIP 생성
         run: |
