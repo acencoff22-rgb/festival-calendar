@@ -23,6 +23,8 @@ festival-calendar/
 └─ .github/
    └─ workflows/
       └─ update-festivals.yml
+```
+
 
 
 ## 자동 데이터 갱신
