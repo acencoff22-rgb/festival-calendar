@@ -1031,12 +1031,23 @@ async function fetchTourApiFestivals() {
         0
       );
 
+    const hasValidTotalCount =
+      Number.isFinite(totalCount) &&
+      totalCount > 0;
+
+    const reachedReportedEnd =
+      hasValidTotalCount &&
+      pageNo * numOfRows >= totalCount;
+
+    // totalCount가 없는 응답은 페이지 크기로 끝을 판단한다.
+    const reachedUnreportedEnd =
+      !hasValidTotalCount &&
+      list.length < numOfRows;
 
     if (
       list.length === 0 ||
-      pageNo *
-        numOfRows >=
-        totalCount
+      reachedReportedEnd ||
+      reachedUnreportedEnd
     ) {
       break;
     }
