@@ -728,6 +728,10 @@ function toggleFavorite(id) {
 
   if (isFavoriteId(id)) {
     removeFromFavoritesOrder(id);
+
+    // 관심 행사에서 해제하면 해당 알림도 함께 제거한다.
+    delete reminders[id];
+    saveReminders();
   } else {
     addToFavoritesOrder(id);
   }
