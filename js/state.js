@@ -27,6 +27,7 @@ const AREA_DISPLAY_ORDER = [
   "광주·전남",
   "전북",
   "제주",
+  "해외",
 ];
 
 const WEEKDAYS = [

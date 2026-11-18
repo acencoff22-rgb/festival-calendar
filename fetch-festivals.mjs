@@ -1416,6 +1416,28 @@ function parseKopisXml(
 }
 
 
+// KOPIS는 해외 공연의 area 필드가 비어 오는 경우가 있다.
+// 제목/공연장에 국가 또는 대표 도시가 명시된 경우에만 해외로 분류한다.
+const OVERSEAS_LOCATION_KEYWORDS = [
+  "일본", "도쿄", "오사카", "교토", "후쿠오카", "사이타마", "요코하마", "나고야",
+  "중국", "베이징", "상하이", "대만", "타이베이", "홍콩", "마카오",
+  "싱가포르", "태국", "방콕", "베트남", "하노이", "호치민", "필리핀", "마닐라",
+  "말레이시아", "쿠알라룸푸르", "인도네시아", "자카르타", "미국", "뉴욕",
+  "로스앤젤레스", "LA 공연", "캐나다", "토론토", "밴쿠버", "영국", "런던",
+  "프랑스", "파리", "독일", "베를린", "이탈리아", "로마", "스페인", "마드리드",
+  "호주", "시드니", "멜버른",
+];
+
+function inferKopisArea(item) {
+  const declaredArea = normalizeAreaName(item?.area);
+  if (declaredArea) return declaredArea;
+  const locationText = `${item?.prfnm || ""} ${item?.fcltynm || ""}`.normalize("NFKC");
+  return OVERSEAS_LOCATION_KEYWORDS.some((keyword) => locationText.includes(keyword))
+    ? "해외"
+    : null;
+}
+
+
 // ======================================================
 // KOPIS 제외 장르
 // ======================================================
@@ -1628,7 +1650,7 @@ async function fetchKopisPerformances() {
           startDate,
           endDate,
           location: item.fcltynm || "",
-          area: normalizeAreaName(item.area),
+          area: inferKopisArea(item),
           lat: null,
           lon: null,
           thumbnail: item.poster || null,
@@ -2385,6 +2407,8 @@ function runSelfTests() {
   if (normalizeAreaName("광주광역시") !== "광주·전남") throw new Error("구 광주 지역명 정규화 실패");
   if (normalizeAreaName("전라남도") !== "광주·전남") throw new Error("구 전남 지역명 정규화 실패");
   if (deriveAreaFromAddress("전남광주통합특별시 무안군") !== "광주·전남") throw new Error("통합특별시 주소 지역 판별 실패");
+  if (inferKopisArea({ prfnm: "콘서트 [일본 오사카]", fcltynm: "Brillia HALL Minoh" }) !== "해외") throw new Error("KOPIS 해외 공연 지역 판별 실패");
+  if (inferKopisArea({ prfnm: "서울 공연", fcltynm: "세종문화회관" }) !== null) throw new Error("국내 미분류 공연을 해외로 오분류함");
 
   if (!isRetryableHttpResponse(503, "application/xml")) {
     throw new Error("일시적 HTTP 오류 재시도 판정 실패");

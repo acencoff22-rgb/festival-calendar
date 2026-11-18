@@ -31,9 +31,10 @@ vm.runInContext(await readSource("js/render.js"), uiContext);
 vm.runInContext('selectedAreas = new Set(["강원"]); renderAreaCheckboxes();', uiContext);
 
 const areaValues = rendered.map((label) => label.children[0].value);
-assert(areaValues.length === 16, "지역 체크박스 수 오류: " + areaValues.length);
+assert(areaValues.length === 17, "지역 체크박스 수 오류: " + areaValues.length);
 assert(new Set(areaValues).size === areaValues.length, "지역 체크박스 값 중복");
 assert(areaValues.includes("광주·전남"), "통합 지역 체크박스 누락");
+assert(areaValues.includes("해외"), "해외 지역 체크박스 누락");
 assert(!areaValues.includes("광주") && !areaValues.includes("전남"), "구 지역 체크박스가 남아 있음");
 assert(rendered.find((label) => label.children[0].value === "강원").children[0].checked, "저장된 지역 선택 상태 미반영");
 assert(vm.runInContext('safeExternalUrl("javascript:alert(1)")', uiContext) === "", "javascript URL 차단 실패");
