@@ -82,19 +82,38 @@ function loadExcludeKeywords() {
       return fallback();
     }
 
-    return parsed
-      .filter(
-        (entry) =>
-          entry &&
-          typeof entry.word ===
-            "string"
-      )
-      .map((entry) => ({
-        word: entry.word,
-        enabled:
-          entry.enabled !==
-          false,
-      }));
+    const seen = new Set();
+
+    return parsed.reduce(
+      (result, entry) => {
+        if (
+          !entry ||
+          typeof entry.word !== "string"
+        ) {
+          return result;
+        }
+
+        const word = entry.word.trim();
+
+        // 빈 키워드는 모든 제목과 일치하므로 저장 데이터에서도 제거한다.
+        if (
+          !word ||
+          seen.has(word)
+        ) {
+          return result;
+        }
+
+        seen.add(word);
+
+        result.push({
+          word,
+          enabled: entry.enabled !== false,
+        });
+
+        return result;
+      },
+      []
+    );
   } catch {
     return fallback();
   }
@@ -233,7 +252,13 @@ function loadFavoritesOrder() {
       return [];
     }
 
-    return parsed.map(String);
+    return [
+      ...new Set(
+        parsed
+          .map(String)
+          .filter(Boolean)
+      ),
+    ];
   } catch {
     return [];
   }
@@ -462,10 +487,15 @@ function reconcileStoredState(validIds) {
     saveHiddenIds();
   }
 
-  const nextFavoritesOrder =
-    favoritesOrder.filter((id) =>
-      ids.has(String(id))
-    );
+  const nextFavoritesOrder = [
+    ...new Set(
+      favoritesOrder
+        .map(String)
+        .filter((id) =>
+          ids.has(id)
+        )
+    ),
+  ];
 
   if (
     nextFavoritesOrder.length !==
