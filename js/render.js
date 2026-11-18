@@ -747,20 +747,18 @@ function renderListView() {
 function normalizeImageUrl(
   url
 ) {
-  const value =
-    String(
-      url || ""
-    ).trim();
+  const safeUrl =
+    normalizeHttpUrl(url);
 
-  if (!value) {
+  if (!safeUrl) {
     return "";
   }
 
-  return value.startsWith(
-    "http://"
-  )
-    ? `https://${value.slice(7)}`
-    : value;
+  // 기존 동작과 같이 이미지 요청은 HTTPS를 우선한다.
+  return safeUrl.replace(
+    /^http:/i,
+    "https:"
+  );
 }
 
 
@@ -827,14 +825,13 @@ function renderFestivalCard(
     );
 
   const link =
-    festival?.link ||
-    festival?.url ||
-    festival?.detailUrl ||
     eventLink(festival);
 
   const videoUrl =
-    festival?.youtube ||
-    festival?.youtubeUrl ||
+    normalizeHttpUrl(
+      festival?.youtube ||
+        festival?.youtubeUrl
+    ) ||
     buildYoutubeSearchUrl(
       festival
     );
@@ -1082,19 +1079,40 @@ function highlightSearchText(
     );
   }
 
-  const escapedSearch =
-    escapeRegExp(
-      search
+  const regex =
+    new RegExp(
+      escapeRegExp(search),
+      "gi"
     );
 
-  return escapeHtml(
-    value
-  ).replace(
-    new RegExp(
-      `(${escapedSearch})`,
-      "gi"
-    ),
-    "<mark>$1</mark>"
+  let html = "";
+  let lastIndex = 0;
+
+  for (const match of value.matchAll(regex)) {
+    const matchedText = match[0];
+    const matchIndex = match.index ?? 0;
+
+    html += escapeHtml(
+      value.slice(
+        lastIndex,
+        matchIndex
+      )
+    );
+
+    html +=
+      "<mark>" +
+      escapeHtml(matchedText) +
+      "</mark>";
+
+    lastIndex =
+      matchIndex + matchedText.length;
+  }
+
+  return (
+    html +
+    escapeHtml(
+      value.slice(lastIndex)
+    )
   );
 }
 
