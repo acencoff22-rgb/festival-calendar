@@ -73,8 +73,39 @@ function parseDate(dateStr) {
     return null;
   }
 
-  const date =
-    new Date(dateStr);
+  const value =
+    String(dateStr).trim();
+
+  const calendarDate =
+    value.match(
+      /^(\d{4})-(\d{2})-(\d{2})$/
+    );
+
+  let date;
+
+  if (calendarDate) {
+    // 행사 날짜는 시간대가 없는 달력 날짜이므로 현지 날짜로 생성한다.
+    // new Date("YYYY-MM-DD")의 UTC 해석으로 해외 기기에서 하루 밀리는 현상을 방지한다.
+    const year = Number(calendarDate[1]);
+    const month = Number(calendarDate[2]);
+    const day = Number(calendarDate[3]);
+
+    date = new Date(
+      year,
+      month - 1,
+      day
+    );
+
+    if (
+      date.getFullYear() !== year ||
+      date.getMonth() !== month - 1 ||
+      date.getDate() !== day
+    ) {
+      return null;
+    }
+  } else {
+    date = new Date(value);
+  }
 
   if (
     Number.isNaN(
