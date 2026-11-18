@@ -29,11 +29,11 @@ festival-calendar/
 
 GitHub Actions의 `Update Festival Data` 워크플로가 매일 한국시간 오전 6시에 실행됩니다. 수동 실행도 지원합니다.
 
-다음 네 가지 저장소 Secret이 모두 설정되어 있어야 데이터 갱신이 진행됩니다.
+GitHub Actions에서 자동 갱신하려면 다음 네 가지 저장소 Secret을 모두 설정해야 합니다.
 
 - `TOUR_API_KEY`
 - `CULTURE_API_KEY`
 - `CULTURE_PORTAL_API_KEY`
 - `KOPIS_API_KEY`
 
-API 키가 누락되거나 수집 결과가 0건이면 기존 `festivals.json`을 덮어쓰지 않습니다. 데이터 수집 스크립트와 브라우저 JavaScript 파일은 갱신 전에 Node.js 구문 검사를 통과해야 합니다.
+GitHub Actions에서 하나라도 빠지면 갱신을 중단하고 기존 `festivals.json`을 보존합니다. 로컬에서 직접 실행할 때는 API 키가 없는 소스만 건너뛰며, 전체 수집 결과가 0건이면 역시 기존 파일을 덮어쓰지 않습니다. 데이터 수집 스크립트와 브라우저 JavaScript 파일은 갱신 전에 Node.js 구문 검사를 통과해야 합니다.
