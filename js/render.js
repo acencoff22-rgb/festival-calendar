@@ -21,9 +21,33 @@
 // 중요
 // - logic.js와 날짜/정렬 함수를 중복 정의하지 않는다.
 // - render.js에서 localStorage에 직접 접근하지 않는다.
-// - 인기도/mentions/hotIds 기능은 사용하지 않는다.
 // - 복사 기능은 사용하지 않는다.
 // ======================================================
+
+
+// ------------------------------------------------------
+// 지역 선택 체크박스
+// ------------------------------------------------------
+
+function renderAreaCheckboxes() {
+  const container = document.getElementById("areaCheckboxList");
+  if (!container) return;
+  const fragment = document.createDocumentFragment();
+  for (const area of AREA_DISPLAY_ORDER) {
+    const label = document.createElement("label");
+    label.className = "area-checkbox-item";
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.name = "festival-area";
+    checkbox.value = area;
+    checkbox.checked = selectedAreas.has(area);
+    const text = document.createElement("span");
+    text.textContent = area;
+    label.append(checkbox, text);
+    fragment.append(label);
+  }
+  container.replaceChildren(fragment);
+}
 
 
 // ------------------------------------------------------
@@ -744,23 +768,16 @@ function renderListView() {
 // YouTube 검색 링크
 // ------------------------------------------------------
 
-function normalizeImageUrl(
-  url
-) {
-  const value =
-    String(
-      url || ""
-    ).trim();
-
-  if (!value) {
+function normalizeImageUrl(url) {
+  const safeUrl = safeExternalUrl(url);
+  if (!safeUrl) return "";
+  try {
+    const parsed = new URL(safeUrl);
+    if (parsed.protocol === "http:") parsed.protocol = "https:";
+    return parsed.href;
+  } catch {
     return "";
   }
-
-  return value.startsWith(
-    "http://"
-  )
-    ? `https://${value.slice(7)}`
-    : value;
 }
 
 
@@ -826,18 +843,11 @@ function renderFestivalCard(
         ""
     );
 
-  const link =
-    festival?.link ||
-    festival?.url ||
-    festival?.detailUrl ||
-    eventLink(festival);
+  const link = eventLink(festival);
 
   const videoUrl =
-    festival?.youtube ||
-    festival?.youtubeUrl ||
-    buildYoutubeSearchUrl(
-      festival
-    );
+    safeExternalUrl(festival?.youtube || festival?.youtubeUrl) ||
+    buildYoutubeSearchUrl(festival);
 
   return `
     <article

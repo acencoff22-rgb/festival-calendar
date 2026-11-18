@@ -477,21 +477,29 @@ function cleanTitleForSearch(
 // 행사 링크
 // ------------------------------------------------------
 
-function eventLink(
-  festival
-) {
-  return (
-    festival?.detailUrl ||
-    festival?.link ||
-    festival?.url ||
-    `https://search.naver.com/search.naver?query=${encodeURIComponent(
-      cleanTitleForSearch(
-        festival?.title
-      )
-    )}`
-  );
+function safeExternalUrl(value) {
+  const raw = String(value ?? "").trim();
+  if (!raw) return "";
+  const withoutProtocolSlashes = raw.startsWith("//") ? raw.slice(2) : raw;
+  const candidate = /^[a-z][a-z0-9+.-]*:/i.test(raw)
+    ? raw
+    : "https://" + withoutProtocolSlashes;
+  try {
+    const url = new URL(candidate);
+    if (!["http:", "https:"].includes(url.protocol) || !url.hostname || url.username || url.password) return "";
+    return url.href;
+  } catch {
+    return "";
+  }
 }
 
+function eventLink(festival) {
+  for (const candidate of [festival?.link, festival?.url, festival?.detailUrl]) {
+    const safeUrl = safeExternalUrl(candidate);
+    if (safeUrl) return safeUrl;
+  }
+  return "https://search.naver.com/search.naver?query=" + encodeURIComponent(cleanTitleForSearch(festival?.title));
+}
 
 // ------------------------------------------------------
 // 검색어 하이라이트

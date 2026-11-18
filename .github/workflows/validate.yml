@@ -1,0 +1,62 @@
+name: Validate Festival Project
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+      - name: JavaScript 문법 검사
+        run: |
+          node --check fetch-festivals.mjs
+          node --check scripts/validate-data.mjs
+          node --check scripts/validate-ui.mjs
+          for file in js/*.js; do
+            node --check "$file"
+          done
+      - name: 수집기 자체 테스트
+        run: node fetch-festivals.mjs --self-test
+      - name: UI 및 지역 필터 테스트
+        run: node scripts/validate-ui.mjs
+      - name: 현재 저장 데이터 구조 검증
+        run: node scripts/validate-data.mjs
+
+      - name: 실제 공공 API 수집 통합 검증
+        env:
+          TOUR_API_KEY: ${{ secrets.TOUR_API_KEY }}
+          CULTURE_API_KEY: ${{ secrets.CULTURE_API_KEY }}
+          KOPIS_API_KEY: ${{ secrets.KOPIS_API_KEY }}
+          TZ: Asia/Seoul
+        run: node fetch-festivals.mjs
+
+      - name: 신규 수집 결과 데이터 구조 및 일정 검증
+        run: node scripts/validate-data.mjs --active-only
+
+      - name: 검증된 프로젝트 ZIP 생성
+        run: |
+          zip -r festival-calendar-verified.zip . \
+            -x "./.git/*" \
+            -x "./festival-calendar-verified.zip" \
+            -x "./node_modules/*" \
+            -x "./*.tmp"
+
+      - name: 검증된 프로젝트 ZIP 업로드
+        uses: actions/upload-artifact@v4
+        with:
+          name: festival-calendar-verified
+          path: festival-calendar-verified.zip
+          if-no-files-found: error
+          retention-days: 7

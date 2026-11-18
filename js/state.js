@@ -24,10 +24,10 @@ const AREA_DISPLAY_ORDER = [
   "부산",
   "울산",
   "경남",
-  "광주",
+  "광주·전남",
   "전북",
-  "전남",
   "제주",
+  "해외",
 ];
 
 const WEEKDAYS = [
@@ -57,11 +57,6 @@ const KAKAO_JS_KEY =
  * 전체 행사 데이터
  */
 let allFestivals = [];
-
-/*
- * 인기 행사 ID
- */
-let hotIds = new Set();
 
 /*
  * 숨긴 행사 ID
