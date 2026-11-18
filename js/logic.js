@@ -477,19 +477,75 @@ function cleanTitleForSearch(
 // 행사 링크
 // ------------------------------------------------------
 
+function normalizeHttpUrl(value) {
+  const raw = String(
+    value ?? ""
+  ).trim();
+
+  if (!raw) {
+    return "";
+  }
+
+  let candidate = raw;
+
+  if (candidate.startsWith("//")) {
+    candidate = `https:${candidate}`;
+  } else if (/^www\./i.test(candidate)) {
+    candidate = `https://${candidate}`;
+  }
+
+  // 외부 링크는 HTTP(S)만 허용한다. javascript:, data: 등은 거부한다.
+  const match = candidate.match(
+    /^(https?):\/\/([^/?#]+)([\s\S]*)$/i
+  );
+
+  if (!match) {
+    return "";
+  }
+
+  const authority = match[2];
+
+  // 잘못된 호스트, 공백, 역슬래시, 사용자 정보가 포함된 주소를 거부한다.
+  if (
+    !authority ||
+    /[\s\\<>]/.test(authority) ||
+    authority.includes("@")
+  ) {
+    return "";
+  }
+
+  return (
+    match[1].toLowerCase() +
+    "://" +
+    authority +
+    match[3]
+  );
+}
+
+
 function eventLink(
   festival
 ) {
-  return (
-    festival?.detailUrl ||
-    festival?.link ||
-    festival?.url ||
-    `https://search.naver.com/search.naver?query=${encodeURIComponent(
-      cleanTitleForSearch(
-        festival?.title
-      )
-    )}`
-  );
+  const candidates = [
+    festival?.link,
+    festival?.url,
+    festival?.detailUrl,
+  ];
+
+  for (const candidate of candidates) {
+    const safeUrl =
+      normalizeHttpUrl(candidate);
+
+    if (safeUrl) {
+      return safeUrl;
+    }
+  }
+
+  return `https://search.naver.com/search.naver?query=${encodeURIComponent(
+    cleanTitleForSearch(
+      festival?.title
+    )
+  )}`;
 }
 
 
