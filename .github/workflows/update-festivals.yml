@@ -25,6 +25,13 @@ jobs:
         with:
           node-version: "lts/*"
 
+      - name: JavaScript 구문 검사
+        run: |
+          node --check fetch-festivals.mjs
+          for file in js/*.js; do
+            node --check "$file"
+          done
+
       - name: 축제 데이터 가져오기
         env:
           TOUR_API_KEY: ${{ secrets.TOUR_API_KEY }}
