@@ -17,7 +17,7 @@
  *   CULTURE_PORTAL_API_KEY
  *   KOPIS_API_KEY
  *
- * API 키가 없는 소스는 건너뜁니다.
+ * 필수 API 키가 하나라도 없으면 기존 데이터를 보호하기 위해 갱신을 중단합니다.
  */
 
 
@@ -38,6 +38,7 @@ async function fetchWithRetry(
   {
     retries = 2,
     delayMs = 1500,
+    timeoutMs = 60000,
   } = {}
 ) {
   let lastError;
@@ -49,7 +50,14 @@ async function fetchWithRetry(
   ) {
     try {
       return await fetch(
-        url
+        url,
+        {
+          // 응답 헤더나 본문이 무기한 대기하는 상황을 방지한다.
+          // 각 재시도마다 새 timeout signal을 생성한다.
+          signal: AbortSignal.timeout(
+            timeoutMs
+          ),
+        }
       );
     } catch (error) {
       lastError = error;
@@ -3762,6 +3770,27 @@ function printTypeStats(
 // ======================================================
 
 async function main() {
+  const requiredApiKeys = [
+    ["TOUR_API_KEY", TOUR_API_KEY],
+    ["CULTURE_API_KEY", CULTURE_API_KEY],
+    ["CULTURE_PORTAL_API_KEY", CULTURE_PORTAL_API_KEY],
+    ["KOPIS_API_KEY", KOPIS_API_KEY],
+  ];
+
+  const missingApiKeys = requiredApiKeys
+    .filter(([, value]) =>
+      !String(value || "").trim()
+    )
+    .map(([name]) => name);
+
+  if (missingApiKeys.length > 0) {
+    console.error(
+      `필수 API 키 누락: ${missingApiKeys.join(", ")} → 기존 festivals.json을 유지합니다.`
+    );
+    process.exitCode = 1;
+    return;
+  }
+
   const [
     tourItems,
     cultureItems,
@@ -3829,6 +3858,14 @@ async function main() {
             b.startDate
           )
       );
+
+  if (merged.length === 0) {
+    console.error(
+      "수집 및 정리 결과가 0건입니다. 기존 festivals.json을 유지합니다."
+    );
+    process.exitCode = 1;
+    return;
+  }
 
 
   printSourceStats(
