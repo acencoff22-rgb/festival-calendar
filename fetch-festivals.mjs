@@ -414,8 +414,27 @@ function addMonths(
   const d =
     new Date(date);
 
+  const originalDay =
+    d.getDate();
+
+  // 1일로 이동한 뒤 월을 변경해 월말 날짜 overflow를 방지한다.
+  d.setDate(1);
   d.setMonth(
     d.getMonth() + months
+  );
+
+  const lastDayOfTargetMonth =
+    new Date(
+      d.getFullYear(),
+      d.getMonth() + 1,
+      0
+    ).getDate();
+
+  d.setDate(
+    Math.min(
+      originalDay,
+      lastDayOfTargetMonth
+    )
   );
 
   return d;
@@ -1284,7 +1303,15 @@ async function fetchCultureStandardFestivals() {
           "festival",
 
         id:
-          `culture-${normalizeTitle(title)}-${start}-${end || "x"}`,
+          `culture-${normalizeTitle(title)}-${start}-${end || "x"}-${normalizeTitle(
+            [
+              sido,
+              sigungu,
+              location || address || jibunAddress,
+            ]
+              .filter(Boolean)
+              .join(" ")
+          ) || "unknown"}`,
 
         title,
 
@@ -1302,14 +1329,13 @@ async function fetchCultureStandardFestivals() {
 
         area:
           normalizeAreaName(
-            sido ||
-            sigungu ||
-            ""
+            sido
           ) ||
           deriveAreaFromAddress(
             address,
             jibunAddress,
-            location
+            location,
+            sigungu
           ),
 
         lat,
@@ -2413,7 +2439,10 @@ async function fetchCulturePortalByServiceType(
 
       const finalArea =
         areaRaw ||
-        sigungu ||
+        deriveAreaFromAddress(
+          location,
+          sigungu
+        ) ||
         "";
 
 
@@ -3036,49 +3065,51 @@ async function fetchKopisPerformances() {
 // 장소 차이 판별
 // ======================================================
 
+function hasValidCoordinatePair(
+  item
+) {
+  if (
+    item?.lat === null ||
+    item?.lat === undefined ||
+    item?.lat === "" ||
+    item?.lon === null ||
+    item?.lon === undefined ||
+    item?.lon === ""
+  ) {
+    return false;
+  }
+
+  const lat = Number(item.lat);
+  const lon = Number(item.lon);
+
+  return (
+    Number.isFinite(lat) &&
+    Number.isFinite(lon) &&
+    lat >= -90 &&
+    lat <= 90 &&
+    lon >= -180 &&
+    lon <= 180
+  );
+}
+
+
+// ======================================================
+// 장소 차이 판별
+// ======================================================
+
 function locationsClearlyDifferent(
   a,
   b
 ) {
-  const locationA =
-    String(
-      a.location || ""
-    ).trim();
-
-
-  const locationB =
-    String(
-      b.location || ""
-    ).trim();
-
-
-  if (
-    !locationA ||
-    !locationB
-  ) {
-    return false;
-  }
-
-
-  if (
-    locationA ===
-    locationB
-  ) {
-    return false;
-  }
-
-
   const areaA =
     normalizeAreaName(
       a.area
     );
 
-
   const areaB =
     normalizeAreaName(
       b.area
     );
-
 
   if (
     areaA &&
@@ -3088,6 +3119,27 @@ function locationsClearlyDifferent(
     return true;
   }
 
+  // 좌표가 1.5km 이상 다르면 별도 행사로 보존한다.
+  // 잘못된 병합으로 독립 행사가 사라지는 것보다 중복이 안전하다.
+  if (
+    hasValidCoordinatePair(a) &&
+    hasValidCoordinatePair(b)
+  ) {
+    const distance =
+      distanceMeters(
+        Number(a.lat),
+        Number(a.lon),
+        Number(b.lat),
+        Number(b.lon)
+      );
+
+    if (
+      distance !== null &&
+      distance > 1500
+    ) {
+      return true;
+    }
+  }
 
   return false;
 }
@@ -3174,18 +3226,9 @@ function dataRichness(
 
 
   if (
-    item.lat !== null &&
-    item.lat !== undefined
+    hasValidCoordinatePair(item)
   ) {
-    score += 1;
-  }
-
-
-  if (
-    item.lon !== null &&
-    item.lon !== undefined
-  ) {
-    score += 1;
+    score += 2;
   }
 
 
@@ -3220,8 +3263,6 @@ function mergeRecords(
   const fillableFields = [
     "location",
     "area",
-    "lat",
-    "lon",
     "thumbnail",
     "detailUrl",
     "genre",
@@ -3243,6 +3284,15 @@ function mergeRecords(
       merged[field] =
         other[field];
     }
+  }
+
+  // 위도와 경도는 서로 다른 출처에서 한쪽씩 섞지 않고 한 쌍으로 병합한다.
+  if (
+    !hasValidCoordinatePair(merged) &&
+    hasValidCoordinatePair(other)
+  ) {
+    merged.lat = other.lat;
+    merged.lon = other.lon;
   }
 
   return merged;
@@ -3793,6 +3843,23 @@ async function main() {
     );
     process.exitCode = 1;
     return;
+  }
+
+  const sourceByApiKey = {
+    TOUR_API_KEY: "tourapi",
+    CULTURE_API_KEY: "culture",
+    CULTURE_PORTAL_API_KEY: "culturePortal",
+    KOPIS_API_KEY: "kopis",
+  };
+
+  // 로컬 수집에서 키가 빠진 출처는 실패가 아니라 미수집으로 표시한다.
+  // 앱은 부분 데이터임을 알리고 저장 상태를 자동 정리하지 않는다.
+  for (const [apiKeyName] of missingApiKeys) {
+    const source = sourceByApiKey[apiKeyName];
+
+    if (source) {
+      sourceStatus[source] = "skipped";
+    }
   }
 
   const [
