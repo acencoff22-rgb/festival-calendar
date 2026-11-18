@@ -25,6 +25,15 @@
 import { writeFile } from "fs/promises";
 
 
+function logSanitizedError(
+  ...values
+) {
+  console.error(
+    ...values.map(redactApiSecrets)
+  );
+}
+
+
 // ======================================================
 // 네트워크 재시도
 // ======================================================
@@ -64,8 +73,8 @@ async function fetchWithRetry(
       lastError = error;
 
       if (attempt < retries) {
-        console.error(
-          `요청 실패, 재시도 ${attempt + 1}/${retries} (${delayMs * (attempt + 1)}ms 후): ${error.message || error}`
+        logSanitizedError(
+          `요청 실패, 재시도 ${attempt + 1}/${retries} (${delayMs * (attempt + 1)}ms 후): ${redactApiSecrets(error.message || error)}`
         );
 
         await new Promise(
@@ -99,6 +108,44 @@ const CULTURE_PORTAL_API_KEY =
 
 const KOPIS_API_KEY =
   process.env.KOPIS_API_KEY || "";
+
+
+// ======================================================
+// API 인증키 로그 마스킹
+// ======================================================
+
+const API_SECRET_VALUES = [
+  TOUR_API_KEY,
+  CULTURE_API_KEY,
+  CULTURE_PORTAL_API_KEY,
+  KOPIS_API_KEY,
+].filter(Boolean);
+
+
+function redactApiSecrets(
+  value
+) {
+  let text =
+    String(value ?? "");
+
+  for (const secret of API_SECRET_VALUES) {
+    const variants = [
+      secret,
+      encodeURIComponent(secret),
+      encodeURIComponent(
+        encodeURIComponent(secret)
+      ),
+    ];
+
+    for (const variant of variants) {
+      if (variant) {
+        text = text.split(variant).join("[REDACTED]");
+      }
+    }
+  }
+
+  return text;
+}
 
 
 // ======================================================
@@ -840,7 +887,7 @@ async function fetchTourApiFestivals() {
           url
         );
     } catch (error) {
-      console.error(
+      logSanitizedError(
         "TourAPI 요청 예외:",
         error
       );
@@ -853,7 +900,7 @@ async function fetchTourApiFestivals() {
 
 
     if (!res.ok) {
-      console.error(
+      logSanitizedError(
         "TourAPI 요청 실패:",
         res.status,
         (
@@ -877,7 +924,7 @@ async function fetchTourApiFestivals() {
       json =
         await res.json();
     } catch (error) {
-      console.error(
+      logSanitizedError(
         "TourAPI JSON 파싱 실패:",
         error
       );
@@ -893,7 +940,7 @@ async function fetchTourApiFestivals() {
       json?.response?.body;
 
     if (!body) {
-      console.error(
+      logSanitizedError(
         "TourAPI 응답 형식 이상:",
         JSON.stringify(
           json
@@ -1121,7 +1168,7 @@ async function fetchCultureStandardFestivals() {
           url
         );
     } catch (error) {
-      console.error(
+      logSanitizedError(
         "문화축제 표준데이터 요청 예외:",
         error
       );
@@ -1137,7 +1184,7 @@ async function fetchCultureStandardFestivals() {
       const text =
         await res.text();
 
-      console.error(
+      logSanitizedError(
         "문화축제 표준데이터 요청 실패:",
         res.status,
         text.slice(
@@ -1159,7 +1206,7 @@ async function fetchCultureStandardFestivals() {
       json =
         await res.json();
     } catch (error) {
-      console.error(
+      logSanitizedError(
         "문화축제 표준데이터 JSON 파싱 실패:",
         error
       );
@@ -1192,7 +1239,7 @@ async function fetchCultureStandardFestivals() {
       resultCode !== "00" &&
       resultCode !== "0"
     ) {
-      console.error(
+      logSanitizedError(
         "문화축제 표준데이터 응답 오류:",
         JSON.stringify(
           json
@@ -2151,7 +2198,7 @@ async function fetchCulturePortalByServiceType(
           url
         );
     } catch (error) {
-      console.error(
+      logSanitizedError(
         `문화포털 ${serviceTp} 요청 예외:`,
         error
       );
@@ -2168,7 +2215,7 @@ async function fetchCulturePortalByServiceType(
 
 
     if (!res.ok) {
-      console.error(
+      logSanitizedError(
         `문화포털 ${serviceTp} API 요청 실패:`,
         res.status,
         xml.slice(
@@ -2197,7 +2244,7 @@ async function fetchCulturePortalByServiceType(
       resultCode !== "0" &&
       resultCode !== "200"
     ) {
-      console.error(
+      logSanitizedError(
         `문화포털 ${serviceTp} 응답 오류:`,
         resultCode,
         xml.slice(
@@ -2221,11 +2268,11 @@ async function fetchCulturePortalByServiceType(
         "해당 오픈API 서비스가 없거나 폐기됨"
       )
     ) {
-      console.error(
+      logSanitizedError(
         `문화포털 ${serviceTp}: 서비스 없음/폐기`
       );
 
-      console.error(
+      logSanitizedError(
         xml.slice(
           0,
           2000
@@ -2253,11 +2300,11 @@ async function fetchCulturePortalByServiceType(
         "LIMITED_NUMBER_OF_SERVICE_REQUESTS_EXCEEDS_ERROR"
       )
     ) {
-      console.error(
+      logSanitizedError(
         `문화포털 ${serviceTp}: 인증/호출 오류`
       );
 
-      console.error(
+      logSanitizedError(
         xml.slice(
           0,
           2000
@@ -2293,11 +2340,11 @@ async function fetchCulturePortalByServiceType(
       }
 
 
-      console.error(
+      logSanitizedError(
         `문화포털 ${serviceTp}: XML 반복 데이터 블록을 찾지 못했습니다.`
       );
 
-      console.error(
+      logSanitizedError(
         xml.slice(
           0,
           2500
@@ -2934,7 +2981,7 @@ async function fetchKopisPerformances() {
           url
         );
     } catch (error) {
-      console.error(
+      logSanitizedError(
         "KOPIS 요청 예외:",
         error
       );
@@ -2947,7 +2994,7 @@ async function fetchKopisPerformances() {
 
 
     if (!res.ok) {
-      console.error(
+      logSanitizedError(
         "KOPIS 요청 실패:",
         res.status,
         (
@@ -2974,7 +3021,7 @@ async function fetchKopisPerformances() {
         "SERVICE KEY IS NOT REGISTERED"
       )
     ) {
-      console.error(
+      logSanitizedError(
         "KOPIS 인증키가 등록되지 않았습니다."
       );
 
@@ -3970,7 +4017,7 @@ async function main() {
     process.env.GITHUB_ACTIONS === "true" &&
     missingApiKeys.length > 0
   ) {
-    console.error(
+    logSanitizedError(
       `GitHub Actions 필수 API 키 누락: ${missingApiKeys.join(", ")} → 기존 festivals.json을 유지합니다.`
     );
     process.exitCode = 1;
@@ -4016,7 +4063,7 @@ async function main() {
     .map(([source]) => source);
 
   if (failedSources.length > 0) {
-    console.error(
+    logSanitizedError(
       `데이터 소스 ${failedSources.join(', ')} 실패 → 기존 festivals.json을 유지합니다.`
     );
     process.exitCode = 1;
@@ -4063,7 +4110,7 @@ async function main() {
       );
 
   if (merged.length === 0) {
-    console.error(
+    logSanitizedError(
       "수집 및 정리 결과가 0건입니다. 기존 festivals.json을 유지합니다."
     );
     process.exitCode = 1;
@@ -4120,7 +4167,7 @@ async function main() {
 
 main().catch(
   (error) => {
-    console.error(
+    logSanitizedError(
       error
     );
 
