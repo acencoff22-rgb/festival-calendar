@@ -325,7 +325,7 @@ function hasSourceFailure(sourceStatus) {
   }
 
   return Object.values(sourceStatus).some(
-    (value) => value === false
+    (value) => value !== true
   );
 }
 
@@ -335,7 +335,7 @@ function getFailedSourceLabels(sourceStatus) {
   }
 
   return Object.entries(sourceStatus)
-    .filter(([, ok]) => ok === false)
+    .filter(([, ok]) => ok !== true)
     .map(([source]) => SOURCE_LABELS[source] || source);
 }
 
@@ -440,7 +440,7 @@ async function loadFestivalData() {
           : "일부 데이터 소스";
 
       showDataWarning(
-        `⚠️ ${failedText} 갱신에 실패해서 일부 정보가 최신이 아닐 수 있어요.`
+        `⚠️ ${failedText} 데이터를 가져오지 못해 일부 행사 정보가 빠져 있을 수 있어요.`
       );
     }
 
@@ -454,10 +454,17 @@ async function loadFestivalData() {
     // 로컬 상태를 데이터와 맞춘다.
     // --------------------------------------------------
     if (!sourceFailed) {
-      reconcileStoredState(
+      const validIds =
         festivalData.map(
           (item) => item.id
-        )
+        );
+
+      reconcileStoredState(
+        validIds
+      );
+
+      reconcileReminders(
+        validIds
       );
     }
 
