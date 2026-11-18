@@ -28,5 +28,16 @@ jobs:
           done
       - name: 수집기 자체 테스트
         run: node fetch-festivals.mjs --self-test
-      - name: 기존 데이터 구조 검증
+      - name: 현재 저장 데이터 구조 검증
+        run: node scripts/validate-data.mjs
+
+      - name: 실제 공공 API 수집 통합 검증
+        env:
+          TOUR_API_KEY: ${{ secrets.TOUR_API_KEY }}
+          CULTURE_API_KEY: ${{ secrets.CULTURE_API_KEY }}
+          KOPIS_API_KEY: ${{ secrets.KOPIS_API_KEY }}
+          TZ: Asia/Seoul
+        run: node fetch-festivals.mjs
+
+      - name: 신규 수집 결과 데이터 구조 검증
         run: node scripts/validate-data.mjs

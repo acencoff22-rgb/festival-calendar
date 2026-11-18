@@ -423,6 +423,39 @@ function kopisDateToIso(
 }
 
 
+function assertPageCompleteness(items, totalCountValue, pageNo, pageSize, sourceName) {
+  const totalCount = Number(totalCountValue);
+
+  if (
+    !Array.isArray(items) ||
+    !Number.isSafeInteger(totalCount) ||
+    totalCount < 0 ||
+    !Number.isInteger(pageNo) ||
+    pageNo < 1 ||
+    !Number.isInteger(pageSize) ||
+    pageSize < 1
+  ) {
+    throw new Error(sourceName + ": 페이지 응답의 totalCount 또는 형식이 잘못되었습니다.");
+  }
+
+  const offset = (pageNo - 1) * pageSize;
+  const expectedCount = Math.min(
+    pageSize,
+    Math.max(0, totalCount - offset)
+  );
+
+  if (items.length !== expectedCount) {
+    throw new Error(
+      sourceName + ": " + pageNo + "페이지 수집 건수 불일치 " +
+      "(예상 " + expectedCount + ", 수신 " + items.length +
+      ", 전체 " + totalCount + ")"
+    );
+  }
+
+  return totalCount;
+}
+
+
 // ======================================================
 // 기간
 // ======================================================
@@ -850,21 +883,20 @@ async function fetchTourApiFestivals() {
 
 
     const totalCount =
-      Number(
-        body.totalCount ||
-        0
+      assertPageCompleteness(
+        list,
+        body.totalCount,
+        pageNo,
+        numOfRows,
+        "TourAPI"
       );
 
-
     if (
-      list.length === 0 ||
-      pageNo *
-        numOfRows >=
-        totalCount
+      totalCount === 0 ||
+      pageNo * numOfRows >= totalCount
     ) {
       break;
     }
-
 
     pageNo += 1;
   }
@@ -1231,25 +1263,20 @@ async function fetchCultureStandardFestivals() {
 
 
     const totalCount =
-      Number(
-        body?.totalCount ||
-        0
+      assertPageCompleteness(
+        rows,
+        body?.totalCount,
+        pageNo,
+        numOfRows,
+        "전국문화축제 표준데이터"
       );
 
-
     if (
-      rows.length === 0 ||
-      rows.length < numOfRows ||
-      (
-        totalCount > 0 &&
-        pageNo *
-          numOfRows >=
-          totalCount
-      )
+      totalCount === 0 ||
+      pageNo * numOfRows >= totalCount
     ) {
       break;
     }
-
 
     pageNo += 1;
   }
@@ -1653,7 +1680,8 @@ function sourcePriority(
 
     case "culture":
       return 3;
-case "kopis":
+
+    case "kopis":
       return 1;
 
     default:
@@ -2326,6 +2354,26 @@ function runSelfTests() {
     }
   }
 
+  if (assertPageCompleteness(new Array(100).fill({}), "150", 1, 100, "테스트") !== 150) {
+    throw new Error("페이지 전체 건수 검증 실패");
+  }
+  if (assertPageCompleteness(new Array(50).fill({}), "150", 2, 100, "테스트") !== 150) {
+    throw new Error("마지막 페이지 건수 검증 실패");
+  }
+  if (assertPageCompleteness([], "0", 1, 100, "테스트") !== 0) {
+    throw new Error("빈 응답 건수 검증 실패");
+  }
+
+  let truncatedPageRejected = false;
+  try {
+    assertPageCompleteness(new Array(30).fill({}), "150", 1, 100, "테스트");
+  } catch (error) {
+    truncatedPageRejected = true;
+  }
+  if (!truncatedPageRejected) {
+    throw new Error("중간 페이지 누락 탐지 실패");
+  }
+
   const xml = "<dbs><db><mt20id>PF123</mt20id><prfnm>테스트 공연</prfnm><prfpdfrom>2026.11.01</prfpdfrom><prfpdto>2026.11.02</prfpdto><fcltynm>테스트홀</fcltynm><genrenm>복합</genrenm><area>서울</area></db></dbs>";
   const parsed = parseKopisXml(xml);
   if (parsed.length !== 1 || parsed[0].mt20id !== "PF123" || parsed[0].prfnm !== "테스트 공연") {
@@ -2404,7 +2452,7 @@ async function main() {
     if (error?.code !== "ENOENT") throw error;
   }
 
-  if (previousCount !== null && merged.length < Math.floor(previousCount * 0.7)) {
+  if (previousCount !== null && merged.length < previousCount * 0.7) {
     console.error(`기존 ${previousCount}건 대비 신규 ${merged.length}건(70% 미만) → 기존 파일 유지`);
     process.exitCode = 1;
     return;
