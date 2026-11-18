@@ -1912,9 +1912,11 @@ function handleCardClick(e) {
     if (f) {
 
       const posterSrc =
-        f.thumbnail ||
-        f.image ||
-        "";
+        normalizeImageUrl(
+          f.thumbnail ||
+            f.image ||
+            ""
+        );
 
       if (posterSrc) {
         openPosterView(
