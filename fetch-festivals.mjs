@@ -17,7 +17,8 @@
  *   CULTURE_PORTAL_API_KEY
  *   KOPIS_API_KEY
  *
- * 필수 API 키가 하나라도 없으면 기존 데이터를 보호하기 위해 갱신을 중단합니다.
+ * GitHub Actions에서 필수 API 키가 하나라도 없으면 갱신을 중단합니다.
+ * 로컬 실행 시에는 API 키가 없는 소스만 건너뜁니다.
  */
 
 
