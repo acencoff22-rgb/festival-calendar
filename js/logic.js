@@ -550,62 +550,6 @@ function eventLink(
 
 
 // ------------------------------------------------------
-// 검색어 하이라이트
-// ------------------------------------------------------
-
-function highlightMatch(
-  text,
-  query
-) {
-  if (
-    !text ||
-    !query
-  ) {
-    return text;
-  }
-
-  const normalizedText =
-    String(text);
-
-  const normalizedQuery =
-    String(query).trim();
-
-  if (!normalizedQuery) {
-    return normalizedText;
-  }
-
-  const idx =
-    normalizedText
-      .toLowerCase()
-      .indexOf(
-        normalizedQuery.toLowerCase()
-      );
-
-  if (idx === -1) {
-    return normalizedText;
-  }
-
-  return (
-    normalizedText.slice(
-      0,
-      idx
-    ) +
-    "<mark>" +
-    normalizedText.slice(
-      idx,
-      idx +
-        normalizedQuery.length
-    ) +
-    "</mark>" +
-    normalizedText.slice(
-      idx +
-        normalizedQuery.length
-    )
-  );
-}
-
-
-// ------------------------------------------------------
 // 검색 대상 텍스트
 //
 // 검색 대상
