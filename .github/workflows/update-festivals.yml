@@ -34,6 +34,7 @@ jobs:
 
       - name: 축제 데이터 가져오기
         env:
+          TZ: Asia/Seoul
           TOUR_API_KEY: ${{ secrets.TOUR_API_KEY }}
           CULTURE_API_KEY: ${{ secrets.CULTURE_API_KEY }}
           CULTURE_PORTAL_API_KEY: ${{ secrets.CULTURE_PORTAL_API_KEY }}
