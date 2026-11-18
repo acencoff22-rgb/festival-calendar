@@ -59,11 +59,6 @@ const KAKAO_JS_KEY =
 let allFestivals = [];
 
 /*
- * 인기 행사 ID
- */
-let hotIds = new Set();
-
-/*
  * 숨긴 행사 ID
  */
 let hiddenIds = new Set();

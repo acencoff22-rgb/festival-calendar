@@ -1,0 +1,32 @@
+name: Validate Festival Project
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+      - name: JavaScript 문법 검사
+        run: |
+          node --check fetch-festivals.mjs
+          node --check scripts/validate-data.mjs
+          for file in js/*.js; do
+            node --check "$file"
+          done
+      - name: 수집기 자체 테스트
+        run: node fetch-festivals.mjs --self-test
+      - name: 기존 데이터 구조 검증
+        run: node scripts/validate-data.mjs

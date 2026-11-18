@@ -2,24 +2,22 @@
 
 전국의 축제·공연 정보를 검색하고 날짜·지역·행사 유형으로 탐색할 수 있는 정적 웹앱입니다.
 
-## 프로젝트 구조
+## 데이터 출처
 
-```text
-festival-calendar/
-├─ index.html
-├─ festivals.json
-├─ fetch-festivals.mjs
-├─ README.md
-├─ js/
-│  ├─ state.js
-│  ├─ storage.js
-│  ├─ logic.js
-│  ├─ render.js
-│  ├─ actions.js
-│  ├─ ui.js
-│  ├─ data.js
-│  ├─ app.js
-│  └─ main.js
-└─ .github/
-   └─ workflows/
-      └─ update-festivals.yml
+- 한국관광공사 TourAPI
+- 전국문화축제 표준데이터
+- 공연예술통합전산망(KOPIS)
+
+문화포털 API와 네이버 검색 API는 자동 수집에 사용하지 않습니다. KOPIS는 공식 조회 기간 제한을 지키도록 최대 31일 단위로 나눠 조회합니다.
+
+## GitHub Actions API 키
+
+저장소의 **Settings → Secrets and variables → Actions**에 다음 Repository Secret을 등록해야 합니다.
+
+- `TOUR_API_KEY`
+- `CULTURE_API_KEY`
+- `KOPIS_API_KEY`
+
+세 키 중 하나라도 없거나, 세 소스 중 하나라도 요청·응답 검증에 실패하거나, 한 소스의 수집 결과가 0건이면 갱신을 실패 처리합니다. 신규 수집 결과가 기존 데이터의 70% 미만이면 일부 API 응답 누락 가능성으로 판단해 갱신을 중단합니다. 이 경우 기존 `festivals.json`은 덮어쓰지 않습니다.
+
+모든 검증을 통과한 경우에만 임시 파일을 생성한 뒤 원본 데이터와 교체합니다. 이전 데이터의 문화포털 항목은 다음 정상 갱신 전까지만 '이전 저장 데이터'로 표시됩니다.

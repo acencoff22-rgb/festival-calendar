@@ -6,9 +6,8 @@
 const SOURCE_LABELS = {
   tourapi: "지역축제(TourAPI)",
   culture: "문화축제 표준데이터",
-  culturePortal: "문화포털",
+  culturePortal: "이전 저장 데이터",
   kopis: "공연(KOPIS)",
-  mentions: "인기도(언급량)",
 };
 
 let festivalData = [];

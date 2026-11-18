@@ -1,27 +1,11 @@
 /**
- * 전국 축제 + 공연 정보를 여러 공공 데이터 API에서 가져와
- * 하나의 festivals.json으로 합칩니다.
- *
- * 데이터 출처
- * 1) 한국관광공사 TourAPI
- * 2) 전국문화축제 표준데이터
- * 3) 한국문화정보원 한눈에보는문화정보조회서비스
- * 4) KOPIS 공연예술통합전산망
- *
- * 실행:
- *   node fetch-festivals.mjs
- *
- * 필요 환경변수:
- *   TOUR_API_KEY
- *   CULTURE_API_KEY
- *   CULTURE_PORTAL_API_KEY
- *   KOPIS_API_KEY
- *
- * API 키가 없는 소스는 건너뜁니다.
+ * 전국 축제·공연 데이터를 TourAPI, 전국문화축제 표준데이터, KOPIS에서 수집합니다.
+ * 일부 소스 실패 또는 0건 수집 시 기존 festivals.json을 유지합니다.
+ * 실행: node fetch-festivals.mjs
+ * 자체 테스트: node fetch-festivals.mjs --self-test
+ * 필수 키: TOUR_API_KEY, CULTURE_API_KEY, KOPIS_API_KEY
  */
-
-
-import { writeFile } from "fs/promises";
+import { readFile, writeFile, rename } from "fs/promises";
 
 
 // ======================================================
@@ -35,72 +19,54 @@ import { writeFile } from "fs/promises";
 
 async function fetchWithRetry(
   url,
-  {
-    retries = 2,
-    delayMs = 1500,
-  } = {}
+  { retries = 2, delayMs = 1500 } = {}
 ) {
+  const retryableStatuses = new Set([408, 425, 429, 500, 502, 503, 504]);
   let lastError;
 
-  for (
-    let attempt = 0;
-    attempt <= retries;
-    attempt += 1
-  ) {
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
     try {
-      return await fetch(
-        url
-      );
+      const response = await fetch(url);
+      if (response.ok || !retryableStatuses.has(response.status) || attempt === retries) {
+        return response;
+      }
+      lastError = new Error(`HTTP ${response.status}`);
     } catch (error) {
       lastError = error;
+    }
 
-      if (attempt < retries) {
-        console.error(
-          `요청 실패, 재시도 ${attempt + 1}/${retries} (${delayMs * (attempt + 1)}ms 후): ${error.message || error}`
-        );
-
-        await new Promise(
-          (resolve) =>
-            setTimeout(
-              resolve,
-              delayMs *
-                (attempt + 1)
-            )
-        );
-      }
+    if (attempt < retries) {
+      const waitMs = delayMs * (attempt + 1);
+      console.error(`요청 실패(${lastError?.message || lastError}), 재시도 ${attempt + 1}/${retries} (${waitMs}ms 후)`);
+      await new Promise((resolve) => setTimeout(resolve, waitMs));
     }
   }
-
-  throw lastError;
+  throw lastError || new Error("API 요청 실패");
 }
 
 
 // ======================================================
 // 환경변수
-// ======================================================
+function normalizeApiKey(value) {
+  const key = String(value || "").trim();
+  if (/%[0-9a-f]{2}/i.test(key)) {
+    try { return decodeURIComponent(key); }
+    catch (error) { console.warn("API 키 URL 디코딩 실패: 원문을 사용합니다."); }
+  }
+  return key;
+}
 
-const TOUR_API_KEY =
-  process.env.TOUR_API_KEY || "";
-
-const CULTURE_API_KEY =
-  process.env.CULTURE_API_KEY || "";
-
-const CULTURE_PORTAL_API_KEY =
-  process.env.CULTURE_PORTAL_API_KEY || "";
-
-const KOPIS_API_KEY =
-  process.env.KOPIS_API_KEY || "";
+const TOUR_API_KEY = normalizeApiKey(process.env.TOUR_API_KEY);
+const CULTURE_API_KEY = normalizeApiKey(process.env.CULTURE_API_KEY);
+const KOPIS_API_KEY = normalizeApiKey(process.env.KOPIS_API_KEY);
 
 
-// ======================================================
-// 소스 상태
 // ======================================================
 
 const sourceStatus = {
-  tourapi: true,
-  culture: true,
-  culturePortal: true,
-  kopis: true,
+  tourapi: false,
+  culture: false,
+  kopis: false,
 };
 
 
@@ -118,12 +84,6 @@ const CULTURE_BASE =
   "https://api.data.go.kr/openapi/tn_pubr_public_cltur_fstvl_api";
 
 
-// 한국문화정보원
-// 한눈에보는문화정보조회서비스
-const CULTURE_PORTAL_BASE =
-  "https://apis.data.go.kr/B553457/cultureinfo";
-
-
 // KOPIS
 const KOPIS_BASE =
   "https://www.kopis.or.kr/openApi/restful/pblprfr";
@@ -134,8 +94,6 @@ const KOPIS_BASE =
 // ======================================================
 
 const KOPIS_MONTHS_AHEAD = 3;
-
-const CULTURE_PORTAL_MONTHS_AHEAD = 3;
 
 
 // ======================================================
@@ -613,69 +571,10 @@ function xmlField(
 }
 
 
-function extractXmlBlocks(
-  xml
-) {
-  const patterns = [
-    /<item\b[^>]*>[\s\S]*?<\/item>/gi,
-    /<db\b[^>]*>[\s\S]*?<\/db>/gi,
-    /<perfor\b[^>]*>[\s\S]*?<\/perfor>/gi,
-  ];
-
-  for (
-    const pattern of patterns
-  ) {
-    const blocks =
-      xml.match(pattern);
-
-    if (
-      blocks &&
-      blocks.length > 0
-    ) {
-      return blocks;
-    }
-  }
-
-  return [];
-}
 
 
-function xmlResultCode(
-  xml
-) {
-  const code =
-    xmlField(
-      xml,
-      [
-        "resultCode",
-      ]
-    );
-
-  return (
-    String(code || "")
-      .trim()
-  );
-}
 
 
-function xmlTotalCount(
-  xml
-) {
-  const value =
-    xmlField(
-      xml,
-      [
-        "totalCount",
-      ]
-    );
-
-  const count =
-    Number(value);
-
-  return Number.isFinite(count)
-    ? count
-    : 0;
-}
 
 
 // ======================================================
@@ -696,6 +595,9 @@ async function fetchTourApiFestivals() {
   let pageNo = 1;
 
   const numOfRows = 100;
+  const todayIso = ymdToIso(todayYYYYMMDD());
+  const lookbackStart = new Date();
+  lookbackStart.setDate(lookbackStart.getDate() - 90);
 
 
   while (true) {
@@ -731,7 +633,7 @@ async function fetchTourApiFestivals() {
 
     url.searchParams.set(
       "eventStartDate",
-      todayYYYYMMDD()
+      dateToYYYYMMDD(lookbackStart)
     );
 
     url.searchParams.set(
@@ -802,6 +704,18 @@ async function fetchTourApiFestivals() {
     }
 
 
+    const resultCode = String(
+      json?.response?.header?.resultCode ?? ""
+    ).trim();
+
+    if (!["0000", "00", "0"].includes(resultCode)) {
+      console.error("TourAPI 응답 코드 오류:", resultCode || "(코드 없음)", JSON.stringify(json).slice(0, 1500));
+      sourceStatus.tourapi = false;
+      break;
+    }
+
+    sourceStatus.tourapi = true;
+
     const body =
       json?.response?.body;
 
@@ -859,14 +773,14 @@ async function fetchTourApiFestivals() {
 
 
       if (
-        isOver90Days(
-          start,
-          end
-        )
+        isOver90Days(start, end)
       ) {
         continue;
       }
 
+      if ((end && end < todayIso) || (!end && start < todayIso)) {
+        continue;
+      }
 
       results.push({
         source:
@@ -1081,10 +995,7 @@ async function fetchCultureStandardFestivals() {
 
 
     const resultCode =
-      String(
-        header.resultCode ??
-        "00"
-      );
+      String(header.resultCode ?? "").trim();
 
 
     if (
@@ -1107,6 +1018,8 @@ async function fetchCultureStandardFestivals() {
       break;
     }
 
+
+    sourceStatus.culture = true;
 
     const body =
       response?.body ||
@@ -1351,1210 +1264,7 @@ async function fetchCultureStandardFestivals() {
 
 
 // ======================================================
-// 3. 문화포털
-//
-// serviceTp:
-//   A = 공연/전시
-//   B = 행사/축제
-//   C = 교육/체험
-//
-// 정책:
-//
-// A = 공연/전시
-//   - 공연 유지
-//   - 콘서트 유지
-//   - 뮤지컬 유지
-//   - 단, 뮤지컬은 대공연장 중심으로 제한
-//   - 연극 제외
-//   - 전시/기획전/특별전/상설전 제외
-//   - 명확한 전시성 항목만 제외
-//
-// B = 행사/축제
-//   - 축제/지역행사/계절행사/페스티벌 유지
-//   - 불꽃놀이/하나비 등 유지
-//   - 교육/체험/강좌/강연/세미나/워크숍 제외
-//   - 전시 제외
-//   - 연극/연극제 제외
-//   - 단순 상설 프로그램 제외
-//
-// C = 사용하지 않음
-// ======================================================
-
-
-// ======================================================
-// 문화포털 전시 제외 키워드
-// ======================================================
-//
-// A와 B에는 다양한 문화행사가 섞일 수 있으므로
-// 명확한 전시성 항목만 제거합니다.
-//
-// "사진", "미술"처럼 단독으로 넓게 쓰이는 단어를
-// realmName만 보고 전시로 판정하지 않습니다.
-// 대신 제목의 명확한 전시 표현은 계속 제외합니다.
-// ======================================================
-
-const EXCLUDED_CULTURE_PORTAL_EXHIBITION_KEYWORDS = [
-  "전시회",
-  "전시",
-  "기획전",
-  "특별전",
-  "상설전",
-  "미디어전",
-  "展",
-  "미술전",
-  "미술전시",
-  "미술전람회",
-  "사진전",
-  "사진전시",
-  "회화전",
-  "조각전",
-  "작품전",
-  "개인전",
-  "초대전",
-  "기념전",
-  "아트페어",
-];
-
-
-// ======================================================
-// 문화포털 교육/체험 등 제외 키워드
-// ======================================================
-
-const EXCLUDED_CULTURE_PORTAL_PROGRAM_KEYWORDS = [
-  // 교육
-  "교육",
-  "교육프로그램",
-  "문화교육",
-  "문화예술교육",
-
-  // 체험
-  "체험",
-  "체험프로그램",
-  "체험행사",
-
-  // 강좌
-  "강좌",
-  "문화강좌",
-  "예술강좌",
-
-  // 강연 / 세미나
-  "강연",
-  "강연회",
-  "세미나",
-  "포럼",
-  "심포지엄",
-
-  // 워크숍
-  "워크숍",
-  "워크샵",
-
-  // 단순 시설 프로그램
-  "상설프로그램",
-  "상설문화",
-];
-
-
-// ======================================================
-// 문화포털 연극 제외 키워드
-// ======================================================
-
-const EXCLUDED_CULTURE_PORTAL_THEATER_KEYWORDS = [
-  "연극",
-  "연극공연",
-  "연극제",
-];
-
-
-// ======================================================
-// 문화포털 뮤지컬 판별 키워드
-// ======================================================
-
-const MUSICAL_KEYWORDS = [
-  "뮤지컬",
-  "musical",
-];
-
-
-// ======================================================
-// 문화포털 공연 판별 키워드
-// ======================================================
-//
-// 공연이라는 단어가 없는 공연도 존재할 수 있으므로
-// 이 목록은 "공연 여부"를 강제하는 용도가 아니라
-// 장르 판별 보조용으로만 사용합니다.
-// ======================================================
-
-const PERFORMANCE_KEYWORDS = [
-  "공연",
-  "콘서트",
-  "음악회",
-  "페스티벌",
-  "페스티발",
-  "라이브",
-  "뮤지컬",
-  "musical",
-];
-
-
-// ======================================================
-// 문화포털 뮤지컬 공연장 화이트리스트
-// ======================================================
-//
-// KOPIS에서 사용하던 기준을 동일하게 적용합니다.
-// ======================================================
-
-const CULTURE_PORTAL_MUSICAL_VENUE_WHITELIST = [
-  "정동극장",
-  "디큐브아트센터",
-  "두산연강홀",
-  "충무아트센터",
-  "상상마당",
-  "우란문화재단",
-  "우란2경",
-  "LG아트센터",
-  "명동예술극장",
-  "신도림",
-  "을지로입구",
-  "샤롯데씨어터",
-  "신한카드FAN스퀘어홀",
-  "신한카드 FAN스퀘어홀",
-  "예술의전당",
-  "이해랑예술극장",
-  "광림아트센터",
-  "국립중앙박물관 극장 용",
-  "세종문화회관",
-  "유니버설아트센터",
-  "블루스퀘어",
-  "성남아트센터",
-
-  "GS아트센터",
-  "코엑스",
-  "신한카드 아티움",
-  "한전아트센터",
-  "홍대대학로아트센터",
-  "홍익대 대학로아트센터",
-  "홍익대학교 대학로아트센터",
-  "대학로아트센터",
-  "NOL씨어터",
-
-  "LG아트센터 서울",
-
-  "충무아트센터 대극장",
-  "국립극장",
-  "예스24라이브홀",
-  "예스24 라이브홀",
-  "고양아람누리",
-  "경기아트센터",
-  "수원SK아트리움",
-  "부천아트센터",
-  "강릉아트센터",
-  "춘천문화예술회관",
-  "원주치악예술관",
-  "부산문화회관",
-  "소향씨어터",
-  "드림씨어터",
-  "경남문화예술회관",
-  "성산아트홀",
-  "대구콘서트하우스",
-  "대구오페라하우스",
-  "계명아트센터",
-  "광주문화예술회관",
-  "김대중컨벤션센터",
-  "대전예술의전당",
-  "청주아트홀",
-  "제주아트센터",
-];
-
-
-function isVenueWhitelisted(
-  location
-) {
-  if (!location) {
-    return false;
-  }
-
-  return CULTURE_PORTAL_MUSICAL_VENUE_WHITELIST.some(
-    (name) =>
-      location.includes(
-        name
-      )
-  );
-}
-
-
-// ======================================================
-// 문화포털 전시 여부
-// ======================================================
-//
-// 중요한 수정:
-// realmName에 단순히 "사진"이나 "미술"이 포함된다고
-// 전시로 보지 않습니다.
-//
-// 대신:
-// 1) realmName에 명확하게 "전시"가 포함되거나
-// 2) 제목에 명확한 전시 키워드가 있을 때만 제외합니다.
-// ======================================================
-
-function isCulturePortalExhibition(
-  title,
-  realmName
-) {
-  const titleText =
-    normalizeText(
-      title
-    );
-
-  const realmText =
-    normalizeText(
-      realmName
-    );
-
-
-  // 분야명이 명확하게 전시인 경우
-  if (
-    realmText.includes("전시")
-  ) {
-    return true;
-  }
-
-
-  // 제목에 명확한 전시 키워드가 있는 경우
-  return EXCLUDED_CULTURE_PORTAL_EXHIBITION_KEYWORDS.some(
-    (keyword) =>
-      titleText.includes(
-        normalizeText(
-          keyword
-        )
-      )
-  );
-}
-
-
-// ======================================================
-// 문화포털 연극 여부
-// ======================================================
-
-function isCulturePortalTheater(
-  title,
-  realmName
-) {
-  const titleText =
-    normalizeText(
-      title
-    );
-
-  const realmText =
-    normalizeText(
-      realmName
-    );
-
-
-  return EXCLUDED_CULTURE_PORTAL_THEATER_KEYWORDS.some(
-    (keyword) =>
-      titleText.includes(
-        normalizeText(
-          keyword
-        )
-      ) ||
-      realmText.includes(
-        normalizeText(
-          keyword
-        )
-      )
-  );
-}
-
-
-// ======================================================
-// 문화포털 뮤지컬 여부
-// ======================================================
-
-function isCulturePortalMusical(
-  title,
-  realmName
-) {
-  const titleText =
-    normalizeText(
-      title
-    );
-
-  const realmText =
-    normalizeText(
-      realmName
-    );
-
-
-  return MUSICAL_KEYWORDS.some(
-    (keyword) =>
-      titleText.includes(
-        normalizeText(
-          keyword
-        )
-      ) ||
-      realmText.includes(
-        normalizeText(
-          keyword
-        )
-      )
-  );
-}
-
-
-// ======================================================
-// 문화포털 프로그램 제외 여부
-// ======================================================
-
-function isCulturePortalProgramExcluded(
-  title,
-  realmName
-) {
-  const text =
-    normalizeText(
-      `${title || ""} ${realmName || ""}`
-    );
-
-
-  if (!text) {
-    return false;
-  }
-
-
-  return EXCLUDED_CULTURE_PORTAL_PROGRAM_KEYWORDS.some(
-    (keyword) =>
-      text.includes(
-        normalizeText(
-          keyword
-        )
-      )
-  );
-}
-
-
-// ======================================================
-// 문화포털 공연 여부
-// ======================================================
-
-function isCulturePortalPerformance(
-  title,
-  realmName
-) {
-  const titleText =
-    normalizeText(
-      title
-    );
-
-  const realmText =
-    normalizeText(
-      realmName
-    );
-
-
-  return PERFORMANCE_KEYWORDS.some(
-    (keyword) =>
-      titleText.includes(
-        normalizeText(
-          keyword
-        )
-      ) ||
-      realmText.includes(
-        normalizeText(
-          keyword
-        )
-      )
-  );
-}
-
-
-// ======================================================
-// 문화포털 A 필터
-// ======================================================
-//
-// A = 공연/전시
-//
-// 전시를 제거하고 공연을 유지합니다.
-//
-// 중요한 점:
-// "공연"이라는 단어가 제목에 반드시 들어가야 하는
-// 것은 아닙니다.
-//
-// 따라서 명확한 제외 대상만 제거하고,
-// 나머지는 보수적으로 유지합니다.
-// 단, 뮤지컬은 별도의 공연장 필터를 적용합니다.
-// ======================================================
-
-function shouldKeepCulturePortalA(
-  title,
-  realmName,
-  location
-) {
-  // 1. 명확한 전시는 제외
-  if (
-    isCulturePortalExhibition(
-      title,
-      realmName
-    )
-  ) {
-    return false;
-  }
-
-
-  // 2. 연극은 기존 정책대로 제외
-  if (
-    isCulturePortalTheater(
-      title,
-      realmName
-    )
-  ) {
-    return false;
-  }
-
-
-  // 3. 교육/체험/강좌 등은 제외
-  if (
-    isCulturePortalProgramExcluded(
-      title,
-      realmName
-    )
-  ) {
-    return false;
-  }
-
-
-  // 4. 뮤지컬은 대공연장 중심으로 제한
-  if (
-    isCulturePortalMusical(
-      title,
-      realmName
-    )
-  ) {
-    return isVenueWhitelisted(
-      location
-    );
-  }
-
-
-  // 5. 명확한 공연/콘서트 등은 유지
-  if (
-    isCulturePortalPerformance(
-      title,
-      realmName
-    )
-  ) {
-    return true;
-  }
-
-
-  // 6. A 안에서 위 조건에 해당하지 않는 항목은
-  // 전시로 명확히 판정되지 않았다면 유지합니다.
-  //
-  // A의 데이터 자체가 "공연/전시"로 제한되어 있으므로
-  // 여기서 지나치게 엄격한 positive 필터를 걸면
-  // 정상적인 공연까지 사라질 수 있습니다.
-  return true;
-}
-
-
-// ======================================================
-// 문화포털 B 필터
-// ======================================================
-//
-// B = 행사/축제
-//
-// 관광성이 낮은 교육/체험/강좌/강연/전시 등을
-// 제거하고 일반적인 행사/축제는 유지합니다.
-//
-// 연극은 프로젝트 정책상 제외하므로
-// "연극/연극제"도 제거합니다.
-//
-// 반대로 불꽃놀이/하나비/지역축제/계절행사 등은
-// 별도의 positive 키워드가 없어도 B의 행사 영역이라는
-// 전제하에 보수적으로 유지합니다.
-// ======================================================
-
-function shouldKeepCulturePortalB(
-  title,
-  realmName
-) {
-  // 1. 명확한 전시는 제외
-  if (
-    isCulturePortalExhibition(
-      title,
-      realmName
-    )
-  ) {
-    return false;
-  }
-
-
-  // 2. 교육/체험/강좌/강연/세미나 등 제외
-  if (
-    isCulturePortalProgramExcluded(
-      title,
-      realmName
-    )
-  ) {
-    return false;
-  }
-
-
-  // 3. 연극/연극제 제외
-  if (
-    isCulturePortalTheater(
-      title,
-      realmName
-    )
-  ) {
-    return false;
-  }
-
-
-  // 4. 나머지 B 항목은 행사/축제 영역으로 보고 유지
-  return true;
-}
-
-
-// ======================================================
-// 문화포털 serviceTp별 필터
-// ======================================================
-
-function shouldKeepCulturePortalItem(
-  serviceTp,
-  title,
-  realmName,
-  location
-) {
-  if (
-    serviceTp === "A"
-  ) {
-    return shouldKeepCulturePortalA(
-      title,
-      realmName,
-      location
-    );
-  }
-
-
-  if (
-    serviceTp === "B"
-  ) {
-    return shouldKeepCulturePortalB(
-      title,
-      realmName
-    );
-  }
-
-
-  // C는 호출하지 않지만 안전상 제외
-  return false;
-}
-
-
-// ======================================================
-// 문화포털 수집
-// ======================================================
-
-async function fetchCulturePortalByServiceType(
-  serviceTp
-) {
-  const results = [];
-
-  let pageNo = 1;
-
-  const numOfRows =
-    100;
-
-
-  const fromDate =
-    dateToYYYYMMDD(
-      new Date()
-    );
-
-
-  const toDate =
-    dateToYYYYMMDD(
-      addMonths(
-        new Date(),
-        CULTURE_PORTAL_MONTHS_AHEAD
-      )
-    );
-
-
-  while (true) {
-    const url =
-      new URL(
-        `${CULTURE_PORTAL_BASE}/period2`
-      );
-
-
-    // 공식 파라미터
-    url.searchParams.set(
-      "serviceKey",
-      CULTURE_PORTAL_API_KEY
-    );
-
-    url.searchParams.set(
-      "PageNo",
-      String(pageNo)
-    );
-
-    url.searchParams.set(
-      "numOfrows",
-      String(numOfRows)
-    );
-
-    url.searchParams.set(
-      "keyword",
-      ""
-    );
-
-    url.searchParams.set(
-      "gpsxfrom",
-      ""
-    );
-
-    url.searchParams.set(
-      "gpsyfrom",
-      ""
-    );
-
-    url.searchParams.set(
-      "gpsxto",
-      ""
-    );
-
-    url.searchParams.set(
-      "gpsyto",
-      ""
-    );
-
-    url.searchParams.set(
-      "serviceTp",
-      serviceTp
-    );
-
-    url.searchParams.set(
-      "from",
-      fromDate
-    );
-
-    url.searchParams.set(
-      "to",
-      toDate
-    );
-
-
-    let res;
-
-    try {
-      res =
-        await fetchWithRetry(
-          url
-        );
-    } catch (error) {
-      console.error(
-        `문화포털 ${serviceTp} 요청 예외:`,
-        error
-      );
-
-      sourceStatus.culturePortal =
-        false;
-
-      break;
-    }
-
-
-    const xml =
-      await res.text();
-
-
-    if (!res.ok) {
-      console.error(
-        `문화포털 ${serviceTp} API 요청 실패:`,
-        res.status,
-        xml.slice(
-          0,
-          2000
-        )
-      );
-
-      sourceStatus.culturePortal =
-        false;
-
-      break;
-    }
-
-
-    // API 자체 오류 응답 처리
-    const resultCode =
-      xmlResultCode(
-        xml
-      );
-
-
-    if (
-      resultCode &&
-      resultCode !== "00" &&
-      resultCode !== "0" &&
-      resultCode !== "200"
-    ) {
-      console.error(
-        `문화포털 ${serviceTp} 응답 오류:`,
-        resultCode,
-        xml.slice(
-          0,
-          2000
-        )
-      );
-
-      sourceStatus.culturePortal =
-        false;
-
-      break;
-    }
-
-
-    if (
-      xml.includes(
-        "NO_OPENAPI_SERVICE_ERROR"
-      ) ||
-      xml.includes(
-        "해당 오픈API 서비스가 없거나 폐기됨"
-      )
-    ) {
-      console.error(
-        `문화포털 ${serviceTp}: 서비스 없음/폐기`
-      );
-
-      console.error(
-        xml.slice(
-          0,
-          2000
-        )
-      );
-
-      sourceStatus.culturePortal =
-        false;
-
-      break;
-    }
-
-
-    if (
-      xml.includes(
-        "SERVICE_KEY_IS_NOT_REGISTERED_ERROR"
-      ) ||
-      xml.includes(
-        "SERVICE_ACCESS_DENIED_ERROR"
-      ) ||
-      xml.includes(
-        "DEADLINE_HAS_EXPIRED_ERROR"
-      ) ||
-      xml.includes(
-        "LIMITED_NUMBER_OF_SERVICE_REQUESTS_EXCEEDS_ERROR"
-      )
-    ) {
-      console.error(
-        `문화포털 ${serviceTp}: 인증/호출 오류`
-      );
-
-      console.error(
-        xml.slice(
-          0,
-          2000
-        )
-      );
-
-      sourceStatus.culturePortal =
-        false;
-
-      break;
-    }
-
-
-    const blocks =
-      extractXmlBlocks(
-        xml
-      );
-
-
-    if (
-      blocks.length === 0
-    ) {
-      const totalCount =
-        xmlTotalCount(
-          xml
-        );
-
-
-      if (
-        totalCount === 0
-      ) {
-        break;
-      }
-
-
-      console.error(
-        `문화포털 ${serviceTp}: XML 반복 데이터 블록을 찾지 못했습니다.`
-      );
-
-      console.error(
-        xml.slice(
-          0,
-          2500
-        )
-      );
-
-      sourceStatus.culturePortal =
-        false;
-
-      break;
-    }
-
-
-    let pageItemCount = 0;
-
-    let filteredCount = 0;
-
-
-    for (
-      const block of blocks
-    ) {
-      const seq =
-        xmlField(
-          block,
-          [
-            "seq",
-            "SEQ",
-          ]
-        );
-
-
-      const title =
-        xmlField(
-          block,
-          [
-            "title",
-            "TITLE",
-          ]
-        );
-
-
-      const startRaw =
-        xmlField(
-          block,
-          [
-            "startDate",
-          ]
-        );
-
-
-      const endRaw =
-        xmlField(
-          block,
-          [
-            "endDate",
-          ]
-        );
-
-
-      const location =
-        xmlField(
-          block,
-          [
-            "place",
-          ]
-        );
-
-
-      const realmName =
-        xmlField(
-          block,
-          [
-            "realmName",
-          ]
-        );
-
-
-      const areaRaw =
-        xmlField(
-          block,
-          [
-            "area",
-          ]
-        );
-
-
-      const sigungu =
-        xmlField(
-          block,
-          [
-            "sigungu",
-          ]
-        );
-
-
-      const thumbnail =
-        xmlField(
-          block,
-          [
-            "thumbnail",
-          ]
-        );
-
-
-      const latRaw =
-        xmlField(
-          block,
-          [
-            "gpsY",
-          ]
-        );
-
-
-      const lonRaw =
-        xmlField(
-          block,
-          [
-            "gpsX",
-          ]
-        );
-
-
-      const start =
-        ymdToIso(
-          startRaw
-        );
-
-
-      const end =
-        ymdToIso(
-          endRaw
-        );
-
-
-      if (
-        !title ||
-        !start
-      ) {
-        continue;
-      }
-
-
-      if (
-        isOver90Days(
-          start,
-          end
-        )
-      ) {
-        continue;
-      }
-
-
-      // --------------------------------------------------
-      // serviceTp별 관광성 필터
-      // --------------------------------------------------
-
-      if (
-        !shouldKeepCulturePortalItem(
-          serviceTp,
-          title,
-          realmName,
-          location
-        )
-      ) {
-        filteredCount += 1;
-
-        continue;
-      }
-
-
-      const lat =
-        latRaw !== "" &&
-        !Number.isNaN(
-          Number(
-            latRaw
-          )
-        )
-          ? Number(
-              latRaw
-            )
-          : null;
-
-
-      const lon =
-        lonRaw !== "" &&
-        !Number.isNaN(
-          Number(
-            lonRaw
-          )
-        )
-          ? Number(
-              lonRaw
-            )
-          : null;
-
-
-      // A = 공연/전시 → 공연만 유지
-      // B = 행사/축제 → 축제로 저장
-      const type =
-        serviceTp === "A"
-          ? "performance"
-          : "festival";
-
-
-      const finalArea =
-        areaRaw ||
-        sigungu ||
-        "";
-
-
-      results.push({
-        source:
-          "culturePortal",
-
-        type,
-
-        id:
-          seq
-            ? `culture-portal-${serviceTp}-${seq}`
-            : (
-                `culture-portal-` +
-                `${serviceTp}-` +
-                `${normalizeTitle(title)}-` +
-                `${start}`
-              ),
-
-        title,
-
-        startDate:
-          start,
-
-        endDate:
-          end,
-
-        location:
-          location ||
-          "",
-
-        area:
-          normalizeAreaName(
-            finalArea
-          ),
-
-        lat,
-
-        lon,
-
-        thumbnail:
-          thumbnail ||
-          null,
-
-        detailUrl:
-          null,
-
-        genre:
-          realmName ||
-          null,
-      });
-
-
-      pageItemCount += 1;
-    }
-
-
-    console.log(
-      `문화포털 ${serviceTp} ${pageNo}페이지 처리: ` +
-      `${pageItemCount}건 유지, ` +
-      `${filteredCount}건 제외`
-    );
-
-
-    const totalCount =
-      xmlTotalCount(
-        xml
-      );
-
-
-    if (
-      blocks.length === 0 ||
-      blocks.length < numOfRows ||
-      (
-        totalCount > 0 &&
-        pageNo *
-          numOfRows >=
-          totalCount
-      )
-    ) {
-      break;
-    }
-
-
-    pageNo += 1;
-  }
-
-
-  return results;
-}
-
-
-// ======================================================
-// 문화포털 공연 + 행사/축제 수집
-// ======================================================
-
-async function fetchCulturePortalPerformances() {
-  if (!CULTURE_PORTAL_API_KEY) {
-    console.log(
-      "CULTURE_PORTAL_API_KEY 없음 → 문화포털 건너뜀"
-    );
-
-    return [];
-  }
-
-
-  // ----------------------------------------------------
-  // A = 공연/전시
-  //
-  // 전시를 제거하고 공연을 유지합니다.
-  // 뮤지컬은 대공연장 화이트리스트 적용.
-  // ----------------------------------------------------
-
-  const performances =
-    await fetchCulturePortalByServiceType(
-      "A"
-    );
-
-
-  // ----------------------------------------------------
-  // B = 행사/축제
-  //
-  // 축제/지역행사 등을 유지하고
-  // 교육/체험/강좌/강연/연극 등은 제거합니다.
-  // ----------------------------------------------------
-
-  const festivals =
-    await fetchCulturePortalByServiceType(
-      "B"
-    );
-
-
-  const results = [
-    ...performances,
-    ...festivals,
-  ];
-
-
-  console.log(
-    `문화포털에서 공연 ${performances.length}건, ` +
-    `행사/축제 ${festivals.length}건 수집`
-  );
-
-
-  return results;
-}
-
-
-// ======================================================
-// 4. KOPIS XML 파싱
+// 3. KOPIS XML 파싱
 // ======================================================
 
 function parseKopisXml(
@@ -2756,269 +1466,113 @@ function isKopisVenueWhitelisted(
 // KOPIS
 // ======================================================
 
+function buildDateWindows(startDate, endDate, maxDateDifferenceDays = 30) {
+  if (!(startDate instanceof Date) || !(endDate instanceof Date) ||
+      Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime()) ||
+      maxDateDifferenceDays < 1) {
+    throw new Error("잘못된 KOPIS 날짜 범위입니다.");
+  }
+
+  const cursor = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+  const lastDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+  if (cursor > lastDate) throw new Error("KOPIS 시작일은 종료일보다 늦을 수 없습니다.");
+
+  const windows = [];
+  while (cursor <= lastDate) {
+    const windowEnd = new Date(cursor);
+    windowEnd.setDate(windowEnd.getDate() + maxDateDifferenceDays);
+    if (windowEnd > lastDate) windowEnd.setTime(lastDate.getTime());
+
+    windows.push({ stdate: dateToYYYYMMDD(cursor), eddate: dateToYYYYMMDD(windowEnd) });
+    cursor.setTime(windowEnd.getTime());
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  return windows;
+}
+
+
 async function fetchKopisPerformances() {
   if (!KOPIS_API_KEY) {
-    console.log(
-      "KOPIS_API_KEY 없음 → KOPIS 건너뜀"
-    );
-
+    console.error("KOPIS_API_KEY 없음 → 수집 중단");
+    sourceStatus.kopis = false;
     return [];
   }
 
   const results = [];
-
-  let cpage = 1;
-
   const rows = 100;
+  const dateWindows = buildDateWindows(new Date(), addMonths(new Date(), KOPIS_MONTHS_AHEAD), 30);
 
+  for (const window of dateWindows) {
+    let cpage = 1;
+    while (true) {
+      const url = new URL(KOPIS_BASE);
+      url.searchParams.set("service", KOPIS_API_KEY);
+      url.searchParams.set("stdate", window.stdate);
+      url.searchParams.set("eddate", window.eddate);
+      url.searchParams.set("cpage", String(cpage));
+      url.searchParams.set("rows", String(rows));
 
-  const stdate =
-    dateToYYYYMMDD(
-      new Date()
-    );
-
-
-  const eddate =
-    dateToYYYYMMDD(
-      addMonths(
-        new Date(),
-        KOPIS_MONTHS_AHEAD
-      )
-    );
-
-
-  while (true) {
-    const url =
-      new URL(
-        KOPIS_BASE
-      );
-
-
-    url.searchParams.set(
-      "service",
-      KOPIS_API_KEY
-    );
-
-    url.searchParams.set(
-      "stdate",
-      stdate
-    );
-
-    url.searchParams.set(
-      "eddate",
-      eddate
-    );
-
-    url.searchParams.set(
-      "cpage",
-      String(cpage)
-    );
-
-    url.searchParams.set(
-      "rows",
-      String(rows)
-    );
-
-
-    let res;
-
-    try {
-      res =
-        await fetchWithRetry(
-          url
-        );
-    } catch (error) {
-      console.error(
-        "KOPIS 요청 예외:",
-        error
-      );
-
-      sourceStatus.kopis =
-        false;
-
-      break;
-    }
-
-
-    if (!res.ok) {
-      console.error(
-        "KOPIS 요청 실패:",
-        res.status,
-        (
-          await res.text()
-        ).slice(
-          0,
-          1000
-        )
-      );
-
-      sourceStatus.kopis =
-        false;
-
-      break;
-    }
-
-
-    const xml =
-      await res.text();
-
-
-    if (
-      xml.includes(
-        "SERVICE KEY IS NOT REGISTERED"
-      )
-    ) {
-      console.error(
-        "KOPIS 인증키가 등록되지 않았습니다."
-      );
-
-      sourceStatus.kopis =
-        false;
-
-      break;
-    }
-
-
-    const list =
-      parseKopisXml(
-        xml
-      );
-
-
-    for (
-      const item of list
-    ) {
-      if (
-        !item.prfnm
-      ) {
-        continue;
+      let res;
+      try {
+        res = await fetchWithRetry(url);
+      } catch (error) {
+        console.error("KOPIS 요청 예외:", error);
+        sourceStatus.kopis = false;
+        return [];
       }
 
-
-      if (
-        EXCLUDED_KOPIS_GENRES.some(
-          (genre) =>
-            item.genrenm?.includes(
-              genre
-            )
-        )
-      ) {
-        continue;
+      if (!res.ok) {
+        console.error("KOPIS 요청 실패:", res.status, (await res.text()).slice(0, 1000));
+        sourceStatus.kopis = false;
+        return [];
       }
 
-
-      if (
-        item.genrenm ===
-          "뮤지컬" &&
-        !isKopisVenueWhitelisted(
-          item.fcltynm
-        )
-      ) {
-        continue;
+      const xml = await res.text();
+      if (!xml.trim() || /<err(?:or)?\\b/i.test(xml) ||
+          /service key is not registered|service access denied|request limit/i.test(xml) ||
+          !/<dbs?\\b/i.test(xml)) {
+        console.error("KOPIS 응답 형식 또는 인증 오류:", xml.slice(0, 1500));
+        sourceStatus.kopis = false;
+        return [];
       }
 
+      const list = parseKopisXml(xml);
+      for (const item of list) {
+        if (!item.prfnm) continue;
+        if (EXCLUDED_KOPIS_GENRES.some((genre) => item.genrenm?.includes(genre))) continue;
+        if (item.genrenm === "뮤지컬" && !isKopisVenueWhitelisted(item.fcltynm)) continue;
 
-      const start =
-        kopisDateToIso(
-          item.prfpdfrom
-        );
+        const startDate = kopisDateToIso(item.prfpdfrom);
+        const endDate = kopisDateToIso(item.prfpdto);
+        if (!startDate || isOver90Days(startDate, endDate)) continue;
 
-
-      const end =
-        kopisDateToIso(
-          item.prfpdto
-        );
-
-
-      if (
-        !start
-      ) {
-        continue;
-      }
-
-
-      if (
-        isOver90Days(
-          start,
-          end
-        )
-      ) {
-        continue;
-      }
-
-
-      results.push({
-        source:
-          "kopis",
-
-        type:
-          item.genrenm?.includes(
-            "축제"
-          )
-            ? "festival"
-            : "performance",
-
-        id:
-          `kopis-${item.mt20id}`,
-
-        title:
-          item.prfnm,
-
-        startDate:
-          start,
-
-        endDate:
-          end,
-
-        location:
-          item.fcltynm ||
-          "",
-
-        area:
-          normalizeAreaName(
-            item.area
-          ),
-
-        lat:
-          null,
-
-        lon:
-          null,
-
-        thumbnail:
-          item.poster ||
-          null,
-
-        detailUrl:
-          item.mt20id
-            ? (
-                "https://www.kopis.or.kr/por/db/pblprfr/" +
-                `pblprfrView.do?mt20Id=${item.mt20id}`
-              )
+        results.push({
+          source: "kopis",
+          type: item.genrenm?.includes("축제") ? "festival" : "performance",
+          id: `kopis-${item.mt20id}`,
+          title: item.prfnm,
+          startDate,
+          endDate,
+          location: item.fcltynm || "",
+          area: normalizeAreaName(item.area),
+          lat: null,
+          lon: null,
+          thumbnail: item.poster || null,
+          detailUrl: item.mt20id
+            ? ("https://www.kopis.or.kr/por/db/pblprfr/" +
+              `pblprfrView.do?mt20Id=${item.mt20id}`)
             : null,
+          genre: item.genrenm || null,
+        });
+      }
 
-        genre:
-          item.genrenm ||
-          null,
-      });
+      if (list.length < rows) break;
+      cpage += 1;
     }
-
-
-    if (
-      list.length < rows
-    ) {
-      break;
-    }
-
-
-    cpage += 1;
   }
 
-
-  console.log(
-    `KOPIS에서 ${results.length}건 수집`
-  );
-
+  sourceStatus.kopis = true;
+  console.log(`KOPIS ${dateWindows.length}개 기간에서 ${results.length}건 수집`);
   return results;
 }
 
@@ -3099,11 +1653,7 @@ function sourcePriority(
 
     case "culture":
       return 3;
-
-    case "culturePortal":
-      return 2;
-
-    case "kopis":
+case "kopis":
       return 1;
 
     default:
@@ -3690,7 +2240,6 @@ function printSourceStats(
   const counts = {
     tourapi: 0,
     culture: 0,
-    culturePortal: 0,
     kopis: 0,
   };
 
@@ -3712,7 +2261,6 @@ function printSourceStats(
     `${label} 출처별:` +
     ` TourAPI=${counts.tourapi},` +
     ` 표준데이터=${counts.culture},` +
-    ` 문화포털=${counts.culturePortal},` +
     ` KOPIS=${counts.kopis}`
   );
 }
@@ -3757,120 +2305,118 @@ function printTypeStats(
 }
 
 
+function runSelfTests() {
+  if (normalizeApiKey("abc%2Bdef%3D") !== "abc+def=") throw new Error("API 키 디코딩 실패");
+  if (normalizeApiKey("plain+key") !== "plain+key") throw new Error("평문 API 키 처리 실패");
+
+  const windows = buildDateWindows(new Date(2026, 10, 1), new Date(2027, 1, 15), 30);
+  if (windows.length < 3) throw new Error("KOPIS 기간 분할 실패");
+
+  for (let i = 0; i < windows.length; i += 1) {
+    const toUtc = (value) => Date.UTC(
+      Number(value.slice(0, 4)),
+      Number(value.slice(4, 6)) - 1,
+      Number(value.slice(6, 8))
+    );
+    const start = toUtc(windows[i].stdate);
+    const end = toUtc(windows[i].eddate);
+    if ((end - start) / 86400000 > 30) throw new Error("KOPIS 31일 제한 초과");
+    if (i > 0 && start - toUtc(windows[i - 1].eddate) !== 86400000) {
+      throw new Error("KOPIS 기간 사이 누락 또는 중복");
+    }
+  }
+
+  const xml = "<dbs><db><mt20id>PF123</mt20id><prfnm>테스트 공연</prfnm><prfpdfrom>2026.11.01</prfpdfrom><prfpdto>2026.11.02</prfpdto><fcltynm>테스트홀</fcltynm><genrenm>복합</genrenm><area>서울</area></db></dbs>";
+  const parsed = parseKopisXml(xml);
+  if (parsed.length !== 1 || parsed[0].mt20id !== "PF123" || parsed[0].prfnm !== "테스트 공연") {
+    throw new Error("KOPIS XML 파싱 실패");
+  }
+  if (parseKopisXml("<dbs></dbs>").length !== 0) throw new Error("KOPIS 빈 XML 처리 실패");
+  console.log("수집기 자체 테스트 통과");
+}
+
+
 // ======================================================
 // 메인
 // ======================================================
 
 async function main() {
-  const [
-    tourItems,
-    cultureItems,
-    culturePortalItems,
-    kopisItems,
-  ] =
-    await Promise.all([
-      fetchTourApiFestivals(),
-      fetchCultureStandardFestivals(),
-      fetchCulturePortalPerformances(),
-      fetchKopisPerformances(),
-    ]);
+  const required = [
+    ["TOUR_API_KEY", TOUR_API_KEY],
+    ["CULTURE_API_KEY", CULTURE_API_KEY],
+    ["KOPIS_API_KEY", KOPIS_API_KEY],
+  ];
+  const missing = required.filter(([, value]) => !value).map(([name]) => name);
+  if (missing.length) throw new Error(`필수 API 키 누락: ${missing.join(", ")}. 기존 festivals.json 유지`);
 
+  const [tourItems, cultureItems, kopisItems] = await Promise.all([
+    fetchTourApiFestivals(),
+    fetchCultureStandardFestivals(),
+    fetchKopisPerformances(),
+  ]);
 
-    // 하나 이상의 핵심 데이터 소스가 실패한 경우
-  // 빈 결과로 기존 festivals.json을 덮어쓰지 않습니다.
-  // 일시적인 API timeout으로 기존 정상 데이터가 사라지는 것을 방지합니다.
-  const failedSources = Object.entries(sourceStatus)
-    .filter(([, ok]) => ok === false)
-    .map(([source]) => source);
-
-  if (failedSources.length > 0) {
-    console.error(
-      `데이터 소스 ${failedSources.join(', ')} 실패 → 기존 festivals.json을 유지합니다.`
-    );
+  const failed = Object.entries(sourceStatus).filter(([, ok]) => ok !== true).map(([name]) => name);
+  if (failed.length) {
+    console.error(`소스 실패: ${failed.join(", ")} → 기존 파일 유지`);
     process.exitCode = 1;
     return;
   }
 
-  const allItems = [
-    ...tourItems,
-    ...cultureItems,
-    ...culturePortalItems,
-    ...kopisItems,
-  ];
+  const empty = [["tourapi", tourItems], ["culture", cultureItems], ["kopis", kopisItems]]
+    .filter(([, items]) => !Array.isArray(items) || items.length === 0)
+    .map(([name]) => name);
+  if (empty.length) {
+    console.error(`수집 결과 0건: ${empty.join(", ")} → 기존 파일 유지`);
+    process.exitCode = 1;
+    return;
+  }
 
+  const allItems = [...tourItems, ...cultureItems, ...kopisItems];
+  printSourceStats("수집 완료", allItems);
+  printTypeStats("수집 완료", allItems);
 
-  printSourceStats(
-    "수집 완료",
-    allItems
-  );
+  let merged = dedupe(allItems);
+  merged = merged.filter((item) => item.startDate)
+    .sort((a, b) => a.startDate.localeCompare(b.startDate));
 
+  if (!merged.length) {
+    console.error("최종 데이터 0건 → 기존 파일 유지");
+    process.exitCode = 1;
+    return;
+  }
 
-  printTypeStats(
-    "수집 완료",
-    allItems
-  );
+  let previousCount = null;
+  try {
+    const previous = JSON.parse(await readFile("festivals.json", "utf8"));
+    const previousRows = Array.isArray(previous) ? previous : previous?.festivals;
+    if (!Array.isArray(previousRows) || previousRows.length === 0) {
+      throw new Error("기존 festivals.json 데이터 구조 오류. 덮어쓰지 않습니다.");
+    }
+    previousCount = previousRows.length;
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
 
+  if (previousCount !== null && merged.length < Math.floor(previousCount * 0.7)) {
+    console.error(`기존 ${previousCount}건 대비 신규 ${merged.length}건(70% 미만) → 기존 파일 유지`);
+    process.exitCode = 1;
+    return;
+  }
 
-  let merged =
-    dedupe(
-      allItems
-    );
-
-
-  merged =
-    merged
-      .filter(
-        (item) =>
-          item.startDate
-      )
-      .sort(
-        (a, b) =>
-          a.startDate.localeCompare(
-            b.startDate
-          )
-      );
-
-
-  printSourceStats(
-    "최종 데이터",
-    merged
-  );
-
-
-  printTypeStats(
-    "최종 데이터",
-    merged
-  );
-
+  printSourceStats("최종 데이터", merged);
+  printTypeStats("최종 데이터", merged);
 
   const payload = {
-    updatedAt:
-      new Date().toISOString(),
-
-    count:
-      merged.length,
-
+    updatedAt: new Date().toISOString(),
+    count: merged.length,
     sourceStatus,
-
-    festivals:
-      merged,
+    festivals: merged,
   };
 
-
-  await writeFile(
-    "festivals.json",
-    JSON.stringify(
-      payload,
-      null,
-      2
-    ),
-    "utf-8"
-  );
-
-
-  console.log(
-    `총 ${merged.length}건 저장 완료 → festivals.json`
-  );
+  const temporaryPath = "festivals.json.tmp";
+  await writeFile(temporaryPath, JSON.stringify(payload, null, 2) + "\n", "utf-8");
+  await rename(temporaryPath, "festivals.json");
+  console.log(`총 ${merged.length}건 저장 완료 → festivals.json`);
 }
 
 
@@ -3878,14 +2424,11 @@ async function main() {
 // 실행
 // ======================================================
 
-main().catch(
-  (error) => {
-    console.error(
-      error
-    );
-
-    process.exit(
-      1
-    );
-  }
-);
+if (process.argv.includes("--self-test")) {
+  runSelfTests();
+} else {
+  main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}
