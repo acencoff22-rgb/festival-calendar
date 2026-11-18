@@ -426,22 +426,34 @@ async function loadFestivalData() {
     const items =
       normalizeFestivalData(json);
 
-    if (sourceFailed) {
+    const emptyDataset =
+      items.length === 0;
+
+    if (
+      sourceFailed ||
+      emptyDataset
+    ) {
       dataLoadError = true;
 
-      const failedLabels =
-        getFailedSourceLabels(
-          dataSourceStatus
+      if (emptyDataset) {
+        showDataWarning(
+          "⚠️ 행사 데이터가 비어 있어요. 저장된 찜·숨김·알림 설정은 유지했습니다."
         );
+      } else {
+        const failedLabels =
+          getFailedSourceLabels(
+            dataSourceStatus
+          );
 
-      const failedText =
-        failedLabels.length > 0
-          ? failedLabels.join(", ")
-          : "일부 데이터 소스";
+        const failedText =
+          failedLabels.length > 0
+            ? failedLabels.join(", ")
+            : "일부 데이터 소스";
 
-      showDataWarning(
-        `⚠️ ${failedText} 데이터를 가져오지 못해 일부 행사 정보가 빠져 있을 수 있어요.`
-      );
+        showDataWarning(
+          `⚠️ ${failedText} 데이터를 가져오지 못해 일부 행사 정보가 빠져 있을 수 있어요.`
+        );
+      }
     }
 
     festivalData = items;
@@ -453,7 +465,10 @@ async function loadFestivalData() {
     // 서버 데이터가 정상적으로 완성된 경우에만
     // 로컬 상태를 데이터와 맞춘다.
     // --------------------------------------------------
-    if (!sourceFailed) {
+    if (
+      !sourceFailed &&
+      !emptyDataset
+    ) {
       const validIds =
         festivalData.map(
           (item) => item.id
