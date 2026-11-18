@@ -1303,15 +1303,7 @@ async function fetchCultureStandardFestivals() {
           "festival",
 
         id:
-          `culture-${normalizeTitle(title)}-${start}-${end || "x"}-${normalizeTitle(
-            [
-              sido,
-              sigungu,
-              location || address || jibunAddress,
-            ]
-              .filter(Boolean)
-              .join(" ")
-          ) || "unknown"}`,
+          `culture-${normalizeTitle(title)}-${start}-${end || "x"}`,
 
         title,
 
@@ -3557,6 +3549,64 @@ function logDuplicateCandidates(
 
 
 // ======================================================
+// 충돌하는 행사 ID 보정
+// ======================================================
+// 정상적으로 하나만 존재하는 ID는 그대로 유지해
+// 기존 브라우저의 찜/숨김 설정과 호환되게 한다.
+// 실제로 서로 다른 행사에 같은 ID가 배정된 경우에만
+// 추가 항목에 지역/장소 식별자를 붙인다.
+
+function ensureUniqueIds(
+  list
+) {
+  const usedIds = new Set();
+
+  for (const item of list) {
+    const originalId =
+      String(item.id || "").trim();
+
+    if (!originalId) {
+      continue;
+    }
+
+    if (!usedIds.has(originalId)) {
+      usedIds.add(originalId);
+      continue;
+    }
+
+    const locationKey =
+      normalizeTitle(
+        [
+          item.area,
+          item.location,
+        ]
+          .filter(Boolean)
+          .join(" ")
+      ) ||
+      normalizeTitle(item.source || "") ||
+      "duplicate";
+
+    const baseCandidate =
+      `${originalId}-${locationKey}`;
+
+    let candidate = baseCandidate;
+    let suffix = 2;
+
+    while (usedIds.has(candidate)) {
+      candidate =
+        `${baseCandidate}-${suffix}`;
+      suffix += 1;
+    }
+
+    item.id = candidate;
+    usedIds.add(candidate);
+  }
+
+  return list;
+}
+
+
+// ======================================================
 // 중복 제거
 // ======================================================
 
@@ -3719,6 +3769,9 @@ function dedupe(
     );
   }
 
+
+  // 중복 정리 후에도 같은 ID가 남은 별도 행사는 각각 고유 ID를 갖게 한다.
+  ensureUniqueIds(result);
 
   console.log(
     `중복 제거: ${list.length}건 → ${result.length}건 ` +
