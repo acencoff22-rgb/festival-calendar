@@ -191,12 +191,17 @@ function reconcileReminders(validIds) {
     [...validIds].map(String)
   );
 
+  const favoriteIds = new Set(
+    (favoritesOrder || []).map(String)
+  );
+
   const next = {};
 
   Object.entries(reminders || {}).forEach(
     ([id, date]) => {
       if (
         ids.has(String(id)) &&
+        favoriteIds.has(String(id)) &&
         /^\d{4}-\d{2}-\d{2}$/.test(String(date))
       ) {
         next[String(id)] = String(date);
