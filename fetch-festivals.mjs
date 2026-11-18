@@ -17,30 +17,52 @@ import { readFile, writeFile, rename } from "fs/promises";
 // 바로 그 소스 전체를 포기하지 않고, 짧은 대기 후 몇 번 더
 // 시도해서 이런 일시적인 장애를 흡수한다.
 
+function isRetryableHttpResponse(status, contentType = "") {
+  const transientStatuses = new Set([408, 425, 429, 500, 502, 503, 504]);
+
+  if (transientStatuses.has(status)) {
+    return true;
+  }
+
+  // KOPIS occasionally responds with an HTML gateway error carrying HTTP 400.
+  // Retry this response class only; XML/API validation errors remain non-retryable.
+  return status === 400 && /text\/html/i.test(contentType);
+}
+
+
 async function fetchWithRetry(
   url,
   { retries = 2, delayMs = 1500 } = {}
 ) {
-  const retryableStatuses = new Set([408, 425, 429, 500, 502, 503, 504]);
   let lastError;
 
   for (let attempt = 0; attempt <= retries; attempt += 1) {
     try {
       const response = await fetch(url);
-      if (response.ok || !retryableStatuses.has(response.status) || attempt === retries) {
+      const contentType = response.headers.get("content-type") || "";
+
+      if (
+        response.ok ||
+        !isRetryableHttpResponse(response.status, contentType) ||
+        attempt === retries
+      ) {
         return response;
       }
-      lastError = new Error(`HTTP ${response.status}`);
+
+      lastError = new Error(`HTTP ${response.status} (${contentType || "content type 없음"})`);
     } catch (error) {
       lastError = error;
     }
 
     if (attempt < retries) {
       const waitMs = delayMs * (attempt + 1);
-      console.error(`요청 실패(${lastError?.message || lastError}), 재시도 ${attempt + 1}/${retries} (${waitMs}ms 후)`);
+      console.error(
+        `요청 실패(${lastError?.message || lastError}), 재시도 ${attempt + 1}/${retries} (${waitMs}ms 후)`
+      );
       await new Promise((resolve) => setTimeout(resolve, waitMs));
     }
   }
+
   throw lastError || new Error("API 요청 실패");
 }
 
@@ -1557,7 +1579,13 @@ async function fetchKopisPerformances() {
       }
 
       if (!res.ok) {
-        console.error("KOPIS 요청 실패:", res.status, (await res.text()).slice(0, 1000));
+        const errorBody = await res.text();
+        console.error(
+          `KOPIS 요청 실패 (${window.stdate}~${window.eddate}, page=${cpage}):`,
+          res.status,
+          res.headers.get("content-type") || "(content type 없음)",
+          errorBody.slice(0, 1000)
+        );
         sourceStatus.kopis = false;
         return [];
       }
@@ -2346,6 +2374,19 @@ function printTypeStats(
 
 
 function runSelfTests() {
+  if (!isRetryableHttpResponse(503, "application/xml")) {
+    throw new Error("일시적 HTTP 오류 재시도 판정 실패");
+  }
+  if (!isRetryableHttpResponse(400, "text/html; charset=ISO-8859-1")) {
+    throw new Error("KOPIS HTML 400 재시도 판정 실패");
+  }
+  if (isRetryableHttpResponse(400, "application/xml")) {
+    throw new Error("일반 XML 400 비재시도 판정 실패");
+  }
+  if (isRetryableHttpResponse(403, "text/html")) {
+    throw new Error("권한 오류 비재시도 판정 실패");
+  }
+
   if (isEventExpired("2026-06-01", "2026-06-20", "2026-11-18") !== true) {
     throw new Error("종료된 행사 필터 테스트 실패");
   }
