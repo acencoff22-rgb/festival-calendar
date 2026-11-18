@@ -441,6 +441,41 @@ function addMonths(
 }
 
 
+function isValidCalendarDate(
+  year,
+  month,
+  day
+) {
+  if (
+    !Number.isInteger(year) ||
+    !Number.isInteger(month) ||
+    !Number.isInteger(day) ||
+    year < 1900 ||
+    month < 1 ||
+    month > 12 ||
+    day < 1 ||
+    day > 31
+  ) {
+    return false;
+  }
+
+  const date =
+    new Date(
+      Date.UTC(
+        year,
+        month - 1,
+        day
+      )
+    );
+
+  return (
+    date.getUTCFullYear() === year &&
+    date.getUTCMonth() === month - 1 &&
+    date.getUTCDate() === day
+  );
+}
+
+
 function ymdToIso(
   value
 ) {
@@ -455,6 +490,20 @@ function ymdToIso(
 
   if (
     text.length !== 8
+  ) {
+    return null;
+  }
+
+  const year = Number(text.slice(0, 4));
+  const month = Number(text.slice(4, 6));
+  const day = Number(text.slice(6, 8));
+
+  if (
+    !isValidCalendarDate(
+      year,
+      month,
+      day
+    )
   ) {
     return null;
   }
@@ -482,6 +531,16 @@ function kopisDateToIso(
       );
 
   if (!match) {
+    return null;
+  }
+
+  if (
+    !isValidCalendarDate(
+      Number(match[1]),
+      Number(match[2]),
+      Number(match[3])
+    )
+  ) {
     return null;
   }
 
@@ -873,8 +932,11 @@ async function fetchTourApiFestivals() {
         );
 
       const end =
-        ymdToIso(
-          item.eventenddate
+        fixReversedDateRange(
+          start,
+          ymdToIso(
+            item.eventenddate
+          )
         );
 
 
@@ -2354,8 +2416,11 @@ async function fetchCulturePortalByServiceType(
 
 
       const end =
-        ymdToIso(
-          endRaw
+        fixReversedDateRange(
+          start,
+          ymdToIso(
+            endRaw
+          )
         );
 
 
@@ -2955,8 +3020,11 @@ async function fetchKopisPerformances() {
 
 
       const end =
-        kopisDateToIso(
-          item.prfpdto
+        fixReversedDateRange(
+          start,
+          kopisDateToIso(
+            item.prfpdto
+          )
         );
 
 
