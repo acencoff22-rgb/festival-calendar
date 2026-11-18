@@ -35,6 +35,7 @@ function initializeApp() {
 
   loadStoredState();
   loadReminders();
+  renderAreaCheckboxes();
 
 
   // --------------------------------------------------

@@ -32,13 +32,15 @@ function isRetryableHttpResponse(status, contentType = "") {
 
 async function fetchWithRetry(
   url,
-  { retries = 2, delayMs = 1500 } = {}
+  { retries = 2, delayMs = 1500, timeoutMs = 20000 } = {}
 ) {
   let lastError;
 
   for (let attempt = 0; attempt <= retries; attempt += 1) {
     try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        signal: AbortSignal.timeout(timeoutMs),
+      });
       const contentType = response.headers.get("content-type") || "";
 
       if (
@@ -127,7 +129,7 @@ const AREA_NAME_BY_CODE = {
   2: "인천",
   3: "대전",
   4: "대구",
-  5: "광주",
+  5: "광주·전남",
   6: "부산",
   7: "울산",
   8: "세종",
@@ -139,7 +141,7 @@ const AREA_NAME_BY_CODE = {
   35: "경북",
   36: "경남",
   37: "전북",
-  38: "전남",
+  38: "광주·전남",
   39: "제주",
 };
 
@@ -195,7 +197,10 @@ const CANONICAL_AREA_MAP = {
   "대구": "대구",
   "인천광역시": "인천",
   "인천": "인천",
-  "광주광역시": "광주",
+  "전남광주통합특별시": "광주·전남",
+  "광주특별시": "광주·전남",
+  "광주광역시": "광주·전남",
+  "광주": "광주·전남",
   "대전광역시": "대전",
   "대전": "대전",
   "울산광역시": "울산",
@@ -214,8 +219,8 @@ const CANONICAL_AREA_MAP = {
   "전북특별자치도": "전북",
   "전라북도": "전북",
   "전북": "전북",
-  "전라남도": "전남",
-  "전남": "전남",
+  "전라남도": "광주·전남",
+  "전남": "광주·전남",
   "경상북도": "경북",
   "경북": "경북",
   "경상남도": "경남",
@@ -285,6 +290,8 @@ const FULL_AREA_NAME_KEYWORDS = [
   "부산광역시",
   "대구광역시",
   "인천광역시",
+  "전남광주통합특별시",
+  "광주특별시",
   "광주광역시",
   "대전광역시",
   "울산광역시",
@@ -2374,6 +2381,11 @@ function printTypeStats(
 
 
 function runSelfTests() {
+  if (normalizeAreaName("전남광주통합특별시") !== "광주·전남") throw new Error("통합특별시 지역명 정규화 실패");
+  if (normalizeAreaName("광주광역시") !== "광주·전남") throw new Error("구 광주 지역명 정규화 실패");
+  if (normalizeAreaName("전라남도") !== "광주·전남") throw new Error("구 전남 지역명 정규화 실패");
+  if (deriveAreaFromAddress("전남광주통합특별시 무안군") !== "광주·전남") throw new Error("통합특별시 주소 지역 판별 실패");
+
   if (!isRetryableHttpResponse(503, "application/xml")) {
     throw new Error("일시적 HTTP 오류 재시도 판정 실패");
   }

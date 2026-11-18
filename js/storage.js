@@ -297,9 +297,16 @@ function loadSelectedAreas() {
       return new Set();
     }
 
-    return new Set(
-      parsed.map(String)
-    );
+    const areas = new Set(parsed.map(String));
+    const hadLegacyIntegratedRegion = areas.has("광주") || areas.has("전남");
+    // 2026-07-01 통합특별시 출범에 맞춰 기존 두 지역 선택을 하나로 합칩니다.
+    if (hadLegacyIntegratedRegion) {
+      areas.delete("광주");
+      areas.delete("전남");
+      areas.add("광주·전남");
+      safeStorageSet("selectedAreas", JSON.stringify([...areas]));
+    }
+    return areas;
   } catch {
     return new Set();
   }

@@ -23,11 +23,14 @@ jobs:
         run: |
           node --check fetch-festivals.mjs
           node --check scripts/validate-data.mjs
+          node --check scripts/validate-ui.mjs
           for file in js/*.js; do
             node --check "$file"
           done
       - name: 수집기 자체 테스트
         run: node fetch-festivals.mjs --self-test
+      - name: UI 및 지역 필터 테스트
+        run: node scripts/validate-ui.mjs
       - name: 현재 저장 데이터 구조 검증
         run: node scripts/validate-data.mjs
 
