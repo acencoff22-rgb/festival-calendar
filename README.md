@@ -29,7 +29,7 @@ festival-calendar/
 
 ## 자동 데이터 갱신
 
-GitHub Actions의 `Update Festival Data` 워크플로가 매일 한국시간 오전 6시에 실행됩니다. 수동 실행도 지원합니다.
+GitHub Actions의 `Update Festival Data` 워크플로가 매일 한국시간 오전 6시에 실행됩니다. 수동 실행도 지원하며, 수집 서버의 시간대도 `Asia/Seoul`로 고정해 날짜 기준 API 요청이 한국 날짜를 따르도록 합니다.
 
 GitHub Actions에서 자동 갱신하려면 다음 네 가지 저장소 Secret을 모두 설정해야 합니다.
 
