@@ -587,9 +587,10 @@ function eventLink(
   festival
 ) {
   const candidates = [
+    // 기존 동작과 같이 행사별 상세 페이지를 일반 홈페이지 링크보다 우선한다.
+    festival?.detailUrl,
     festival?.link,
     festival?.url,
-    festival?.detailUrl,
   ];
 
   for (const candidate of candidates) {
