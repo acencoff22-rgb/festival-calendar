@@ -67,7 +67,8 @@ vm.runInContext(
   helpers +
     "\nglobalThis.__mergeNearDuplicateFestivals = mergeNearDuplicateFestivals;" +
     "\nglobalThis.__isNearDuplicateFestival = isNearDuplicateFestival;" +
-    "\nglobalThis.__dataRichness = dataRichness;",
+    "\nglobalThis.__dataRichness = dataRichness;" +
+    "\nglobalThis.__locationsClearlyDifferent = locationsClearlyDifferent;",
   context
 );
 
@@ -286,3 +287,60 @@ test(
     assert.equal(result.mergedCount, 0);
   }
 );
+
+test(
+  "같은 통합 행정구역 안의 서로 다른 공연장은 동명·동일 날짜여도 병합하지 않는다",
+  () => {
+    const portal = festival({
+      source: "culturePortal",
+      type: "performance",
+      area: "광주",
+      location: "광주예술의전당",
+      lat: 35.178207,
+      lon: 126.881436,
+    });
+
+    const kopis = festival({
+      source: "kopis",
+      type: "performance",
+      area: "전남광주통합",
+      location: "예울마루",
+      lat: null,
+      lon: null,
+    });
+
+    assert.equal(
+      context.__locationsClearlyDifferent(portal, kopis),
+      true
+    );
+  }
+);
+
+test(
+  "이전 명칭을 포함한 동일 공연장 표기는 서로 다른 장소로 판단하지 않는다",
+  () => {
+    const portal = festival({
+      source: "culturePortal",
+      type: "performance",
+      area: "광주",
+      location: "광주예술의전당",
+      lat: null,
+      lon: null,
+    });
+
+    const kopis = festival({
+      source: "kopis",
+      type: "performance",
+      area: "전남광주통합",
+      location: "전남광주통합특별시 예술의전당 (구. 광주예술의전당)",
+      lat: null,
+      lon: null,
+    });
+
+    assert.equal(
+      context.__locationsClearlyDifferent(portal, kopis),
+      false
+    );
+  }
+);
+
