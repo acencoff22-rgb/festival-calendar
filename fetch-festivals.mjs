@@ -3705,6 +3705,11 @@ function locationsClearlyDifferent(
     return true;
   }
 
+  // 행사 유형이 명시되어 있고 서로 다르면 동일 제목·날짜여도 병합하지 않는다.
+  if (a?.type && b?.type && a.type !== b.type) {
+    return true;
+  }
+
   const areaA =
     normalizeAreaName(
       a.area
