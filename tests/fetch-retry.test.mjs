@@ -80,7 +80,8 @@ function createFetchWithRetry(
 
   vm.runInContext(
     helperSource +
-      "\\nglobalThis.__fetchWithRetry = fetchWithRetry;",
+      String.fromCharCode(10) +
+      "globalThis.__fetchWithRetry = fetchWithRetry;",
     context
   );
 
