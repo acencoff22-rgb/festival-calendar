@@ -79,7 +79,8 @@ function createFetchWithRetry(
   vm.createContext(context);
 
   vm.runInContext(
-    `${helperSource}\nglobalThis.__fetchWithRetry = fetchWithRetry;`,
+    helperSource +
+      "\\nglobalThis.__fetchWithRetry = fetchWithRetry;",
     context
   );
 
