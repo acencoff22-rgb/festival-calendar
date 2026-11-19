@@ -941,12 +941,49 @@ async function fetchTourApiFestivals() {
     }
 
 
-    const body =
-      json?.response?.body;
+    const apiResponse =
+      json?.response;
 
-    if (!body) {
+    const header =
+      apiResponse?.header ||
+      {};
+
+    const resultCode =
+      String(
+        header.resultCode ?? ""
+      ).trim();
+
+    if (
+      resultCode !== "0000" &&
+      resultCode !== "00"
+    ) {
       logSanitizedError(
-        "TourAPI 응답 형식 이상:",
+        "TourAPI 응답 오류:",
+        resultCode || "resultCode 없음",
+        header.resultMsg || "",
+        JSON.stringify(
+          json
+        ).slice(
+          0,
+          1500
+        )
+      );
+
+      sourceStatus.tourapi =
+        false;
+
+      break;
+    }
+
+    const body =
+      apiResponse?.body;
+
+    if (
+      !body ||
+      typeof body !== "object"
+    ) {
+      logSanitizedError(
+        "TourAPI 응답 형식 이상: body가 없습니다.",
         JSON.stringify(
           json
         ).slice(
