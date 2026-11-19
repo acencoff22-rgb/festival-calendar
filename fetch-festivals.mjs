@@ -3657,10 +3657,54 @@ function hasValidCoordinatePair(
 // 장소 차이 판별
 // ======================================================
 
+function normalizeVenueName(raw) {
+  return String(raw || "")
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[^\\p{L}\\p{N}]/gu, "")
+    .trim();
+}
+
+
+// 같은 공연장이라도 출처별 표기가 다를 수 있어 한쪽 이름이 다른 쪽에
+// 포함되는 경우는 같은 장소로 취급한다. 일치 여부가 불분명하면
+// 공연을 잘못 합치는 것보다 별도 항목으로 보존한다.
+function venuesClearlyDifferent(a, b) {
+  if (
+    a?.type !== "performance" ||
+    b?.type !== "performance"
+  ) {
+    return false;
+  }
+
+  const venueA =
+    normalizeVenueName(a.location);
+
+  const venueB =
+    normalizeVenueName(b.location);
+
+  if (!venueA || !venueB) {
+    return false;
+  }
+
+  return !(
+    venueA === venueB ||
+    venueA.includes(venueB) ||
+    venueB.includes(venueA)
+  );
+}
+
+
 function locationsClearlyDifferent(
   a,
   b
 ) {
+  // 공연은 같은 제목·날짜라도 같은 행정구역 안의 다른 공연장에서 열릴 수 있습니다.
+  // 공연장명이 명시되어 있고 서로 다르면 좌표 누락 또는 행정구역 통합만으로 병합하지 않습니다.
+  if (venuesClearlyDifferent(a, b)) {
+    return true;
+  }
+
   const areaA =
     normalizeAreaName(
       a.area
