@@ -18,11 +18,12 @@ assert.notEqual(start, -1, "URL normalizer must exist");
 assert.notEqual(end, -1, "eventLink boundary must exist");
 
 const helper = source.slice(start, end);
-const context = vm.createContext({ URL });
+const context = vm.createContext({ URL, cleanTitleForSearch: (value) => String(value ?? "") });
 
 vm.runInContext(
   helper +
-    "\nglobalThis.__normalizeHttpUrl = normalizeHttpUrl;",
+    "\nglobalThis.__normalizeHttpUrl = normalizeHttpUrl;" +
+    "\nglobalThis.__eventLink = eventLink;",
   context
 );
 
@@ -101,3 +102,34 @@ test(
     }
   }
 );
+
+test(
+  "행사별 상세 페이지는 일반 홈페이지 링크보다 우선한다",
+  () => {
+    assert.equal(
+      context.__eventLink({
+        detailUrl: "https://official.example.com/event",
+        link: "https://ticket.example.com",
+        url: "https://homepage.example.com",
+        title: "검증 행사",
+      }),
+      "https://official.example.com/event"
+    );
+  }
+);
+
+test(
+  "행사별 상세 페이지 URL이 안전하지 않으면 다음 안전한 링크를 사용한다",
+  () => {
+    assert.equal(
+      context.__eventLink({
+        detailUrl: "javascript:alert(1)",
+        link: "www.example.com/ticket",
+        url: "https://homepage.example.com",
+        title: "검증 행사",
+      }),
+      "https://www.example.com/ticket"
+    );
+  }
+);
+
