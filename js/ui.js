@@ -75,6 +75,69 @@ function initializeCompactView() {
 
 
 // ------------------------------------------------------
+// 지역 선택 체크박스
+// ------------------------------------------------------
+
+function initializeAreaCheckboxes() {
+  const container =
+    document.getElementById(
+      "areaCheckboxList"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  const fragment =
+    document.createDocumentFragment();
+
+  AREA_DISPLAY_ORDER.forEach(
+    (area, index) => {
+      const label =
+        document.createElement("label");
+
+      label.className =
+        "area-checkbox-item";
+
+      const checkbox =
+        document.createElement("input");
+
+      checkbox.type =
+        "checkbox";
+
+      checkbox.id =
+        `area-filter-${index}`;
+
+      checkbox.value =
+        area;
+
+      checkbox.checked =
+        selectedAreas.has(area);
+
+      const text =
+        document.createElement("span");
+
+      text.textContent =
+        area;
+
+      label.append(
+        checkbox,
+        text
+      );
+
+      fragment.append(
+        label
+      );
+    }
+  );
+
+  container.replaceChildren(
+    fragment
+  );
+}
+
+
+// ------------------------------------------------------
 // UI 초기화
 // ------------------------------------------------------
 
@@ -82,4 +145,6 @@ function initializeUI() {
   initializeTheme();
 
   initializeCompactView();
+
+  initializeAreaCheckboxes();
 }
