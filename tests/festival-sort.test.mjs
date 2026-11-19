@@ -31,45 +31,45 @@ assert.notEqual(end, -1, "list comparator boundary must exist");
 const comparatorSource =
   logic.slice(start, end);
 
-const context = {
-  getFestivalStartDate(event) {
-    return event?.startDate
-      ? new Date(`${event.startDate}T00:00:00Z`)
-      : null;
-  },
-
-  getFestivalEndDate(event) {
-    return event?.endDate
-      ? new Date(`${event.endDate}T00:00:00Z`)
-      : this.getFestivalStartDate(event);
-  },
-
-  isFestivalEnded(event) {
-    const endDate = this.getFestivalEndDate(event);
-    return Boolean(
-      endDate &&
-      endDate < new Date("2026-11-19T00:00:00Z")
-    );
-  },
-
-  isFestivalOngoing(event) {
-    const startDate = this.getFestivalStartDate(event);
-    const endDate = this.getFestivalEndDate(event);
-    const today = new Date("2026-11-19T00:00:00Z");
-
-    return Boolean(
-      startDate &&
-      endDate &&
-      startDate <= today &&
-      today <= endDate
-    );
-  },
-};
+const context = {};
 
 vm.createContext(context);
 
 vm.runInContext(
-  comparatorSource +
+  `
+  const TODAY = new Date("2026-11-19T00:00:00Z");
+
+  function getFestivalStartDate(event) {
+    return event?.startDate
+      ? new Date(`${event.startDate}T00:00:00Z`)
+      : null;
+  }
+
+  function getFestivalEndDate(event) {
+    return event?.endDate
+      ? new Date(`${event.endDate}T00:00:00Z`)
+      : getFestivalStartDate(event);
+  }
+
+  function isFestivalEnded(event) {
+    const endDate = getFestivalEndDate(event);
+    return Boolean(endDate && endDate < TODAY);
+  }
+
+  function isFestivalOngoing(event) {
+    const startDate = getFestivalStartDate(event);
+    const endDate = getFestivalEndDate(event);
+
+    return Boolean(
+      startDate &&
+      endDate &&
+      startDate <= TODAY &&
+      TODAY <= endDate
+    );
+  }
+
+  ` +
+    comparatorSource +
     String.fromCharCode(10) +
     "globalThis.__compareFestivalStart = compareFestivalStart;",
   context
