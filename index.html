@@ -2119,9 +2119,14 @@
     }
 
     .filter-handle {
-      right: 14px;
-      bottom: 14px;
+      right: max(14px, env(safe-area-inset-right));
+      bottom: max(14px, env(safe-area-inset-bottom));
       height: 48px;
+    }
+
+    .controls input,
+    .controls select {
+      font-size: 16px;
     }
 
     .filter-drawer {
@@ -2129,7 +2134,9 @@
       right: 0;
       bottom: 0;
       width: 100%;
+      max-height: min(88vh, 780px);
       max-height: min(88dvh, 780px);
+      -webkit-overflow-scrolling: touch;
       padding: 18px 18px max(24px, env(safe-area-inset-bottom));
       border: 1px solid var(--line);
       border-bottom: 0;
@@ -2640,12 +2647,18 @@
 <div
   id="areaModal"
   class="modal-backdrop hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="areaModalTitle"
+  aria-hidden="true"
+  inert
+  tabindex="-1"
 >
   <div class="modal-sheet">
 
     <div class="modal-header">
 
-      <div class="modal-title">
+      <div id="areaModalTitle" class="modal-title">
         지역 선택
       </div>
 
@@ -2710,12 +2723,18 @@
 <div
   id="hiddenModal"
   class="modal-backdrop hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="hiddenModalTitle"
+  aria-hidden="true"
+  inert
+  tabindex="-1"
 >
   <div class="modal-sheet">
 
     <div class="modal-header">
 
-      <div class="modal-title">
+      <div id="hiddenModalTitle" class="modal-title">
         숨긴 항목 관리
       </div>
 
@@ -2743,12 +2762,18 @@
 <div
   id="excludeKeywordModal"
   class="modal-backdrop hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="excludeKeywordModalTitle"
+  aria-hidden="true"
+  inert
+  tabindex="-1"
 >
   <div class="modal-sheet">
 
     <div class="modal-header">
 
-      <div class="modal-title">
+      <div id="excludeKeywordModalTitle" class="modal-title">
         제외 키워드 관리
       </div>
 
