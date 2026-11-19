@@ -3699,6 +3699,67 @@ function sourcePriority(
 // 데이터 풍부함
 // ======================================================
 
+function detailUrlSpecificity(
+  item
+) {
+  const raw =
+    String(
+      item?.detailUrl || ""
+    ).trim();
+
+  if (!raw) {
+    return 0;
+  }
+
+  let candidate = raw;
+
+  if (candidate.startsWith("//")) {
+    candidate = `https:${candidate}`;
+  } else if (/^www\./i.test(candidate)) {
+    candidate = `https://${candidate}`;
+  } else if (/^https?:\/(?!\/)/i.test(candidate)) {
+    candidate = candidate.replace(
+      /^(https?):\//i,
+      "$1://"
+    );
+  } else if (
+    !/^[a-z][a-z\d+.-]*:/i.test(candidate) &&
+    /^[^\s/?#]+\.[^\s/?#]+(?::\d+)?(?:[/?#][^\s]*)?$/.test(candidate)
+  ) {
+    candidate = `https://${candidate}`;
+  }
+
+  try {
+    const parsed =
+      new URL(candidate);
+
+    if (
+      !["http:", "https:"].includes(parsed.protocol) ||
+      !parsed.hostname ||
+      parsed.username ||
+      parsed.password
+    ) {
+      return 0;
+    }
+
+    const pathSegments =
+      parsed.pathname
+        .split("/")
+        .filter(Boolean)
+        .length;
+
+    // 홈페이지 루트보다 행사별 상세 페이지와 쿼리 페이지를 우선한다.
+    return Math.min(
+      3,
+      pathSegments +
+        (parsed.search ? 1 : 0)
+    );
+  } catch {
+    return 0;
+  }
+}
+
+
 function dataRichness(
   item
 ) {
@@ -3736,7 +3797,9 @@ function dataRichness(
   if (
     item.detailUrl
   ) {
-    score += 1;
+    score +=
+      1 +
+      detailUrlSpecificity(item);
   }
 
 
@@ -4136,6 +4199,217 @@ function ensureUniqueIds(
 }
 
 
+function calendarDayDifference(
+  a,
+  b
+) {
+  const aTime =
+    Date.parse(
+      `${a}T00:00:00Z`
+    );
+
+  const bTime =
+    Date.parse(
+      `${b}T00:00:00Z`
+    );
+
+  if (
+    !Number.isFinite(aTime) ||
+    !Number.isFinite(bTime)
+  ) {
+    return Infinity;
+  }
+
+  return Math.abs(
+    (aTime - bTime) / 86400000
+  );
+}
+
+
+// 제목·유형·기간·좌표가 모두 매우 가까운 축제만 날짜 차이 중복으로 본다.
+// 공연은 같은 작품의 다른 회차일 수 있어 자동 병합하지 않는다.
+function isNearDuplicateFestival(
+  a,
+  b
+) {
+  if (
+    a?.type !== "festival" ||
+    b?.type !== "festival"
+  ) {
+    return false;
+  }
+
+  const titleA =
+    normalizeTitle(
+      a.title
+    );
+
+  const titleB =
+    normalizeTitle(
+      b.title
+    );
+
+  if (
+    !titleA ||
+    titleA !== titleB
+  ) {
+    return false;
+  }
+
+  if (
+    locationsClearlyDifferent(
+      a,
+      b
+    )
+  ) {
+    return false;
+  }
+
+  if (
+    !hasValidCoordinatePair(a) ||
+    !hasValidCoordinatePair(b)
+  ) {
+    return false;
+  }
+
+  if (
+    !datesOverlap(
+      a.startDate,
+      a.endDate,
+      b.startDate,
+      b.endDate
+    )
+  ) {
+    return false;
+  }
+
+  if (
+    calendarDayDifference(
+      a.startDate,
+      b.startDate
+    ) > 1 ||
+    calendarDayDifference(
+      a.endDate || a.startDate,
+      b.endDate || b.startDate
+    ) > 1
+  ) {
+    return false;
+  }
+
+  const distance =
+    distanceMeters(
+      Number(a.lat),
+      Number(a.lon),
+      Number(b.lat),
+      Number(b.lon)
+    );
+
+  return (
+    distance !== null &&
+    distance <= 500
+  );
+}
+
+
+function mergeNearDuplicateFestivals(
+  list
+) {
+  const groups =
+    new Map();
+
+  for (const item of list) {
+    const titleKey =
+      normalizeTitle(
+        item.title
+      );
+
+    if (!titleKey) {
+      continue;
+    }
+
+    if (!groups.has(titleKey)) {
+      groups.set(
+        titleKey,
+        []
+      );
+    }
+
+    groups
+      .get(titleKey)
+      .push(item);
+  }
+
+  const result = [];
+  let mergedCount = 0;
+
+  for (const items of groups.values()) {
+    const kept = [];
+
+    for (const item of items) {
+      let merged = false;
+
+      for (
+        let i = 0;
+        i < kept.length;
+        i += 1
+      ) {
+        const existing =
+          kept[i];
+
+        if (
+          !isNearDuplicateFestival(
+            existing,
+            item
+          )
+        ) {
+          continue;
+        }
+
+        const existingPriority =
+          sourcePriority(
+            existing
+          );
+
+        const itemPriority =
+          sourcePriority(
+            item
+          );
+
+        const itemWins =
+          itemPriority > existingPriority ||
+          (
+            itemPriority === existingPriority &&
+            dataRichness(item) >
+              dataRichness(existing)
+          );
+
+        // 검증된 원본을 대표로 남기고 비어있는 메타데이터만 보충한다.
+        kept[i] =
+          mergeRecords(
+            itemWins ? item : existing,
+            itemWins ? existing : item
+          );
+
+        mergedCount += 1;
+        merged = true;
+        break;
+      }
+
+      if (!merged) {
+        kept.push(item);
+      }
+    }
+
+    result.push(...kept);
+  }
+
+  return {
+    records: result,
+    mergedCount,
+  };
+}
+
+
 // ======================================================
 // 중복 제거
 // ======================================================
@@ -4300,24 +4574,35 @@ function dedupe(
   }
 
 
+  // 공식 날짜 차이가 하루 이내이고 같은 장소에서 열린 같은 축제는
+  // 출처 우선순위와 행사별 상세 링크가 더 구체적인 레코드를 대표로 선택한다.
+  const nearMerged =
+    mergeNearDuplicateFestivals(
+      result
+    );
+
+  duplicateRemoved +=
+    nearMerged.mergedCount;
+
+  const finalResult =
+    nearMerged.records;
+
   // 중복 정리 후에도 같은 ID가 남은 별도 행사는 각각 고유 ID를 갖게 한다.
-  ensureUniqueIds(result);
+  ensureUniqueIds(finalResult);
 
   console.log(
-    `중복 제거: ${list.length}건 → ${result.length}건 ` +
+    `중복 제거: ${list.length}건 → ${finalResult.length}건 ` +
     `(중복 ${duplicateRemoved}건 제거)`
   );
 
 
-  // 확정 병합 후 남은 데이터에서
-  // "제목 같고 날짜 겹치고 좌표 근접"인 후보를
-  // 찾아 로그로만 남긴다.
+  // 엄격한 조건으로 병합하지 못한 후보만 수동 확인용으로 남긴다.
   logDuplicateCandidates(
-    result
+    finalResult
   );
 
 
-  return result;
+  return finalResult;
 }
 
 
