@@ -520,9 +520,21 @@ function normalizeHttpUrl(value) {
   let candidate = raw;
 
   if (candidate.startsWith("//")) {
-    candidate = `https:${candidate}`;
+    candidate = \`https:\${candidate}\`;
   } else if (/^www\./i.test(candidate)) {
-    candidate = `https://${candidate}`;
+    candidate = \`https://\${candidate}\`;
+  } else if (/^https?:\/(?!\/)/i.test(candidate)) {
+    // 공공데이터에 간혹 잘못 저장된 "https:/example.com" 형태를 보정한다.
+    candidate = candidate.replace(
+      /^(https?):\//i,
+      "$1://"
+    );
+  } else if (
+    !/^[a-z][a-z\d+.-]*:/i.test(candidate) &&
+    /^[^\s/?#]+\.[^\s/?#]+(?::\d+)?(?:[/?#][^\s]*)?$/.test(candidate)
+  ) {
+    // 스킴이 빠진 도메인만 HTTPS로 보정한다.
+    candidate = \`https://\${candidate}\`;
   }
 
   // 외부 링크는 HTTP(S)만 허용한다. javascript:, data: 등은 거부한다.
