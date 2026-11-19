@@ -55,11 +55,22 @@ function openFilterDrawer() {
       "filterHandle"
     );
 
-  if (!drawer) {
+  if (!drawer || filterDrawerOpen) {
     return;
   }
 
   filterDrawerOpen = true;
+
+  // 닫힌 패널은 탭 이동 대상에서 제외하고, 열릴 때만 접근 가능하게 한다.
+  drawer.removeAttribute("inert");
+  drawer.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+  drawer.setAttribute(
+    "aria-modal",
+    "true"
+  );
 
   drawer.classList.add(
     "open"
@@ -73,14 +84,23 @@ function openFilterDrawer() {
     "aria-expanded",
     "true"
   );
+  handle?.setAttribute(
+    "aria-label",
+    "검색 및 필터 닫기"
+  );
 
   document.body.classList.add(
     "filter-drawer-open"
   );
+
+  // 검색창 대신 닫기 버튼에 초점을 두어 모바일 키보드가 자동으로 열리지 않게 한다.
+  document
+    .getElementById("filterClose")
+    ?.focus({ preventScroll: true });
 }
 
 
-function closeFilterDrawer() {
+function closeFilterDrawer(options = {}) {
   const drawer =
     document.getElementById(
       "filterDrawer"
@@ -96,10 +116,31 @@ function closeFilterDrawer() {
       "filterHandle"
     );
 
+  const restoreFocus =
+    options.restoreFocus !== false;
+
+  const focusWasInside =
+    Boolean(
+      drawer &&
+      drawer.contains(document.activeElement)
+    );
+
   filterDrawerOpen = false;
 
   drawer?.classList.remove(
     "open"
+  );
+  drawer?.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+  drawer?.setAttribute(
+    "aria-modal",
+    "false"
+  );
+  drawer?.setAttribute(
+    "inert",
+    ""
   );
 
   backdrop?.classList.remove(
@@ -110,10 +151,25 @@ function closeFilterDrawer() {
     "aria-expanded",
     "false"
   );
+  handle?.setAttribute(
+    "aria-label",
+    "검색 및 필터 열기"
+  );
 
   document.body.classList.remove(
     "filter-drawer-open"
   );
+
+  filterPointerState = null;
+
+  if (
+    restoreFocus &&
+    focusWasInside
+  ) {
+    handle?.focus({
+      preventScroll: true,
+    });
+  }
 }
 
 
@@ -272,10 +328,18 @@ function switchView(view) {
     "active",
     view === "urgent"
   );
+  urgentButton?.setAttribute(
+    "aria-pressed",
+    view === "urgent" ? "true" : "false"
+  );
 
   listButton?.classList.toggle(
     "active",
     view === "list"
+  );
+  listButton?.setAttribute(
+    "aria-pressed",
+    view === "list" ? "true" : "false"
   );
 
   urgentView?.classList.toggle(
@@ -387,7 +451,6 @@ function setDateFilter(mode) {
   saveDateFilterState();
   updateDateQuickUI();
   renderCurrentView();
-  closeFilterDrawer();
 }
 
 
@@ -436,7 +499,6 @@ function applyCustomDateFilter() {
   saveDateFilterState();
   updateDateQuickUI();
   renderCurrentView();
-  closeFilterDrawer();
 }
 
 
@@ -2023,8 +2085,6 @@ function resetAllFilters() {
   updateAreaButtonLabel();
   updateDateQuickUI();
   renderCurrentView();
-
-  closeFilterDrawer();
 }
 
 
@@ -2134,11 +2194,55 @@ function setupActions() {
   document.addEventListener(
     "keydown",
     (e) => {
-      if (
-        e.key === "Escape" &&
-        filterDrawerOpen
-      ) {
+      if (!filterDrawerOpen) {
+        return;
+      }
+
+      if (e.key === "Escape") {
+        e.preventDefault();
         closeFilterDrawer();
+        return;
+      }
+
+      if (e.key !== "Tab") {
+        return;
+      }
+
+      const focusable = [
+        ...filterDrawer.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        ),
+      ].filter(
+        (element) =>
+          element.getClientRects().length > 0
+      );
+
+      if (!focusable.length) {
+        e.preventDefault();
+        filterDrawer.focus({
+          preventScroll: true,
+        });
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (
+        e.shiftKey &&
+        (
+          document.activeElement === first ||
+          !filterDrawer.contains(document.activeElement)
+        )
+      ) {
+        e.preventDefault();
+        last.focus();
+      } else if (
+        !e.shiftKey &&
+        document.activeElement === last
+      ) {
+        e.preventDefault();
+        first.focus();
       }
     }
   );
@@ -2185,7 +2289,6 @@ function setupActions() {
       "change",
       () => {
         renderCurrentView();
-        closeFilterDrawer();
       }
     );
 
@@ -2260,7 +2363,6 @@ function setupActions() {
         }
 
         renderCurrentView();
-        closeFilterDrawer();
       }
     );
 
