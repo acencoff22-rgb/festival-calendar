@@ -136,6 +136,37 @@ test(
 );
 
 test(
+  "설정된 일시적 HTTP 오류 코드를 모두 재시도한다",
+  async () => {
+    for (const status of [408, 425, 429, 500, 502, 503, 504]) {
+      let calls = 0;
+
+      const delays = [];
+
+      const fetchWithRetry =
+        createFetchWithRetry(
+          async () => {
+            calls += 1;
+            return calls === 1
+              ? response(status)
+              : response(200);
+          },
+          delays
+        );
+
+      const result =
+        await fetchWithRetry(
+          "https://example.test/api"
+        );
+
+      assert.equal(result.status, 200, `HTTP ${status}`);
+      assert.equal(calls, 2, `HTTP ${status} should retry once`);
+      assert.deepEqual(delays, [1500], `HTTP ${status} delay`);
+    }
+  }
+);
+
+test(
   "429 응답은 Retry-After 초 단위를 따른다",
   async () => {
     const queue = [
