@@ -327,8 +327,24 @@ function loadSelectedAreas() {
       return new Set();
     }
 
+    const legacyAreaAliases = {
+      "광주": "광주특별시",
+      "광주광역시": "광주특별시",
+      "전남": "광주특별시",
+      "전라남도": "광주특별시",
+      "전남광주통합": "광주특별시",
+      "전남광주통합특별시": "광주특별시",
+    };
+
     return new Set(
-      parsed.map(String)
+      parsed
+        .map((value) =>
+          String(value ?? "").trim()
+        )
+        .filter(Boolean)
+        .map((area) =>
+          legacyAreaAliases[area] || area
+        )
     );
   } catch {
     return new Set();
