@@ -22,7 +22,7 @@
  */
 
 
-import { writeFile } from "fs/promises";
+import { rename, writeFile } from "fs/promises";
 
 
 function logSanitizedError(
@@ -803,12 +803,17 @@ function xmlTotalCount(
       ]
     );
 
+  if (!value) {
+    return null;
+  }
+
   const count =
     Number(value);
 
-  return Number.isFinite(count)
-    ? count
-    : 0;
+  return Number.isFinite(count) &&
+    count >= 0
+      ? count
+      : null;
 }
 
 
@@ -1227,13 +1232,41 @@ async function fetchCultureStandardFestivals() {
       response?.header ||
       {};
 
+    const rawResultCode =
+      header.resultCode;
 
-    const resultCode =
-      String(
-        header.resultCode ??
-        "00"
+    if (
+      rawResultCode === null ||
+      rawResultCode === undefined ||
+      String(rawResultCode).trim() === ""
+    ) {
+      logSanitizedError(
+        "문화축제 표준데이터 응답에 resultCode가 없습니다:",
+        JSON.stringify(
+          json
+        ).slice(
+          0,
+          1500
+        )
       );
 
+      sourceStatus.culture =
+        false;
+
+      break;
+    }
+
+    const resultCode =
+      String(rawResultCode).trim();
+
+    // 공공데이터포털의 03은 정상적인 조회 결과 없음 코드다.
+    if (resultCode === "03") {
+      console.log(
+        "문화축제 표준데이터: 조회 결과 없음"
+      );
+
+      break;
+    }
 
     if (
       resultCode !== "00" &&
@@ -1255,10 +1288,28 @@ async function fetchCultureStandardFestivals() {
       break;
     }
 
-
     const body =
-      response?.body ||
-      {};
+      response?.body;
+
+    if (
+      !body ||
+      typeof body !== "object"
+    ) {
+      logSanitizedError(
+        "문화축제 표준데이터 응답에 body가 없습니다:",
+        JSON.stringify(
+          json
+        ).slice(
+          0,
+          1500
+        )
+      );
+
+      sourceStatus.culture =
+        false;
+
+      break;
+    }
 
 
     const rawItems =
@@ -2339,10 +2390,15 @@ async function fetchCulturePortalByServiceType(
         break;
       }
 
-
-      logSanitizedError(
-        `문화포털 ${serviceTp}: XML 반복 데이터 블록을 찾지 못했습니다.`
-      );
+      if (totalCount === null) {
+        logSanitizedError(
+          `문화포털 ${serviceTp}: 응답에 유효한 totalCount가 없습니다.`
+        );
+      } else {
+        logSanitizedError(
+          `문화포털 ${serviceTp}: totalCount는 ${totalCount}건인데 XML 데이터 블록이 없습니다.`
+        );
+      }
 
       logSanitizedError(
         xml.slice(
@@ -3074,6 +3130,73 @@ async function fetchKopisPerformances() {
           false;
 
         hasRequestFailure = true;
+
+        break;
+      }
+
+      const resultCode =
+        xmlResultCode(
+          xml
+        );
+
+      const hasResponseEnvelope =
+        /<dbs\b[^>]*>/i.test(
+          xml
+        );
+
+      const isNoDataResponse =
+        resultCode === "04" ||
+        /NODATA ERROR/i.test(
+          xml
+        );
+
+      if (
+        resultCode &&
+        resultCode !== "00" &&
+        resultCode !== "0" &&
+        !isNoDataResponse
+      ) {
+        logSanitizedError(
+          "KOPIS 응답 오류:",
+          resultCode,
+          xml.slice(
+            0,
+            1500
+          )
+        );
+
+        sourceStatus.kopis =
+          false;
+
+        hasRequestFailure = true;
+
+        break;
+      }
+
+      if (
+        !hasResponseEnvelope &&
+        !isNoDataResponse
+      ) {
+        logSanitizedError(
+          "KOPIS 응답 형식 이상: dbs 데이터 영역이 없습니다.",
+          xml.slice(
+            0,
+            1500
+          )
+        );
+
+        sourceStatus.kopis =
+          false;
+
+        hasRequestFailure = true;
+
+        break;
+      }
+
+      if (isNoDataResponse) {
+        console.log(
+          `KOPIS ${stdate} ~ ${eddate}: 조회 결과 없음`
+        );
 
         break;
       }
@@ -4192,14 +4315,27 @@ async function main() {
   };
 
 
-  await writeFile(
-    "festivals.json",
+  // 같은 디렉터리의 임시 파일을 완성한 뒤 rename으로 교체한다.
+  // 프로세스가 저장 도중 중단되어도 기존 festivals.json은 그대로 남는다.
+  const serializedPayload =
     JSON.stringify(
       payload,
       null,
       2
-    ),
+    );
+
+  const temporaryPath =
+    "festivals.json.tmp";
+
+  await writeFile(
+    temporaryPath,
+    serializedPayload,
     "utf-8"
+  );
+
+  await rename(
+    temporaryPath,
+    "festivals.json"
   );
 
 
