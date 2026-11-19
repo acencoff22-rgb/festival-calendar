@@ -1362,13 +1362,70 @@ function isFestivalInWeekendMode(
 // ------------------------------------------------------
 
 function compareFestivalStart(a, b) {
-  const aStart = getFestivalStartDate(a);
-  const bStart = getFestivalStartDate(b);
+  const aStart =
+    getFestivalStartDate(a);
+
+  const bStart =
+    getFestivalStartDate(b);
 
   if (!aStart && !bStart) return 0;
   if (!aStart) return 1;
   if (!bStart) return -1;
 
+  const aEnded =
+    isFestivalEnded(a);
+
+  const bEnded =
+    isFestivalEnded(b);
+
+  // 진행 중이거나 앞으로 열릴 행사를 과거 행사보다 먼저 보여준다.
+  if (aEnded !== bEnded) {
+    return aEnded
+      ? 1
+      : -1;
+  }
+
+  const aOngoing =
+    isFestivalOngoing(a);
+
+  const bOngoing =
+    isFestivalOngoing(b);
+
+  // 현재 진행 중인 행사는 종료가 임박한 순서로 우선 노출한다.
+  if (aOngoing && bOngoing) {
+    const aEnd =
+      getFestivalEndDate(a);
+
+    const bEnd =
+      getFestivalEndDate(b);
+
+    const endDiff =
+      aEnd - bEnd;
+
+    if (endDiff !== 0) {
+      return endDiff;
+    }
+  }
+
+  // 종료된 행사는 가장 최근에 끝난 순서로 뒤쪽에 모은다.
+  if (aEnded && bEnded) {
+    const aEnd =
+      getFestivalEndDate(a);
+
+    const bEnd =
+      getFestivalEndDate(b);
+
+    const endDiff =
+      bEnd - aEnd;
+
+    if (endDiff !== 0) {
+      return endDiff;
+    }
+
+    return bStart.getTime() - aStart.getTime();
+  }
+
+  // 진행 중인 행사가 아닌 경우에는 시작일이 빠른 순서다.
   return aStart.getTime() - bStart.getTime();
 }
 
