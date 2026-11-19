@@ -51,6 +51,7 @@ function createFetchWithRetry(
 ) {
   const context = {
     fetch: mockFetch,
+    Response,
 
     AbortSignal: {
       timeout(milliseconds) {
@@ -94,12 +95,14 @@ function response(
 ) {
   return {
     status,
-    headers: {
-      get(name) {
-        return name.toLowerCase() === "retry-after"
-          ? retryAfter
-          : null;
-      },
+    statusText: status === 200 ? "OK" : "HTTP Error",
+    headers: new Headers(
+      retryAfter
+        ? { "retry-after": retryAfter }
+        : {}
+    ),
+    async text() {
+      return "";
     },
   };
 }
@@ -215,6 +218,50 @@ test(
 
     assert.equal(result.status, 200);
     assert.deepEqual(delays, [30000]);
+  }
+);
+
+test(
+  "응답 본문을 읽는 중 네트워크 오류가 나도 재시도한다",
+  async () => {
+    let calls = 0;
+    const delays = [];
+
+    const fetchWithRetry =
+      createFetchWithRetry(
+        async () => {
+          calls += 1;
+
+          return {
+            status: 200,
+            statusText: "OK",
+            headers: new Headers({
+              "content-type": "text/plain",
+            }),
+            async text() {
+              if (calls === 1) {
+                throw new Error("response body interrupted");
+              }
+
+              return "complete response";
+            },
+          };
+        },
+        delays
+      );
+
+    const result =
+      await fetchWithRetry(
+        "https://example.test/api"
+      );
+
+    assert.equal(result.status, 200);
+    assert.equal(
+      await result.text(),
+      "complete response"
+    );
+    assert.equal(calls, 2);
+    assert.deepEqual(delays, [1500]);
   }
 );
 
