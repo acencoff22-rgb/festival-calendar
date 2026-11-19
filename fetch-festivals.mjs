@@ -43,6 +43,64 @@ function logSanitizedError(
 // 바로 그 소스 전체를 포기하지 않고, 짧은 대기 후 몇 번 더
 // 시도해서 이런 일시적인 장애를 흡수한다.
 
+const RETRYABLE_HTTP_STATUSES = new Set([
+  408,
+  425,
+  429,
+  500,
+  502,
+  503,
+  504,
+]);
+
+
+function getRetryDelayMs(
+  response,
+  fallbackMs
+) {
+  const retryAfter =
+    String(
+      response?.headers?.get?.("retry-after") || ""
+    ).trim();
+
+  let requestedDelay = null;
+
+  if (
+    /^\d+(?:\.\d+)?$/.test(
+      retryAfter
+    )
+  ) {
+    requestedDelay =
+      Number(retryAfter) * 1000;
+  } else if (retryAfter) {
+    const retryAt =
+      Date.parse(
+        retryAfter
+      );
+
+    if (
+      Number.isFinite(retryAt)
+    ) {
+      requestedDelay =
+        retryAt - Date.now();
+    }
+  }
+
+  // Retry-After를 존중하되 한 번의 대기로 작업이 무기한 멈추지 않게 제한한다.
+  const delay =
+    requestedDelay ??
+    fallbackMs;
+
+  return Math.min(
+    Math.max(
+      delay,
+      0
+    ),
+    30000
+  );
+}
+
+
 async function fetchWithRetry(
   url,
   {
@@ -59,30 +117,62 @@ async function fetchWithRetry(
     attempt += 1
   ) {
     try {
-      return await fetch(
-        url,
-        {
-          // 응답 헤더나 본문이 무기한 대기하는 상황을 방지한다.
-          // 각 재시도마다 새 timeout signal을 생성한다.
-          signal: AbortSignal.timeout(
-            timeoutMs
-          ),
-        }
-      );
-    } catch (error) {
-      lastError = error;
+      const response =
+        await fetch(
+          url,
+          {
+            // 응답 헤더나 본문이 무기한 대기하는 상황을 방지한다.
+            // 각 재시도마다 새 timeout signal을 생성한다.
+            signal: AbortSignal.timeout(
+              timeoutMs
+            ),
+          }
+        );
 
-      if (attempt < retries) {
+      if (
+        RETRYABLE_HTTP_STATUSES.has(
+          response.status
+        ) &&
+        attempt < retries
+      ) {
+        const waitMs =
+          getRetryDelayMs(
+            response,
+            delayMs * (attempt + 1)
+          );
+
         logSanitizedError(
-          `요청 실패, 재시도 ${attempt + 1}/${retries} (${delayMs * (attempt + 1)}ms 후): ${redactApiSecrets(error.message || error)}`
+          `HTTP ${response.status} 응답, 재시도 ${attempt + 1}/${retries} (${waitMs}ms 후)`
         );
 
         await new Promise(
           (resolve) =>
             setTimeout(
               resolve,
-              delayMs *
-                (attempt + 1)
+              waitMs
+            )
+        );
+
+        continue;
+      }
+
+      return response;
+    } catch (error) {
+      lastError = error;
+
+      if (attempt < retries) {
+        const waitMs =
+          delayMs * (attempt + 1);
+
+        logSanitizedError(
+          `요청 실패, 재시도 ${attempt + 1}/${retries} (${waitMs}ms 후): ${redactApiSecrets(error.message || error)}`
+        );
+
+        await new Promise(
+          (resolve) =>
+            setTimeout(
+              resolve,
+              waitMs
             )
         );
       }
