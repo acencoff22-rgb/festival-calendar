@@ -41,13 +41,13 @@ vm.runInContext(
 
   function getFestivalStartDate(event) {
     return event?.startDate
-      ? new Date(`${event.startDate}T00:00:00Z`)
+      ? new Date(event.startDate + "T00:00:00Z")
       : null;
   }
 
   function getFestivalEndDate(event) {
     return event?.endDate
-      ? new Date(`${event.endDate}T00:00:00Z`)
+      ? new Date(event.endDate + "T00:00:00Z")
       : getFestivalStartDate(event);
   }
 
