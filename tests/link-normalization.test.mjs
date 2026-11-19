@@ -10,7 +10,7 @@ const source = (await readFile(
 
 const start = source.indexOf("function normalizeHttpUrl(value)");
 const end = source.indexOf(
-  "function eventLink(",
+  "// ------------------------------------------------------\n// 검색 대상 텍스트",
   start
 );
 
