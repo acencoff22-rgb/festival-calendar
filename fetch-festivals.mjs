@@ -3661,7 +3661,7 @@ function normalizeVenueName(raw) {
   return String(raw || "")
     .normalize("NFKC")
     .toLowerCase()
-    .replace(/[^\\p{L}\\p{N}]/gu, "")
+    .replace(/[^\p{L}\p{N}]/gu, "")
     .trim();
 }
 
