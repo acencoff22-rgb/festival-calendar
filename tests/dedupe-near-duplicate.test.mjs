@@ -344,3 +344,50 @@ test(
   }
 );
 
+test(
+  "축제와 공연으로 분류된 동명·동일 날짜 항목은 자동 병합하지 않는다",
+  () => {
+    const festivalRecord = festival({
+      type: "festival",
+      title: "같은 제목",
+      startDate: "2026-12-01",
+      endDate: "2026-12-03",
+    });
+
+    const performanceRecord = festival({
+      type: "performance",
+      title: "같은 제목",
+      startDate: "2026-12-01",
+      endDate: "2026-12-03",
+    });
+
+    assert.equal(
+      context.__locationsClearlyDifferent(
+        festivalRecord,
+        performanceRecord
+      ),
+      true
+    );
+  }
+);
+
+test(
+  "한쪽 출처의 행사 유형이 비어 있으면 유형 차이만으로 병합을 차단하지 않는다",
+  () => {
+    const typed = festival({
+      type: "festival",
+      title: "같은 제목",
+    });
+
+    const untyped = festival({
+      type: null,
+      title: "같은 제목",
+    });
+
+    assert.equal(
+      context.__locationsClearlyDifferent(typed, untyped),
+      false
+    );
+  }
+);
+
