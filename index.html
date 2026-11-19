@@ -2292,12 +2292,14 @@
   </div>
 
 
-  <div class="view-toggle">
+  <div class="view-toggle" role="group" aria-label="행사 보기 방식">
 
     <button
       id="btnUrgentView"
       class="active"
       type="button"
+      aria-pressed="true"
+      aria-controls="urgentView"
     >
       🔥 다가오는 일정
     </button>
@@ -2305,6 +2307,8 @@
     <button
       id="btnListView"
       type="button"
+      aria-pressed="false"
+      aria-controls="list"
     >
       📅 월별 목록
     </button>
@@ -2336,6 +2340,8 @@
   class="filter-handle"
   type="button"
   aria-label="검색 및 필터 열기"
+  aria-controls="filterDrawer"
+  aria-haspopup="dialog"
   aria-expanded="false"
 >
   ‹
@@ -2355,12 +2361,18 @@
 <aside
   id="filterDrawer"
   class="filter-drawer"
+  role="dialog"
   aria-label="검색 및 필터"
+  aria-labelledby="filterDrawerTitle"
+  aria-modal="false"
+  aria-hidden="true"
+  inert
+  tabindex="-1"
 >
 
   <div class="filter-header">
 
-    <div class="filter-title">
+    <div id="filterDrawerTitle" class="filter-title">
       검색 · 필터
     </div>
 
