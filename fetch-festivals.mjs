@@ -156,7 +156,21 @@ async function fetchWithRetry(
         continue;
       }
 
-      return response;
+      // 본문 읽기까지 제한 시간 안에 끝나야 성공으로 간주한다.
+      // 응답을 버퍼링한 뒤 새 Response로 감싸 호출부에서도 다시 읽을 수 있게 한다.
+      const responseText =
+        await response.text();
+
+      return new Response(
+        responseText.length > 0
+          ? responseText
+          : null,
+        {
+          status: response.status,
+          statusText: response.statusText,
+          headers: response.headers,
+        }
+      );
     } catch (error) {
       lastError = error;
 
