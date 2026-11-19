@@ -18,7 +18,7 @@ assert.notEqual(start, -1, "URL normalizer must exist");
 assert.notEqual(end, -1, "eventLink boundary must exist");
 
 const helper = source.slice(start, end);
-const context = vm.createContext({});
+const context = vm.createContext({ URL });
 
 vm.runInContext(
   helper +
@@ -89,6 +89,8 @@ test(
       "ftp://example.com/file",
       "//user@example.com/path",
       "https://user@example.com/path",
+      "https://example.com:99999/path",
+      "https://:443/path",
       "../relative/path",
       "not a domain",
       "",
