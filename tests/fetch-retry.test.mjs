@@ -8,6 +8,9 @@ const script = await readFile(
   "utf8"
 );
 
+const normalizedScript =
+  script.replace(/\r\n/g, "\n");
+
 const startMarker =
   "const RETRYABLE_HTTP_STATUSES";
 
@@ -15,10 +18,10 @@ const endMarker =
   "// ======================================================\n// 환경변수";
 
 const start =
-  script.indexOf(startMarker);
+  normalizedScript.indexOf(startMarker);
 
 const end =
-  script.indexOf(
+  normalizedScript.indexOf(
     endMarker,
     start
   );
