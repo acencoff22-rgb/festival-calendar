@@ -39,7 +39,7 @@ assert.notEqual(
 );
 
 const helperSource =
-  script.slice(
+  normalizedScript.slice(
     start,
     end
   );
