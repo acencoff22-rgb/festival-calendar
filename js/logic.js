@@ -557,6 +557,23 @@ function normalizeHttpUrl(value) {
     return "";
   }
 
+  // 브라우저 URL 파서로 잘못된 호스트나 포트까지 최종 확인한다.
+  try {
+    const parsed =
+      new URL(candidate);
+
+    if (
+      !["http:", "https:"].includes(parsed.protocol) ||
+      !parsed.hostname ||
+      parsed.username ||
+      parsed.password
+    ) {
+      return "";
+    }
+  } catch {
+    return "";
+  }
+
   return (
     match[1].toLowerCase() +
     "://" +
