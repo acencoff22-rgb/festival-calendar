@@ -29,6 +29,40 @@
 
 
 // ------------------------------------------------------
+// 다이얼로그 내부 초점 순환
+// ------------------------------------------------------
+
+function keepFocusInside(container, event) {
+  const focusable = [
+    ...container.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    ),
+  ].filter(
+    (element) =>
+      element.getClientRects().length > 0
+  );
+
+  if (!focusable.length) {
+    event.preventDefault();
+    container.focus({ preventScroll: true });
+    return;
+  }
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  const focusOutside = !container.contains(document.activeElement);
+
+  if (event.shiftKey && (document.activeElement === first || focusOutside)) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && (document.activeElement === last || focusOutside)) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
+
+// ------------------------------------------------------
 // 필터 패널
 // ------------------------------------------------------
 
@@ -518,16 +552,44 @@ function openAreaModal() {
         );
     });
 
+  const modal =
+    document.getElementById("areaModal");
+
+  const drawer =
+    document.getElementById("filterDrawer");
+
+  modal?.removeAttribute("inert");
+  modal?.setAttribute("aria-hidden", "false");
+  drawer?.setAttribute("aria-modal", "false");
+  modal?.classList.remove("hidden");
+
   document
-    .getElementById("areaModal")
-    ?.classList.remove("hidden");
+    .getElementById("areaModalClose")
+    ?.focus({ preventScroll: true });
 }
 
 
 function closeAreaModal() {
-  document
-    .getElementById("areaModal")
-    ?.classList.add("hidden");
+  const modal =
+    document.getElementById("areaModal");
+
+  const drawer =
+    document.getElementById("filterDrawer");
+
+  modal?.classList.add("hidden");
+  modal?.setAttribute("aria-hidden", "true");
+  modal?.setAttribute("inert", "");
+
+  if (filterDrawerOpen) {
+    drawer?.setAttribute("aria-modal", "true");
+    document
+      .getElementById("areaFilterBtn")
+      ?.focus({ preventScroll: true });
+  } else {
+    document
+      .getElementById("filterHandle")
+      ?.focus({ preventScroll: true });
+  }
 }
 
 
@@ -612,42 +674,68 @@ function updateHiddenManageButton() {
 function openHiddenModal() {
   renderHiddenList();
 
-  document
-    .getElementById("hiddenModal")
-    ?.classList.remove("hidden");
+  const modal =
+    document.getElementById("hiddenModal");
 
-  closeFilterDrawer();
+  modal?.removeAttribute("inert");
+  modal?.setAttribute("aria-hidden", "false");
+  modal?.classList.remove("hidden");
+
+  closeFilterDrawer({
+    restoreFocus: false,
+  });
+
+  document
+    .getElementById("hiddenModalClose")
+    ?.focus({ preventScroll: true });
 }
 
 
 function closeHiddenModal() {
+  const modal =
+    document.getElementById("hiddenModal");
+
+  modal?.classList.add("hidden");
+  modal?.setAttribute("aria-hidden", "true");
+  modal?.setAttribute("inert", "");
+
   document
-    .getElementById("hiddenModal")
-    ?.classList.add("hidden");
+    .getElementById("filterHandle")
+    ?.focus({ preventScroll: true });
 }
 
 
 function openExcludeKeywordModal() {
   renderExcludeKeywordList();
 
-  document
-    .getElementById(
-      "excludeKeywordModal"
-    )
-    ?.classList.remove(
-      "hidden"
-    );
+  const modal =
+    document.getElementById("excludeKeywordModal");
 
-  closeFilterDrawer();
+  modal?.removeAttribute("inert");
+  modal?.setAttribute("aria-hidden", "false");
+  modal?.classList.remove("hidden");
+
+  closeFilterDrawer({
+    restoreFocus: false,
+  });
+
+  document
+    .getElementById("excludeKeywordModalClose")
+    ?.focus({ preventScroll: true });
 }
 
 
 function closeExcludeKeywordModal() {
+  const modal =
+    document.getElementById("excludeKeywordModal");
+
+  modal?.classList.add("hidden");
+  modal?.setAttribute("aria-hidden", "true");
+  modal?.setAttribute("inert", "");
+
   document
-    .getElementById(
-      "excludeKeywordModal"
-    )
-    ?.classList.add("hidden");
+    .getElementById("filterHandle")
+    ?.focus({ preventScroll: true });
 }
 
 
@@ -2194,6 +2282,32 @@ function setupActions() {
   document.addEventListener(
     "keydown",
     (e) => {
+      const openModals = [
+        ...document.querySelectorAll(".modal-backdrop"),
+      ].filter(
+        (modal) =>
+          !modal.classList.contains("hidden")
+      );
+
+      const activeModal =
+        openModals[openModals.length - 1];
+
+      if (activeModal) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          activeModal
+            .querySelector(".modal-close")
+            ?.click();
+          return;
+        }
+
+        if (e.key === "Tab") {
+          keepFocusInside(activeModal, e);
+        }
+
+        return;
+      }
+
       if (!filterDrawerOpen) {
         return;
       }
@@ -2204,45 +2318,8 @@ function setupActions() {
         return;
       }
 
-      if (e.key !== "Tab") {
-        return;
-      }
-
-      const focusable = [
-        ...filterDrawer.querySelectorAll(
-          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        ),
-      ].filter(
-        (element) =>
-          element.getClientRects().length > 0
-      );
-
-      if (!focusable.length) {
-        e.preventDefault();
-        filterDrawer.focus({
-          preventScroll: true,
-        });
-        return;
-      }
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (
-        e.shiftKey &&
-        (
-          document.activeElement === first ||
-          !filterDrawer.contains(document.activeElement)
-        )
-      ) {
-        e.preventDefault();
-        last.focus();
-      } else if (
-        !e.shiftKey &&
-        document.activeElement === last
-      ) {
-        e.preventDefault();
-        first.focus();
+      if (e.key === "Tab") {
+        keepFocusInside(filterDrawer, e);
       }
     }
   );
