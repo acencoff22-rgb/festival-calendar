@@ -2134,6 +2134,8 @@
       right: 0;
       bottom: 0;
       width: 100%;
+      /* height:auto would retain the aside's document-flow static position. */
+      height: max-content;
       max-height: min(88vh, 780px);
       max-height: min(88dvh, 780px);
       -webkit-overflow-scrolling: touch;
