@@ -133,3 +133,46 @@ test(
   }
 );
 
+
+
+test(
+  "전체 행사 데이터의 상세 링크와 이미지 링크가 안전한 HTTP(S) 주소로 정규화된다",
+  async () => {
+    const payload = JSON.parse(
+      await readFile(
+        new URL("../festivals.json", import.meta.url),
+        "utf8"
+      )
+    );
+
+    let checkedDetailUrls = 0;
+    let checkedThumbnails = 0;
+
+    for (const item of payload.festivals) {
+      if (item.detailUrl) {
+        const normalized = normalizeHttpUrl(item.detailUrl);
+
+        assert.ok(
+          /^https?:\/\//i.test(normalized),
+          `unsafe detailUrl: ${item.id} → ${item.detailUrl}`
+        );
+
+        checkedDetailUrls += 1;
+      }
+
+      if (item.thumbnail) {
+        const normalized = normalizeHttpUrl(item.thumbnail);
+
+        assert.ok(
+          /^https?:\/\//i.test(normalized),
+          `unsafe thumbnail: ${item.id} → ${item.thumbnail}`
+        );
+
+        checkedThumbnails += 1;
+      }
+    }
+
+    assert.ok(checkedDetailUrls > 0);
+    assert.ok(checkedThumbnails > 0);
+  }
+);
