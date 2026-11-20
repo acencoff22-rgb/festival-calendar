@@ -195,6 +195,7 @@ try {
       height: 844,
     },
     deviceScaleFactor: 1,
+    isMobile: true,
     hasTouch: true,
   });
 
@@ -272,35 +273,8 @@ try {
       scrollY: window.scrollY,
       visualViewportTop: window.visualViewport?.offsetTop ?? null,
       visualViewportHeight: window.visualViewport?.height ?? null,
-      documentHeight: document.documentElement.scrollHeight,
-      bodyHeight: document.body.scrollHeight,
       borderRadius: style.borderTopLeftRadius,
       position: style.position,
-      ancestors: (() => {
-        const result = [];
-        let current = element.parentElement;
-
-        while (current) {
-          const parentStyle = getComputedStyle(current);
-
-          result.push({
-            tag: current.tagName,
-            id: current.id,
-            className: String(current.className || ""),
-            position: parentStyle.position,
-            transform: parentStyle.transform,
-            filter: parentStyle.filter,
-            perspective: parentStyle.perspective,
-            contain: parentStyle.contain,
-            willChange: parentStyle.willChange,
-            zoom: parentStyle.zoom,
-          });
-
-          current = current.parentElement;
-        }
-
-        return result;
-      })(),
     };
   });
 
