@@ -65,7 +65,7 @@ try {
       !updatedAt.includes("불러오는 중") &&
       Boolean(urgentView?.textContent.trim())
     );
-  }, {
+  }, null, {
     timeout: 45_000,
   });
 
@@ -221,7 +221,7 @@ try {
       Boolean(updatedAt.trim()) &&
       !updatedAt.includes("불러오는 중")
     );
-  }, {
+  }, null, {
     timeout: 45_000,
   });
 
