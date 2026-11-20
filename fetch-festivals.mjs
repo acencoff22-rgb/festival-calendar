@@ -4212,7 +4212,7 @@ function logDuplicateCandidates(
                 b.lat,
                 b.lon
               ),
-              reason: "동일 기간·지역에서 장소 표기가 다른 항목",
+              reason: "동일 기간·지역에서 장소·좌표 정보가 다른 항목",
             });
           }
 
