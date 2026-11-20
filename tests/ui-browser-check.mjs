@@ -23,6 +23,7 @@ await mkdir(artifactDir, {
 });
 
 const browser = await chromium.launch({
+  channel: "chrome",
   headless: true,
 });
 
