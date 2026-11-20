@@ -2130,12 +2130,13 @@
     }
 
     .filter-drawer {
-      top: auto;
+      top: calc(100vh - min(88vh, 780px));
+      top: calc(100dvh - min(88dvh, 780px));
       right: 0;
-      bottom: 0;
+      bottom: auto;
       width: 100%;
-      /* height:auto would retain the aside's document-flow static position. */
-      height: max-content;
+      height: min(88vh, 780px);
+      height: min(88dvh, 780px);
       max-height: min(88vh, 780px);
       max-height: min(88dvh, 780px);
       -webkit-overflow-scrolling: touch;
