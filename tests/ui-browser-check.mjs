@@ -226,9 +226,13 @@ try {
     timeout: 45_000,
   });
 
+  await mobile.evaluate(() => {
+    window.scrollTo(0, 0);
+  });
+
   await mobile.screenshot({
     path: `${artifactDir}/mobile-overview.png`,
-    fullPage: true,
+    fullPage: false,
   });
 
   const mobileHandle = mobile.locator("#filterHandle");
@@ -251,6 +255,9 @@ try {
       bottom: rect.bottom,
       viewportWidth: window.innerWidth,
       viewportHeight: window.innerHeight,
+      scrollY: window.scrollY,
+      visualViewportTop: window.visualViewport?.offsetTop ?? null,
+      visualViewportHeight: window.visualViewport?.height ?? null,
       borderRadius: style.borderTopLeftRadius,
       position: style.position,
     };
@@ -265,10 +272,20 @@ try {
     mobileGeometry.height <= mobileGeometry.viewportHeight * 0.9,
     `Mobile filter drawer should stay within the viewport: ${JSON.stringify(mobileGeometry)}`
   );
+  assert.ok(
+    mobileGeometry.top >= -1 &&
+      mobileGeometry.top < mobileGeometry.viewportHeight &&
+      mobileGeometry.bottom <= mobileGeometry.viewportHeight + 1,
+    `Mobile filter drawer must be visible inside the viewport: ${JSON.stringify(mobileGeometry)}`
+  );
+  assert.ok(
+    Math.abs(mobileGeometry.bottom - mobileGeometry.viewportHeight) <= 2,
+    `Mobile filter drawer must align with the viewport bottom: ${JSON.stringify(mobileGeometry)}`
+  );
 
   await mobile.screenshot({
     path: `${artifactDir}/mobile-filter-open.png`,
-    fullPage: true,
+    fullPage: false,
   });
 
   await mobile.locator("#filterClose").click();
