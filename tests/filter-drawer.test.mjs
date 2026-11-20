@@ -130,7 +130,8 @@ async function createDrawerContext() {
   });
 
   vm.runInContext(
-    helper +
+    "let filterDrawerOpen = false;\nlet filterPointerState = null;\n" +
+      helper +
       "\nglobalThis.__openFilterDrawer = openFilterDrawer;" +
       "\nglobalThis.__closeFilterDrawer = closeFilterDrawer;" +
       "\nglobalThis.__isFilterDrawerOpen = () => filterDrawerOpen;",
