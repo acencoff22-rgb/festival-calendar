@@ -447,3 +447,52 @@ test(
     );
   }
 );
+
+
+test(
+  "문화축제 표준데이터의 상세 장소명으로 누락 지역을 보완한다",
+  async () => {
+    const source = (await readProjectFile("fetch-festivals.mjs"))
+      .replace(/\r\n/g, "\n");
+
+    const codeMap = sliceBetween(
+      source,
+      "const AREA_NAME_BY_CODE =",
+      "// ======================================================\n// 제목 정규화"
+    );
+
+    const areaHelpers = sliceBetween(
+      source,
+      "const CANONICAL_AREA_MAP =",
+      "// ======================================================\n// 날짜"
+    );
+
+    const context = vm.createContext({});
+
+    vm.runInContext(
+      codeMap +
+        "\n" +
+        areaHelpers +
+        "\nglobalThis.__deriveAreaFromAddress = deriveAreaFromAddress;",
+      context
+    );
+
+    const cases = [
+      ["울릉군 도동항", "경북"],
+      ["울릉군 저동항", "경북"],
+      ["울릉군 일원", "경북"],
+      ["충남 계룡시일원(계룡대 활주로 및 시가지)", "충남"],
+      ["화랑대 철도공원 일원", "서울"],
+      ["노원역 일원(KB국민은행/롯데백화점)", "서울"],
+      ["당현천 일원(상계역~중계역)", "서울"],
+    ];
+
+    for (const [location, expected] of cases) {
+      assert.equal(
+        context.__deriveAreaFromAddress(location),
+        expected,
+        location
+      );
+    }
+  }
+);
