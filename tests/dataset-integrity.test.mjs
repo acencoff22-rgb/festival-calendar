@@ -82,6 +82,10 @@ test(
         typeof item.title === "string" && item.title.trim(),
         `title: row ${index}`
       );
+      assert.ok(
+        typeof item.area === "string" && item.area.trim(),
+        `area: row ${index}`
+      );
       assert.ok(isValidDate(item.startDate), `startDate: ${item.id}`);
       assert.ok(isValidDate(item.endDate), `endDate: ${item.id}`);
       assert.ok(
