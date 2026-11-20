@@ -359,6 +359,88 @@ function normalizeText(value) {
 }
 
 
+
+function normalizeExternalUrl(value) {
+  const raw =
+    String(value ?? "").trim();
+
+  if (!raw) {
+    return "";
+  }
+
+  // 일부 공공데이터는 기관 홈페이지와 행사 홈페이지를
+  // "주소 / 주소" 형태로 한 필드에 함께 저장한다.
+  // 뒤쪽 주소가 행사 전용 페이지인 경우가 많아 뒤에서부터 검사한다.
+  const candidates =
+    raw
+      .split(/\s+\/\s+|\r?\n/)
+      .map((candidate) => candidate.trim())
+      .filter(Boolean);
+
+  for (const part of candidates.reverse()) {
+    let candidate = part;
+
+    if (candidate.startsWith("//")) {
+      candidate = `https:${candidate}`;
+    } else if (/^www\./i.test(candidate)) {
+      candidate = `https://${candidate}`;
+    } else if (/^https?:\/(?!\/)/i.test(candidate)) {
+      candidate = candidate.replace(
+        /^(https?):\//i,
+        "$1://"
+      );
+    } else if (
+      !/^[a-z][a-z\d+.-]*:/i.test(candidate) &&
+      /^[^\s/?#]+\.[^\s/?#]+(?::\d+)?(?:[/?#][^\s]*)?$/.test(candidate)
+    ) {
+      candidate = `https://${candidate}`;
+    }
+
+    const match = candidate.match(
+      /^(https?):\/\/([^/?#]+)([\s\S]*)$/i
+    );
+
+    if (!match) {
+      continue;
+    }
+
+    const authority = match[2];
+
+    if (
+      !authority ||
+      /[\s\\<>]/.test(authority) ||
+      authority.includes("@")
+    ) {
+      continue;
+    }
+
+    try {
+      const parsed = new URL(candidate);
+
+      if (
+        !["http:", "https:"].includes(parsed.protocol) ||
+        !parsed.hostname ||
+        parsed.username ||
+        parsed.password
+      ) {
+        continue;
+      }
+    } catch {
+      continue;
+    }
+
+    return (
+      match[1].toLowerCase() +
+      "://" +
+      authority +
+      match[3]
+    );
+  }
+
+  return "";
+}
+
+
 // ======================================================
 // 지역명 정규화
 // ======================================================
@@ -4930,6 +5012,18 @@ async function main() {
   let merged =
     dedupe(
       allItems
+    );
+
+  // 주소 형식이 여러 개 섞인 원본 값을 정리하고, 안전하지 않은 링크는 비운다.
+  merged =
+    merged.map(
+      (item) => ({
+        ...item,
+        detailUrl:
+          normalizeExternalUrl(item.detailUrl) || null,
+        thumbnail:
+          normalizeExternalUrl(item.thumbnail) || null,
+      })
     );
 
 
