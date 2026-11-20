@@ -17,11 +17,21 @@
  *   CULTURE_PORTAL_API_KEY
  *   KOPIS_API_KEY
  *
- * API 키가 없는 소스는 건너뜁니다.
+ * GitHub Actions에서 필수 API 키가 하나라도 없으면 갱신을 중단합니다.
+ * 로컬 실행 시에는 API 키가 없는 소스만 건너뜁니다.
  */
 
 
-import { writeFile } from "fs/promises";
+import { rename, writeFile } from "fs/promises";
+
+
+function logSanitizedError(
+  ...values
+) {
+  console.error(
+    ...values.map(redactApiSecrets)
+  );
+}
 
 
 // ======================================================
@@ -33,11 +43,70 @@ import { writeFile } from "fs/promises";
 // 바로 그 소스 전체를 포기하지 않고, 짧은 대기 후 몇 번 더
 // 시도해서 이런 일시적인 장애를 흡수한다.
 
+const RETRYABLE_HTTP_STATUSES = new Set([
+  408,
+  425,
+  429,
+  500,
+  502,
+  503,
+  504,
+]);
+
+
+function getRetryDelayMs(
+  response,
+  fallbackMs
+) {
+  const retryAfter =
+    String(
+      response?.headers?.get?.("retry-after") || ""
+    ).trim();
+
+  let requestedDelay = null;
+
+  if (
+    /^\d+(?:\.\d+)?$/.test(
+      retryAfter
+    )
+  ) {
+    requestedDelay =
+      Number(retryAfter) * 1000;
+  } else if (retryAfter) {
+    const retryAt =
+      Date.parse(
+        retryAfter
+      );
+
+    if (
+      Number.isFinite(retryAt)
+    ) {
+      requestedDelay =
+        retryAt - Date.now();
+    }
+  }
+
+  // Retry-After를 존중하되 한 번의 대기로 작업이 무기한 멈추지 않게 제한한다.
+  const delay =
+    requestedDelay ??
+    fallbackMs;
+
+  return Math.min(
+    Math.max(
+      delay,
+      0
+    ),
+    30000
+  );
+}
+
+
 async function fetchWithRetry(
   url,
   {
     retries = 2,
     delayMs = 1500,
+    timeoutMs = 60000,
   } = {}
 ) {
   let lastError;
@@ -48,23 +117,76 @@ async function fetchWithRetry(
     attempt += 1
   ) {
     try {
-      return await fetch(
-        url
-      );
-    } catch (error) {
-      lastError = error;
+      const response =
+        await fetch(
+          url,
+          {
+            // 응답 헤더나 본문이 무기한 대기하는 상황을 방지한다.
+            // 각 재시도마다 새 timeout signal을 생성한다.
+            signal: AbortSignal.timeout(
+              timeoutMs
+            ),
+          }
+        );
 
-      if (attempt < retries) {
-        console.error(
-          `요청 실패, 재시도 ${attempt + 1}/${retries} (${delayMs * (attempt + 1)}ms 후): ${error.message || error}`
+      if (
+        RETRYABLE_HTTP_STATUSES.has(
+          response.status
+        ) &&
+        attempt < retries
+      ) {
+        const waitMs =
+          getRetryDelayMs(
+            response,
+            delayMs * (attempt + 1)
+          );
+
+        logSanitizedError(
+          `HTTP ${response.status} 응답, 재시도 ${attempt + 1}/${retries} (${waitMs}ms 후)`
         );
 
         await new Promise(
           (resolve) =>
             setTimeout(
               resolve,
-              delayMs *
-                (attempt + 1)
+              waitMs
+            )
+        );
+
+        continue;
+      }
+
+      // 본문 읽기까지 제한 시간 안에 끝나야 성공으로 간주한다.
+      // 응답을 버퍼링한 뒤 새 Response로 감싸 호출부에서도 다시 읽을 수 있게 한다.
+      const responseText =
+        await response.text();
+
+      return new Response(
+        responseText.length > 0
+          ? responseText
+          : null,
+        {
+          status: response.status,
+          statusText: response.statusText,
+          headers: response.headers,
+        }
+      );
+    } catch (error) {
+      lastError = error;
+
+      if (attempt < retries) {
+        const waitMs =
+          delayMs * (attempt + 1);
+
+        logSanitizedError(
+          `요청 실패, 재시도 ${attempt + 1}/${retries} (${waitMs}ms 후): ${redactApiSecrets(error.message || error)}`
+        );
+
+        await new Promise(
+          (resolve) =>
+            setTimeout(
+              resolve,
+              waitMs
             )
         );
       }
@@ -90,6 +212,44 @@ const CULTURE_PORTAL_API_KEY =
 
 const KOPIS_API_KEY =
   process.env.KOPIS_API_KEY || "";
+
+
+// ======================================================
+// API 인증키 로그 마스킹
+// ======================================================
+
+const API_SECRET_VALUES = [
+  TOUR_API_KEY,
+  CULTURE_API_KEY,
+  CULTURE_PORTAL_API_KEY,
+  KOPIS_API_KEY,
+].filter(Boolean);
+
+
+function redactApiSecrets(
+  value
+) {
+  let text =
+    String(value ?? "");
+
+  for (const secret of API_SECRET_VALUES) {
+    const variants = [
+      secret,
+      encodeURIComponent(secret),
+      encodeURIComponent(
+        encodeURIComponent(secret)
+      ),
+    ];
+
+    for (const variant of variants) {
+      if (variant) {
+        text = text.split(variant).join("[REDACTED]");
+      }
+    }
+  }
+
+  return text;
+}
 
 
 // ======================================================
@@ -147,7 +307,7 @@ const AREA_NAME_BY_CODE = {
   2: "인천",
   3: "대전",
   4: "대구",
-  5: "광주",
+  5: "광주특별시",
   6: "부산",
   7: "울산",
   8: "세종",
@@ -159,7 +319,7 @@ const AREA_NAME_BY_CODE = {
   35: "경북",
   36: "경남",
   37: "전북",
-  38: "전남",
+  38: "광주특별시",
   39: "제주",
 };
 
@@ -199,6 +359,88 @@ function normalizeText(value) {
 }
 
 
+
+function normalizeExternalUrl(value) {
+  const raw =
+    String(value ?? "").trim();
+
+  if (!raw) {
+    return "";
+  }
+
+  // 일부 공공데이터는 기관 홈페이지와 행사 홈페이지를
+  // "주소 / 주소" 형태로 한 필드에 함께 저장한다.
+  // 뒤쪽 주소가 행사 전용 페이지인 경우가 많아 뒤에서부터 검사한다.
+  const candidates =
+    raw
+      .split(/\s+\/\s+|\r?\n/)
+      .map((candidate) => candidate.trim())
+      .filter(Boolean);
+
+  for (const part of candidates.reverse()) {
+    let candidate = part;
+
+    if (candidate.startsWith("//")) {
+      candidate = `https:${candidate}`;
+    } else if (/^www\./i.test(candidate)) {
+      candidate = `https://${candidate}`;
+    } else if (/^https?:\/(?!\/)/i.test(candidate)) {
+      candidate = candidate.replace(
+        /^(https?):\//i,
+        "$1://"
+      );
+    } else if (
+      !/^[a-z][a-z\d+.-]*:/i.test(candidate) &&
+      /^[^\s/?#]+\.[^\s/?#]+(?::\d+)?(?:[/?#][^\s]*)?$/.test(candidate)
+    ) {
+      candidate = `https://${candidate}`;
+    }
+
+    const match = candidate.match(
+      /^(https?):\/\/([^/?#]+)([\s\S]*)$/i
+    );
+
+    if (!match) {
+      continue;
+    }
+
+    const authority = match[2];
+
+    if (
+      !authority ||
+      /[\s\\<>]/.test(authority) ||
+      authority.includes("@")
+    ) {
+      continue;
+    }
+
+    try {
+      const parsed = new URL(candidate);
+
+      if (
+        !["http:", "https:"].includes(parsed.protocol) ||
+        !parsed.hostname ||
+        parsed.username ||
+        parsed.password
+      ) {
+        continue;
+      }
+    } catch {
+      continue;
+    }
+
+    return (
+      match[1].toLowerCase() +
+      "://" +
+      authority +
+      match[3]
+    );
+  }
+
+  return "";
+}
+
+
 // ======================================================
 // 지역명 정규화
 // ======================================================
@@ -215,7 +457,11 @@ const CANONICAL_AREA_MAP = {
   "대구": "대구",
   "인천광역시": "인천",
   "인천": "인천",
-  "광주광역시": "광주",
+  "전남광주통합특별시": "광주특별시",
+  "전남광주통합": "광주특별시",
+  "광주특별시": "광주특별시",
+  "광주광역시": "광주특별시",
+  "광주": "광주특별시",
   "대전광역시": "대전",
   "대전": "대전",
   "울산광역시": "울산",
@@ -234,8 +480,52 @@ const CANONICAL_AREA_MAP = {
   "전북특별자치도": "전북",
   "전라북도": "전북",
   "전북": "전북",
-  "전라남도": "전남",
-  "전남": "전남",
+  "전라남도": "광주특별시",
+  "전남": "광주특별시",
+  "무안군": "광주특별시",
+  "무안": "광주특별시",
+  "함평군": "광주특별시",
+  "함평": "광주특별시",
+  "해남군": "광주특별시",
+  "해남": "광주특별시",
+  "여수시": "광주특별시",
+  "여수": "광주특별시",
+  "순천시": "광주특별시",
+  "순천": "광주특별시",
+  "광양시": "광주특별시",
+  "광양": "광주특별시",
+  "화순군": "광주특별시",
+  "화순": "광주특별시",
+  "나주시": "광주특별시",
+  "나주": "광주특별시",
+  "목포시": "광주특별시",
+  "목포": "광주특별시",
+  "영암군": "광주특별시",
+  "영암": "광주특별시",
+  "강진군": "광주특별시",
+  "강진": "광주특별시",
+  "완도군": "광주특별시",
+  "완도": "광주특별시",
+  "진도군": "광주특별시",
+  "진도": "광주특별시",
+  "신안군": "광주특별시",
+  "신안": "광주특별시",
+  "장흥군": "광주특별시",
+  "장흥": "광주특별시",
+  "보성군": "광주특별시",
+  "보성": "광주특별시",
+  "곡성군": "광주특별시",
+  "곡성": "광주특별시",
+  "구례군": "광주특별시",
+  "구례": "광주특별시",
+  "고흥군": "광주특별시",
+  "고흥": "광주특별시",
+  "장성군": "광주특별시",
+  "장성": "광주특별시",
+  "담양군": "광주특별시",
+  "담양": "광주특별시",
+  "영광군": "광주특별시",
+  "영광": "광주특별시",
   "경상북도": "경북",
   "경북": "경북",
   "경상남도": "경남",
@@ -301,6 +591,7 @@ function normalizeAreaName(raw) {
 // (짧은 축약형이 아니라 정식 명칭만 검사해서, "경기도 광주시"가
 //  "광주광역시"로 잘못 매칭되는 식의 오탐을 피한다.)
 const FULL_AREA_NAME_KEYWORDS = [
+  "전남광주통합특별시",
   "서울특별시",
   "부산광역시",
   "대구광역시",
@@ -314,6 +605,7 @@ const FULL_AREA_NAME_KEYWORDS = [
   "강원도",
   "충청북도",
   "충청남도",
+  "충남",
   "전북특별자치도",
   "전라북도",
   "전라남도",
@@ -321,6 +613,68 @@ const FULL_AREA_NAME_KEYWORDS = [
   "경상남도",
   "제주특별자치도",
   "제주도",
+];
+
+const INTEGRATED_GWANGJU_LOCALITY_KEYWORDS = [
+  "무안군",
+  "무안",
+  "함평군",
+  "함평",
+  "해남군",
+  "해남",
+  "여수시",
+  "여수",
+  "순천시",
+  "순천",
+  "광양시",
+  "광양",
+  "땅끝마을",
+  "화순군",
+  "화순읍",
+  "화순",
+  "양림동",
+  "양림오거리",
+  "나주시",
+  "나주",
+  "목포시",
+  "목포",
+  "영암군",
+  "영암",
+  "강진군",
+  "강진",
+  "완도군",
+  "완도",
+  "진도군",
+  "진도",
+  "신안군",
+  "신안",
+  "장흥군",
+  "장흥",
+  "보성군",
+  "보성",
+  "곡성군",
+  "곡성",
+  "구례군",
+  "구례",
+  "고흥군",
+  "고흥",
+  "장성군",
+  "장성",
+  "담양군",
+  "담양",
+  "영광군",
+  "영광",
+];
+
+const GYEONGBUK_LOCALITY_KEYWORDS = [
+  "울릉군",
+  "울릉도",
+];
+
+const SEOUL_LOCALITY_KEYWORDS = [
+  "노원역",
+  "화랑대",
+  "당현천",
 ];
 
 function deriveAreaFromAddress(
@@ -346,6 +700,33 @@ function deriveAreaFromAddress(
           keyword
         );
       }
+    }
+
+    if (
+      GYEONGBUK_LOCALITY_KEYWORDS.some(
+        (keyword) =>
+          text.includes(keyword)
+      )
+    ) {
+      return "경북";
+    }
+
+    if (
+      SEOUL_LOCALITY_KEYWORDS.some(
+        (keyword) =>
+          text.includes(keyword)
+      )
+    ) {
+      return "서울";
+    }
+
+    if (
+      INTEGRATED_GWANGJU_LOCALITY_KEYWORDS.some(
+        (keyword) =>
+          text.includes(keyword)
+      )
+    ) {
+      return "광주특별시";
     }
   }
 
@@ -405,11 +786,65 @@ function addMonths(
   const d =
     new Date(date);
 
+  const originalDay =
+    d.getDate();
+
+  // 1일로 이동한 뒤 월을 변경해 월말 날짜 overflow를 방지한다.
+  d.setDate(1);
   d.setMonth(
     d.getMonth() + months
   );
 
+  const lastDayOfTargetMonth =
+    new Date(
+      d.getFullYear(),
+      d.getMonth() + 1,
+      0
+    ).getDate();
+
+  d.setDate(
+    Math.min(
+      originalDay,
+      lastDayOfTargetMonth
+    )
+  );
+
   return d;
+}
+
+
+function isValidCalendarDate(
+  year,
+  month,
+  day
+) {
+  if (
+    !Number.isInteger(year) ||
+    !Number.isInteger(month) ||
+    !Number.isInteger(day) ||
+    year < 1900 ||
+    month < 1 ||
+    month > 12 ||
+    day < 1 ||
+    day > 31
+  ) {
+    return false;
+  }
+
+  const date =
+    new Date(
+      Date.UTC(
+        year,
+        month - 1,
+        day
+      )
+    );
+
+  return (
+    date.getUTCFullYear() === year &&
+    date.getUTCMonth() === month - 1 &&
+    date.getUTCDate() === day
+  );
 }
 
 
@@ -427,6 +862,20 @@ function ymdToIso(
 
   if (
     text.length !== 8
+  ) {
+    return null;
+  }
+
+  const year = Number(text.slice(0, 4));
+  const month = Number(text.slice(4, 6));
+  const day = Number(text.slice(6, 8));
+
+  if (
+    !isValidCalendarDate(
+      year,
+      month,
+      day
+    )
   ) {
     return null;
   }
@@ -454,6 +903,16 @@ function kopisDateToIso(
       );
 
   if (!match) {
+    return null;
+  }
+
+  if (
+    !isValidCalendarDate(
+      Number(match[1]),
+      Number(match[2]),
+      Number(match[3])
+    )
+  ) {
     return null;
   }
 
@@ -669,12 +1128,17 @@ function xmlTotalCount(
       ]
     );
 
+  if (!value) {
+    return null;
+  }
+
   const count =
     Number(value);
 
-  return Number.isFinite(count)
-    ? count
-    : 0;
+  return Number.isFinite(count) &&
+    count >= 0
+      ? count
+      : null;
 }
 
 
@@ -753,7 +1217,7 @@ async function fetchTourApiFestivals() {
           url
         );
     } catch (error) {
-      console.error(
+      logSanitizedError(
         "TourAPI 요청 예외:",
         error
       );
@@ -766,7 +1230,7 @@ async function fetchTourApiFestivals() {
 
 
     if (!res.ok) {
-      console.error(
+      logSanitizedError(
         "TourAPI 요청 실패:",
         res.status,
         (
@@ -790,7 +1254,7 @@ async function fetchTourApiFestivals() {
       json =
         await res.json();
     } catch (error) {
-      console.error(
+      logSanitizedError(
         "TourAPI JSON 파싱 실패:",
         error
       );
@@ -802,12 +1266,49 @@ async function fetchTourApiFestivals() {
     }
 
 
-    const body =
-      json?.response?.body;
+    const apiResponse =
+      json?.response;
 
-    if (!body) {
-      console.error(
-        "TourAPI 응답 형식 이상:",
+    const header =
+      apiResponse?.header ||
+      {};
+
+    const resultCode =
+      String(
+        header.resultCode ?? ""
+      ).trim();
+
+    if (
+      resultCode !== "0000" &&
+      resultCode !== "00"
+    ) {
+      logSanitizedError(
+        "TourAPI 응답 오류:",
+        resultCode || "resultCode 없음",
+        header.resultMsg || "",
+        JSON.stringify(
+          json
+        ).slice(
+          0,
+          1500
+        )
+      );
+
+      sourceStatus.tourapi =
+        false;
+
+      break;
+    }
+
+    const body =
+      apiResponse?.body;
+
+    if (
+      !body ||
+      typeof body !== "object"
+    ) {
+      logSanitizedError(
+        "TourAPI 응답 형식 이상: body가 없습니다.",
         JSON.stringify(
           json
         ).slice(
@@ -845,8 +1346,11 @@ async function fetchTourApiFestivals() {
         );
 
       const end =
-        ymdToIso(
-          item.eventenddate
+        fixReversedDateRange(
+          start,
+          ymdToIso(
+            item.eventenddate
+          )
         );
 
 
@@ -941,12 +1445,23 @@ async function fetchTourApiFestivals() {
         0
       );
 
+    const hasValidTotalCount =
+      Number.isFinite(totalCount) &&
+      totalCount > 0;
+
+    const reachedReportedEnd =
+      hasValidTotalCount &&
+      pageNo * numOfRows >= totalCount;
+
+    // totalCount가 없는 응답은 페이지 크기로 끝을 판단한다.
+    const reachedUnreportedEnd =
+      !hasValidTotalCount &&
+      list.length < numOfRows;
 
     if (
       list.length === 0 ||
-      pageNo *
-        numOfRows >=
-        totalCount
+      reachedReportedEnd ||
+      reachedUnreportedEnd
     ) {
       break;
     }
@@ -1020,7 +1535,7 @@ async function fetchCultureStandardFestivals() {
           url
         );
     } catch (error) {
-      console.error(
+      logSanitizedError(
         "문화축제 표준데이터 요청 예외:",
         error
       );
@@ -1036,7 +1551,7 @@ async function fetchCultureStandardFestivals() {
       const text =
         await res.text();
 
-      console.error(
+      logSanitizedError(
         "문화축제 표준데이터 요청 실패:",
         res.status,
         text.slice(
@@ -1058,7 +1573,7 @@ async function fetchCultureStandardFestivals() {
       json =
         await res.json();
     } catch (error) {
-      console.error(
+      logSanitizedError(
         "문화축제 표준데이터 JSON 파싱 실패:",
         error
       );
@@ -1079,19 +1594,47 @@ async function fetchCultureStandardFestivals() {
       response?.header ||
       {};
 
+    const rawResultCode =
+      header.resultCode;
 
-    const resultCode =
-      String(
-        header.resultCode ??
-        "00"
+    if (
+      rawResultCode === null ||
+      rawResultCode === undefined ||
+      String(rawResultCode).trim() === ""
+    ) {
+      logSanitizedError(
+        "문화축제 표준데이터 응답에 resultCode가 없습니다:",
+        JSON.stringify(
+          json
+        ).slice(
+          0,
+          1500
+        )
       );
 
+      sourceStatus.culture =
+        false;
+
+      break;
+    }
+
+    const resultCode =
+      String(rawResultCode).trim();
+
+    // 공공데이터포털의 03은 정상적인 조회 결과 없음 코드다.
+    if (resultCode === "03") {
+      console.log(
+        "문화축제 표준데이터: 조회 결과 없음"
+      );
+
+      break;
+    }
 
     if (
       resultCode !== "00" &&
       resultCode !== "0"
     ) {
-      console.error(
+      logSanitizedError(
         "문화축제 표준데이터 응답 오류:",
         JSON.stringify(
           json
@@ -1107,10 +1650,28 @@ async function fetchCultureStandardFestivals() {
       break;
     }
 
-
     const body =
-      response?.body ||
-      {};
+      response?.body;
+
+    if (
+      !body ||
+      typeof body !== "object"
+    ) {
+      logSanitizedError(
+        "문화축제 표준데이터 응답에 body가 없습니다:",
+        JSON.stringify(
+          json
+        ).slice(
+          0,
+          1500
+        )
+      );
+
+      sourceStatus.culture =
+        false;
+
+      break;
+    }
 
 
     const rawItems =
@@ -1293,14 +1854,13 @@ async function fetchCultureStandardFestivals() {
 
         area:
           normalizeAreaName(
-            sido ||
-            sigungu ||
-            ""
+            sido
           ) ||
           deriveAreaFromAddress(
             address,
             jibunAddress,
-            location
+            location,
+            sigungu
           ),
 
         lat,
@@ -2051,7 +2611,7 @@ async function fetchCulturePortalByServiceType(
           url
         );
     } catch (error) {
-      console.error(
+      logSanitizedError(
         `문화포털 ${serviceTp} 요청 예외:`,
         error
       );
@@ -2068,7 +2628,7 @@ async function fetchCulturePortalByServiceType(
 
 
     if (!res.ok) {
-      console.error(
+      logSanitizedError(
         `문화포털 ${serviceTp} API 요청 실패:`,
         res.status,
         xml.slice(
@@ -2097,7 +2657,7 @@ async function fetchCulturePortalByServiceType(
       resultCode !== "0" &&
       resultCode !== "200"
     ) {
-      console.error(
+      logSanitizedError(
         `문화포털 ${serviceTp} 응답 오류:`,
         resultCode,
         xml.slice(
@@ -2121,11 +2681,11 @@ async function fetchCulturePortalByServiceType(
         "해당 오픈API 서비스가 없거나 폐기됨"
       )
     ) {
-      console.error(
+      logSanitizedError(
         `문화포털 ${serviceTp}: 서비스 없음/폐기`
       );
 
-      console.error(
+      logSanitizedError(
         xml.slice(
           0,
           2000
@@ -2153,11 +2713,11 @@ async function fetchCulturePortalByServiceType(
         "LIMITED_NUMBER_OF_SERVICE_REQUESTS_EXCEEDS_ERROR"
       )
     ) {
-      console.error(
+      logSanitizedError(
         `문화포털 ${serviceTp}: 인증/호출 오류`
       );
 
-      console.error(
+      logSanitizedError(
         xml.slice(
           0,
           2000
@@ -2192,12 +2752,17 @@ async function fetchCulturePortalByServiceType(
         break;
       }
 
+      if (totalCount === null) {
+        logSanitizedError(
+          `문화포털 ${serviceTp}: 응답에 유효한 totalCount가 없습니다.`
+        );
+      } else {
+        logSanitizedError(
+          `문화포털 ${serviceTp}: totalCount는 ${totalCount}건인데 XML 데이터 블록이 없습니다.`
+        );
+      }
 
-      console.error(
-        `문화포털 ${serviceTp}: XML 반복 데이터 블록을 찾지 못했습니다.`
-      );
-
-      console.error(
+      logSanitizedError(
         xml.slice(
           0,
           2500
@@ -2327,8 +2892,11 @@ async function fetchCulturePortalByServiceType(
 
 
       const end =
-        ymdToIso(
-          endRaw
+        fixReversedDateRange(
+          start,
+          ymdToIso(
+            endRaw
+          )
         );
 
 
@@ -2404,7 +2972,10 @@ async function fetchCulturePortalByServiceType(
 
       const finalArea =
         areaRaw ||
-        sigungu ||
+        deriveAreaFromAddress(
+          location,
+          sigungu
+        ) ||
         "";
 
 
@@ -2752,6 +3323,19 @@ function isKopisVenueWhitelisted(
 }
 
 
+function isLikelyOverseasPerformance(
+  title,
+  venue
+) {
+  const combined =
+    `${title || ""} ${venue || ""}`;
+
+  return /\[(?:일본|중국|대만|미국|캐나다|영국|프랑스|독일|호주|태국|베트남|홍콩|싱가포르|마카오|인도네시아|필리핀|뉴질랜드)[^\]]*\]/i.test(
+    combined
+  );
+}
+
+
 // ======================================================
 // KOPIS
 // ======================================================
@@ -2766,254 +3350,380 @@ async function fetchKopisPerformances() {
   }
 
   const results = [];
-
-  let cpage = 1;
-
   const rows = 100;
 
+  const overallStart =
+    new Date();
 
-  const stdate =
-    dateToYYYYMMDD(
-      new Date()
+  overallStart.setHours(
+    0,
+    0,
+    0,
+    0
+  );
+
+  const overallEnd =
+    addMonths(
+      overallStart,
+      KOPIS_MONTHS_AHEAD
     );
 
+  overallEnd.setHours(
+    0,
+    0,
+    0,
+    0
+  );
 
-  const eddate =
-    dateToYYYYMMDD(
-      addMonths(
-        new Date(),
-        KOPIS_MONTHS_AHEAD
-      )
+  // KOPIS 목록 API의 조회 기간 제한은 최대 31일이다.
+  // 시작일과 종료일을 모두 포함해 한 번에 최대 31일씩 나눈다.
+  let windowStart =
+    new Date(overallStart);
+
+  let hasRequestFailure = false;
+
+  while (
+    windowStart <= overallEnd &&
+    !hasRequestFailure
+  ) {
+    const windowEnd =
+      new Date(windowStart);
+
+    windowEnd.setDate(
+      windowEnd.getDate() + 30
     );
-
-
-  while (true) {
-    const url =
-      new URL(
-        KOPIS_BASE
-      );
-
-
-    url.searchParams.set(
-      "service",
-      KOPIS_API_KEY
-    );
-
-    url.searchParams.set(
-      "stdate",
-      stdate
-    );
-
-    url.searchParams.set(
-      "eddate",
-      eddate
-    );
-
-    url.searchParams.set(
-      "cpage",
-      String(cpage)
-    );
-
-    url.searchParams.set(
-      "rows",
-      String(rows)
-    );
-
-
-    let res;
-
-    try {
-      res =
-        await fetchWithRetry(
-          url
-        );
-    } catch (error) {
-      console.error(
-        "KOPIS 요청 예외:",
-        error
-      );
-
-      sourceStatus.kopis =
-        false;
-
-      break;
-    }
-
-
-    if (!res.ok) {
-      console.error(
-        "KOPIS 요청 실패:",
-        res.status,
-        (
-          await res.text()
-        ).slice(
-          0,
-          1000
-        )
-      );
-
-      sourceStatus.kopis =
-        false;
-
-      break;
-    }
-
-
-    const xml =
-      await res.text();
-
 
     if (
-      xml.includes(
-        "SERVICE KEY IS NOT REGISTERED"
-      )
+      windowEnd > overallEnd
     ) {
-      console.error(
-        "KOPIS 인증키가 등록되지 않았습니다."
+      windowEnd.setTime(
+        overallEnd.getTime()
       );
-
-      sourceStatus.kopis =
-        false;
-
-      break;
     }
 
-
-    const list =
-      parseKopisXml(
-        xml
+    const stdate =
+      dateToYYYYMMDD(
+        windowStart
       );
 
+    const eddate =
+      dateToYYYYMMDD(
+        windowEnd
+      );
 
-    for (
-      const item of list
-    ) {
-      if (
-        !item.prfnm
-      ) {
-        continue;
-      }
+    console.log(
+      `KOPIS 조회 구간: ${stdate} ~ ${eddate}`
+    );
 
+    let cpage = 1;
 
-      if (
-        EXCLUDED_KOPIS_GENRES.some(
-          (genre) =>
-            item.genrenm?.includes(
-              genre
-            )
-        )
-      ) {
-        continue;
-      }
-
-
-      if (
-        item.genrenm ===
-          "뮤지컬" &&
-        !isKopisVenueWhitelisted(
-          item.fcltynm
-        )
-      ) {
-        continue;
-      }
-
-
-      const start =
-        kopisDateToIso(
-          item.prfpdfrom
+    while (true) {
+      const url =
+        new URL(
+          KOPIS_BASE
         );
 
+      url.searchParams.set(
+        "service",
+        KOPIS_API_KEY
+      );
 
-      const end =
-        kopisDateToIso(
-          item.prfpdto
+      url.searchParams.set(
+        "stdate",
+        stdate
+      );
+
+      url.searchParams.set(
+        "eddate",
+        eddate
+      );
+
+      url.searchParams.set(
+        "cpage",
+        String(cpage)
+      );
+
+      url.searchParams.set(
+        "rows",
+        String(rows)
+      );
+
+      let res;
+
+      try {
+        res =
+          await fetchWithRetry(
+            url
+          );
+      } catch (error) {
+        logSanitizedError(
+          "KOPIS 요청 예외:",
+          error
         );
 
+        sourceStatus.kopis =
+          false;
 
-      if (
-        !start
-      ) {
-        continue;
+        hasRequestFailure = true;
+
+        break;
       }
 
-
-      if (
-        isOver90Days(
-          start,
-          end
-        )
-      ) {
-        continue;
-      }
-
-
-      results.push({
-        source:
-          "kopis",
-
-        type:
-          item.genrenm?.includes(
-            "축제"
+      if (!res.ok) {
+        logSanitizedError(
+          "KOPIS 요청 실패:",
+          res.status,
+          (
+            await res.text()
+          ).slice(
+            0,
+            1000
           )
-            ? "festival"
-            : "performance",
+        );
 
-        id:
-          `kopis-${item.mt20id}`,
+        sourceStatus.kopis =
+          false;
 
-        title:
-          item.prfnm,
+        hasRequestFailure = true;
 
-        startDate:
-          start,
+        break;
+      }
 
-        endDate:
-          end,
+      const xml =
+        await res.text();
 
-        location:
-          item.fcltynm ||
-          "",
+      if (
+        xml.includes(
+          "SERVICE KEY IS NOT REGISTERED"
+        )
+      ) {
+        logSanitizedError(
+          "KOPIS 인증키가 등록되지 않았습니다."
+        );
 
-        area:
-          normalizeAreaName(
-            item.area
-          ),
+        sourceStatus.kopis =
+          false;
 
-        lat:
-          null,
+        hasRequestFailure = true;
 
-        lon:
-          null,
+        break;
+      }
 
-        thumbnail:
-          item.poster ||
-          null,
+      const resultCode =
+        xmlResultCode(
+          xml
+        );
 
-        detailUrl:
-          item.mt20id
-            ? (
-                "https://www.kopis.or.kr/por/db/pblprfr/" +
-                `pblprfrView.do?mt20Id=${item.mt20id}`
+      const hasResponseEnvelope =
+        /<dbs\b[^>]*>/i.test(
+          xml
+        );
+
+      const isNoDataResponse =
+        resultCode === "04" ||
+        /NODATA ERROR/i.test(
+          xml
+        );
+
+      if (
+        resultCode &&
+        resultCode !== "00" &&
+        resultCode !== "0" &&
+        !isNoDataResponse
+      ) {
+        logSanitizedError(
+          "KOPIS 응답 오류:",
+          resultCode,
+          xml.slice(
+            0,
+            1500
+          )
+        );
+
+        sourceStatus.kopis =
+          false;
+
+        hasRequestFailure = true;
+
+        break;
+      }
+
+      if (
+        !hasResponseEnvelope &&
+        !isNoDataResponse
+      ) {
+        logSanitizedError(
+          "KOPIS 응답 형식 이상: dbs 데이터 영역이 없습니다.",
+          xml.slice(
+            0,
+            1500
+          )
+        );
+
+        sourceStatus.kopis =
+          false;
+
+        hasRequestFailure = true;
+
+        break;
+      }
+
+      if (isNoDataResponse) {
+        console.log(
+          `KOPIS ${stdate} ~ ${eddate}: 조회 결과 없음`
+        );
+
+        break;
+      }
+
+      const list =
+        parseKopisXml(
+          xml
+        );
+
+      for (
+        const item of list
+      ) {
+        if (
+          !item.prfnm
+        ) {
+          continue;
+        }
+
+        if (
+          EXCLUDED_KOPIS_GENRES.some(
+            (genre) =>
+              item.genrenm?.includes(
+                genre
               )
-            : null,
+          )
+        ) {
+          continue;
+        }
 
-        genre:
-          item.genrenm ||
-          null,
-      });
+        if (
+          item.genrenm ===
+            "뮤지컬" &&
+          !isKopisVenueWhitelisted(
+            item.fcltynm
+          )
+        ) {
+          continue;
+        }
+
+        const start =
+          kopisDateToIso(
+            item.prfpdfrom
+          );
+
+        const end =
+          fixReversedDateRange(
+            start,
+            kopisDateToIso(
+              item.prfpdto
+            )
+          );
+
+        if (
+          !start
+        ) {
+          continue;
+        }
+
+        if (
+          isOver90Days(
+            start,
+            end
+          )
+        ) {
+          continue;
+        }
+
+        results.push({
+          source:
+            "kopis",
+
+          type:
+            item.genrenm?.includes(
+              "축제"
+            )
+              ? "festival"
+              : "performance",
+
+          id:
+            `kopis-${item.mt20id}`,
+
+          title:
+            item.prfnm,
+
+          startDate:
+            start,
+
+          endDate:
+            end,
+
+          location:
+            item.fcltynm ||
+            "",
+
+          area:
+            normalizeAreaName(
+              item.area
+            ) ||
+            (
+              isLikelyOverseasPerformance(
+                item.prfnm,
+                item.fcltynm
+              )
+                ? "해외"
+                : null
+            ),
+
+          lat:
+            null,
+
+          lon:
+            null,
+
+          thumbnail:
+            item.poster ||
+            null,
+
+          detailUrl:
+            item.mt20id
+              ? (
+                  "https://www.kopis.or.kr/por/db/pblprfr/" +
+                  `pblprfrView.do?mt20Id=${item.mt20id}`
+                )
+              : null,
+
+          genre:
+            item.genrenm ||
+            null,
+        });
+      }
+
+      if (
+        list.length < rows
+      ) {
+        break;
+      }
+
+      cpage += 1;
     }
 
-
-    if (
-      list.length < rows
-    ) {
+    if (hasRequestFailure) {
       break;
     }
 
+    // 다음 조회 구간은 직전 종료일의 다음 날부터 시작한다.
+    windowStart =
+      new Date(windowEnd);
 
-    cpage += 1;
+    windowStart.setDate(
+      windowStart.getDate() + 1
+    );
   }
-
 
   console.log(
     `KOPIS에서 ${results.length}건 수집`
@@ -3027,49 +3737,100 @@ async function fetchKopisPerformances() {
 // 장소 차이 판별
 // ======================================================
 
+function hasValidCoordinatePair(
+  item
+) {
+  if (
+    item?.lat === null ||
+    item?.lat === undefined ||
+    item?.lat === "" ||
+    item?.lon === null ||
+    item?.lon === undefined ||
+    item?.lon === ""
+  ) {
+    return false;
+  }
+
+  const lat = Number(item.lat);
+  const lon = Number(item.lon);
+
+  return (
+    Number.isFinite(lat) &&
+    Number.isFinite(lon) &&
+    lat >= -90 &&
+    lat <= 90 &&
+    lon >= -180 &&
+    lon <= 180
+  );
+}
+
+
+// ======================================================
+// 장소 차이 판별
+// ======================================================
+
+function normalizeVenueName(raw) {
+  return String(raw || "")
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]/gu, "")
+    .trim();
+}
+
+
+// 같은 공연장이라도 출처별 표기가 다를 수 있어 한쪽 이름이 다른 쪽에
+// 포함되는 경우는 같은 장소로 취급한다. 일치 여부가 불분명하면
+// 공연을 잘못 합치는 것보다 별도 항목으로 보존한다.
+function venuesClearlyDifferent(a, b) {
+  if (
+    a?.type !== "performance" ||
+    b?.type !== "performance"
+  ) {
+    return false;
+  }
+
+  const venueA =
+    normalizeVenueName(a.location);
+
+  const venueB =
+    normalizeVenueName(b.location);
+
+  if (!venueA || !venueB) {
+    return false;
+  }
+
+  return !(
+    venueA === venueB ||
+    venueA.includes(venueB) ||
+    venueB.includes(venueA)
+  );
+}
+
+
 function locationsClearlyDifferent(
   a,
   b
 ) {
-  const locationA =
-    String(
-      a.location || ""
-    ).trim();
-
-
-  const locationB =
-    String(
-      b.location || ""
-    ).trim();
-
-
-  if (
-    !locationA ||
-    !locationB
-  ) {
-    return false;
+  // 공연은 같은 제목·날짜라도 같은 행정구역 안의 다른 공연장에서 열릴 수 있습니다.
+  // 공연장명이 명시되어 있고 서로 다르면 좌표 누락 또는 행정구역 통합만으로 병합하지 않습니다.
+  if (venuesClearlyDifferent(a, b)) {
+    return true;
   }
 
-
-  if (
-    locationA ===
-    locationB
-  ) {
-    return false;
+  // 행사 유형이 명시되어 있고 서로 다르면 동일 제목·날짜여도 병합하지 않는다.
+  if (a?.type && b?.type && a.type !== b.type) {
+    return true;
   }
-
 
   const areaA =
     normalizeAreaName(
       a.area
     );
 
-
   const areaB =
     normalizeAreaName(
       b.area
     );
-
 
   if (
     areaA &&
@@ -3079,6 +3840,27 @@ function locationsClearlyDifferent(
     return true;
   }
 
+  // 좌표가 1.5km 이상 다르면 별도 행사로 보존한다.
+  // 잘못된 병합으로 독립 행사가 사라지는 것보다 중복이 안전하다.
+  if (
+    hasValidCoordinatePair(a) &&
+    hasValidCoordinatePair(b)
+  ) {
+    const distance =
+      distanceMeters(
+        Number(a.lat),
+        Number(a.lon),
+        Number(b.lat),
+        Number(b.lon)
+      );
+
+    if (
+      distance !== null &&
+      distance > 1500
+    ) {
+      return true;
+    }
+  }
 
   return false;
 }
@@ -3115,6 +3897,67 @@ function sourcePriority(
 // ======================================================
 // 데이터 풍부함
 // ======================================================
+
+function detailUrlSpecificity(
+  item
+) {
+  const raw =
+    String(
+      item?.detailUrl || ""
+    ).trim();
+
+  if (!raw) {
+    return 0;
+  }
+
+  let candidate = raw;
+
+  if (candidate.startsWith("//")) {
+    candidate = `https:${candidate}`;
+  } else if (/^www\./i.test(candidate)) {
+    candidate = `https://${candidate}`;
+  } else if (/^https?:\/(?!\/)/i.test(candidate)) {
+    candidate = candidate.replace(
+      /^(https?):\//i,
+      "$1://"
+    );
+  } else if (
+    !/^[a-z][a-z\d+.-]*:/i.test(candidate) &&
+    /^[^\s/?#]+\.[^\s/?#]+(?::\d+)?(?:[/?#][^\s]*)?$/.test(candidate)
+  ) {
+    candidate = `https://${candidate}`;
+  }
+
+  try {
+    const parsed =
+      new URL(candidate);
+
+    if (
+      !["http:", "https:"].includes(parsed.protocol) ||
+      !parsed.hostname ||
+      parsed.username ||
+      parsed.password
+    ) {
+      return 0;
+    }
+
+    const pathSegments =
+      parsed.pathname
+        .split("/")
+        .filter(Boolean)
+        .length;
+
+    // 홈페이지 루트보다 행사별 상세 페이지와 쿼리 페이지를 우선한다.
+    return Math.min(
+      3,
+      pathSegments +
+        (parsed.search ? 1 : 0)
+    );
+  } catch {
+    return 0;
+  }
+}
+
 
 function dataRichness(
   item
@@ -3153,7 +3996,9 @@ function dataRichness(
   if (
     item.detailUrl
   ) {
-    score += 1;
+    score +=
+      1 +
+      detailUrlSpecificity(item);
   }
 
 
@@ -3165,18 +4010,9 @@ function dataRichness(
 
 
   if (
-    item.lat !== null &&
-    item.lat !== undefined
+    hasValidCoordinatePair(item)
   ) {
-    score += 1;
-  }
-
-
-  if (
-    item.lon !== null &&
-    item.lon !== undefined
-  ) {
-    score += 1;
+    score += 2;
   }
 
 
@@ -3211,8 +4047,6 @@ function mergeRecords(
   const fillableFields = [
     "location",
     "area",
-    "lat",
-    "lon",
     "thumbnail",
     "detailUrl",
     "genre",
@@ -3234,6 +4068,15 @@ function mergeRecords(
       merged[field] =
         other[field];
     }
+  }
+
+  // 위도와 경도는 서로 다른 출처에서 한쪽씩 섞지 않고 한 쌍으로 병합한다.
+  if (
+    !hasValidCoordinatePair(merged) &&
+    hasValidCoordinatePair(other)
+  ) {
+    merged.lat = other.lat;
+    merged.lon = other.lon;
   }
 
   return merged;
@@ -3419,14 +4262,42 @@ function logDuplicateCandidates(
           items[j];
 
 
-        // 이미 1차에서 병합된
-        // 완전 일치 쌍은 제외
-        if (
-          a.startDate ===
-            b.startDate &&
-          a.endDate ===
-            b.endDate
-        ) {
+        const samePeriod =
+          a.startDate === b.startDate &&
+          a.endDate === b.endDate;
+
+        if (samePeriod) {
+          const sameType =
+            Boolean(a.type) &&
+            a.type === b.type;
+
+          const areaA =
+            normalizeAreaName(a.area);
+
+          const areaB =
+            normalizeAreaName(b.area);
+
+          // 동일 제목·기간·지역이어도 장소가 달라 병합하지 않은 쌍은
+          // 데이터에서 제거하지 않고 수동 확인 후보로 기록한다.
+          if (
+            sameType &&
+            areaA &&
+            areaA === areaB &&
+            locationsClearlyDifferent(a, b)
+          ) {
+            candidates.push({
+              a,
+              b,
+              dist: distanceMeters(
+                a.lat,
+                a.lon,
+                b.lat,
+                b.lon
+              ),
+              reason: "동일 기간·지역에서 장소·좌표 정보가 다른 항목",
+            });
+          }
+
           continue;
         }
 
@@ -3460,6 +4331,7 @@ function logDuplicateCandidates(
             a,
             b,
             dist,
+            reason: "기간이 겹치고 좌표가 500m 이내인 항목",
           });
         }
       }
@@ -3480,6 +4352,7 @@ function logDuplicateCandidates(
         a,
         b,
         dist,
+        reason,
       } of candidates
     ) {
       console.log(
@@ -3487,13 +4360,283 @@ function logDuplicateCandidates(
         `(${a.source}, ${a.startDate}~${a.endDate}) ` +
         `↔ "${b.title}" ` +
         `(${b.source}, ${b.startDate}~${b.endDate}) ` +
-        `[${Math.round(dist)}m]`
+        `[${dist === null ? "거리 미확인" : `${Math.round(dist)}m`}]` +
+        ` - ${reason}`
       );
     }
   }
 
 
   return candidates;
+}
+
+
+// ======================================================
+// 충돌하는 행사 ID 보정
+// ======================================================
+// 정상적으로 하나만 존재하는 ID는 그대로 유지해
+// 기존 브라우저의 찜/숨김 설정과 호환되게 한다.
+// 실제로 서로 다른 행사에 같은 ID가 배정된 경우에만
+// 추가 항목에 지역/장소 식별자를 붙인다.
+
+function ensureUniqueIds(
+  list
+) {
+  const usedIds = new Set();
+
+  for (const item of list) {
+    const originalId =
+      String(item.id || "").trim();
+
+    if (!originalId) {
+      continue;
+    }
+
+    if (!usedIds.has(originalId)) {
+      usedIds.add(originalId);
+      continue;
+    }
+
+    const locationKey =
+      normalizeTitle(
+        [
+          item.area,
+          item.location,
+        ]
+          .filter(Boolean)
+          .join(" ")
+      ) ||
+      normalizeTitle(item.source || "") ||
+      "duplicate";
+
+    const baseCandidate =
+      `${originalId}-${locationKey}`;
+
+    let candidate = baseCandidate;
+    let suffix = 2;
+
+    while (usedIds.has(candidate)) {
+      candidate =
+        `${baseCandidate}-${suffix}`;
+      suffix += 1;
+    }
+
+    item.id = candidate;
+    usedIds.add(candidate);
+  }
+
+  return list;
+}
+
+
+function calendarDayDifference(
+  a,
+  b
+) {
+  const aTime =
+    Date.parse(
+      `${a}T00:00:00Z`
+    );
+
+  const bTime =
+    Date.parse(
+      `${b}T00:00:00Z`
+    );
+
+  if (
+    !Number.isFinite(aTime) ||
+    !Number.isFinite(bTime)
+  ) {
+    return Infinity;
+  }
+
+  return Math.abs(
+    (aTime - bTime) / 86400000
+  );
+}
+
+
+// 제목·유형·기간·좌표가 모두 매우 가까운 축제만 날짜 차이 중복으로 본다.
+// 공연은 같은 작품의 다른 회차일 수 있어 자동 병합하지 않는다.
+function isNearDuplicateFestival(
+  a,
+  b
+) {
+  if (
+    a?.type !== "festival" ||
+    b?.type !== "festival"
+  ) {
+    return false;
+  }
+
+  const titleA =
+    normalizeTitle(
+      a.title
+    );
+
+  const titleB =
+    normalizeTitle(
+      b.title
+    );
+
+  if (
+    !titleA ||
+    titleA !== titleB
+  ) {
+    return false;
+  }
+
+  if (
+    locationsClearlyDifferent(
+      a,
+      b
+    )
+  ) {
+    return false;
+  }
+
+  if (
+    !hasValidCoordinatePair(a) ||
+    !hasValidCoordinatePair(b)
+  ) {
+    return false;
+  }
+
+  if (
+    !datesOverlap(
+      a.startDate,
+      a.endDate,
+      b.startDate,
+      b.endDate
+    )
+  ) {
+    return false;
+  }
+
+  if (
+    calendarDayDifference(
+      a.startDate,
+      b.startDate
+    ) > 1 ||
+    calendarDayDifference(
+      a.endDate || a.startDate,
+      b.endDate || b.startDate
+    ) > 1
+  ) {
+    return false;
+  }
+
+  const distance =
+    distanceMeters(
+      Number(a.lat),
+      Number(a.lon),
+      Number(b.lat),
+      Number(b.lon)
+    );
+
+  return (
+    distance !== null &&
+    distance <= 500
+  );
+}
+
+
+function mergeNearDuplicateFestivals(
+  list
+) {
+  const groups =
+    new Map();
+
+  for (const item of list) {
+    const titleKey =
+      normalizeTitle(
+        item.title
+      );
+
+    if (!titleKey) {
+      continue;
+    }
+
+    if (!groups.has(titleKey)) {
+      groups.set(
+        titleKey,
+        []
+      );
+    }
+
+    groups
+      .get(titleKey)
+      .push(item);
+  }
+
+  const result = [];
+  let mergedCount = 0;
+
+  for (const items of groups.values()) {
+    const kept = [];
+
+    for (const item of items) {
+      let merged = false;
+
+      for (
+        let i = 0;
+        i < kept.length;
+        i += 1
+      ) {
+        const existing =
+          kept[i];
+
+        if (
+          !isNearDuplicateFestival(
+            existing,
+            item
+          )
+        ) {
+          continue;
+        }
+
+        const existingPriority =
+          sourcePriority(
+            existing
+          );
+
+        const itemPriority =
+          sourcePriority(
+            item
+          );
+
+        const itemWins =
+          itemPriority > existingPriority ||
+          (
+            itemPriority === existingPriority &&
+            dataRichness(item) >
+              dataRichness(existing)
+          );
+
+        // 검증된 원본을 대표로 남기고 비어있는 메타데이터만 보충한다.
+        kept[i] =
+          mergeRecords(
+            itemWins ? item : existing,
+            itemWins ? existing : item
+          );
+
+        mergedCount += 1;
+        merged = true;
+        break;
+      }
+
+      if (!merged) {
+        kept.push(item);
+      }
+    }
+
+    result.push(...kept);
+  }
+
+  return {
+    records: result,
+    mergedCount,
+  };
 }
 
 
@@ -3661,21 +4804,35 @@ function dedupe(
   }
 
 
+  // 공식 날짜 차이가 하루 이내이고 같은 장소에서 열린 같은 축제는
+  // 출처 우선순위와 행사별 상세 링크가 더 구체적인 레코드를 대표로 선택한다.
+  const nearMerged =
+    mergeNearDuplicateFestivals(
+      result
+    );
+
+  duplicateRemoved +=
+    nearMerged.mergedCount;
+
+  const finalResult =
+    nearMerged.records;
+
+  // 중복 정리 후에도 같은 ID가 남은 별도 행사는 각각 고유 ID를 갖게 한다.
+  ensureUniqueIds(finalResult);
+
   console.log(
-    `중복 제거: ${list.length}건 → ${result.length}건 ` +
+    `중복 제거: ${list.length}건 → ${finalResult.length}건 ` +
     `(중복 ${duplicateRemoved}건 제거)`
   );
 
 
-  // 확정 병합 후 남은 데이터에서
-  // "제목 같고 날짜 겹치고 좌표 근접"인 후보를
-  // 찾아 로그로만 남긴다.
+  // 엄격한 조건으로 병합하지 못한 후보만 수동 확인용으로 남긴다.
   logDuplicateCandidates(
-    result
+    finalResult
   );
 
 
-  return result;
+  return finalResult;
 }
 
 
@@ -3762,6 +4919,47 @@ function printTypeStats(
 // ======================================================
 
 async function main() {
+  const requiredApiKeys = [
+    ["TOUR_API_KEY", TOUR_API_KEY],
+    ["CULTURE_API_KEY", CULTURE_API_KEY],
+    ["CULTURE_PORTAL_API_KEY", CULTURE_PORTAL_API_KEY],
+    ["KOPIS_API_KEY", KOPIS_API_KEY],
+  ];
+
+  const missingApiKeys = requiredApiKeys
+    .filter(([, value]) =>
+      !String(value || "").trim()
+    )
+    .map(([name]) => name);
+
+  if (
+    process.env.GITHUB_ACTIONS === "true" &&
+    missingApiKeys.length > 0
+  ) {
+    logSanitizedError(
+      `GitHub Actions 필수 API 키 누락: ${missingApiKeys.join(", ")} → 기존 festivals.json을 유지합니다.`
+    );
+    process.exitCode = 1;
+    return;
+  }
+
+  const sourceByApiKey = {
+    TOUR_API_KEY: "tourapi",
+    CULTURE_API_KEY: "culture",
+    CULTURE_PORTAL_API_KEY: "culturePortal",
+    KOPIS_API_KEY: "kopis",
+  };
+
+  // 로컬 수집에서 키가 빠진 출처는 실패가 아니라 미수집으로 표시한다.
+  // 앱은 부분 데이터임을 알리고 저장 상태를 자동 정리하지 않는다.
+  for (const [apiKeyName] of missingApiKeys) {
+    const source = sourceByApiKey[apiKeyName];
+
+    if (source) {
+      sourceStatus[source] = "skipped";
+    }
+  }
+
   const [
     tourItems,
     cultureItems,
@@ -3784,7 +4982,7 @@ async function main() {
     .map(([source]) => source);
 
   if (failedSources.length > 0) {
-    console.error(
+    logSanitizedError(
       `데이터 소스 ${failedSources.join(', ')} 실패 → 기존 festivals.json을 유지합니다.`
     );
     process.exitCode = 1;
@@ -3816,6 +5014,18 @@ async function main() {
       allItems
     );
 
+  // 주소 형식이 여러 개 섞인 원본 값을 정리하고, 안전하지 않은 링크는 비운다.
+  merged =
+    merged.map(
+      (item) => ({
+        ...item,
+        detailUrl:
+          normalizeExternalUrl(item.detailUrl) || null,
+        thumbnail:
+          normalizeExternalUrl(item.thumbnail) || null,
+      })
+    );
+
 
   merged =
     merged
@@ -3829,6 +5039,14 @@ async function main() {
             b.startDate
           )
       );
+
+  if (merged.length === 0) {
+    logSanitizedError(
+      "수집 및 정리 결과가 0건입니다. 기존 festivals.json을 유지합니다."
+    );
+    process.exitCode = 1;
+    return;
+  }
 
 
   printSourceStats(
@@ -3857,14 +5075,27 @@ async function main() {
   };
 
 
-  await writeFile(
-    "festivals.json",
+  // 같은 디렉터리의 임시 파일을 완성한 뒤 rename으로 교체한다.
+  // 프로세스가 저장 도중 중단되어도 기존 festivals.json은 그대로 남는다.
+  const serializedPayload =
     JSON.stringify(
       payload,
       null,
       2
-    ),
+    );
+
+  const temporaryPath =
+    "festivals.json.tmp";
+
+  await writeFile(
+    temporaryPath,
+    serializedPayload,
     "utf-8"
+  );
+
+  await rename(
+    temporaryPath,
+    "festivals.json"
   );
 
 
@@ -3880,7 +5111,7 @@ async function main() {
 
 main().catch(
   (error) => {
-    console.error(
+    logSanitizedError(
       error
     );
 

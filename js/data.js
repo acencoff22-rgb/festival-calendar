@@ -70,11 +70,61 @@ function normalizeArea(value) {
   }
 
   const areaMap = [
+    ["전남광주통합특별시", "광주특별시"],
+    ["전남광주통합", "광주특별시"],
+    ["광주특별시", "광주특별시"],
+    ["광주광역시", "광주특별시"],
+    ["전라남도", "광주특별시"],
+    ["전남", "광주특별시"],
+    ["여수시", "광주특별시"],
+    ["여수", "광주특별시"],
+    ["순천시", "광주특별시"],
+    ["순천", "광주특별시"],
+    ["광양시", "광주특별시"],
+    ["광양", "광주특별시"],
+    ["무안군", "광주특별시"],
+    ["무안", "광주특별시"],
+    ["함평군", "광주특별시"],
+    ["함평", "광주특별시"],
+    ["해남군", "광주특별시"],
+    ["해남", "광주특별시"],
+    ["화순군", "광주특별시"],
+    ["화순", "광주특별시"],
+    ["나주시", "광주특별시"],
+    ["나주", "광주특별시"],
+    ["목포시", "광주특별시"],
+    ["목포", "광주특별시"],
+    ["영암군", "광주특별시"],
+    ["영암", "광주특별시"],
+    ["강진군", "광주특별시"],
+    ["강진", "광주특별시"],
+    ["완도군", "광주특별시"],
+    ["완도", "광주특별시"],
+    ["진도군", "광주특별시"],
+    ["진도", "광주특별시"],
+    ["신안군", "광주특별시"],
+    ["신안", "광주특별시"],
+    ["장흥군", "광주특별시"],
+    ["장흥", "광주특별시"],
+    ["보성군", "광주특별시"],
+    ["보성", "광주특별시"],
+    ["곡성군", "광주특별시"],
+    ["곡성", "광주특별시"],
+    ["구례군", "광주특별시"],
+    ["구례", "광주특별시"],
+    ["고흥군", "광주특별시"],
+    ["고흥", "광주특별시"],
+    ["장성군", "광주특별시"],
+    ["장성", "광주특별시"],
+    ["담양군", "광주특별시"],
+    ["담양", "광주특별시"],
+    ["영광군", "광주특별시"],
+    ["영광", "광주특별시"],
+    ["광주", "광주특별시"],
     ["서울특별시", "서울"],
     ["부산광역시", "부산"],
     ["대구광역시", "대구"],
     ["인천광역시", "인천"],
-    ["광주광역시", "광주"],
     ["대전광역시", "대전"],
     ["울산광역시", "울산"],
     ["세종특별자치시", "세종"],
@@ -85,7 +135,6 @@ function normalizeArea(value) {
     ["충청남도", "충남"],
     ["전라북도", "전북"],
     ["전북특별자치도", "전북"],
-    ["전라남도", "전남"],
     ["경상북도", "경북"],
     ["경상남도", "경남"],
     ["제주특별자치도", "제주"],
@@ -325,7 +374,7 @@ function hasSourceFailure(sourceStatus) {
   }
 
   return Object.values(sourceStatus).some(
-    (value) => value === false
+    (value) => value !== true
   );
 }
 
@@ -335,7 +384,7 @@ function getFailedSourceLabels(sourceStatus) {
   }
 
   return Object.entries(sourceStatus)
-    .filter(([, ok]) => ok === false)
+    .filter(([, ok]) => ok !== true)
     .map(([source]) => SOURCE_LABELS[source] || source);
 }
 
@@ -426,22 +475,34 @@ async function loadFestivalData() {
     const items =
       normalizeFestivalData(json);
 
-    if (sourceFailed) {
+    const emptyDataset =
+      items.length === 0;
+
+    if (
+      sourceFailed ||
+      emptyDataset
+    ) {
       dataLoadError = true;
 
-      const failedLabels =
-        getFailedSourceLabels(
-          dataSourceStatus
+      if (emptyDataset) {
+        showDataWarning(
+          "⚠️ 행사 데이터가 비어 있어요. 저장된 찜·숨김·알림 설정은 유지했습니다."
         );
+      } else {
+        const failedLabels =
+          getFailedSourceLabels(
+            dataSourceStatus
+          );
 
-      const failedText =
-        failedLabels.length > 0
-          ? failedLabels.join(", ")
-          : "일부 데이터 소스";
+        const failedText =
+          failedLabels.length > 0
+            ? failedLabels.join(", ")
+            : "일부 데이터 소스";
 
-      showDataWarning(
-        `⚠️ ${failedText} 갱신에 실패해서 일부 정보가 최신이 아닐 수 있어요.`
-      );
+        showDataWarning(
+          `⚠️ ${failedText} 데이터를 가져오지 못해 일부 행사 정보가 빠져 있을 수 있어요.`
+        );
+      }
     }
 
     festivalData = items;
@@ -453,11 +514,21 @@ async function loadFestivalData() {
     // 서버 데이터가 정상적으로 완성된 경우에만
     // 로컬 상태를 데이터와 맞춘다.
     // --------------------------------------------------
-    if (!sourceFailed) {
-      reconcileStoredState(
+    if (
+      !sourceFailed &&
+      !emptyDataset
+    ) {
+      const validIds =
         festivalData.map(
           (item) => item.id
-        )
+        );
+
+      reconcileStoredState(
+        validIds
+      );
+
+      reconcileReminders(
+        validIds
       );
     }
 

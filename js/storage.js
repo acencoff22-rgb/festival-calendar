@@ -82,19 +82,38 @@ function loadExcludeKeywords() {
       return fallback();
     }
 
-    return parsed
-      .filter(
-        (entry) =>
-          entry &&
-          typeof entry.word ===
-            "string"
-      )
-      .map((entry) => ({
-        word: entry.word,
-        enabled:
-          entry.enabled !==
-          false,
-      }));
+    const seen = new Set();
+
+    return parsed.reduce(
+      (result, entry) => {
+        if (
+          !entry ||
+          typeof entry.word !== "string"
+        ) {
+          return result;
+        }
+
+        const word = entry.word.trim();
+
+        // 빈 키워드는 모든 제목과 일치하므로 저장 데이터에서도 제거한다.
+        if (
+          !word ||
+          seen.has(word)
+        ) {
+          return result;
+        }
+
+        seen.add(word);
+
+        result.push({
+          word,
+          enabled: entry.enabled !== false,
+        });
+
+        return result;
+      },
+      []
+    );
   } catch {
     return fallback();
   }
@@ -191,12 +210,17 @@ function reconcileReminders(validIds) {
     [...validIds].map(String)
   );
 
+  const favoriteIds = new Set(
+    (favoritesOrder || []).map(String)
+  );
+
   const next = {};
 
   Object.entries(reminders || {}).forEach(
     ([id, date]) => {
       if (
         ids.has(String(id)) &&
+        favoriteIds.has(String(id)) &&
         /^\d{4}-\d{2}-\d{2}$/.test(String(date))
       ) {
         next[String(id)] = String(date);
@@ -228,7 +252,13 @@ function loadFavoritesOrder() {
       return [];
     }
 
-    return parsed.map(String);
+    return [
+      ...new Set(
+        parsed
+          .map(String)
+          .filter(Boolean)
+      ),
+    ];
   } catch {
     return [];
   }
@@ -297,8 +327,24 @@ function loadSelectedAreas() {
       return new Set();
     }
 
+    const legacyAreaAliases = {
+      "광주": "광주특별시",
+      "광주광역시": "광주특별시",
+      "전남": "광주특별시",
+      "전라남도": "광주특별시",
+      "전남광주통합": "광주특별시",
+      "전남광주통합특별시": "광주특별시",
+    };
+
     return new Set(
-      parsed.map(String)
+      parsed
+        .map((value) =>
+          String(value ?? "").trim()
+        )
+        .filter(Boolean)
+        .map((area) =>
+          legacyAreaAliases[area] || area
+        )
     );
   } catch {
     return new Set();
@@ -457,10 +503,15 @@ function reconcileStoredState(validIds) {
     saveHiddenIds();
   }
 
-  const nextFavoritesOrder =
-    favoritesOrder.filter((id) =>
-      ids.has(String(id))
-    );
+  const nextFavoritesOrder = [
+    ...new Set(
+      favoritesOrder
+        .map(String)
+        .filter((id) =>
+          ids.has(id)
+        )
+    ),
+  ];
 
   if (
     nextFavoritesOrder.length !==

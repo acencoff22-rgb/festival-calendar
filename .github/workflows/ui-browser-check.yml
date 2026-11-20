@@ -1,0 +1,79 @@
+name: UI Browser Check
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "js/**"
+      - "festivals.json"
+      - "tests/ui-browser-check.mjs"
+      - ".github/workflows/ui-browser-check.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    name: Chromium desktop and mobile checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      - name: Playwright 및 Chrome 준비
+        run: |
+          mkdir -p "$RUNNER_TEMP/playwright-check"
+          npm install \
+            --prefix "$RUNNER_TEMP/playwright-check" \
+            --no-audit \
+            --no-fund \
+            playwright@1.56.1
+
+          google-chrome --version
+
+      - name: 정적 서버 실행 및 브라우저 UI 검사
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/playwright-check/node_modules/playwright/index.mjs
+          UI_BASE_URL: http://127.0.0.1:4173/
+          UI_ARTIFACT_DIR: artifacts/ui-browser
+        run: |
+          set -euo pipefail
+
+          python3 -m http.server 4173 \
+            --bind 127.0.0.1 \
+            --directory "$GITHUB_WORKSPACE" \
+            > "$RUNNER_TEMP/ui-http.log" 2>&1 &
+          SERVER_PID=$!
+
+          cleanup() {
+            kill "$SERVER_PID" 2>/dev/null || true
+          }
+          trap cleanup EXIT
+
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent "$UI_BASE_URL" > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          curl --fail --silent "$UI_BASE_URL" > /dev/null
+          node tests/ui-browser-check.mjs
+
+      - name: 브라우저 화면 캡처 업로드
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: festival-calendar-ui-browser
+          path: artifacts/ui-browser/
+          if-no-files-found: warn
+          retention-days: 7

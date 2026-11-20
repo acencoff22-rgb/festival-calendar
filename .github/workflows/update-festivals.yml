@@ -5,16 +5,19 @@ on:
     # 매일 한국시간 오전 6시 (UTC 21시) 실행
     - cron: "0 21 * * *"
   workflow_dispatch: {} # 수동 실행 버튼도 사용 가능
+  pull_request:
+    branches:
+      - main
 
 concurrency:
   group: update-festivals
   cancel-in-progress: false
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  update:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: 저장소 체크아웃
@@ -25,8 +28,35 @@ jobs:
         with:
           node-version: "lts/*"
 
+      - name: JavaScript 구문 검사 및 수집기 테스트
+        run: |
+          node --check fetch-festivals.mjs
+          for file in js/*.js; do
+            node --check "$file"
+          done
+          node --check tests/fetch-retry.test.mjs
+          node --test tests/*.test.mjs
+
+  update:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: validate
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
       - name: 축제 데이터 가져오기
         env:
+          TZ: Asia/Seoul
           TOUR_API_KEY: ${{ secrets.TOUR_API_KEY }}
           CULTURE_API_KEY: ${{ secrets.CULTURE_API_KEY }}
           CULTURE_PORTAL_API_KEY: ${{ secrets.CULTURE_PORTAL_API_KEY }}

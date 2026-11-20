@@ -73,8 +73,39 @@ function parseDate(dateStr) {
     return null;
   }
 
-  const date =
-    new Date(dateStr);
+  const value =
+    String(dateStr).trim();
+
+  const calendarDate =
+    value.match(
+      /^(\d{4})-(\d{2})-(\d{2})$/
+    );
+
+  let date;
+
+  if (calendarDate) {
+    // 행사 날짜는 시간대가 없는 달력 날짜이므로 현지 날짜로 생성한다.
+    // new Date("YYYY-MM-DD")의 UTC 해석으로 해외 기기에서 하루 밀리는 현상을 방지한다.
+    const year = Number(calendarDate[1]);
+    const month = Number(calendarDate[2]);
+    const day = Number(calendarDate[3]);
+
+    date = new Date(
+      year,
+      month - 1,
+      day
+    );
+
+    if (
+      date.getFullYear() !== year ||
+      date.getMonth() !== month - 1 ||
+      date.getDate() !== day
+    ) {
+      return null;
+    }
+  } else {
+    date = new Date(value);
+  }
 
   if (
     Number.isNaN(
@@ -477,75 +508,105 @@ function cleanTitleForSearch(
 // 행사 링크
 // ------------------------------------------------------
 
-function eventLink(
-  festival
-) {
+function normalizeHttpUrl(value) {
+  const raw = String(
+    value ?? ""
+  ).trim();
+
+  if (!raw) {
+    return "";
+  }
+
+  let candidate = raw;
+
+  if (candidate.startsWith("//")) {
+    candidate = `https:${candidate}`;
+  } else if (/^www\./i.test(candidate)) {
+    candidate = `https://${candidate}`;
+  } else if (/^https?:\/(?!\/)/i.test(candidate)) {
+    // 공공데이터에 간혹 잘못 저장된 "https:/example.com" 형태를 보정한다.
+    candidate = candidate.replace(
+      /^(https?):\//i,
+      "$1://"
+    );
+  } else if (
+    !/^[a-z][a-z\d+.-]*:/i.test(candidate) &&
+    /^[^\s/?#]+\.[^\s/?#]+(?::\d+)?(?:[/?#][^\s]*)?$/.test(candidate)
+  ) {
+    // 스킴이 빠진 도메인만 HTTPS로 보정한다.
+    candidate = `https://${candidate}`;
+  }
+
+  // 외부 링크는 HTTP(S)만 허용한다. javascript:, data: 등은 거부한다.
+  const match = candidate.match(
+    /^(https?):\/\/([^/?#]+)([\s\S]*)$/i
+  );
+
+  if (!match) {
+    return "";
+  }
+
+  const authority = match[2];
+
+  // 잘못된 호스트, 공백, 역슬래시, 사용자 정보가 포함된 주소를 거부한다.
+  if (
+    !authority ||
+    /[\s\\<>]/.test(authority) ||
+    authority.includes("@")
+  ) {
+    return "";
+  }
+
+  // 브라우저 URL 파서로 잘못된 호스트나 포트까지 최종 확인한다.
+  try {
+    const parsed =
+      new URL(candidate);
+
+    if (
+      !["http:", "https:"].includes(parsed.protocol) ||
+      !parsed.hostname ||
+      parsed.username ||
+      parsed.password
+    ) {
+      return "";
+    }
+  } catch {
+    return "";
+  }
+
   return (
-    festival?.detailUrl ||
-    festival?.link ||
-    festival?.url ||
-    `https://search.naver.com/search.naver?query=${encodeURIComponent(
-      cleanTitleForSearch(
-        festival?.title
-      )
-    )}`
+    match[1].toLowerCase() +
+    "://" +
+    authority +
+    match[3]
   );
 }
 
 
-// ------------------------------------------------------
-// 검색어 하이라이트
-// ------------------------------------------------------
-
-function highlightMatch(
-  text,
-  query
+function eventLink(
+  festival
 ) {
-  if (
-    !text ||
-    !query
-  ) {
-    return text;
+  const candidates = [
+    // 기존 동작과 같이 행사별 상세 페이지를 일반 홈페이지 링크보다 우선한다.
+    festival?.detailUrl,
+    festival?.link,
+    festival?.url,
+  ];
+
+  for (const candidate of candidates) {
+    const safeUrl =
+      normalizeHttpUrl(candidate);
+
+    if (safeUrl) {
+      return safeUrl;
+    }
   }
 
-  const normalizedText =
-    String(text);
-
-  const normalizedQuery =
-    String(query).trim();
-
-  if (!normalizedQuery) {
-    return normalizedText;
-  }
-
-  const idx =
-    normalizedText
-      .toLowerCase()
-      .indexOf(
-        normalizedQuery.toLowerCase()
-      );
-
-  if (idx === -1) {
-    return normalizedText;
-  }
-
-  return (
-    normalizedText.slice(
-      0,
-      idx
-    ) +
-    "<mark>" +
-    normalizedText.slice(
-      idx,
-      idx +
-        normalizedQuery.length
-    ) +
-    "</mark>" +
-    normalizedText.slice(
-      idx +
-        normalizedQuery.length
+  return `https://search.naver.com/search.naver?query=${encodeURIComponent(
+    cleanTitleForSearch(
+      festival?.title
     )
-  );
+  )}`;
 }
 
 
@@ -1302,13 +1363,70 @@ function isFestivalInWeekendMode(
 // ------------------------------------------------------
 
 function compareFestivalStart(a, b) {
-  const aStart = getFestivalStartDate(a);
-  const bStart = getFestivalStartDate(b);
+  const aStart =
+    getFestivalStartDate(a);
+
+  const bStart =
+    getFestivalStartDate(b);
 
   if (!aStart && !bStart) return 0;
   if (!aStart) return 1;
   if (!bStart) return -1;
 
+  const aEnded =
+    isFestivalEnded(a);
+
+  const bEnded =
+    isFestivalEnded(b);
+
+  // 진행 중이거나 앞으로 열릴 행사를 과거 행사보다 먼저 보여준다.
+  if (aEnded !== bEnded) {
+    return aEnded
+      ? 1
+      : -1;
+  }
+
+  const aOngoing =
+    isFestivalOngoing(a);
+
+  const bOngoing =
+    isFestivalOngoing(b);
+
+  // 현재 진행 중인 행사는 종료가 임박한 순서로 우선 노출한다.
+  if (aOngoing && bOngoing) {
+    const aEnd =
+      getFestivalEndDate(a);
+
+    const bEnd =
+      getFestivalEndDate(b);
+
+    const endDiff =
+      aEnd - bEnd;
+
+    if (endDiff !== 0) {
+      return endDiff;
+    }
+  }
+
+  // 종료된 행사는 가장 최근에 끝난 순서로 뒤쪽에 모은다.
+  if (aEnded && bEnded) {
+    const aEnd =
+      getFestivalEndDate(a);
+
+    const bEnd =
+      getFestivalEndDate(b);
+
+    const endDiff =
+      bEnd - aEnd;
+
+    if (endDiff !== 0) {
+      return endDiff;
+    }
+
+    return bStart.getTime() - aStart.getTime();
+  }
+
+  // 진행 중인 행사가 아닌 경우에는 시작일이 빠른 순서다.
   return aStart.getTime() - bStart.getTime();
 }
 

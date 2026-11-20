@@ -29,6 +29,40 @@
 
 
 // ------------------------------------------------------
+// 다이얼로그 내부 초점 순환
+// ------------------------------------------------------
+
+function keepFocusInside(container, event) {
+  const focusable = [
+    ...container.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    ),
+  ].filter(
+    (element) =>
+      element.getClientRects().length > 0
+  );
+
+  if (!focusable.length) {
+    event.preventDefault();
+    container.focus({ preventScroll: true });
+    return;
+  }
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  const focusOutside = !container.contains(document.activeElement);
+
+  if (event.shiftKey && (document.activeElement === first || focusOutside)) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && (document.activeElement === last || focusOutside)) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
+
+// ------------------------------------------------------
 // 필터 패널
 // ------------------------------------------------------
 
@@ -55,11 +89,22 @@ function openFilterDrawer() {
       "filterHandle"
     );
 
-  if (!drawer) {
+  if (!drawer || filterDrawerOpen) {
     return;
   }
 
   filterDrawerOpen = true;
+
+  // 닫힌 패널은 탭 이동 대상에서 제외하고, 열릴 때만 접근 가능하게 한다.
+  drawer.removeAttribute("inert");
+  drawer.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+  drawer.setAttribute(
+    "aria-modal",
+    "true"
+  );
 
   drawer.classList.add(
     "open"
@@ -73,14 +118,23 @@ function openFilterDrawer() {
     "aria-expanded",
     "true"
   );
+  handle?.setAttribute(
+    "aria-label",
+    "검색 및 필터 닫기"
+  );
 
   document.body.classList.add(
     "filter-drawer-open"
   );
+
+  // 검색창 대신 닫기 버튼에 초점을 두어 모바일 키보드가 자동으로 열리지 않게 한다.
+  document
+    .getElementById("filterClose")
+    ?.focus({ preventScroll: true });
 }
 
 
-function closeFilterDrawer() {
+function closeFilterDrawer(options = {}) {
   const drawer =
     document.getElementById(
       "filterDrawer"
@@ -96,10 +150,31 @@ function closeFilterDrawer() {
       "filterHandle"
     );
 
+  const restoreFocus =
+    options.restoreFocus !== false;
+
+  const focusWasInside =
+    Boolean(
+      drawer &&
+      drawer.contains(document.activeElement)
+    );
+
   filterDrawerOpen = false;
 
   drawer?.classList.remove(
     "open"
+  );
+  drawer?.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+  drawer?.setAttribute(
+    "aria-modal",
+    "false"
+  );
+  drawer?.setAttribute(
+    "inert",
+    ""
   );
 
   backdrop?.classList.remove(
@@ -110,10 +185,25 @@ function closeFilterDrawer() {
     "aria-expanded",
     "false"
   );
+  handle?.setAttribute(
+    "aria-label",
+    "검색 및 필터 열기"
+  );
 
   document.body.classList.remove(
     "filter-drawer-open"
   );
+
+  filterPointerState = null;
+
+  if (
+    restoreFocus &&
+    focusWasInside
+  ) {
+    handle?.focus({
+      preventScroll: true,
+    });
+  }
 }
 
 
@@ -272,10 +362,18 @@ function switchView(view) {
     "active",
     view === "urgent"
   );
+  urgentButton?.setAttribute(
+    "aria-pressed",
+    view === "urgent" ? "true" : "false"
+  );
 
   listButton?.classList.toggle(
     "active",
     view === "list"
+  );
+  listButton?.setAttribute(
+    "aria-pressed",
+    view === "list" ? "true" : "false"
   );
 
   urgentView?.classList.toggle(
@@ -387,7 +485,6 @@ function setDateFilter(mode) {
   saveDateFilterState();
   updateDateQuickUI();
   renderCurrentView();
-  closeFilterDrawer();
 }
 
 
@@ -436,7 +533,6 @@ function applyCustomDateFilter() {
   saveDateFilterState();
   updateDateQuickUI();
   renderCurrentView();
-  closeFilterDrawer();
 }
 
 
@@ -456,16 +552,44 @@ function openAreaModal() {
         );
     });
 
+  const modal =
+    document.getElementById("areaModal");
+
+  const drawer =
+    document.getElementById("filterDrawer");
+
+  modal?.removeAttribute("inert");
+  modal?.setAttribute("aria-hidden", "false");
+  drawer?.setAttribute("aria-modal", "false");
+  modal?.classList.remove("hidden");
+
   document
-    .getElementById("areaModal")
-    ?.classList.remove("hidden");
+    .getElementById("areaModalClose")
+    ?.focus({ preventScroll: true });
 }
 
 
 function closeAreaModal() {
-  document
-    .getElementById("areaModal")
-    ?.classList.add("hidden");
+  const modal =
+    document.getElementById("areaModal");
+
+  const drawer =
+    document.getElementById("filterDrawer");
+
+  modal?.classList.add("hidden");
+  modal?.setAttribute("aria-hidden", "true");
+  modal?.setAttribute("inert", "");
+
+  if (filterDrawerOpen) {
+    drawer?.setAttribute("aria-modal", "true");
+    document
+      .getElementById("areaFilterBtn")
+      ?.focus({ preventScroll: true });
+  } else {
+    document
+      .getElementById("filterHandle")
+      ?.focus({ preventScroll: true });
+  }
 }
 
 
@@ -550,42 +674,68 @@ function updateHiddenManageButton() {
 function openHiddenModal() {
   renderHiddenList();
 
-  document
-    .getElementById("hiddenModal")
-    ?.classList.remove("hidden");
+  const modal =
+    document.getElementById("hiddenModal");
 
-  closeFilterDrawer();
+  modal?.removeAttribute("inert");
+  modal?.setAttribute("aria-hidden", "false");
+  modal?.classList.remove("hidden");
+
+  closeFilterDrawer({
+    restoreFocus: false,
+  });
+
+  document
+    .getElementById("hiddenModalClose")
+    ?.focus({ preventScroll: true });
 }
 
 
 function closeHiddenModal() {
+  const modal =
+    document.getElementById("hiddenModal");
+
+  modal?.classList.add("hidden");
+  modal?.setAttribute("aria-hidden", "true");
+  modal?.setAttribute("inert", "");
+
   document
-    .getElementById("hiddenModal")
-    ?.classList.add("hidden");
+    .getElementById("filterHandle")
+    ?.focus({ preventScroll: true });
 }
 
 
 function openExcludeKeywordModal() {
   renderExcludeKeywordList();
 
-  document
-    .getElementById(
-      "excludeKeywordModal"
-    )
-    ?.classList.remove(
-      "hidden"
-    );
+  const modal =
+    document.getElementById("excludeKeywordModal");
 
-  closeFilterDrawer();
+  modal?.removeAttribute("inert");
+  modal?.setAttribute("aria-hidden", "false");
+  modal?.classList.remove("hidden");
+
+  closeFilterDrawer({
+    restoreFocus: false,
+  });
+
+  document
+    .getElementById("excludeKeywordModalClose")
+    ?.focus({ preventScroll: true });
 }
 
 
 function closeExcludeKeywordModal() {
+  const modal =
+    document.getElementById("excludeKeywordModal");
+
+  modal?.classList.add("hidden");
+  modal?.setAttribute("aria-hidden", "true");
+  modal?.setAttribute("inert", "");
+
   document
-    .getElementById(
-      "excludeKeywordModal"
-    )
-    ?.classList.add("hidden");
+    .getElementById("filterHandle")
+    ?.focus({ preventScroll: true });
 }
 
 
@@ -728,6 +878,10 @@ function toggleFavorite(id) {
 
   if (isFavoriteId(id)) {
     removeFromFavoritesOrder(id);
+
+    // 관심 행사에서 해제하면 해당 알림도 함께 제거한다.
+    delete reminders[id];
+    saveReminders();
   } else {
     addToFavoritesOrder(id);
   }
@@ -1912,9 +2066,11 @@ function handleCardClick(e) {
     if (f) {
 
       const posterSrc =
-        f.thumbnail ||
-        f.image ||
-        "";
+        normalizeImageUrl(
+          f.thumbnail ||
+            f.image ||
+            ""
+        );
 
       if (posterSrc) {
         openPosterView(
@@ -2017,8 +2173,6 @@ function resetAllFilters() {
   updateAreaButtonLabel();
   updateDateQuickUI();
   renderCurrentView();
-
-  closeFilterDrawer();
 }
 
 
@@ -2128,11 +2282,44 @@ function setupActions() {
   document.addEventListener(
     "keydown",
     (e) => {
-      if (
-        e.key === "Escape" &&
-        filterDrawerOpen
-      ) {
+      const openModals = [
+        ...document.querySelectorAll(".modal-backdrop"),
+      ].filter(
+        (modal) =>
+          !modal.classList.contains("hidden")
+      );
+
+      const activeModal =
+        openModals[openModals.length - 1];
+
+      if (activeModal) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          activeModal
+            .querySelector(".modal-close")
+            ?.click();
+          return;
+        }
+
+        if (e.key === "Tab") {
+          keepFocusInside(activeModal, e);
+        }
+
+        return;
+      }
+
+      if (!filterDrawerOpen) {
+        return;
+      }
+
+      if (e.key === "Escape") {
+        e.preventDefault();
         closeFilterDrawer();
+        return;
+      }
+
+      if (e.key === "Tab") {
+        keepFocusInside(filterDrawer, e);
       }
     }
   );
@@ -2179,7 +2366,6 @@ function setupActions() {
       "change",
       () => {
         renderCurrentView();
-        closeFilterDrawer();
       }
     );
 
@@ -2254,7 +2440,6 @@ function setupActions() {
         }
 
         renderCurrentView();
-        closeFilterDrawer();
       }
     );
 
