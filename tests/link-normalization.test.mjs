@@ -176,3 +176,54 @@ test(
     assert.ok(checkedThumbnails > 0);
   }
 );
+
+
+test(
+  "수집기도 복수 공식 URL에서 안전한 행사 링크 하나를 선택한다",
+  async () => {
+    const collector = (await readFile(
+      new URL("../fetch-festivals.mjs", import.meta.url),
+      "utf8"
+    )).replace(/\r\n/g, "\n");
+
+    const start = collector.indexOf(
+      "function normalizeExternalUrl(value)"
+    );
+    const end = collector.indexOf(
+      "// ======================================================\n// 지역명 정규화",
+      start
+    );
+
+    assert.notEqual(start, -1, "collector URL normalizer must exist");
+    assert.notEqual(end, -1, "collector URL normalizer boundary must exist");
+
+    const context = vm.createContext({ URL });
+    vm.runInContext(
+      collector.slice(start, end) +
+        "\nglobalThis.__normalizeExternalUrl = normalizeExternalUrl;",
+      context
+    );
+
+    const normalizeExternalUrl = context.__normalizeExternalUrl;
+
+    assert.equal(
+      normalizeExternalUrl("http://www.ayac.or.kr / www.aydf.kr"),
+      "https://www.aydf.kr"
+    );
+
+    assert.equal(
+      normalizeExternalUrl("www.example.com/event"),
+      "https://www.example.com/event"
+    );
+
+    assert.equal(
+      normalizeExternalUrl("javascript:alert(1)"),
+      ""
+    );
+
+    assert.equal(
+      normalizeExternalUrl("https://user@example.com/path"),
+      ""
+    );
+  }
+);
