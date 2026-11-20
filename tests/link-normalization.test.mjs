@@ -150,6 +150,11 @@ test(
 
     for (const item of payload.festivals) {
       if (item.detailUrl) {
+        assert.ok(
+          /^https?:\/\//i.test(item.detailUrl),
+          `stored detailUrl is not normalized: ${item.id} → ${item.detailUrl}`
+        );
+
         const normalized = normalizeHttpUrl(item.detailUrl);
 
         assert.ok(
