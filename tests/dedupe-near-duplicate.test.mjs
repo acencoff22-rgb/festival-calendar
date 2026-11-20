@@ -458,7 +458,7 @@ test(
 
     assert.ok(
       duplicateLogs.some((line) =>
-        line.includes("동일 기간·지역에서 장소 표기가 다른 항목")
+        line.includes("동일 기간·지역에서 장소·좌표 정보가 다른 항목")
       )
     );
   }
