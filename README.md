@@ -20,6 +20,8 @@ festival-calendar/
 │  ├─ data.js
 │  ├─ app.js
 │  └─ main.js
+├─ tests/
+│  └─ *.test.mjs
 └─ .github/
    └─ workflows/
       └─ update-festivals.yml
@@ -37,7 +39,7 @@ festival-calendar/
 
 GitHub Actions의 `Update Festival Data` 워크플로가 매일 한국시간 오전 6시에 실행됩니다. 수동 실행도 지원하며, 수집 서버의 시간대도 `Asia/Seoul`로 고정해 날짜 기준 API 요청이 한국 날짜를 따르도록 합니다.
 
-Pull Request가 `main`을 대상으로 열리거나 갱신되면 실제 데이터 수집 없이 JavaScript 구문 검사와 수집기 재시도 단위 테스트를 실행합니다. 실제 데이터 갱신은 예약 실행 또는 수동 실행에서만 수행합니다.
+Pull Request가 `main`을 대상으로 열리거나 갱신되면 실제 데이터 수집 없이 JavaScript 구문 검사와 `tests/*.test.mjs`의 39개 단위 테스트를 실행합니다. 화면 파일이나 브라우저 테스트가 변경되면 별도 Chromium UI 검사도 실행해 데스크톱(1440×960)·모바일(390×844) 레이아웃, 필터/모달 조작, 키보드 초점 동작을 확인하고 화면 캡처를 7일간 Actions 아티팩트로 보관합니다. 실제 데이터 갱신은 예약 실행 또는 수동 실행에서만 수행합니다.
 
 실제 API 수집을 PR 브랜치에서 시험하려면 GitHub의 **Actions → Update Festival Data → Run workflow**에서 브랜치 `maintenance/2026-11-19-data-safety`를 선택해 실행합니다. 네 가지 저장소 Secret이 모두 등록되어 있어야 합니다. 이 방식은 선택한 브랜치에 결과를 저장하며 `main`을 직접 갱신하지 않습니다.
 
@@ -59,3 +61,9 @@ GitHub Actions에서 자동 갱신하려면 다음 네 가지 저장소 Secret�
 - `KOPIS_API_KEY`
 
 GitHub Actions에서 하나라도 빠지면 갱신을 중단하고 기존 `festivals.json`을 보존합니다. 로컬에서 직접 실행할 때는 API 키가 없는 소스만 건너뛰며, 해당 출처를 `skipped`로 표시해 앱에서 부분 데이터임을 알립니다. 부분 데이터 또는 브라우저에 전달된 행사 데이터가 0건인 경우 숨김·찜 순서·알림 정보를 자동 정리하지 않습니다. 전체 수집 결과가 0건이면 역시 기존 파일을 덮어쓰지 않습니다. 데이터 파일은 임시 파일을 완성한 후 교체합니다. 데이터 수집 스크립트와 브라우저 JavaScript 파일은 Node.js 구문 검사를 통과해야 하며, `tests/*.test.mjs`의 단위 테스트도 자동 실행됩니다. 최신 PR 검증 기준은 39개 테스트이며, 지역 정규화·체크박스 표시·URL 보정·재시도·근접 중복 병합·필터 패널 및 모달의 키보드 접근성과 조건 연속 설정을 포함합니다.
+
+
+## 공개 미리보기
+- GitHub Pages: https://acencoff22-rgb.github.io/festival-calendar/
+- 위 주소는 `main` 브랜치에 배포된 버전입니다. Pull Request 브랜치의 변경 사항은 병합되기 전까지 공개 주소에 반영되지 않습니다.
+- PR UI 브라우저 검사는 공개 사이트를 변경하지 않고 GitHub Actions 안에서 해당 PR 코드를 임시 로컬 서버로 실행합니다. 데스크톱·모바일 화면 캡처는 해당 Actions 실행의 `festival-calendar-ui-browser` 아티팩트에서 확인할 수 있습니다.
