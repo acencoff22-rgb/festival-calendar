@@ -243,6 +243,21 @@ try {
     document.getElementById("filterDrawer")?.classList.contains("open")
   );
 
+  // Wait for the 240ms slide transition before measuring the fixed bottom sheet.
+  await mobile.waitForFunction(() => {
+    const panel = document.getElementById("filterDrawer");
+
+    if (!panel?.classList.contains("open")) {
+      return false;
+    }
+
+    const rect = panel.getBoundingClientRect();
+
+    return Math.abs(rect.bottom - window.innerHeight) <= 2;
+  }, null, {
+    timeout: 5_000,
+  });
+
   const mobileGeometry = await mobileDrawer.evaluate((element) => {
     const rect = element.getBoundingClientRect();
     const style = getComputedStyle(element);
