@@ -523,6 +523,7 @@ const FULL_AREA_NAME_KEYWORDS = [
   "강원도",
   "충청북도",
   "충청남도",
+  "충남",
   "전북특별자치도",
   "전라북도",
   "전라남도",
@@ -583,6 +584,17 @@ const INTEGRATED_GWANGJU_LOCALITY_KEYWORDS = [
   "영광",
 ];
 
+const GYEONGBUK_LOCALITY_KEYWORDS = [
+  "울릉군",
+  "울릉도",
+];
+
+const SEOUL_LOCALITY_KEYWORDS = [
+  "노원역",
+  "화랑대",
+  "당현천",
+];
+
 function deriveAreaFromAddress(
   ...candidates
 ) {
@@ -606,6 +618,24 @@ function deriveAreaFromAddress(
           keyword
         );
       }
+    }
+
+    if (
+      GYEONGBUK_LOCALITY_KEYWORDS.some(
+        (keyword) =>
+          text.includes(keyword)
+      )
+    ) {
+      return "경북";
+    }
+
+    if (
+      SEOUL_LOCALITY_KEYWORDS.some(
+        (keyword) =>
+          text.includes(keyword)
+      )
+    ) {
+      return "서울";
     }
 
     if (
@@ -4150,14 +4180,42 @@ function logDuplicateCandidates(
           items[j];
 
 
-        // 이미 1차에서 병합된
-        // 완전 일치 쌍은 제외
-        if (
-          a.startDate ===
-            b.startDate &&
-          a.endDate ===
-            b.endDate
-        ) {
+        const samePeriod =
+          a.startDate === b.startDate &&
+          a.endDate === b.endDate;
+
+        if (samePeriod) {
+          const sameType =
+            Boolean(a.type) &&
+            a.type === b.type;
+
+          const areaA =
+            normalizeAreaName(a.area);
+
+          const areaB =
+            normalizeAreaName(b.area);
+
+          // 동일 제목·기간·지역이어도 장소가 달라 병합하지 않은 쌍은
+          // 데이터에서 제거하지 않고 수동 확인 후보로 기록한다.
+          if (
+            sameType &&
+            areaA &&
+            areaA === areaB &&
+            locationsClearlyDifferent(a, b)
+          ) {
+            candidates.push({
+              a,
+              b,
+              dist: distanceMeters(
+                a.lat,
+                a.lon,
+                b.lat,
+                b.lon
+              ),
+              reason: "동일 기간·지역에서 장소 표기가 다른 항목",
+            });
+          }
+
           continue;
         }
 
@@ -4191,6 +4249,7 @@ function logDuplicateCandidates(
             a,
             b,
             dist,
+            reason: "기간이 겹치고 좌표가 500m 이내인 항목",
           });
         }
       }
@@ -4218,7 +4277,8 @@ function logDuplicateCandidates(
         `(${a.source}, ${a.startDate}~${a.endDate}) ` +
         `↔ "${b.title}" ` +
         `(${b.source}, ${b.startDate}~${b.endDate}) ` +
-        `[${Math.round(dist)}m]`
+        `[${dist === null ? "거리 미확인" : `${Math.round(dist)}m`}]` +
+        ` - ${reason}`
       );
     }
   }
