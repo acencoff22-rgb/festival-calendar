@@ -195,7 +195,6 @@ try {
       height: 844,
     },
     deviceScaleFactor: 1,
-    isMobile: true,
     hasTouch: true,
   });
 
