@@ -258,9 +258,41 @@ try {
       scrollY: window.scrollY,
       visualViewportTop: window.visualViewport?.offsetTop ?? null,
       visualViewportHeight: window.visualViewport?.height ?? null,
+      documentHeight: document.documentElement.scrollHeight,
+      bodyHeight: document.body.scrollHeight,
       borderRadius: style.borderTopLeftRadius,
       position: style.position,
+      ancestors: (() => {
+        const result = [];
+        let current = element.parentElement;
+
+        while (current) {
+          const parentStyle = getComputedStyle(current);
+
+          result.push({
+            tag: current.tagName,
+            id: current.id,
+            className: String(current.className || ""),
+            position: parentStyle.position,
+            transform: parentStyle.transform,
+            filter: parentStyle.filter,
+            perspective: parentStyle.perspective,
+            contain: parentStyle.contain,
+            willChange: parentStyle.willChange,
+            zoom: parentStyle.zoom,
+          });
+
+          current = current.parentElement;
+        }
+
+        return result;
+      })(),
     };
+  });
+
+  await mobile.screenshot({
+    path: `${artifactDir}/mobile-filter-open.png`,
+    fullPage: false,
   });
 
   assert.equal(mobileGeometry.position, "fixed");
@@ -282,11 +314,6 @@ try {
     Math.abs(mobileGeometry.bottom - mobileGeometry.viewportHeight) <= 2,
     `Mobile filter drawer must align with the viewport bottom: ${JSON.stringify(mobileGeometry)}`
   );
-
-  await mobile.screenshot({
-    path: `${artifactDir}/mobile-filter-open.png`,
-    fullPage: false,
-  });
 
   await mobile.locator("#filterClose").click();
 
