@@ -29,7 +29,7 @@ jobs:
         with:
           node-version: "lts/*"
 
-      - name: Playwright 및 Chromium 설치
+      - name: Playwright 및 Chrome 준비
         run: |
           mkdir -p "$RUNNER_TEMP/playwright-check"
           npm install \
@@ -38,8 +38,7 @@ jobs:
             --no-fund \
             playwright@1.56.1
 
-          "$RUNNER_TEMP/playwright-check/node_modules/.bin/playwright" \
-            install --with-deps chromium
+          google-chrome --version
 
       - name: 정적 서버 실행 및 브라우저 UI 검사
         env:
