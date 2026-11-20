@@ -59,16 +59,30 @@ const helpers = [
     "function calendarDayDifference(",
     "// ======================================================\n// 중복 제거"
   ),
+  sliceBetween(
+    "function logDuplicateCandidates(",
+    "// ======================================================\n// 충돌하는 행사 ID 보정"
+  ),
 ].join("\n\n");
 
-const context = vm.createContext({ URL });
+const duplicateLogs = [];
+
+const context = vm.createContext({
+  URL,
+  console: {
+    log(...values) {
+      duplicateLogs.push(values.join(" "));
+    },
+  },
+});
 
 vm.runInContext(
   helpers +
     "\nglobalThis.__mergeNearDuplicateFestivals = mergeNearDuplicateFestivals;" +
     "\nglobalThis.__isNearDuplicateFestival = isNearDuplicateFestival;" +
     "\nglobalThis.__dataRichness = dataRichness;" +
-    "\nglobalThis.__locationsClearlyDifferent = locationsClearlyDifferent;",
+    "\nglobalThis.__locationsClearlyDifferent = locationsClearlyDifferent;" +
+    "\nglobalThis.__logDuplicateCandidates = logDuplicateCandidates;",
   context
 );
 
@@ -391,3 +405,61 @@ test(
   }
 );
 
+
+
+test(
+  "동일 제목·기간·지역이지만 장소가 달라 병합하지 않은 항목은 수동 확인 후보로 기록한다",
+  () => {
+    const first = festival({
+      id: "gimcheon-first",
+      title: "김천김밥축제",
+      startDate: "2026-10-23",
+      endDate: "2026-10-25",
+      area: "경북",
+      location: "직지문화공원+사명대사공원+친환경생태공원",
+      lat: 36.117093,
+      lon: 128.0081803,
+    });
+
+    const second = festival({
+      id: "gimcheon-second",
+      title: "김천김밥축제",
+      startDate: "2026-10-23",
+      endDate: "2026-10-25",
+      area: "경북",
+      location: "직지문화공원+사명대사공원 일원",
+      lat: 36.10308448,
+      lon: 127.9929081,
+    });
+
+    const differentArea = festival({
+      id: "other-area",
+      title: "김천김밥축제",
+      startDate: "2026-10-23",
+      endDate: "2026-10-25",
+      area: "서울",
+      location: "서울 행사장",
+      lat: 37.5,
+      lon: 127.0,
+    });
+
+    duplicateLogs.length = 0;
+    context.__logDuplicateCandidates([
+      first,
+      second,
+      differentArea,
+    ]);
+
+    assert.ok(
+      duplicateLogs.some((line) =>
+        line.includes("중복 후보(수동 확인 필요) 1건")
+      )
+    );
+
+    assert.ok(
+      duplicateLogs.some((line) =>
+        line.includes("동일 기간·지역에서 장소 표기가 다른 항목")
+      )
+    );
+  }
+);
