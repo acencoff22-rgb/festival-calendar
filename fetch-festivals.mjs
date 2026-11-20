@@ -4270,6 +4270,7 @@ function logDuplicateCandidates(
         a,
         b,
         dist,
+        reason,
       } of candidates
     ) {
       console.log(
